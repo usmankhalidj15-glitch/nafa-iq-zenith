@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import logo from "@/assets/logo.png";
 import {
   LayoutDashboard,
@@ -7,7 +7,7 @@ import {
   Wallet,
   GraduationCap,
   Bell,
-  Settings,
+  LogOut,
   Menu,
   MoreHorizontal,
   X,
@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { TICKER_ITEMS } from "@/lib/data";
+import { useAuth } from "@/hooks/use-auth";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, mobile: "Home" },
@@ -34,8 +35,19 @@ function Logo() {
   );
 }
 
+function initial(name?: string | null, email?: string | null) {
+  return (name?.trim()?.[0] || email?.trim()?.[0] || "U").toUpperCase();
+}
+
 function Sidebar() {
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const { profile, user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const name = profile?.display_name || user?.email?.split("@")[0] || "User";
+  async function handleSignOut() {
+    await signOut();
+    navigate({ to: "/auth" });
+  }
   return (
     <aside className="fixed top-0 left-0 z-30 hidden h-screen w-[240px] flex-col border-r border-border bg-sidebar lg:flex">
       <div className="flex h-[52px] items-center border-b border-border px-4">
@@ -62,12 +74,16 @@ function Sidebar() {
         })}
       </nav>
       <div className="flex items-center gap-3 border-t border-border p-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-bull/20 font-semibold text-bull">A</div>
-        <div className="flex-1">
-          <div className="text-sm font-medium text-text-primary">Ahmed</div>
-          <div className="text-xs text-text-muted">Free plan</div>
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-bull/20 font-semibold text-bull">
+          {initial(profile?.display_name, user?.email)}
         </div>
-        <Settings className="h-[18px] w-[18px] text-text-secondary" />
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-sm font-medium text-text-primary">{name}</div>
+          <div className="text-xs text-text-muted">{profile?.plan ?? "Free"} plan</div>
+        </div>
+        <button onClick={handleSignOut} aria-label="Sign out" className="text-text-secondary transition-colors hover:text-bear">
+          <LogOut className="h-[18px] w-[18px]" />
+        </button>
       </div>
     </aside>
   );
@@ -94,6 +110,7 @@ function Ticker() {
 }
 
 function Header({ onMenu }: { onMenu: () => void }) {
+  const { profile, user } = useAuth();
   return (
     <header className="sticky top-0 z-20 flex h-[52px] items-center gap-3 border-b border-border bg-sidebar px-3 lg:pl-6">
       <button onClick={onMenu} className="text-text-secondary lg:hidden" aria-label="Menu">
@@ -111,7 +128,7 @@ function Header({ onMenu }: { onMenu: () => void }) {
         </span>
       </button>
       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-bull/20 text-sm font-semibold text-bull">
-        A
+        {initial(profile?.display_name, user?.email)}
       </div>
     </header>
   );
@@ -144,6 +161,13 @@ function BottomNav({ onMore }: { onMore: () => void }) {
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [drawer, setDrawer] = useState(false);
+  const { profile, user, signOut } = useAuth();
+  const navigate = useNavigate();
+  async function handleSignOut() {
+    setDrawer(false);
+    await signOut();
+    navigate({ to: "/auth" });
+  }
   return (
     <div className="min-h-screen bg-background">
       <Sidebar />
@@ -179,6 +203,23 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 {n.label}
               </Link>
             ))}
+            <div className="mt-2 flex items-center gap-3 border-t border-border px-3 pt-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-bull/20 text-sm font-semibold text-bull">
+                {initial(profile?.display_name, user?.email)}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="truncate text-sm font-medium text-text-primary">
+                  {profile?.display_name || user?.email?.split("@")[0] || "User"}
+                </div>
+                <div className="text-xs text-text-muted">{profile?.plan ?? "Free"} plan</div>
+              </div>
+              <button
+                onClick={handleSignOut}
+                className="flex items-center gap-1.5 rounded-[6px] px-2.5 py-1.5 text-sm font-medium text-bear hover:bg-hover"
+              >
+                <LogOut className="h-4 w-4" /> Sign out
+              </button>
+            </div>
           </div>
         </div>
       )}

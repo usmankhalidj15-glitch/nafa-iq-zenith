@@ -4,14 +4,19 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
+  useNavigate,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { Loader2 } from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AppShell } from "../components/AppShell";
+import { AuthProvider, useAuth } from "@/hooks/use-auth";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -140,15 +145,52 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function Spinner() {
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-background">
+      <Loader2 className="h-6 w-6 animate-spin text-bull" />
+    </div>
+  );
+}
+
+function AuthGate() {
+  const { user, loading } = useAuth();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const navigate = useNavigate();
+  const isAuthRoute = pathname === "/auth";
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user && !isAuthRoute) navigate({ to: "/auth" });
+  }, [loading, user, isAuthRoute, navigate]);
+
+  // Outlet must ALWAYS render so the router keeps its matched route (avoids
+  // "Expected to find a match below the root match" during hydration).
+  if (isAuthRoute) {
+    return <Outlet />;
+  }
+
+  const blocking = loading || !user;
+  return (
+    <>
+      <AppShell>
+        <Outlet />
+      </AppShell>
+      {blocking && <Spinner />}
+    </>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <AppShell>
-        <Outlet />
-      </AppShell>
+      <AuthProvider>
+        <AuthGate />
+        <Toaster />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

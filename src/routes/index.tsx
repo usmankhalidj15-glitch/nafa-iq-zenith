@@ -8,6 +8,7 @@ import { DonutChart, PortfolioAreaChart, Sparkline } from "@/components/charts";
 import { STOCKS, WATCHLIST, generateOHLCV, fmtPKR } from "@/lib/data";
 import { SPENDING, GOALS } from "@/lib/finance-data";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/use-auth";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,6 +38,8 @@ function portfolioSeries(months: number) {
 }
 
 function Dashboard() {
+  const { profile, user } = useAuth();
+  const firstName = (profile?.display_name || user?.email?.split("@")[0] || "Investor").split(" ")[0];
   const [range, setRange] = useState<(typeof RANGES)[number]>("6M");
   const [showAI, setShowAI] = useState(true);
   const months = range === "1M" ? 2 : range === "3M" ? 3 : range === "1Y" ? 6 : 6;
@@ -47,7 +50,7 @@ function Dashboard() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-text-primary sm:text-3xl">
-            Asalam-o-Alaikum, Ahmed
+            Asalam-o-Alaikum, {firstName}
           </h1>
           <p className="mt-1 text-sm text-text-secondary">
             Thursday, 19 June 2025 · KSE-100 is up <span className="text-bull">1.24%</span> today
