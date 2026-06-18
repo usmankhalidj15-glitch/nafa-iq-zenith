@@ -50,7 +50,7 @@ function Dashboard() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-text-primary sm:text-3xl">
-            Asalam-o-Alaikum, Ahmed
+            Asalam-o-Alaikum, {firstName}
           </h1>
           <p className="mt-1 text-sm text-text-secondary">
             Thursday, 19 June 2025 · KSE-100 is up <span className="text-bull">1.24%</span> today
