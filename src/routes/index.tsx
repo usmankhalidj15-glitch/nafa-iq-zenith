@@ -37,6 +37,8 @@ function portfolioSeries(months: number) {
 }
 
 function Dashboard() {
+  const { profile, user } = useAuth();
+  const firstName = (profile?.display_name || user?.email?.split("@")[0] || "Investor").split(" ")[0];
   const [range, setRange] = useState<(typeof RANGES)[number]>("6M");
   const [showAI, setShowAI] = useState(true);
   const months = range === "1M" ? 2 : range === "3M" ? 3 : range === "1Y" ? 6 : 6;
