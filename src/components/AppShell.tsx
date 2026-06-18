@@ -27,7 +27,7 @@ const NAV = [
 function Logo() {
   return (
     <Link to="/" className="flex items-center gap-2">
-      <img src="/icons/icon-192.png" alt="NafaIQ" width={28} height={28} className="rounded-[6px]" />
+      <img src={logo} alt="NafaIQ" width={28} height={28} className="rounded-[6px]" />
       <span className="text-lg font-bold tracking-tight text-bull">NafaIQ</span>
     </Link>
   );
