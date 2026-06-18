@@ -97,7 +97,7 @@ export function CandlestickChart({
   const pad = (highs - lows) * 0.08;
 
   return (
-    <ResponsiveContainer width="100%" height={height}>
+    <ResponsiveContainer width="100%" height={height >= 9999 ? "100%" : height}>}
       <ComposedChart data={enriched} margin={{ top: 10, right: 8, left: 0, bottom: 0 }}>
         <CartesianGrid stroke="#1a2535" vertical={false} />
         <XAxis dataKey="date" tick={{ fill: "#64748b", fontSize: 10 }} minTickGap={48} axisLine={{ stroke: "#1a2535" }} tickLine={false} />
