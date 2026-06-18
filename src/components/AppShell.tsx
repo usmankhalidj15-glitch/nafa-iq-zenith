@@ -110,6 +110,7 @@ function Ticker() {
 }
 
 function Header({ onMenu }: { onMenu: () => void }) {
+  const { profile, user } = useAuth();
   return (
     <header className="sticky top-0 z-20 flex h-[52px] items-center gap-3 border-b border-border bg-sidebar px-3 lg:pl-6">
       <button onClick={onMenu} className="text-text-secondary lg:hidden" aria-label="Menu">
@@ -127,7 +128,7 @@ function Header({ onMenu }: { onMenu: () => void }) {
         </span>
       </button>
       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-bull/20 text-sm font-semibold text-bull">
-        A
+        {initial(profile?.display_name, user?.email)}
       </div>
     </header>
   );
