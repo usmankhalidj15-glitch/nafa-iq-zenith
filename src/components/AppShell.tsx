@@ -161,6 +161,13 @@ function BottomNav({ onMore }: { onMore: () => void }) {
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [drawer, setDrawer] = useState(false);
+  const { profile, user, signOut } = useAuth();
+  const navigate = useNavigate();
+  async function handleSignOut() {
+    setDrawer(false);
+    await signOut();
+    navigate({ to: "/auth" });
+  }
   return (
     <div className="min-h-screen bg-background">
       <Sidebar />
