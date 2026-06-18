@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PsxRouteImport } from './routes/psx'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as LearnRouteImport } from './routes/learn'
@@ -17,6 +18,11 @@ import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StockTickerRouteImport } from './routes/stock.$ticker'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PsxRoute = PsxRouteImport.update({
   id: '/psx',
   path: '/psx',
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/learn': typeof LearnRoute
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stock/$ticker': typeof StockTickerRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/learn': typeof LearnRoute
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stock/$ticker': typeof StockTickerRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/learn': typeof LearnRoute
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stock/$ticker': typeof StockTickerRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/learn'
     | '/portfolio'
     | '/psx'
+    | '/sitemap.xml'
     | '/stock/$ticker'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/learn'
     | '/portfolio'
     | '/psx'
+    | '/sitemap.xml'
     | '/stock/$ticker'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/learn'
     | '/portfolio'
     | '/psx'
+    | '/sitemap.xml'
     | '/stock/$ticker'
   fileRoutesById: FileRoutesById
 }
@@ -118,11 +130,19 @@ export interface RootRouteChildren {
   LearnRoute: typeof LearnRoute
   PortfolioRoute: typeof PortfolioRoute
   PsxRoute: typeof PsxRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StockTickerRoute: typeof StockTickerRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/psx': {
       id: '/psx'
       path: '/psx'
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   LearnRoute: LearnRoute,
   PortfolioRoute: PortfolioRoute,
   PsxRoute: PsxRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   StockTickerRoute: StockTickerRoute,
 }
 export const routeTree = rootRouteImport
