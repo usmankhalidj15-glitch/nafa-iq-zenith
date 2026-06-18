@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import logo from "@/assets/logo.png";
 import {
   LayoutDashboard,
@@ -7,7 +7,7 @@ import {
   Wallet,
   GraduationCap,
   Bell,
-  Settings,
+  LogOut,
   Menu,
   MoreHorizontal,
   X,
@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { TICKER_ITEMS } from "@/lib/data";
+import { useAuth } from "@/hooks/use-auth";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, mobile: "Home" },
