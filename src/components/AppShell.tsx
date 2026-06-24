@@ -55,7 +55,7 @@ function Sidebar() {
       </div>
       <nav className="flex-1 space-y-1 p-3">
         {NAV.map((n) => {
-          const active = n.to === "/" ? path === "/" : path.startsWith(n.to);
+          const active = path === n.to || path.startsWith(n.to + "/");
           return (
             <Link
               key={n.to}
@@ -140,7 +140,7 @@ function BottomNav({ onMore }: { onMore: () => void }) {
   return (
     <nav className="safe-bottom fixed bottom-0 left-0 z-30 flex w-full items-stretch border-t border-border bg-sidebar lg:hidden">
       {tabs.map((t) => {
-        const active = t.to === "/" ? path === "/" : path.startsWith(t.to);
+        const active = path === t.to || path.startsWith(t.to + "/");
         return (
           <Link
             key={t.to}
