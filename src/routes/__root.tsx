@@ -158,15 +158,17 @@ function AuthGate() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
   const isAuthRoute = pathname === "/auth";
+  const isLanding = pathname === "/";
+  const isPublic = isAuthRoute || isLanding;
 
   useEffect(() => {
     if (loading) return;
-    if (!user && !isAuthRoute) navigate({ to: "/auth" });
-  }, [loading, user, isAuthRoute, navigate]);
+    if (!user && !isPublic) navigate({ to: "/auth" });
+  }, [loading, user, isPublic, navigate]);
 
   // Outlet must ALWAYS render so the router keeps its matched route (avoids
   // "Expected to find a match below the root match" during hydration).
-  if (isAuthRoute) {
+  if (isPublic) {
     return <Outlet />;
   }
 
