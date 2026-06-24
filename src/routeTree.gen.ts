@@ -15,8 +15,8 @@ import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as LearnRouteImport } from './routes/learn'
 import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as AlertsRouteImport } from './routes/alerts'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as StockTickerRouteImport } from './routes/stock.$ticker'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -49,14 +49,14 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AlertsRoute = AlertsRouteImport.update({
   id: '/alerts',
   path: '/alerts',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StockTickerRoute = StockTickerRouteImport.update({
@@ -66,8 +66,8 @@ const StockTickerRoute = StockTickerRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
+  '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/finance': typeof FinanceRoute
   '/learn': typeof LearnRoute
@@ -77,8 +77,8 @@ export interface FileRoutesByFullPath {
   '/stock/$ticker': typeof StockTickerRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
+  '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/finance': typeof FinanceRoute
   '/learn': typeof LearnRoute
@@ -89,8 +89,8 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
+  '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/finance': typeof FinanceRoute
   '/learn': typeof LearnRoute
@@ -102,8 +102,8 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/alerts'
+    | '/app'
     | '/auth'
     | '/finance'
     | '/learn'
@@ -113,8 +113,8 @@ export interface FileRouteTypes {
     | '/stock/$ticker'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/alerts'
+    | '/app'
     | '/auth'
     | '/finance'
     | '/learn'
@@ -124,8 +124,8 @@ export interface FileRouteTypes {
     | '/stock/$ticker'
   id:
     | '__root__'
-    | '/'
     | '/alerts'
+    | '/app'
     | '/auth'
     | '/finance'
     | '/learn'
@@ -136,8 +136,8 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AlertsRoute: typeof AlertsRoute
+  AppRoute: typeof AppRoute
   AuthRoute: typeof AuthRoute
   FinanceRoute: typeof FinanceRoute
   LearnRoute: typeof LearnRoute
@@ -191,18 +191,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/alerts': {
       id: '/alerts'
       path: '/alerts'
       fullPath: '/alerts'
       preLoaderRoute: typeof AlertsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/stock/$ticker': {
@@ -216,8 +216,8 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AlertsRoute: AlertsRoute,
+  AppRoute: AppRoute,
   AuthRoute: AuthRoute,
   FinanceRoute: FinanceRoute,
   LearnRoute: LearnRoute,

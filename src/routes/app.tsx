@@ -10,7 +10,7 @@ import { SPENDING, GOALS } from "@/lib/finance-data";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/app")({
   head: () => ({
     meta: [
       { title: "Dashboard — NafaIQ" },
