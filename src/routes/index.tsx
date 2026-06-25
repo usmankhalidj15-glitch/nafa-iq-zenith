@@ -411,6 +411,63 @@ function Nav() {
   );
 }
 
+const SCATTERED_TICKERS = [
+  { text: "HBL", x: "4%", y: "12%", size: 11, opacity: 0.12 },
+  { text: "+2.41%", x: "14%", y: "28%", size: 10, opacity: 0.09 },
+  { text: "ENGRO", x: "22%", y: "8%", size: 12, opacity: 0.1 },
+  { text: "312.45", x: "32%", y: "22%", size: 10, opacity: 0.07 },
+  { text: "LUCK", x: "44%", y: "15%", size: 11, opacity: 0.08 },
+  { text: "-0.45%", x: "55%", y: "32%", size: 10, opacity: 0.09 },
+  { text: "KSE-100", x: "64%", y: "9%", size: 13, opacity: 0.11 },
+  { text: "78,542", x: "74%", y: "25%", size: 10, opacity: 0.08 },
+  { text: "OGDC", x: "84%", y: "14%", size: 11, opacity: 0.1 },
+  { text: "+1.24%", x: "91%", y: "35%", size: 10, opacity: 0.09 },
+  { text: "FFC", x: "8%", y: "48%", size: 11, opacity: 0.07 },
+  { text: "168.70", x: "18%", y: "62%", size: 10, opacity: 0.08 },
+  { text: "+1.08%", x: "28%", y: "45%", size: 10, opacity: 0.06 },
+  { text: "UBL", x: "38%", y: "58%", size: 12, opacity: 0.09 },
+  { text: "198.20", x: "50%", y: "70%", size: 10, opacity: 0.07 },
+  { text: "MCB", x: "60%", y: "52%", size: 11, opacity: 0.08 },
+  { text: "-0.38%", x: "70%", y: "68%", size: 10, opacity: 0.06 },
+  { text: "PSO", x: "80%", y: "55%", size: 11, opacity: 0.09 },
+  { text: "251.30", x: "88%", y: "72%", size: 10, opacity: 0.07 },
+  { text: "KSE-30", x: "6%", y: "78%", size: 12, opacity: 0.08 },
+  { text: "24,180", x: "16%", y: "85%", size: 10, opacity: 0.06 },
+  { text: "DGKC", x: "35%", y: "82%", size: 11, opacity: 0.07 },
+  { text: "+0.95%", x: "48%", y: "88%", size: 10, opacity: 0.06 },
+  { text: "POL", x: "62%", y: "80%", size: 11, opacity: 0.08 },
+  { text: "412.80", x: "72%", y: "90%", size: 10, opacity: 0.05 },
+  { text: "LOTCHEM", x: "82%", y: "83%", size: 11, opacity: 0.07 },
+  { text: "+0.62%", x: "92%", y: "78%", size: 10, opacity: 0.06 },
+  { text: "145.30", x: "42%", y: "38%", size: 10, opacity: 0.07 },
+] as const;
+
+function ScatteredTickers() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-50 md:opacity-100"
+      style={{ animation: "tickerBreath 8s ease-in-out infinite" }}
+    >
+      {SCATTERED_TICKERS.map((t, i) => (
+        <span
+          key={i}
+          className="absolute select-none whitespace-nowrap font-mono text-white"
+          style={{
+            left: t.x,
+            top: t.y,
+            fontSize: t.size,
+            opacity: t.opacity,
+            letterSpacing: "0.05em",
+          }}
+        >
+          {t.text}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-bull">
@@ -425,7 +482,14 @@ function Landing() {
       <Nav />
 
       {/* HERO */}
-      <section className="relative overflow-hidden">
+      <section
+        className="relative overflow-hidden"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,45,45,0.95) 0%, #0A0E1A 60%)",
+        }}
+      >
+        <ScatteredTickers />
         {/* gradient orbs */}
         <div className="pointer-events-none absolute inset-0 z-0">
           <span
@@ -501,6 +565,11 @@ function Landing() {
             <PhoneMockup />
           </div>
         </div>
+        {/* bottom fade mask */}
+        <div
+          className="pointer-events-none absolute bottom-0 left-0 right-0 z-[1] h-[200px]"
+          style={{ background: "linear-gradient(to bottom, transparent, #0A0E1A)" }}
+        />
       </section>
 
       {/* TICKER */}
