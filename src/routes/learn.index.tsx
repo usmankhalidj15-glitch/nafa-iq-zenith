@@ -7,7 +7,7 @@ import { LEARNING_PATHS, LESSON_ID_BY_TITLE, LESSON_CONTENT, FLASHCARDS } from "
 import { useLearn } from "@/hooks/use-learn";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/learn")({
+export const Route = createFileRoute("/learn/")({
   head: () => ({
     meta: [
       { title: "Learn Hub — NafaIQ" },
