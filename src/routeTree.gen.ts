@@ -19,6 +19,7 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StockTickerRouteImport } from './routes/stock.$ticker'
+import { Route as LearnLessonIdRouteImport } from './routes/learn.lesson.$id'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -70,6 +71,11 @@ const StockTickerRoute = StockTickerRouteImport.update({
   path: '/stock/$ticker',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LearnLessonIdRoute = LearnLessonIdRouteImport.update({
+  id: '/lesson/$id',
+  path: '/lesson/$id',
+  getParentRoute: () => LearnRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -77,11 +83,12 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/finance': typeof FinanceRoute
-  '/learn': typeof LearnRoute
+  '/learn': typeof LearnRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stock/$ticker': typeof StockTickerRoute
+  '/learn/lesson/$id': typeof LearnLessonIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -89,11 +96,12 @@ export interface FileRoutesByTo {
   '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/finance': typeof FinanceRoute
-  '/learn': typeof LearnRoute
+  '/learn': typeof LearnRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stock/$ticker': typeof StockTickerRoute
+  '/learn/lesson/$id': typeof LearnLessonIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -102,11 +110,12 @@ export interface FileRoutesById {
   '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/finance': typeof FinanceRoute
-  '/learn': typeof LearnRoute
+  '/learn': typeof LearnRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stock/$ticker': typeof StockTickerRoute
+  '/learn/lesson/$id': typeof LearnLessonIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/psx'
     | '/sitemap.xml'
     | '/stock/$ticker'
+    | '/learn/lesson/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/psx'
     | '/sitemap.xml'
     | '/stock/$ticker'
+    | '/learn/lesson/$id'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/psx'
     | '/sitemap.xml'
     | '/stock/$ticker'
+    | '/learn/lesson/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -153,7 +165,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRoute
   AuthRoute: typeof AuthRoute
   FinanceRoute: typeof FinanceRoute
-  LearnRoute: typeof LearnRoute
+  LearnRoute: typeof LearnRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
   PsxRoute: typeof PsxRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -232,8 +244,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StockTickerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/learn/lesson/$id': {
+      id: '/learn/lesson/$id'
+      path: '/lesson/$id'
+      fullPath: '/learn/lesson/$id'
+      preLoaderRoute: typeof LearnLessonIdRouteImport
+      parentRoute: typeof LearnRoute
+    }
   }
 }
+
+interface LearnRouteChildren {
+  LearnLessonIdRoute: typeof LearnLessonIdRoute
+}
+
+const LearnRouteChildren: LearnRouteChildren = {
+  LearnLessonIdRoute: LearnLessonIdRoute,
+}
+
+const LearnRouteWithChildren = LearnRoute._addFileChildren(LearnRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -241,7 +270,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRoute,
   AuthRoute: AuthRoute,
   FinanceRoute: FinanceRoute,
-  LearnRoute: LearnRoute,
+  LearnRoute: LearnRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
   PsxRoute: PsxRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

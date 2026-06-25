@@ -10,7 +10,6 @@ import {
   Brain,
   Check,
   ChevronDown,
-  MessageCircle,
   Send,
   Sparkles,
   X,
@@ -840,5 +839,3 @@ function ChatPanel({ lesson, activeSection, embedded }: { lesson: LessonContent;
   );
 }
 
-// Suppress unused import warning for MessageCircle (kept for future use)
-void MessageCircle;
