@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PsxRouteImport } from './routes/psx'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as LearnRouteImport } from './routes/learn'
 import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/app'
@@ -34,6 +35,11 @@ const PsxRoute = PsxRouteImport.update({
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearnRoute = LearnRouteImport.update({
+  id: '/learn',
+  path: '/learn',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FinanceRoute = FinanceRouteImport.update({
@@ -62,9 +68,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const LearnIndexRoute = LearnIndexRouteImport.update({
-  id: '/learn/',
-  path: '/learn/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => LearnRoute,
 } as any)
 const StockTickerRoute = StockTickerRouteImport.update({
   id: '/stock/$ticker',
@@ -72,9 +78,9 @@ const StockTickerRoute = StockTickerRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const LearnLessonIdRoute = LearnLessonIdRouteImport.update({
-  id: '/learn/lesson/$id',
-  path: '/learn/lesson/$id',
-  getParentRoute: () => rootRouteImport,
+  id: '/lesson/$id',
+  path: '/lesson/$id',
+  getParentRoute: () => LearnRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/finance': typeof FinanceRoute
+  '/learn': typeof LearnRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -110,6 +117,7 @@ export interface FileRoutesById {
   '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/finance': typeof FinanceRoute
+  '/learn': typeof LearnRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -125,6 +133,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/finance'
+    | '/learn'
     | '/portfolio'
     | '/psx'
     | '/sitemap.xml'
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/finance'
+    | '/learn'
     | '/portfolio'
     | '/psx'
     | '/sitemap.xml'
@@ -165,12 +175,11 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRoute
   AuthRoute: typeof AuthRoute
   FinanceRoute: typeof FinanceRoute
+  LearnRoute: typeof LearnRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
   PsxRoute: typeof PsxRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StockTickerRoute: typeof StockTickerRoute
-  LearnIndexRoute: typeof LearnIndexRoute
-  LearnLessonIdRoute: typeof LearnLessonIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -194,6 +203,13 @@ declare module '@tanstack/react-router' {
       path: '/portfolio'
       fullPath: '/portfolio'
       preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learn': {
+      id: '/learn'
+      path: '/learn'
+      fullPath: '/learn'
+      preLoaderRoute: typeof LearnRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/finance': {
@@ -233,10 +249,10 @@ declare module '@tanstack/react-router' {
     }
     '/learn/': {
       id: '/learn/'
-      path: '/learn'
+      path: '/'
       fullPath: '/learn/'
       preLoaderRoute: typeof LearnIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof LearnRoute
     }
     '/stock/$ticker': {
       id: '/stock/$ticker'
@@ -247,13 +263,25 @@ declare module '@tanstack/react-router' {
     }
     '/learn/lesson/$id': {
       id: '/learn/lesson/$id'
-      path: '/learn/lesson/$id'
+      path: '/lesson/$id'
       fullPath: '/learn/lesson/$id'
       preLoaderRoute: typeof LearnLessonIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof LearnRoute
     }
   }
 }
+
+interface LearnRouteChildren {
+  LearnIndexRoute: typeof LearnIndexRoute
+  LearnLessonIdRoute: typeof LearnLessonIdRoute
+}
+
+const LearnRouteChildren: LearnRouteChildren = {
+  LearnIndexRoute: LearnIndexRoute,
+  LearnLessonIdRoute: LearnLessonIdRoute,
+}
+
+const LearnRouteWithChildren = LearnRoute._addFileChildren(LearnRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -261,12 +289,11 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRoute,
   AuthRoute: AuthRoute,
   FinanceRoute: FinanceRoute,
+  LearnRoute: LearnRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
   PsxRoute: PsxRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StockTickerRoute: StockTickerRoute,
-  LearnIndexRoute: LearnIndexRoute,
-  LearnLessonIdRoute: LearnLessonIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
