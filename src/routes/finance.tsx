@@ -49,23 +49,102 @@ function Finance() {
   );
 }
 
+function KpiCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-[12px] border border-border bg-surface p-4 transition-all duration-200 hover:border-bull/25 hover:shadow-[0_4px_20px_rgba(0,0,0,0.3)] sm:p-5">
+      {children}
+    </div>
+  );
+}
+
+function KpiLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mb-1.5 text-[11px] font-medium uppercase tracking-[0.06em] text-text-secondary sm:text-xs">
+      {children}
+    </div>
+  );
+}
+
+function KpiValue({ children }: { children: React.ReactNode }) {
+  return <div className="font-mono text-lg font-bold text-text-primary sm:text-[22px]">{children}</div>;
+}
+
 function Overview() {
   return (
     <div className="space-y-4">
-      <Card>
-        <h3 className="mb-3 text-sm font-semibold text-text-primary">Income vs Expense (6 months)</h3>
-        <IncomeExpenseChart data={INCOME_EXPENSE} />
-      </Card>
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Total Income" value={fmtPKR(285000)} />
-        <StatCard label="Total Expenses" value={fmtPKR(112050)} />
-        <StatCard label="Net Savings" value={fmtPKR(172950)} subColor="text-bull" />
-        <Card>
-          <div className="text-xs text-text-secondary">Savings Rate</div>
-          <div className="mt-2 font-mono text-2xl font-bold tabular-nums text-text-primary">60.7%</div>
-          <span className="mt-1 inline-block rounded-[4px] bg-bull/15 px-2 py-0.5 text-[10px] font-semibold text-bull">Excellent</span>
-        </Card>
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+        {/* Monthly Income */}
+        <KpiCard>
+          <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-[8px]" style={{ background: "rgba(0,212,170,0.12)" }}>
+            <ArrowUpRight className="h-5 w-5 text-bull" />
+          </div>
+          <KpiLabel>Monthly Income</KpiLabel>
+          <KpiValue>PKR 47,500</KpiValue>
+          <div className="mt-3 flex items-end justify-between gap-2">
+            <span className="text-[11px] text-bull sm:text-xs">+PKR 2,500 vs last month</span>
+            <div className="w-16 shrink-0">
+              <Sparkline data={[43000, 45000, 47500]} color="#00d4aa" />
+            </div>
+          </div>
+        </KpiCard>
+
+        {/* Total Expenses */}
+        <KpiCard>
+          <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-[8px]" style={{ background: "rgba(255,77,77,0.12)" }}>
+            <ArrowDownRight className="h-5 w-5 text-bear" />
+          </div>
+          <KpiLabel>Total Expenses</KpiLabel>
+          <KpiValue>PKR 18,675</KpiValue>
+          <div className="mt-3 flex items-end justify-between gap-2">
+            <span className="text-[11px] text-bull sm:text-xs">-12% vs last month</span>
+            <div className="w-16 shrink-0">
+              <Sparkline data={[22000, 21200, 18675]} color="#ff4d4d" />
+            </div>
+          </div>
+        </KpiCard>
+
+        {/* Net Savings */}
+        <KpiCard>
+          <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-[8px]" style={{ background: "rgba(0,212,170,0.12)" }}>
+            <PiggyBank className="h-5 w-5 text-bull" />
+          </div>
+          <KpiLabel>Net Savings</KpiLabel>
+          <KpiValue>PKR 28,825</KpiValue>
+          <div className="mt-3 flex items-end justify-between gap-2">
+            <span className="text-[11px] text-text-secondary sm:text-xs">Saved this month</span>
+            <span className="text-[11px] text-bull sm:text-xs">+PKR 4,825 vs May</span>
+          </div>
+        </KpiCard>
+
+        {/* Savings Rate */}
+        <KpiCard>
+          <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-[8px]" style={{ background: "rgba(0,212,170,0.12)" }}>
+            <Percent className="h-5 w-5 text-bull" />
+          </div>
+          <KpiLabel>Savings Rate</KpiLabel>
+          <KpiValue>60.7%</KpiValue>
+          <div className="mt-2 h-1 w-full overflow-hidden rounded-full" style={{ background: "rgba(0,212,170,0.12)" }}>
+            <div className="h-full rounded-full bg-bull" style={{ width: "60.7%" }} />
+          </div>
+          <div className="mt-3 flex items-center justify-between gap-2">
+            <span className="rounded-full px-2 py-0.5 text-[10px] font-semibold text-bull" style={{ background: "rgba(0,212,170,0.12)", border: "1px solid rgba(0,212,170,0.3)" }}>
+              Excellent
+            </span>
+            <span className="text-[11px] text-text-muted sm:text-xs">Goal: 65%</span>
+          </div>
+        </KpiCard>
       </div>
+
+      <Card>
+        <div className="text-sm text-text-secondary">6-Month Overview</div>
+        <div className="text-xs text-text-muted">Jan 2026 — Jun 2026</div>
+        <div className="mt-3">
+          <IncomeExpenseChart data={INCOME_EXPENSE} />
+        </div>
+        <div className="mt-3 text-center text-xs text-text-muted">
+          6-month totals: Income PKR 2,85,000 · Expenses PKR 1,12,050 · Saved PKR 1,72,950
+        </div>
+      </Card>
     </div>
   );
 }
