@@ -93,6 +93,29 @@
     0% { transform: translateY(-60%); }
     100% { transform: translateY(100vh); }
   }
+  @keyframes float1 {
+    from { transform: translate(0, 0); }
+    to { transform: translate(40px, 30px); }
+  }
+  @keyframes float2 {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-30px, 20px); }
+  }
+  @keyframes float3 {
+    from { transform: translate(0, 0); }
+    to { transform: translate(20px, -25px); }
+  }
+  @keyframes floatCard1 {
+    from { transform: perspective(500px) rotateY(8deg) rotateX(-4deg) translateZ(20px) translateY(0); }
+    to { transform: perspective(500px) rotateY(8deg) rotateX(-4deg) translateZ(20px) translateY(-8px); }
+  }
+  @keyframes floatCard2 {
+    from { transform: perspective(500px) rotateY(-6deg) rotateX(3deg) translateZ(20px) translateY(0); }
+    to { transform: perspective(500px) rotateY(-6deg) rotateX(3deg) translateZ(20px) translateY(-6px); }
+  }
+  @keyframes spin-border {
+    to { transform: rotate(360deg); }
+  }
 }
 
 :root {
