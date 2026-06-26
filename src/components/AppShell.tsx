@@ -199,7 +199,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
-      <BottomNav onMore={() => setDrawer(true)} />
+      <BottomNav />
 
       {drawer && (
         <div className="fixed inset-0 z-50 lg:hidden" onClick={() => setDrawer(false)}>
