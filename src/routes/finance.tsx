@@ -30,10 +30,26 @@ function Finance() {
   const [tab, setTab] = useState<Tab>("Overview");
   return (
     <div className="mx-auto max-w-6xl space-y-6">
-      <h1 className="text-2xl font-bold text-text-primary sm:text-3xl">Personal Finance</h1>
-      <div className="scrollbar-none flex gap-1 overflow-x-auto border-b border-border">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">Personal Finance</h1>
+        <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-surface/60 backdrop-blur-md">
+          <span className="h-2 w-2 animate-pulse rounded-full bg-bull" />
+        </div>
+      </div>
+      <div className="scrollbar-none flex gap-1 overflow-x-auto rounded-xl border border-white/5 bg-surface/50 p-1 backdrop-blur-xl">
         {TABS.map((t) => (
-          <button key={t} onClick={() => setTab(t)} className={cn("shrink-0 border-b-2 px-3 py-2 text-sm font-medium transition", tab === t ? "border-bull text-bull" : "border-transparent text-text-secondary hover:text-text-primary")}>{t}</button>
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={cn(
+              "shrink-0 rounded-lg px-4 py-1.5 text-sm font-medium transition",
+              tab === t
+                ? "bg-bull/10 text-bull shadow-[0_0_15px_rgba(0,212,170,0.12)] ring-1 ring-bull/20"
+                : "text-text-secondary hover:text-text-primary",
+            )}
+          >
+            {t}
+          </button>
         ))}
       </div>
 
