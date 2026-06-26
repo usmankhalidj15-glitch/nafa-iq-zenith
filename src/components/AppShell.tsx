@@ -151,8 +151,9 @@ function BottomNav({ onMore }: { onMore: () => void }) {
             to={t.to}
             className="flex min-h-[64px] flex-1 flex-col items-center justify-center gap-1 py-2"
           >
-            <t.icon className={cn("h-5 w-5", active ? "text-bull" : "text-text-muted")} />
-            {active && <span className="text-[10px] font-medium text-bull">{"mobile" in t ? t.mobile : t.label}</span>}
+            <t.icon className={cn("h-5 w-5", active ? "text-primary" : "text-text-muted")} strokeWidth={1.75} />
+            {active && <span className="text-[10px] font-medium text-primary">{"mobile" in t ? t.mobile : t.label}</span>}
+
           </Link>
         );
       })}
