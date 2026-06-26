@@ -457,7 +457,7 @@ function Nav() {
       <div className="mx-auto flex h-14 max-w-[1200px] items-center justify-between px-6">
         <div className="flex items-center gap-2">
           <img src={logo} alt="NafaIQ" width={26} height={26} className="rounded-[6px]" />
-          <span className="text-lg font-bold tracking-tight text-bull">NafaIQ</span>
+          <span className="font-display text-lg font-bold tracking-tight text-text-primary">Nafa<span className="text-gold">IQ</span></span>
         </div>
         <nav className="flex items-center gap-4 sm:gap-6">
           <NavLink href="#features">Features</NavLink>
