@@ -73,7 +73,7 @@ function Sidebar() {
           );
         })}
       </nav>
-      <div className="flex items-center gap-3 border-t border-border p-3">
+      <div className="flex items-center gap-3 border-t border-white/5 p-3">
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-bull/20 font-semibold text-bull">
           {initial(profile?.display_name, user?.email)}
         </div>
