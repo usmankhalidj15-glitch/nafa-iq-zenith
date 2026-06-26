@@ -26,6 +26,8 @@ const COLORS = [
 export function Particles({ count = 28 }: { count?: number }) {
   const reduce = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const particles = useMemo<P[]>(
     () =>
@@ -42,7 +44,8 @@ export function Particles({ count = 28 }: { count?: number }) {
     [count],
   );
 
-  if (reduce) return null;
+  // Avoid SSR hydration mismatch — only render randomized particles on the client.
+  if (reduce || !mounted) return null;
 
   return (
     <div
