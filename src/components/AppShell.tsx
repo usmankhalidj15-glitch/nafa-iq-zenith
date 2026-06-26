@@ -214,7 +214,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <X className="h-5 w-5 text-text-secondary" />
               </button>
             </div>
-            {NAV.slice(4).map((n) => (
+            {NAV.slice(5).map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
