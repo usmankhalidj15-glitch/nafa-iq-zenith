@@ -79,6 +79,13 @@ function AuthPage() {
       <div className="ambient-glow -top-24 left-1/2 h-[460px] w-[460px] -translate-x-1/2 bg-bull/10" />
       <div className="ambient-glow bottom-[-10%] right-[-10%] h-[360px] w-[360px] bg-ai/[0.08]" />
       <div className="relative z-10 w-full max-w-[400px]">
+        <Link
+          to="/"
+          className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
+        >
+          <ArrowLeft className="h-4 w-4" strokeWidth={1.75} /> Back to home
+        </Link>
+
         <div className="mb-8 flex flex-col items-center text-center">
           <div className="relative">
             <div className="absolute inset-0 -z-10 rounded-[14px] bg-bull/30 blur-xl" />
