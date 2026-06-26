@@ -115,25 +115,26 @@ function Ticker() {
 function Header({ onMenu }: { onMenu: () => void }) {
   const { profile, user } = useAuth();
   return (
-    <header className="glass-chrome sticky top-0 z-20 flex h-[52px] items-center gap-3 border-b border-white/5 px-3 lg:pl-6">
+    <header className="glass-chrome sticky top-0 z-20 flex h-[48px] items-center gap-3 border-b border-white/[0.06] px-3 lg:pl-6">
       <button onClick={onMenu} className="text-text-secondary lg:hidden" aria-label="Menu">
-        <Menu className="h-5 w-5" />
+        <Menu className="h-5 w-5" strokeWidth={1.75} />
       </button>
-      <span className="hidden shrink-0 items-center gap-2 rounded-[4px] bg-bull/15 px-2 py-0.5 text-[10px] font-semibold text-bull sm:inline-flex">
+      <span className="hidden shrink-0 items-center gap-1.5 rounded-[4px] bg-bull/10 px-2 py-0.5 text-[10px] font-semibold text-bull sm:inline-flex">
         <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-bull" />
         PSX OPEN
       </span>
       <Ticker />
-      <button className="relative shrink-0 text-text-secondary" aria-label="Notifications">
-        <Bell className="h-5 w-5" />
-        <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-bear text-[9px] font-bold text-white">
+      <button className="relative shrink-0 text-text-secondary transition-colors hover:text-text-primary" aria-label="Notifications">
+        <Bell className="h-[18px] w-[18px]" strokeWidth={1.75} />
+        <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-bear text-[9px] font-bold text-white">
           3
         </span>
       </button>
-      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-bull/20 text-sm font-semibold text-bull">
+      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
         {initial(profile?.display_name, user?.email)}
       </div>
     </header>
+
   );
 }
 
