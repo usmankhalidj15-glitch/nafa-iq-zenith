@@ -151,6 +151,12 @@
   .tabular {
     font-variant-numeric: tabular-nums;
   }
+  /* Accessible gold focus ring on all interactive elements */
+  *:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
 @utility tabular-nums {
