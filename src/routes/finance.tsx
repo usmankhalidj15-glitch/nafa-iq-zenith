@@ -36,18 +36,19 @@ function Finance() {
           <span className="h-2 w-2 animate-pulse rounded-full bg-bull" />
         </div>
       </div>
-      <div className="scrollbar-none flex gap-1 overflow-x-auto rounded-xl border border-white/5 bg-surface/50 p-1 backdrop-blur-xl">
+      <div className="scrollbar-none flex gap-1 overflow-x-auto rounded-[10px] border border-white/[0.06] bg-surface p-1">
         {TABS.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={cn(
-              "shrink-0 rounded-lg px-4 py-1.5 text-sm font-medium transition",
+              "shrink-0 rounded-lg px-4 py-1.5 text-sm font-medium transition-colors",
               tab === t
-                ? "bg-bull/10 text-bull shadow-[0_0_15px_rgba(0,212,170,0.12)] ring-1 ring-bull/20"
+                ? "bg-primary/10 text-primary"
                 : "text-text-secondary hover:text-text-primary",
             )}
           >
+
             {t}
           </button>
         ))}
