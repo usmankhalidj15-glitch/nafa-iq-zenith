@@ -132,9 +132,10 @@ function StockDetail() {
       </Card>
 
       <div className="flex flex-wrap gap-2">
-        <button className="rounded-[6px] border border-bull px-4 py-2 text-sm font-semibold text-bull hover:bg-bull/10">Add to Watchlist</button>
-        <button className="rounded-[6px] bg-bull px-4 py-2 text-sm font-semibold text-bull-foreground hover:brightness-110">Add to Portfolio</button>
-        <button className="rounded-[6px] border border-bull px-4 py-2 text-sm font-semibold text-bull hover:bg-bull/10">Set Price Alert</button>
+        <button className="rounded-[10px] border border-white/[0.08] bg-surface px-4 py-2 text-sm font-semibold text-text-primary transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.16]">Add to Watchlist</button>
+        <button className="rounded-[10px] bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110">Add to Portfolio</button>
+        <button className="rounded-[10px] border border-white/[0.08] bg-surface px-4 py-2 text-sm font-semibold text-text-primary transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.16]">Set Price Alert</button>
+
       </div>
     </div>
   );
