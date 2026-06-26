@@ -36,18 +36,19 @@ function Finance() {
           <span className="h-2 w-2 animate-pulse rounded-full bg-bull" />
         </div>
       </div>
-      <div className="scrollbar-none flex gap-1 overflow-x-auto rounded-xl border border-white/5 bg-surface/50 p-1 backdrop-blur-xl">
+      <div className="scrollbar-none flex gap-1 overflow-x-auto rounded-[10px] border border-white/[0.06] bg-surface p-1">
         {TABS.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={cn(
-              "shrink-0 rounded-lg px-4 py-1.5 text-sm font-medium transition",
+              "shrink-0 rounded-lg px-4 py-1.5 text-sm font-medium transition-colors",
               tab === t
-                ? "bg-bull/10 text-bull shadow-[0_0_15px_rgba(0,212,170,0.12)] ring-1 ring-bull/20"
+                ? "bg-primary/10 text-primary"
                 : "text-text-secondary hover:text-text-primary",
             )}
           >
+
             {t}
           </button>
         ))}
@@ -111,23 +112,21 @@ function KpiCard({
   const reduce = useReducedMotion();
   return (
     <motion.div
-      initial={reduce ? false : { opacity: 0, y: 18 }}
+      initial={reduce ? false : { opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={reduce ? undefined : { y: -3 }}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-surface/40 p-4 backdrop-blur-md transition-shadow duration-300 sm:p-5"
-      style={{ boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.04)" }}
+      transition={{ duration: 0.4, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={reduce ? undefined : { y: -2 }}
+      className="group relative flex flex-col justify-between overflow-hidden rounded-[14px] border border-white/[0.06] bg-surface p-6 transition-colors duration-200 hover:border-white/[0.12]"
     >
-      {/* inner highlight */}
-      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.05] to-transparent" />
       {/* accent glow on hover */}
       <div
-        className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-60"
         style={{ background: accent }}
       />
       <div className="relative z-10 flex h-full flex-col">{children}</div>
     </motion.div>
+
   );
 }
 

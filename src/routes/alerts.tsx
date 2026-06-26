@@ -54,8 +54,9 @@ function Alerts() {
         <Card>
           <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
             {TYPES.map((t) => (
-              <button key={t.label} onClick={() => setType(t.label)} className={cn("flex flex-col items-center gap-1.5 rounded-[6px] border p-3 text-xs font-medium transition", type === t.label ? "border-bull bg-bull/10 text-bull" : "border-border text-text-secondary hover:bg-hover")}>
-                <t.icon className="h-5 w-5" />{t.label}
+              <button key={t.label} onClick={() => setType(t.label)} className={cn("flex flex-col items-center gap-1.5 rounded-[10px] border p-3 text-xs font-medium transition", type === t.label ? "border-primary/40 bg-primary/10 text-primary" : "border-white/[0.06] text-text-secondary hover:bg-white/[0.04]")}>
+                <t.icon className="h-5 w-5" strokeWidth={1.75} />{t.label}
+
               </button>
             ))}
           </div>
