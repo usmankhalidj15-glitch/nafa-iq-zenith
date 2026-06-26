@@ -175,9 +175,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background">
-      {/* ambient depth — subtle brand glows behind everything */}
-      <div className="ambient-glow -top-32 right-[-10%] h-[420px] w-[420px] bg-bull/[0.06]" />
-      <div className="ambient-glow top-1/3 left-[-12%] h-[380px] w-[380px] bg-ai/[0.05]" />
+      {/* ambient depth — very subtle brand wash */}
+      <div className="ambient-glow -top-40 right-[-12%] h-[420px] w-[420px] bg-primary/[0.03]" />
+
       <Sidebar />
       <div className="relative lg:pl-[212px]">
         <Header onMenu={() => setDrawer(true)} />
