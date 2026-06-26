@@ -357,7 +357,7 @@
 
   /* Active nav item — subtle bg + left accent bar */
   .nav-active {
-    background: rgba(18, 214, 161, 0.08);
+    background: rgba(0, 212, 170, 0.08);
     position: relative;
   }
   .nav-active::before {
