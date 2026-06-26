@@ -21,13 +21,14 @@
   --color-popover: #111a2e;
   --color-popover-foreground: #ffffff;
 
-  --color-bull: #17c964;
-  --color-bull-foreground: #03130a;
+  --color-bull: #10b981;
+  --color-bull-foreground: #020617;
   --color-bear: #f31260;
   --color-warning: #f5a524;
   --color-neutral: #64748b;
-  --color-info: #12d6a1;
-  --color-ai: #12d6a1;
+  --color-info: #00d4aa;
+  --color-ai: #00d4aa;
+
   --color-ai-tint: #0d1424;
 
   /* Gold — premium accent (logo IQ, premium badges, savings) */
