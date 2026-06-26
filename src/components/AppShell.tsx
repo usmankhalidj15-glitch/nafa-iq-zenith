@@ -19,10 +19,10 @@ import { useAuth } from "@/hooks/use-auth";
 
 const NAV = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard, mobile: "Home" },
-  { to: "/psx", label: "PSX Market", icon: TrendingUp, mobile: "PSX" },
+  { to: "/psx", label: "PSX Market", icon: TrendingUp, mobile: "Markets" },
   { to: "/portfolio", label: "Portfolio", icon: Briefcase, mobile: "Portfolio" },
   { to: "/finance", label: "Finance", icon: Wallet, mobile: "Finance" },
-  { to: "/learn", label: "Learn Hub", icon: GraduationCap },
+  { to: "/learn", label: "Learn Hub", icon: GraduationCap, mobile: "Learn" },
   { to: "/alerts", label: "Alerts", icon: Bell },
 ] as const;
 
