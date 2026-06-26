@@ -9,7 +9,6 @@ import {
   Bell,
   LogOut,
   Menu,
-  MoreHorizontal,
   X,
 } from "lucide-react";
 import { useState } from "react";
@@ -19,10 +18,10 @@ import { useAuth } from "@/hooks/use-auth";
 
 const NAV = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard, mobile: "Home" },
-  { to: "/psx", label: "PSX Market", icon: TrendingUp, mobile: "PSX" },
+  { to: "/psx", label: "PSX Market", icon: TrendingUp, mobile: "Markets" },
   { to: "/portfolio", label: "Portfolio", icon: Briefcase, mobile: "Portfolio" },
   { to: "/finance", label: "Finance", icon: Wallet, mobile: "Finance" },
-  { to: "/learn", label: "Learn Hub", icon: GraduationCap },
+  { to: "/learn", label: "Learn Hub", icon: GraduationCap, mobile: "Learn" },
   { to: "/alerts", label: "Alerts", icon: Bell },
 ] as const;
 
@@ -138,28 +137,42 @@ function Header({ onMenu }: { onMenu: () => void }) {
   );
 }
 
-function BottomNav({ onMore }: { onMore: () => void }) {
+function BottomNav() {
   const path = useRouterState({ select: (s) => s.location.pathname });
-  const tabs = NAV.slice(0, 4);
+  const tabs = NAV.slice(0, 5);
   return (
     <nav className="glass-chrome safe-bottom fixed bottom-0 left-0 z-30 flex w-full items-stretch border-t border-white/5 lg:hidden">
       {tabs.map((t) => {
         const active = path === t.to || path.startsWith(t.to + "/");
+        const label = "mobile" in t ? t.mobile : t.label;
         return (
           <Link
             key={t.to}
             to={t.to}
             className="flex min-h-[64px] flex-1 flex-col items-center justify-center gap-1 py-2"
           >
-            <t.icon className={cn("h-5 w-5", active ? "text-primary" : "text-text-muted")} strokeWidth={1.75} />
-            {active && <span className="text-[10px] font-medium text-primary">{"mobile" in t ? t.mobile : t.label}</span>}
-
+            <span
+              className={cn(
+                "flex h-7 w-12 items-center justify-center rounded-full transition-colors",
+                active ? "bg-gold/15" : "",
+              )}
+            >
+              <t.icon
+                className={cn("h-5 w-5", active ? "text-gold" : "text-text-muted")}
+                strokeWidth={1.75}
+              />
+            </span>
+            <span
+              className={cn(
+                "text-[10px] font-medium",
+                active ? "text-gold" : "text-text-muted",
+              )}
+            >
+              {label}
+            </span>
           </Link>
         );
       })}
-      <button onClick={onMore} className="flex min-h-[64px] flex-1 flex-col items-center justify-center gap-1 py-2">
-        <MoreHorizontal className="h-5 w-5 text-text-muted" />
-      </button>
     </nav>
   );
 }
@@ -185,7 +198,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
-      <BottomNav onMore={() => setDrawer(true)} />
+      <BottomNav />
 
       {drawer && (
         <div className="fixed inset-0 z-50 lg:hidden" onClick={() => setDrawer(false)}>
@@ -200,7 +213,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <X className="h-5 w-5 text-text-secondary" />
               </button>
             </div>
-            {NAV.slice(4).map((n) => (
+            {NAV.slice(5).map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
