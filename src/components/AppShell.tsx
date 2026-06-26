@@ -169,9 +169,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     navigate({ to: "/auth" });
   }
   return (
-    <div className="min-h-screen bg-background">
+    <div className="relative min-h-screen overflow-x-hidden bg-background">
+      {/* ambient depth — subtle brand glows behind everything */}
+      <div className="ambient-glow -top-32 right-[-10%] h-[420px] w-[420px] bg-bull/[0.06]" />
+      <div className="ambient-glow top-1/3 left-[-12%] h-[380px] w-[380px] bg-ai/[0.05]" />
       <Sidebar />
-      <div className="lg:pl-[240px]">
+      <div className="relative lg:pl-[240px]">
         <Header onMenu={() => setDrawer(true)} />
         <main key={useRouterState({ select: (s) => s.location.pathname })} className="animate-[page-in_0.25s_ease-out] px-3 pt-4 pb-24 sm:px-5 lg:px-6 lg:pb-8">
           {children}
@@ -181,9 +184,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       {drawer && (
         <div className="fixed inset-0 z-50 lg:hidden" onClick={() => setDrawer(false)}>
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <div
-            className="safe-bottom absolute right-0 bottom-0 left-0 rounded-t-[16px] border-t border-border bg-sidebar p-4"
+            className="glass-chrome safe-bottom absolute right-0 bottom-0 left-0 rounded-t-2xl border-t border-white/10 p-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between">
