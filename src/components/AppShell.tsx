@@ -138,7 +138,7 @@ function BottomNav({ onMore }: { onMore: () => void }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const tabs = NAV.slice(0, 4);
   return (
-    <nav className="safe-bottom fixed bottom-0 left-0 z-30 flex w-full items-stretch border-t border-border bg-sidebar lg:hidden">
+    <nav className="glass-chrome safe-bottom fixed bottom-0 left-0 z-30 flex w-full items-stretch border-t border-white/5 lg:hidden">
       {tabs.map((t) => {
         const active = path === t.to || path.startsWith(t.to + "/");
         return (
