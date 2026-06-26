@@ -179,7 +179,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="ambient-glow -top-32 right-[-10%] h-[420px] w-[420px] bg-bull/[0.06]" />
       <div className="ambient-glow top-1/3 left-[-12%] h-[380px] w-[380px] bg-ai/[0.05]" />
       <Sidebar />
-      <div className="relative lg:pl-[240px]">
+      <div className="relative lg:pl-[212px]">
         <Header onMenu={() => setDrawer(true)} />
         <main key={useRouterState({ select: (s) => s.location.pathname })} className="animate-[page-in_0.25s_ease-out] px-3 pt-4 pb-24 sm:px-5 lg:px-6 lg:pb-8">
           {children}
