@@ -49,8 +49,8 @@ function Sidebar() {
     navigate({ to: "/auth" });
   }
   return (
-    <aside className="fixed top-0 left-0 z-30 hidden h-screen w-[240px] flex-col border-r border-border bg-sidebar lg:flex">
-      <div className="flex h-[52px] items-center border-b border-border px-4">
+    <aside className="glass-chrome fixed top-0 left-0 z-30 hidden h-screen w-[240px] flex-col border-r border-white/5 lg:flex">
+      <div className="flex h-[52px] items-center border-b border-white/5 px-4">
         <Logo />
       </div>
       <nav className="flex-1 space-y-1 p-3">
@@ -61,10 +61,10 @@ function Sidebar() {
               key={n.to}
               to={n.to}
               className={cn(
-                "flex items-center gap-3 rounded-[6px] border-l-2 px-3 py-2.5 text-sm font-medium transition-colors",
+                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
                 active
-                  ? "border-bull bg-bull/10 text-bull"
-                  : "border-transparent text-text-secondary hover:bg-hover hover:text-text-primary",
+                  ? "nav-active text-bull"
+                  : "text-text-secondary hover:bg-white/5 hover:text-text-primary",
               )}
             >
               <n.icon className="h-[18px] w-[18px]" />
@@ -73,7 +73,7 @@ function Sidebar() {
           );
         })}
       </nav>
-      <div className="flex items-center gap-3 border-t border-border p-3">
+      <div className="flex items-center gap-3 border-t border-white/5 p-3">
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-bull/20 font-semibold text-bull">
           {initial(profile?.display_name, user?.email)}
         </div>
@@ -112,7 +112,7 @@ function Ticker() {
 function Header({ onMenu }: { onMenu: () => void }) {
   const { profile, user } = useAuth();
   return (
-    <header className="sticky top-0 z-20 flex h-[52px] items-center gap-3 border-b border-border bg-sidebar px-3 lg:pl-6">
+    <header className="glass-chrome sticky top-0 z-20 flex h-[52px] items-center gap-3 border-b border-white/5 px-3 lg:pl-6">
       <button onClick={onMenu} className="text-text-secondary lg:hidden" aria-label="Menu">
         <Menu className="h-5 w-5" />
       </button>
@@ -138,7 +138,7 @@ function BottomNav({ onMore }: { onMore: () => void }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const tabs = NAV.slice(0, 4);
   return (
-    <nav className="safe-bottom fixed bottom-0 left-0 z-30 flex w-full items-stretch border-t border-border bg-sidebar lg:hidden">
+    <nav className="glass-chrome safe-bottom fixed bottom-0 left-0 z-30 flex w-full items-stretch border-t border-white/5 lg:hidden">
       {tabs.map((t) => {
         const active = path === t.to || path.startsWith(t.to + "/");
         return (
@@ -169,9 +169,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     navigate({ to: "/auth" });
   }
   return (
-    <div className="min-h-screen bg-background">
+    <div className="relative min-h-screen overflow-x-hidden bg-background">
+      {/* ambient depth — subtle brand glows behind everything */}
+      <div className="ambient-glow -top-32 right-[-10%] h-[420px] w-[420px] bg-bull/[0.06]" />
+      <div className="ambient-glow top-1/3 left-[-12%] h-[380px] w-[380px] bg-ai/[0.05]" />
       <Sidebar />
-      <div className="lg:pl-[240px]">
+      <div className="relative lg:pl-[240px]">
         <Header onMenu={() => setDrawer(true)} />
         <main key={useRouterState({ select: (s) => s.location.pathname })} className="animate-[page-in_0.25s_ease-out] px-3 pt-4 pb-24 sm:px-5 lg:px-6 lg:pb-8">
           {children}
@@ -181,9 +184,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       {drawer && (
         <div className="fixed inset-0 z-50 lg:hidden" onClick={() => setDrawer(false)}>
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <div
-            className="safe-bottom absolute right-0 bottom-0 left-0 rounded-t-[16px] border-t border-border bg-sidebar p-4"
+            className="glass-chrome safe-bottom absolute right-0 bottom-0 left-0 rounded-t-2xl border-t border-white/10 p-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between">

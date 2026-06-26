@@ -309,3 +309,56 @@
     100% { background-position: 100% 100%; }
   }
 }
+
+@layer components {
+  /* ============================================================
+     Premium glass design language (project-wide)
+     ============================================================ */
+
+  /* Frosted glass surface — used by Card and panels everywhere */
+  .glass-card {
+    position: relative;
+    background: color-mix(in oklab, var(--color-surface) 72%, transparent);
+    backdrop-filter: blur(16px) saturate(135%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Hover lift + brighten — opt-in */
+  .glass-card-hover {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .glass-card-hover:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 16px 44px rgba(0, 0, 0, 0.55),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* Heavier glass for chrome (sidebar / header / nav) */
+  .glass-chrome {
+    background: color-mix(in oklab, var(--color-sidebar) 78%, transparent);
+    backdrop-filter: blur(20px) saturate(140%);
+  }
+
+  /* Active nav pill */
+  .nav-active {
+    background: rgba(0, 212, 170, 0.1);
+    box-shadow: 0 0 18px rgba(0, 212, 170, 0.12);
+    outline: 1px solid rgba(0, 212, 170, 0.22);
+    outline-offset: -1px;
+  }
+
+  /* Reusable ambient glow blobs for section backgrounds */
+  .ambient-glow {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+  }
+}

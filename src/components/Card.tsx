@@ -9,8 +9,8 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-[8px] border border-border bg-surface p-4 shadow-[0_4px_24px_rgba(0,0,0,0.4)] transition-colors",
-        hover && "hover:border-border-hover",
+        "glass-card rounded-2xl p-4",
+        hover && "glass-card-hover",
         className,
       )}
       {...props}
