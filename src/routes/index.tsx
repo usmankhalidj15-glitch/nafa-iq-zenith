@@ -8,6 +8,7 @@ import {
   useMotionValue,
   useAnimationFrame,
   useReducedMotion,
+  type MotionValue,
 } from "framer-motion";
 import {
   Download,
