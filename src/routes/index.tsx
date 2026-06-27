@@ -283,7 +283,7 @@ function PhoneMockup({ startDelay = 0 }: { startDelay?: number }) {
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut", delay: startDelay }}
+        transition={{ ...SPRING_SOFT, delay: startDelay }}
         style={{ rotateY: ry, rotateX: rx, transformStyle: "preserve-3d" }}
         className="relative will-change-transform"
       >
