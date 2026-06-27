@@ -1518,7 +1518,7 @@ function Landing() {
           <div>
             <div className="text-sm font-semibold text-text-primary">Company</div>
             <ul className="mt-3 space-y-2 text-sm text-text-secondary">
-              <li><a href="#" className="transition hover:text-bull">About</a></li>
+              <li><a href="#about" className="transition hover:text-bull">About</a></li>
               <li><a href="#" className="transition hover:text-bull">Privacy Policy</a></li>
               <li><a href="#" className="transition hover:text-bull">Terms</a></li>
               <li><a href="#" className="transition hover:text-bull">Contact</a></li>
