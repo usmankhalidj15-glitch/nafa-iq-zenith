@@ -1001,7 +1001,7 @@ function FlipCard() {
       />
       <motion.div
         animate={{ rotateY: flipped && !reduce ? 180 : 0 }}
-        transition={{ type: "spring", stiffness: 120, damping: 18 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="relative h-full w-full"
         style={{ transformStyle: "preserve-3d" }}
       >
