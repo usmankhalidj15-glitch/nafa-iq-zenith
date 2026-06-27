@@ -34,7 +34,7 @@ import { toast } from "sonner";
 import { EmojiIcon, PkBadge } from "@/components/icons";
 import { AlertTriangle } from "lucide-react";
 import logo from "@/assets/logo.png";
-import { TICKER_ITEMS } from "@/lib/data";
+import { TICKER_ITEMS, STOCKS } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Reveal, staggerParent, perspectiveCard, Magnetic, SPRING } from "@/components/animations";
 import { Tilt3D } from "@/components/Tilt3D";
