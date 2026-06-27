@@ -61,6 +61,8 @@ import {
   perspectiveCard,
   Magnetic,
   SPRING,
+  SPRING_UI,
+  SPRING_SOFT,
   CountUp,
 } from "@/components/animations";
 import { Tilt3D } from "@/components/Tilt3D";
@@ -119,7 +121,7 @@ function StoreButtons({ center = false }: { center?: boolean }) {
     <div className={cn("flex flex-col gap-5", center && "items-center")}>
       {/* PRIMARY — single dominant action */}
       <Magnetic strength={0.45} className={cn(center && "self-center")}>
-        <motion.div whileTap={{ scale: 0.96 }} whileHover={{ scale: 1.03 }} transition={SPRING}>
+        <motion.div whileTap={{ scale: 0.96 }} whileHover={{ scale: 1.03 }} transition={SPRING_UI}>
           <Link
             to="/app"
             className="inline-flex w-auto items-center gap-2 rounded-[12px] bg-gradient-to-br from-[#00d4aa] to-[#00a88a] px-5 py-2.5 text-bull-foreground shadow-[0_6px_24px_rgba(0,212,170,0.3)] transition hover:shadow-[0_10px_36px_rgba(0,212,170,0.5)]"
@@ -232,7 +234,7 @@ function PhoneMockup({ startDelay = 0 }: { startDelay?: number }) {
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut", delay: startDelay + 0.15 }}
+        transition={{ ...SPRING_SOFT, delay: startDelay + 0.15 }}
         className="absolute -top-8 -left-10 z-20"
       >
         <motion.div
@@ -257,7 +259,7 @@ function PhoneMockup({ startDelay = 0 }: { startDelay?: number }) {
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut", delay: startDelay + 0.30 }}
+        transition={{ ...SPRING_SOFT, delay: startDelay + 0.30 }}
         className="absolute -bottom-8 -right-8 z-20"
       >
         <motion.div
@@ -281,7 +283,7 @@ function PhoneMockup({ startDelay = 0 }: { startDelay?: number }) {
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut", delay: startDelay }}
+        transition={{ ...SPRING_SOFT, delay: startDelay }}
         style={{ rotateY: ry, rotateX: rx, transformStyle: "preserve-3d" }}
         className="relative will-change-transform"
       >
@@ -702,7 +704,7 @@ function Nav() {
 
           {/* Enter App — dominant CTA, always visible */}
           <Magnetic strength={0.4}>
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} transition={SPRING}>
+            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} transition={SPRING_UI}>
               <Link
                 to="/app"
                 className="inline-flex items-center gap-1 rounded-full bg-bull px-4 py-2 text-sm font-semibold text-bull-foreground shadow-[0_0_20px_rgba(0,212,170,0.25)] transition hover:bg-[#00efc0] hover:shadow-[0_0_28px_rgba(0,212,170,0.5)]"
@@ -1060,15 +1062,11 @@ function FlipCard() {
           filter: "blur(40px)",
         }}
       />
-      <div
-        className={cn(
-          "relative h-full w-full",
-          !reduce && "transition-transform duration-[600ms] ease-in-out"
-        )}
-        style={{
-          transformStyle: "preserve-3d",
-          transform: flipped && !reduce ? "rotateY(180deg)" : "rotateY(0deg)",
-        }}
+      <motion.div
+        className="relative h-full w-full"
+        style={{ transformStyle: "preserve-3d" }}
+        animate={{ rotateY: flipped && !reduce ? 180 : 0 }}
+        transition={reduce ? { duration: 0 } : SPRING_UI}
       >
         {/* FRONT — PSX return */}
         <div
@@ -1123,7 +1121,7 @@ function FlipCard() {
           </div>
           <div className="mt-4 text-[11px] text-text-muted">Tap to flip back</div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -1164,7 +1162,7 @@ function HowItWorks() {
             initial={reduce ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.1 }}
+            transition={{ ...SPRING_UI, delay: i * 0.1 }}
           >
             <div className="relative h-full rounded-[16px] border border-white/[0.07] bg-[rgba(17,24,39,0.6)] p-7 backdrop-blur-md">
               <span className="absolute right-5 top-4 font-mono text-3xl font-bold tabular-nums text-white/[0.06]">
@@ -1275,13 +1273,13 @@ function Landing() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.08 }}
+                transition={{ ...SPRING_UI, delay: i * 0.08 }}
                 className="[perspective:1000px]"
               >
                 <Tilt3D max={10} className="h-full">
                   <motion.div
                     whileHover={{ y: -4, scale: 1.02 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    transition={SPRING_UI}
                     className={cn(
                       "group relative h-full rounded-[16px] border border-white/[0.07] p-7 backdrop-blur-md transition-shadow duration-[250ms] hover:border-bull/30 hover:shadow-[0_24px_60px_rgba(0,212,170,0.18),0_0_0_1px_rgba(0,212,170,0.18)]",
                       f.badge && "spin-border",
@@ -1396,7 +1394,7 @@ function Landing() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
+              transition={{ ...SPRING_UI, delay: i * 0.1 }}
             >
               <Tilt3D max={8} scale={1.03} className="h-full">
                 <div
@@ -1496,7 +1494,7 @@ function Landing() {
                   href="#"
                   whileHover={{ scale: 1.18, rotate: 6 }}
                   whileTap={{ scale: 0.92 }}
-                  transition={SPRING}
+                  transition={SPRING_UI}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.05] text-text-secondary transition hover:border-bull hover:bg-bull/10 hover:text-bull hover:shadow-[0_0_18px_rgba(0,212,170,0.35)]"
                 >
                   <Icon className="h-4 w-4" />
