@@ -1427,7 +1427,7 @@ function Landing() {
               </Tilt3D>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
         <Reveal className="mt-16">
           <div className="rounded-[16px] border border-white/[0.07] bg-surface/40 py-2">
             <StatsStrip />
