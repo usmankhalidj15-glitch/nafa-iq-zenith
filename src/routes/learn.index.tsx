@@ -104,7 +104,7 @@ function Learn() {
                 className="group min-w-[220px] flex-1 rounded-[12px] border border-border bg-surface p-5 transition-all hover:-translate-y-0.5 hover:border-border-hover hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
                 style={{ borderLeft: `3px solid ${p.accent}` }}
               >
-                <div className="text-2xl">{p.emoji}</div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-[8px] border border-white/[0.06] bg-elevated" style={{ color: p.accent }}><EmojiIcon emoji={p.emoji} size={18} /></div>
                 <div className="mt-2 text-sm font-semibold text-text-primary">{p.title}</div>
                 <div className="mt-0.5 text-xs text-text-secondary">{p.description}</div>
                 <div className="mt-2 font-mono text-[11px] text-text-muted">{p.lessonIds.length} lessons · Est: {p.estMin} min</div>
