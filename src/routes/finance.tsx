@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { Plus, Search, Check, Sparkles, ArrowUpRight, ArrowDownRight, PiggyBank, Percent } from "lucide-react";
+import { Plus, Search, Check, Sparkles, ArrowUpRight, ArrowDownRight, PiggyBank, Percent, Lightbulb } from "lucide-react";
+import { EmojiIcon } from "@/components/icons";
 import { Card } from "@/components/Card";
 import { IncomeExpenseChart, Sparkline } from "@/components/charts";
 import { fmtPKR } from "@/lib/data";
