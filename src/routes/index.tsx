@@ -28,15 +28,39 @@ import {
   Menu,
   X,
   Search,
+  CandlestickChart,
+  Bot,
+  Wallet,
+  GraduationCap,
+  LineChart,
+  Brain,
+  Lightbulb,
+  Lock,
+  BadgeDollarSign,
+  UserCheck,
+  AlertTriangle,
+  type LucideIcon,
 } from "lucide-react";
 
 import { toast } from "sonner";
-import { EmojiIcon, PkBadge } from "@/components/icons";
-import { AlertTriangle } from "lucide-react";
+import { CrescentIcon, PkBadge } from "@/components/icons";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import logo from "@/assets/logo.png";
 import { TICKER_ITEMS, STOCKS } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import { Reveal, staggerParent, perspectiveCard, Magnetic, SPRING } from "@/components/animations";
+import {
+  Reveal,
+  staggerParent,
+  perspectiveCard,
+  Magnetic,
+  SPRING,
+  CountUp,
+} from "@/components/animations";
 import { Tilt3D } from "@/components/Tilt3D";
 import { Particles } from "@/components/Particles";
 
