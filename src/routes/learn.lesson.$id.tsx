@@ -180,7 +180,7 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
               <div className="mt-5 space-y-1.5 border-t border-border pt-4 text-xs text-text-secondary">
                 <div className="flex items-center gap-1.5"><Sparkles className="h-3.5 w-3.5" strokeWidth={1.5} /> {lesson.duration} read</div>
                 <div className="flex items-center gap-1.5"><Target className="h-3.5 w-3.5" strokeWidth={1.5} /> {lesson.level}</div>
-                <div className="flex items-center gap-1.5">{lesson.type === "video" ? <><Video className="h-3.5 w-3.5" strokeWidth={1.5} /> Video + Article</> : <><BookOpen className="h-3.5 w-3.5" strokeWidth={1.5} /> Article</>}</div>
+                <div className="flex items-center gap-1.5">{lesson.type === "video" && lesson.videoUrl ? <><Video className="h-3.5 w-3.5" strokeWidth={1.5} /> Video + Article</> : <><BookOpen className="h-3.5 w-3.5" strokeWidth={1.5} /> Article</>}</div>
               </div>
               <button
                 onClick={() => toggleBookmark(lesson.id)}
