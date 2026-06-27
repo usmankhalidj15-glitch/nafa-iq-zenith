@@ -378,24 +378,6 @@ const TESTIMONIALS = [
   },
 ] as const;
 
-/* ---------- count-up that triggers in view ---------- */
-function useCountUp(target: number, start: boolean, decimals = 0, duration = 1600) {
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    if (!start) return;
-    let raf: number;
-    const t0 = performance.now();
-    const tick = (now: number) => {
-      const p = Math.min((now - t0) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setVal(target * eased);
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [target, duration, start]);
-  return Number(val.toFixed(decimals));
-}
 
 function StatsStrip() {
   const stats = [
