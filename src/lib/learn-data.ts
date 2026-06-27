@@ -719,8 +719,94 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
       "What is the KMI-30 index?",
       "Is interest income allowed?",
     ],
-    sections: placeholderSections("halal investing and Islamic finance", "#22c55e"),
-    quiz: genericQuiz("halal investing"),
+    sections: [
+      {
+        id: "introduction",
+        heading: "What Makes Investing Halal",
+        blocks: [
+          {
+            type: "p",
+            text: "Halal investing applies Islamic principles to the stock market. The core rules: avoid riba (interest), avoid excessive gharar (uncertainty/speculation), and avoid owning businesses whose core activity is haram — such as conventional banking, alcohol, gambling, or pork.",
+          },
+          {
+            type: "callout",
+            kind: "note",
+            text: "On PSX, the KMI-30 and KMI All-Share indices track companies screened as Sharia-compliant, so you don't have to vet every stock from scratch.",
+          },
+        ],
+      },
+      {
+        id: "the-core-idea",
+        heading: "The Screening Tests",
+        blocks: [
+          {
+            type: "p",
+            text: "A stock is screened on two levels. First, its business must be permissible. Second, its finances must pass quantitative thresholds — a company can run a halal business but still fail if it carries too much interest-based debt.",
+          },
+          {
+            type: "table",
+            head: ["Screen", "Common threshold", "Why it exists"],
+            rows: [
+              ["Interest-bearing debt ÷ assets", "< 37%", "Limits reliance on riba-based borrowing"],
+              ["Interest income ÷ revenue", "< 5%", "Keeps haram income immaterial"],
+              ["Non-compliant investments", "Below set limit", "Avoids indirect haram exposure"],
+            ],
+          },
+          {
+            type: "callout",
+            kind: "example",
+            text: "A profitable cement maker may still fail the screen if most of its balance sheet is funded by conventional interest-bearing loans.",
+          },
+        ],
+      },
+      {
+        id: "purification",
+        heading: "Income Purification",
+        blocks: [
+          {
+            type: "p",
+            text: "Even compliant companies may earn a tiny share of income from interest. Scholars require investors to 'purify' this by donating the equivalent proportion of their dividends to charity, keeping the remaining return halal.",
+          },
+          {
+            type: "callout",
+            kind: "warning",
+            text: "Screening status can change as a company's debt levels shift. Re-check compliance periodically rather than assuming it's permanent.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        q: "Which index on PSX tracks Sharia-compliant companies?",
+        options: ["KSE-100", "KMI-30", "KSE-30", "BR Index"],
+        correct: 1,
+        explanation: "The KMI-30 (and KMI All-Share) track Sharia-screened PSX companies.",
+      },
+      {
+        q: "A company runs a permissible business but funds itself mostly with interest-bearing loans. Is it halal to invest in?",
+        options: [
+          "Yes — the business activity is all that matters",
+          "Not necessarily — it can fail the financial debt screen",
+          "Yes — debt is never part of screening",
+          "Only if it pays a dividend",
+        ],
+        correct: 1,
+        explanation:
+          "Both the business and its finances are screened. Excessive interest-based debt can disqualify a permissible business.",
+      },
+      {
+        q: "What is 'purification' in halal investing?",
+        options: [
+          "Selling all stocks once a year",
+          "Donating the share of returns linked to impermissible income",
+          "Only buying KMI-30 stocks",
+          "Avoiding dividends entirely",
+        ],
+        correct: 1,
+        explanation:
+          "Purification means giving away the proportion of income tied to non-compliant sources, such as small interest earnings.",
+      },
+    ],
   },
 
   "pe-ratio": {
