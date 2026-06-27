@@ -172,8 +172,13 @@ function AuthGate() {
   // Outlet must ALWAYS render so the router keeps its matched route (avoids
   // "Expected to find a match below the root match" during hydration).
   if (isPublic) {
-    return <Outlet />;
+    return (
+      <PageTransition routeKey={pathname}>
+        <Outlet />
+      </PageTransition>
+    );
   }
+
 
   const blocking = loading || !user;
   return (
