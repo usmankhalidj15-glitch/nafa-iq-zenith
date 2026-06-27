@@ -426,7 +426,7 @@ function ReadingView({
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         {prev ? (
           <Link to="/learn/lesson/$id" params={{ id: prev.id }} className="rounded-[8px] border border-border p-3 text-left hover:border-border-hover">
-            <div className="text-[10px] text-text-muted">← Previous</div>
+            <div className="flex items-center gap-1 text-[10px] text-text-muted"><ArrowLeft className="h-3 w-3" strokeWidth={1.5} /> Previous</div>
             <div className="text-sm font-medium text-text-primary">{prev.title}</div>
           </Link>
         ) : <div />}
