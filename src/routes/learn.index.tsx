@@ -171,7 +171,7 @@ function Learn() {
             onClick={() => setFlashcards(true)}
             className="inline-flex items-center gap-1.5 rounded-[6px] border border-bull/40 bg-bull/10 px-3 py-1.5 text-xs font-semibold text-bull hover:bg-bull/20"
           >
-            <Layers className="h-3.5 w-3.5" /> 🃏 Flashcard Mode
+            <Layers className="h-3.5 w-3.5" /> Flashcard Mode
           </button>
         </div>
         <div className="mb-3 flex items-center gap-2 rounded-[6px] border border-border bg-surface px-3 py-2">
