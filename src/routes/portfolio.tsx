@@ -186,8 +186,10 @@ function Portfolio() {
                 const mv = h.shares * h.current;
                 const gain = h.shares * (h.current - h.avgCost);
                 const gainPct = ((h.current - h.avgCost) / h.avgCost) * 100;
+                const isSell = h.signal === "SELL" || h.signal === "STRONG SELL";
                 return (
-                  <tr key={h.ticker} className="border-b border-border/50">
+                  <tr key={h.ticker} className={cn("border-b border-border/50", isSell && "border-l-2 border-l-bear bg-bear/[0.04]")}>
+
                     <td className="py-2 font-semibold text-bull">{h.ticker}</td>
                     <td className="text-text-secondary">{h.sector}</td>
                     <td className="text-right font-mono tabular-nums text-text-primary">{h.shares.toLocaleString()}</td>
