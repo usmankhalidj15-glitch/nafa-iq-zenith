@@ -284,13 +284,6 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
             />
           )}
         </main>
-
-        {/* Right AI sidebar (desktop wide) */}
-        <aside className="hidden w-[300px] shrink-0 xl:block">
-          <div className="sticky top-[110px] h-[calc(100vh-130px)]">
-            <ChatPanel lesson={lesson} activeSection={activeSection} />
-          </div>
-        </aside>
       </div>
 
       {/* Floating AI button (tablet + mobile) */}
