@@ -1364,6 +1364,9 @@ function Landing() {
         </Reveal>
       </section>
 
+      {/* FAQ */}
+      <FAQ />
+
       {/* DOWNLOAD CTA */}
       <section id="download" className="gradient-mesh border-y border-border bg-[#0D1421]">
         <div className="mx-auto max-w-3xl px-6 py-[60px] text-center lg:py-[100px]">
