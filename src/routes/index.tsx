@@ -704,7 +704,7 @@ function Nav() {
 
           {/* Enter App — dominant CTA, always visible */}
           <Magnetic strength={0.4}>
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} transition={SPRING}>
+            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} transition={SPRING_UI}>
               <Link
                 to="/app"
                 className="inline-flex items-center gap-1 rounded-full bg-bull px-4 py-2 text-sm font-semibold text-bull-foreground shadow-[0_0_20px_rgba(0,212,170,0.25)] transition hover:bg-[#00efc0] hover:shadow-[0_0_28px_rgba(0,212,170,0.5)]"
