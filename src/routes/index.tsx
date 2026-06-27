@@ -1027,12 +1027,12 @@ function Landing() {
         <div className="border-t border-border">
           <div className="mx-auto flex max-w-[1200px] flex-col gap-2 px-6 py-5 text-xs text-text-muted sm:flex-row sm:items-center sm:justify-between">
             <span className="flex items-center gap-2">
-              © 2026 NafaIQ. Made in Pakistan 🇵🇰
+              © 2026 NafaIQ · Built in Pakistan <PkBadge />
               <span className="rounded-full bg-white/[0.05] px-2 py-0.5 text-[11px] text-text-secondary">
                 v1.0 · Beta
               </span>
             </span>
-            <span>Made with ❤️ for Pakistani investors</span>
+            <span>Pakistan's Financial Intelligence Terminal</span>
           </div>
         </div>
       </footer>
