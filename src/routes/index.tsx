@@ -860,26 +860,32 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 /* ---------- scroll to discover cue ---------- */
-function ScrollCue({ progress, reduce }: { progress: any; reduce: boolean }) {
-  const opacity = useTransform(progress, [0, 0.08], [1, 0]);
+function ScrollCue({ reduce }: { reduce: boolean }) {
+  const [hidden, setHidden] = useState(false);
+  useEffect(() => {
+    if (hidden) return;
+    const onScroll = () => {
+      if (window.scrollY > 50) setHidden(true);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [hidden]);
   if (reduce) return null;
   return (
-    <motion.div
-      style={{ opacity }}
-      className="pointer-events-none absolute bottom-6 left-1/2 z-[2] flex -translate-x-1/2 flex-col items-center gap-2"
+    <div
+      className="pointer-events-none absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 transition-opacity duration-300"
+      style={{ opacity: hidden ? 0 : 1 }}
       aria-hidden
     >
-      <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-text-muted">
-        Scroll to discover
-      </span>
-      <span className="relative flex h-9 w-5 justify-center rounded-full border border-white/15 pt-1.5">
-        <motion.span
-          className="h-1.5 w-1 rounded-full bg-bull"
-          animate={{ y: [0, 10, 0], opacity: [1, 0.3, 1] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </span>
-    </motion.div>
+      <motion.span
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-text-secondary"
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <ChevronDown className="h-5 w-5" strokeWidth={1.75} />
+      </motion.span>
+    </div>
   );
 }
 
