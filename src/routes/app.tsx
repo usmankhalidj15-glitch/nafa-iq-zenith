@@ -54,7 +54,7 @@ function Dashboard() {
             Asalam-o-Alaikum, {firstName}
           </h1>
           <p className="mt-0.5 text-[13px] text-text-secondary">
-            Thursday, 19 June 2025 · KSE-100 <span className="font-mono text-bull">+1.24%</span> today
+            {new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" })} · KSE-100 <span className="font-mono text-bull">+1.24%</span> today
           </p>
         </div>
         <div className="flex shrink-0 gap-2">
