@@ -645,7 +645,7 @@ function Hero() {
                 letterSpacing: "0.08em",
               }}
             >
-              🇵🇰 Built for the Pakistani Investor
+              <PkBadge /> Built for the Pakistani Investor
             </span>
           </Reveal>
           <Reveal delay={0.05}>
