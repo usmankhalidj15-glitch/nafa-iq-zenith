@@ -181,11 +181,11 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
         </button>
       </div>
 
-      <div className="flex gap-6 px-3 py-5 lg:px-6">
+      <div className="mx-auto flex max-w-[1600px] gap-6 px-3 py-5 lg:px-6">
         {/* Left TOC */}
         {mode === "reading" && (
-          <aside className="hidden w-[220px] shrink-0 lg:block">
-            <div className="sticky top-[110px]">
+          <aside className="hidden w-[240px] shrink-0 lg:block">
+            <div className="sticky top-[110px] rounded-[12px] border border-border bg-surface p-4">
               <div className="text-xs font-semibold uppercase tracking-wide text-text-muted">
                 In This Lesson
               </div>
