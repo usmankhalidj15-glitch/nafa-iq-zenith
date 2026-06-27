@@ -432,7 +432,7 @@ function ReadingView({
         ) : <div />}
         {next ? (
           <Link to="/learn/lesson/$id" params={{ id: next.id }} className="rounded-[8px] border border-border p-3 text-right hover:border-border-hover">
-            <div className="text-[10px] text-text-muted">Next →</div>
+            <div className="flex items-center justify-end gap-1 text-[10px] text-text-muted">Next <ArrowRight className="h-3 w-3" strokeWidth={1.5} /></div>
             <div className="text-sm font-medium text-text-primary">{next.title}</div>
           </Link>
         ) : <div />}
