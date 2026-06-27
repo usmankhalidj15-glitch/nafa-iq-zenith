@@ -7,6 +7,7 @@ import { SignalBadge } from "@/components/SignalBadge";
 import { DonutChart, PortfolioAreaChart } from "@/components/charts";
 import { HOLDINGS, fmtPKR, fmtNum } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { EmojiIcon } from "@/components/icons";
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
