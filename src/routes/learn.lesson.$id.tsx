@@ -533,7 +533,7 @@ function QuizView({ lesson, onExit, onFinish }: { lesson: LessonContent; onExit:
         <button onClick={onExit} className="flex items-center gap-1.5 text-xs text-text-secondary hover:text-text-primary">
           <ArrowLeft className="h-4 w-4" /> Back to Lesson
         </button>
-        <span className="rounded-full bg-bull/10 px-3 py-1 text-xs font-semibold text-bull">⭐ Up to 50 XP</span>
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-bull/10 px-3 py-1 text-xs font-semibold text-bull"><Star className="h-3.5 w-3.5" strokeWidth={1.5} /> Up to 50 XP</span>
       </div>
 
       <div className="mt-4 text-xs text-text-muted">{lesson.title}</div>
