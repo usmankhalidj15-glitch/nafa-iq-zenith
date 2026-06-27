@@ -286,36 +286,36 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
         </main>
       </div>
 
-      {/* Floating AI button (tablet + mobile) */}
+      {/* Floating AI button */}
       <button
         onClick={() => setChatOpen(true)}
-        className="fixed right-4 bottom-20 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-bull text-bull-foreground shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:brightness-110 lg:bottom-8 xl:hidden"
+        className="fixed right-4 bottom-20 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-bull text-bull-foreground shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:brightness-110 lg:bottom-8"
         aria-label="Ask AI Tutor"
       >
         <Bot className="h-6 w-6" />
       </button>
 
-      {/* Mobile / tablet chat sheet */}
+      {/* Chat sheet — bottom sheet on mobile, right-docked panel on desktop */}
       {chatOpen && (
         <div
-          className="fixed inset-0 z-50 flex flex-col justify-end xl:hidden"
+          className="fixed inset-0 z-50 flex flex-col justify-end sm:items-end sm:justify-end sm:p-6"
           onClick={() => setChatOpen(false)}
         >
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <div
-            className="relative h-[80vh] rounded-t-[16px] border-t border-border bg-sidebar"
+            className="relative h-[80vh] rounded-t-[16px] border-t border-border bg-sidebar sm:h-[600px] sm:w-[400px] sm:rounded-[16px] sm:border"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="mx-auto mt-2 h-1 w-10 rounded-full bg-border" />
+            <div className="mx-auto mt-2 h-1 w-10 rounded-full bg-border sm:hidden" />
             <div className="flex items-center justify-between border-b border-border px-4 py-3">
               <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary">
                 <Cpu className="h-4 w-4 text-ai" strokeWidth={1.5} /> Ask AI Tutor
               </span>
-              <button onClick={() => setChatOpen(false)}>
+              <button onClick={() => setChatOpen(false)} aria-label="Close">
                 <X className="h-5 w-5 text-text-secondary" />
               </button>
             </div>
-            <div className="h-[calc(80vh-56px)]">
+            <div className="h-[calc(80vh-56px)] sm:h-[calc(600px-56px)]">
               <ChatPanel lesson={lesson} activeSection={activeSection} embedded />
             </div>
           </div>
