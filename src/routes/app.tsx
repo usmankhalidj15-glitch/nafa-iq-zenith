@@ -41,6 +41,36 @@ function portfolioSeries(months: number) {
   return out;
 }
 
+const WEEKDAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+function formatToday() {
+  const d = new Date();
+  return `${WEEKDAYS[d.getDay()]}, ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+
 function Dashboard() {
   const { profile, user } = useAuth();
   const firstName = (profile?.display_name || user?.email?.split("@")[0] || "Investor").split(
