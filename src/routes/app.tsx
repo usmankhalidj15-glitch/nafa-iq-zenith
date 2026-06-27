@@ -59,12 +59,7 @@ function Dashboard() {
             Asalam-o-Alaikum, {firstName}
           </h1>
           <p className="mt-0.5 text-[13px] text-text-secondary">
-            {new Date().toLocaleDateString("en-GB", {
-              weekday: "long",
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}{" "}
+            {formatToday()}{" "}
             · KSE-100 <span className="font-mono text-bull">+1.24%</span> today
           </p>
         </div>
