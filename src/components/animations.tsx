@@ -89,7 +89,7 @@ export const fadeUp: Variants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    transition: SPRING_SOFT,
   },
 };
 
@@ -105,7 +105,7 @@ export const perspectiveCard: Variants = {
     y: 0,
     rotateX: 0,
     transformPerspective: 1000,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    transition: SPRING_UI,
   },
 };
 
