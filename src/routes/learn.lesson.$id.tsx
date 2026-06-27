@@ -349,7 +349,7 @@ function Blocks({ blocks, accent }: { blocks: ContentBlock[]; accent: string }) 
       {blocks.map((b, i) => {
         if (b.type === "p") {
           return (
-            <p key={i} className="my-4 max-w-[680px] text-[16px] leading-[1.8] text-[#cbd5e1]">
+            <p key={i} className="my-4 text-[16px] leading-[1.8] text-[#cbd5e1]">
               {b.text}
             </p>
           );
