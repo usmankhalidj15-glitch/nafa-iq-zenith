@@ -1259,6 +1259,11 @@ function Landing() {
       {/* TICKER */}
       <TickerStrip />
 
+      {/* TRUST STRIP */}
+      <TrustStrip />
+
+
+
       {/* FEATURES */}
       <section id="features" className="gradient-mesh mx-auto max-w-[1200px] px-6 py-[60px] lg:py-[100px]">
         <Reveal className="text-center">
