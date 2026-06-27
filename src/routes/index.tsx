@@ -670,7 +670,7 @@ function Nav() {
               <Link
                 key={l.label}
                 to={l.to}
-                className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
+                className="rounded-full px-2.5 py-1.5 text-sm font-medium whitespace-nowrap text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
               >
                 {l.label}
               </Link>
@@ -678,7 +678,7 @@ function Nav() {
               <a
                 key={l.label}
                 href={l.href}
-                className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
+                className="rounded-full px-2.5 py-1.5 text-sm font-medium whitespace-nowrap text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
               >
                 {l.label}
               </a>
