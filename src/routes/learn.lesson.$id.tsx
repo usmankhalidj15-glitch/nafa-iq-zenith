@@ -670,9 +670,9 @@ function ResultsView({
 
   const message =
     correct >= total
-      ? "🏆 Perfect Score! Ustād level understanding!"
+      ? "Perfect Score! Ustād level understanding!"
       : correct === 2
-        ? "⭐ Great work! One more review and you'll nail it."
+        ? "Great work! One more review and you'll nail it."
         : correct === 1
           ? "📖 Keep learning — review the lesson and retry."
           : "💪 Don't give up — re-read and try again!";
