@@ -95,7 +95,7 @@ function HaqeeqiDaulat() {
                 34% of portfolio in Oil &amp; Gas provides partial hedge against rupee weakness.
               </p>
             </div>
-            <button className="flex items-center gap-1.5 rounded-[8px] bg-gold px-3.5 py-2 text-sm font-semibold text-background transition hover:brightness-110">
+            <button className="flex items-center gap-1.5 rounded-[8px] bg-gold px-3.5 py-2 text-sm font-semibold text-gold-foreground transition hover:bg-gold-hover">
               Improve Score <ArrowRight className="h-4 w-4" />
             </button>
           </div>
