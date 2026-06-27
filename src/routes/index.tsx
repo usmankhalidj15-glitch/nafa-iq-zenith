@@ -695,18 +695,19 @@ function Nav() {
         </nav>
 
         {/* utility cluster — right */}
-        <div className="ml-auto flex items-center gap-2 sm:gap-2.5 md:ml-0">
-          <div className="hidden items-center gap-2.5 lg:flex">
+        <div className="ml-auto flex items-center gap-2.5 sm:gap-3 md:ml-0">
+          <div className="hidden items-center gap-3 lg:flex">
             <StatusPill />
             <NavSearch />
             <LangToggle />
           </div>
           <Link
             to="/auth"
-            className="hidden whitespace-nowrap text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary md:inline"
+            className="hidden whitespace-nowrap pl-1 text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary md:inline lg:border-l lg:border-white/[0.08] lg:pl-3"
           >
             Log In
           </Link>
+
 
           {/* Enter App — dominant CTA, always visible */}
           <Magnetic strength={0.4}>
