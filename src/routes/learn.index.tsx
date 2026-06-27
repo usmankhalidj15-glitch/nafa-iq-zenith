@@ -140,7 +140,7 @@ function Learn() {
               <Link key={l.title} to="/learn/lesson/$id" params={{ id }}>
                 <Card className="group h-full transition-all hover:-translate-y-[3px] hover:border-bull">
                   <div className="flex items-start gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-elevated text-xl">{l.emoji}</span>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-[8px] border border-white/[0.06] bg-elevated text-text-secondary"><EmojiIcon emoji={l.emoji} size={18} /></span>
                     <div className="flex-1">
                       <div className="text-sm font-medium text-text-primary">{l.title}</div>
                       <div className="mt-1 flex items-center gap-1.5 text-[10px]">
