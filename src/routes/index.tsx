@@ -178,32 +178,26 @@ function StoreButtons({ center = false }: { center?: boolean }) {
 /* ---------- scroll-velocity driven ticker ---------- */
 function TickerStrip() {
   const reduce = useReducedMotion();
+  // duplicate once so wrapping -50%..0 is perfectly seamless (no visible seam)
   const items = [...TICKER_ITEMS, ...TICKER_ITEMS];
   const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 4], { clamp: false });
-  const directionRef = useRef(1);
-
   const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
 
   useAnimationFrame((_, delta) => {
     if (reduce) return;
-    let moveBy = directionRef.current * -2.4 * (delta / 1000);
-    const vf = velocityFactor.get();
-    if (vf < 0) directionRef.current = -1;
-    else if (vf > 0) directionRef.current = 1;
-    moveBy += directionRef.current * moveBy * vf;
-    baseX.set(baseX.get() + moveBy);
+    // constant smooth velocity — no scroll coupling, so no stutter
+    baseX.set(baseX.get() - 2.2 * (delta / 1000));
   });
 
   return (
     <div className="relative z-10 overflow-hidden border-y border-border bg-surface py-3">
+      {/* edge fade masks hide the wrap point */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-surface to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-surface to-transparent" />
       <motion.div
         style={reduce ? undefined : { x }}
         className={cn(
-          "flex w-max gap-8 whitespace-nowrap px-4",
+          "flex w-max gap-8 whitespace-nowrap px-4 will-change-transform",
           reduce && "animate-[ticker_40s_linear_infinite]",
         )}
       >
@@ -221,6 +215,7 @@ function TickerStrip() {
     </div>
   );
 }
+
 
 /* ---------- 3D phone with mouse tilt + float ---------- */
 function PhoneMockup() {
