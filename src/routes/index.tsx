@@ -79,54 +79,67 @@ function GooglePlayGlyph() {
 }
 
 function StoreButtons({ center = false }: { center?: boolean }) {
+  const [email, setEmail] = useState("");
+  function notify(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim()) return;
+    toast.success("You're on the list — we'll email you when the native app launches.");
+    setEmail("");
+  }
   return (
-    <div className={cn("flex flex-col gap-3 sm:flex-row sm:flex-wrap", center && "sm:justify-center")}>
-      <Magnetic>
-        <motion.button
-          whileTap={{ scale: 0.96 }}
-          onClick={() => toast(STORE_TOAST)}
-          className="group relative flex items-center gap-3 rounded-[12px] border border-white/20 bg-black px-5 py-2.5 text-left transition hover:border-white/40 hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
-        >
+    <div className={cn("flex flex-col gap-4", center && "items-center")}>
+      <div className={cn("flex flex-col gap-3 sm:flex-row sm:flex-wrap", center && "sm:justify-center")}>
+        <Magnetic strength={0.45}>
+          <motion.div whileTap={{ scale: 0.96 }} whileHover={{ scale: 1.03 }} transition={SPRING}>
+            <Link
+              to="/app"
+              className="flex items-center gap-3 rounded-[12px] bg-gradient-to-br from-[#00d4aa] to-[#00a88a] px-6 py-3 text-left text-bull-foreground shadow-[0_8px_30px_rgba(0,212,170,0.3)] transition hover:shadow-[0_12px_50px_rgba(0,212,170,0.55)]"
+            >
+              <Download className="h-7 w-7 shrink-0" />
+              <span className="flex flex-col leading-tight">
+                <span className="text-[10px] text-white/80">Install as</span>
+                <span className="text-lg font-semibold">Web App — Free</span>
+              </span>
+            </Link>
+          </motion.div>
+        </Magnetic>
+        <div className="flex items-center gap-3 rounded-[12px] border border-white/15 bg-black/40 px-5 py-2.5 text-left opacity-80">
           <AppleGlyph />
           <span className="flex flex-col leading-tight">
-            <span className="text-[10px] tracking-wide text-white/70">Download on the</span>
+            <span className="text-[10px] tracking-wide text-white/60">Coming soon to the</span>
             <span className="text-lg font-semibold text-white">App Store</span>
           </span>
-          <span className="pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 rounded-md bg-elevated px-2 py-0.5 text-[10px] text-text-secondary opacity-0 transition group-hover:opacity-100">
-            Coming soon
-          </span>
-        </motion.button>
-      </Magnetic>
-      <Magnetic>
-        <motion.button
-          whileTap={{ scale: 0.96 }}
-          onClick={() => toast(STORE_TOAST)}
-          className="group relative flex items-center gap-3 rounded-[12px] border border-white/20 bg-black px-5 py-2.5 text-left transition hover:border-white/40 hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
-        >
+        </div>
+        <div className="flex items-center gap-3 rounded-[12px] border border-white/15 bg-black/40 px-5 py-2.5 text-left opacity-80">
           <GooglePlayGlyph />
           <span className="flex flex-col leading-tight">
-            <span className="text-[10px] tracking-wide text-white/70">Get it on</span>
+            <span className="text-[10px] tracking-wide text-white/60">Coming soon to</span>
             <span className="text-lg font-semibold text-white">Google Play</span>
           </span>
-          <span className="pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 rounded-md bg-elevated px-2 py-0.5 text-[10px] text-text-secondary opacity-0 transition group-hover:opacity-100">
-            Coming soon
-          </span>
-        </motion.button>
-      </Magnetic>
-      <Magnetic strength={0.45}>
-        <motion.div whileTap={{ scale: 0.96 }} whileHover={{ scale: 1.03 }} transition={SPRING}>
-          <Link
-            to="/app"
-            className="flex items-center gap-3 rounded-[12px] bg-gradient-to-br from-[#00d4aa] to-[#00a88a] px-6 py-3 text-left text-bull-foreground shadow-[0_8px_30px_rgba(0,212,170,0.3)] transition hover:shadow-[0_12px_50px_rgba(0,212,170,0.55)]"
+        </div>
+      </div>
+      <form onSubmit={notify} className={cn("w-full max-w-md", center && "mx-auto")}>
+        <div className="flex gap-2">
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@email.com"
+            aria-label="Email for native app launch notification"
+            className="h-10 flex-1 rounded-[10px] border border-white/10 bg-surface px-3 font-mono text-sm text-text-primary outline-none transition-colors placeholder:text-text-muted focus:border-gold"
+          />
+          <button
+            type="submit"
+            className="h-10 shrink-0 rounded-[10px] bg-gold px-4 text-sm font-semibold text-background transition hover:brightness-110"
           >
-            <Download className="h-7 w-7 shrink-0" />
-            <span className="flex flex-col leading-tight">
-              <span className="text-[10px] text-white/80">Install as</span>
-              <span className="text-lg font-semibold">Web App — Free</span>
-            </span>
-          </Link>
-        </motion.div>
-      </Magnetic>
+            Notify Me
+          </button>
+        </div>
+        <p className="mt-1.5 text-[11px] text-text-muted">
+          We'll email you when the native app launches. No spam, ever.
+        </p>
+      </form>
     </div>
   );
 }
