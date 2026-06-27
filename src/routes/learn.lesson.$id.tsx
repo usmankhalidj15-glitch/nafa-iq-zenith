@@ -297,7 +297,7 @@ function Blocks({ blocks, accent }: { blocks: ContentBlock[]; accent: string }) 
               className="my-6 max-w-[680px] rounded-r-[8px] p-4"
               style={{ background: `${m.color}10`, borderLeft: `3px solid ${m.color}` }}
             >
-              <div className="text-xs font-bold" style={{ color: m.color }}>{m.emoji} {m.label}</div>
+              <div className="flex items-center gap-1.5 text-xs font-bold" style={{ color: m.color }}><EmojiIcon emoji={m.emoji} size={13} /> {m.label}</div>
               <p className="mt-1.5 text-sm leading-relaxed text-[#cbd5e1]">{b.text}</p>
             </div>
           );
