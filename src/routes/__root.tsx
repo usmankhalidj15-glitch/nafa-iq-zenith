@@ -157,66 +157,6 @@ function Spinner() {
 
 const TARGET_PATHS = new Set(["/", "/app", "/psx", "/portfolio", "/finance", "/learn"]);
 
-function CrossfadeOutlet() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const prevPathname = useRef(pathname);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const snapshotRef = useRef<HTMLDivElement | null>(null);
-
-  // Capture a DOM snapshot on every successful commit so we have the
-  // *previous* page's rendered output when the pathname changes.
-  useEffect(() => {
-    if (containerRef.current) {
-      snapshotRef.current = containerRef.current.cloneNode(true) as HTMLDivElement;
-    }
-  });
-
-  useEffect(() => {
-    if (prevPathname.current === pathname) return;
-    prevPathname.current = pathname;
-
-    const snapshot = snapshotRef.current;
-    const container = containerRef.current;
-    if (!snapshot || !container) return;
-    snapshotRef.current = null;
-
-    const wrapper = container.parentElement;
-    if (!wrapper) return;
-
-    // Prevent the snapshot from receiving events or affecting layout
-    snapshot.style.position = "absolute";
-    snapshot.style.inset = "0";
-    snapshot.style.pointerEvents = "none";
-    snapshot.style.zIndex = "10";
-
-    wrapper.insertBefore(snapshot, container);
-
-    const fadeIn = container.animate([{ opacity: 0 }, { opacity: 1 }], {
-      duration: 200,
-      easing: "ease-out",
-      fill: "forwards",
-    });
-
-    const fadeOut = snapshot.animate([{ opacity: 1 }, { opacity: 0 }], {
-      duration: 150,
-      easing: "ease-out",
-      fill: "forwards",
-    });
-
-    fadeOut.finished.then(() => {
-      snapshot.remove();
-      fadeIn.cancel();
-      container.style.opacity = "";
-    });
-  }, [pathname]);
-
-  return (
-    <div ref={containerRef}>
-      <Outlet />
-    </div>
-  );
-}
-
 function PageTransition({ routeKey, children }: { routeKey: string; children: ReactNode }) {
   const reduce = useReducedMotion();
   const isTarget = TARGET_PATHS.has(routeKey);
