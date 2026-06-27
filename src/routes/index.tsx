@@ -1145,7 +1145,7 @@ function Landing() {
         />
         <div className="relative mx-auto grid max-w-[1200px] items-center gap-12 px-6 py-[60px] lg:grid-cols-2 lg:py-[100px]">
           <Reveal>
-            <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-warning">
+            <span className="badge-shimmer inline-block overflow-hidden rounded-full text-[11px] font-semibold uppercase tracking-[0.15em] text-warning">
               World-first feature
             </span>
             <h2 className="mt-3 text-[28px] font-bold leading-[1.2] sm:text-[40px]">
