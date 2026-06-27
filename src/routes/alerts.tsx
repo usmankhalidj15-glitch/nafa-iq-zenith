@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Trash2, TrendingUp, Calendar, Wallet, Target } from "lucide-react";
 import { Card } from "@/components/Card";
+import { EmojiIcon } from "@/components/icons";
 import { ALERTS, NOTIFS } from "@/lib/finance-data";
 import { cn } from "@/lib/utils";
 
