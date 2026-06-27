@@ -244,39 +244,54 @@ function PhoneMockup() {
       onMouseLeave={reset}
       className="group/phone relative mx-auto w-[260px] [perspective:1200px] sm:w-[280px]"
     >
-      {/* KSE-100 floating card */}
+      {/* KSE-100 floating card — staggered entrance + float loop */}
       <motion.div
-        animate={reduce ? undefined : { y: [0, -10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-8 -left-10 z-20 rounded-[12px] border border-bull/25 bg-surface/85 px-3.5 py-2.5 backdrop-blur-md"
-        style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)" }}
+        initial={reduce ? false : { opacity: 0, y: -24, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute -top-8 -left-10 z-20"
       >
-        <div className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-bull" />
-          <span className="text-[9px] font-bold tracking-widest text-bull">LIVE</span>
-        </div>
-        <div className="mt-1 flex items-center gap-2 text-[11px]">
-          <span className="font-bold text-text-primary">KSE-100</span>
-          <span className="font-mono text-text-primary">78,542</span>
-          <span className="font-mono text-bull">+1.24% ▲</span>
-        </div>
+        <motion.div
+          animate={reduce ? undefined : { y: [0, -10, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="rounded-[12px] border border-bull/25 bg-surface/85 px-3.5 py-2.5 backdrop-blur-md"
+          style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)" }}
+        >
+          <div className="flex items-center gap-1.5">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-bull" />
+            <span className="text-[9px] font-bold tracking-widest text-bull">LIVE</span>
+          </div>
+          <div className="mt-1 flex items-center gap-2 text-[11px]">
+            <span className="font-bold text-text-primary">KSE-100</span>
+            <span className="font-mono text-text-primary">78,542</span>
+            <span className="font-mono text-bull">+1.24% ▲</span>
+          </div>
+        </motion.div>
       </motion.div>
 
-      {/* Real Wealth floating card */}
+      {/* Real Wealth floating card — staggered entrance + float loop */}
       <motion.div
-        animate={reduce ? undefined : { y: [0, 9, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-        className="absolute -bottom-8 -right-8 z-20 rounded-[12px] border border-warning/30 bg-surface/85 px-3.5 py-2.5 backdrop-blur-md"
-        style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)" }}
+        initial={reduce ? false : { opacity: 0, y: 24, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.72, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute -bottom-8 -right-8 z-20"
       >
-        <div className="flex items-center gap-1.5 text-[10px] font-semibold text-warning">
-          <ShieldCheck className="h-3 w-3" /> Real Wealth
-        </div>
-        <div className="mt-1 flex items-baseline gap-1.5">
-          <span className="font-mono text-sm font-bold text-text-primary">$15,395</span>
-          <span className="text-[9px] text-text-muted">USD value</span>
-        </div>
+        <motion.div
+          animate={reduce ? undefined : { y: [0, 9, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+          className="rounded-[12px] border border-warning/30 bg-surface/85 px-3.5 py-2.5 backdrop-blur-md"
+          style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)" }}
+        >
+          <div className="flex items-center gap-1.5 text-[10px] font-semibold text-warning">
+            <ShieldCheck className="h-3 w-3" /> Real Wealth
+          </div>
+          <div className="mt-1 flex items-baseline gap-1.5">
+            <span className="font-mono text-sm font-bold text-text-primary">$15,395</span>
+            <span className="text-[9px] text-text-muted">USD value</span>
+          </div>
+        </motion.div>
       </motion.div>
+
 
       {/* phone frame */}
       <motion.div
