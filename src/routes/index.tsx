@@ -849,7 +849,7 @@ const SCATTERED_TICKERS = [
   { text: "145.30", x: "42%", y: "38%", size: 10, opacity: 0.07, depth: 0.5 },
 ] as const;
 
-function ScatteredTickers({ progress }: { progress: any }) {
+function ScatteredTickers({ progress }: { progress: MotionValue<number> }) {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
       {SCATTERED_TICKERS.map((t, i) => (
@@ -864,7 +864,7 @@ function ScatteredTicker({
   progress,
 }: {
   t: (typeof SCATTERED_TICKERS)[number];
-  progress: any;
+  progress: MotionValue<number>;
 }) {
   const y = useTransform(progress, [0, 1], [0, -180 * t.depth]);
   const opacity = useTransform(progress, [0, 0.5, 1], [t.opacity, t.opacity * 1.6, 0]);
