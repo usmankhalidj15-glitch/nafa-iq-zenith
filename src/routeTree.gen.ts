@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PsxRouteImport } from './routes/psx'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as PlansRouteImport } from './routes/plans'
 import { Route as LearnRouteImport } from './routes/learn'
 import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -35,6 +36,11 @@ const PsxRoute = PsxRouteImport.update({
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlansRoute = PlansRouteImport.update({
+  id: '/plans',
+  path: '/plans',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LearnRoute = LearnRouteImport.update({
@@ -90,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/finance': typeof FinanceRoute
   '/learn': typeof LearnRouteWithChildren
+  '/plans': typeof PlansRoute
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByTo {
   '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/finance': typeof FinanceRoute
+  '/plans': typeof PlansRoute
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -118,6 +126,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/finance': typeof FinanceRoute
   '/learn': typeof LearnRouteWithChildren
+  '/plans': typeof PlansRoute
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/finance'
     | '/learn'
+    | '/plans'
     | '/portfolio'
     | '/psx'
     | '/sitemap.xml'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/finance'
+    | '/plans'
     | '/portfolio'
     | '/psx'
     | '/sitemap.xml'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/finance'
     | '/learn'
+    | '/plans'
     | '/portfolio'
     | '/psx'
     | '/sitemap.xml'
@@ -176,6 +188,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   FinanceRoute: typeof FinanceRoute
   LearnRoute: typeof LearnRouteWithChildren
+  PlansRoute: typeof PlansRoute
   PortfolioRoute: typeof PortfolioRoute
   PsxRoute: typeof PsxRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -203,6 +216,13 @@ declare module '@tanstack/react-router' {
       path: '/portfolio'
       fullPath: '/portfolio'
       preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plans': {
+      id: '/plans'
+      path: '/plans'
+      fullPath: '/plans'
+      preLoaderRoute: typeof PlansRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/learn': {
@@ -290,6 +310,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   FinanceRoute: FinanceRoute,
   LearnRoute: LearnRouteWithChildren,
+  PlansRoute: PlansRoute,
   PortfolioRoute: PortfolioRoute,
   PsxRoute: PsxRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
