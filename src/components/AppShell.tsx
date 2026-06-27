@@ -415,7 +415,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="relative lg:pl-[212px]">
         <Header onMenu={() => setDrawer(true)} />
         <Breadcrumbs />
-        <main key={pathname} className="animate-[page-in_0.25s_ease-out] px-3 pt-4 pb-24 sm:px-5 lg:px-6 lg:pb-8">
+        <main className="px-3 pt-4 pb-24 sm:px-5 lg:px-6 lg:pb-8">
           {children}
         </main>
       </div>
