@@ -10,10 +10,16 @@ import {
   LogOut,
   Menu,
   X,
+  Search,
+  Sparkles,
+  User,
+  Settings,
+  CreditCard,
+  ChevronRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { TICKER_ITEMS } from "@/lib/data";
+import { TICKER_ITEMS, STOCKS } from "@/lib/data";
 import { useAuth } from "@/hooks/use-auth";
 
 const NAV = [
@@ -25,9 +31,26 @@ const NAV = [
   { to: "/alerts", label: "Alerts", icon: Bell },
 ] as const;
 
-function Logo() {
+const NOTIFICATIONS = [
+  { id: 1, title: "HBL flashed a Strong Buy", time: "2m ago", tone: "bull" },
+  { id: 2, title: "Dining budget exceeded by 15%", time: "1h ago", tone: "warning" },
+  { id: 3, title: "KSE-100 up 1.24% — market open", time: "Today", tone: "bull" },
+] as const;
+
+const LABELS: Record<string, string> = {
+  app: "Dashboard",
+  psx: "PSX Market",
+  portfolio: "Portfolio",
+  finance: "Finance",
+  learn: "Learn Hub",
+  alerts: "Alerts",
+  stock: "Markets",
+  lesson: "Lesson",
+};
+
+function Logo({ to = "/app" }: { to?: string }) {
   return (
-    <Link to="/app" className="flex items-center gap-2">
+    <Link to={to} className="flex items-center gap-2">
       <img src={logo} alt="NafaIQ" width={28} height={28} className="rounded-[6px]" />
       <span className="font-display text-lg font-bold tracking-tight text-text-primary">
         Nafa<span className="text-gold">IQ</span>
@@ -62,13 +85,16 @@ function Sidebar() {
               key={n.to}
               to={n.to}
               className={cn(
-                "relative flex items-center gap-3 rounded-md px-3 py-2 text-[13px] font-medium transition-colors duration-200",
+                "relative flex items-center gap-3 rounded-md border-l-2 px-3 py-2 text-[13px] font-medium transition-colors duration-200",
                 active
-                  ? "nav-active text-text-primary"
-                  : "text-text-secondary hover:bg-white/[0.04] hover:text-text-primary",
+                  ? "border-l-bull bg-bull/[0.08] text-text-primary"
+                  : "border-l-transparent text-text-secondary hover:bg-white/[0.04] hover:text-text-primary",
               )}
             >
-              <n.icon className="h-5 w-5 shrink-0" strokeWidth={1.75} />
+              <n.icon
+                className={cn("h-5 w-5 shrink-0", active && "text-bull")}
+                strokeWidth={1.75}
+              />
               {n.label}
             </Link>
           );
@@ -90,50 +116,204 @@ function Sidebar() {
   );
 }
 
-
-function Ticker() {
-  const items = [...TICKER_ITEMS, ...TICKER_ITEMS];
+function StockSearch() {
+  const [q, setQ] = useState("");
+  const navigate = useNavigate();
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    const t = q.trim().toUpperCase();
+    if (!t) return;
+    if (STOCKS[t]) {
+      navigate({ to: "/stock/$ticker", params: { ticker: t } });
+    } else {
+      navigate({ to: "/psx" });
+    }
+    setQ("");
+  }
   return (
-    <div className="relative flex-1 overflow-hidden">
-      <div className="flex w-max animate-[ticker_40s_linear_infinite] gap-6 whitespace-nowrap">
-        {items.map((it, i) => (
-          <span key={i} className="flex items-center gap-1.5 text-xs">
-            <span className="font-medium text-text-secondary">{it.label}</span>
-            <span className="font-mono tabular-nums text-text-primary">{it.value}</span>
-            <span className={cn("font-mono tabular-nums", it.pct >= 0 ? "text-bull" : "text-bear")}>
-              {it.pct >= 0 ? "▲+" : "▼"}
-              {it.pct.toFixed(2)}%
-            </span>
-          </span>
-        ))}
-      </div>
+    <form onSubmit={submit} className="relative hidden flex-1 sm:block sm:max-w-xs">
+      <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
+      <input
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        placeholder="Search stocks (e.g. HBL)…"
+        aria-label="Search stocks"
+        className="h-8 w-full rounded-[8px] border border-white/[0.08] bg-surface pl-8 pr-3 text-[13px] text-text-primary outline-none transition-colors placeholder:text-text-muted focus:border-bull"
+      />
+    </form>
+  );
+}
+
+function NotificationBell() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    function onClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, []);
+  return (
+    <div ref={ref} className="relative shrink-0">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="relative text-text-secondary transition-colors hover:text-text-primary"
+        aria-label="Notifications"
+      >
+        <Bell className="h-[18px] w-[18px]" strokeWidth={1.75} />
+        <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-bear text-[9px] font-bold text-white">
+          {NOTIFICATIONS.length}
+        </span>
+      </button>
+      {open && (
+        <div className="glass-chrome absolute right-0 top-9 z-50 w-72 overflow-hidden rounded-[12px] border border-white/[0.08] shadow-2xl">
+          <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-2.5">
+            <span className="text-[13px] font-semibold text-text-primary">Notifications</span>
+            <Link to="/alerts" onClick={() => setOpen(false)} className="text-[11px] text-bull hover:underline">
+              View all
+            </Link>
+          </div>
+          <ul className="max-h-72 overflow-y-auto">
+            {NOTIFICATIONS.map((n) => (
+              <li key={n.id} className="flex items-start gap-2.5 px-4 py-3 transition-colors hover:bg-white/[0.03]">
+                <span
+                  className={cn(
+                    "mt-1.5 h-2 w-2 shrink-0 rounded-full",
+                    n.tone === "bull" ? "bg-bull" : "bg-warning",
+                  )}
+                />
+                <div className="min-w-0">
+                  <div className="text-[13px] text-text-primary">{n.title}</div>
+                  <div className="text-[11px] text-text-muted">{n.time}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function UserMenu() {
+  const { profile, user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const name = profile?.display_name || user?.email?.split("@")[0] || "User";
+  useEffect(() => {
+    function onClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, []);
+  async function handleSignOut() {
+    setOpen(false);
+    await signOut();
+    navigate({ to: "/auth" });
+  }
+  const items = [
+    { label: "Profile", icon: User, to: "/app" as const },
+    { label: "Settings", icon: Settings, to: "/app" as const },
+    { label: "Plans / Upgrade", icon: CreditCard, to: "/plans" as const },
+  ];
+  return (
+    <div ref={ref} className="relative shrink-0">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary transition hover:brightness-110"
+        aria-label="Account menu"
+      >
+        {initial(profile?.display_name, user?.email)}
+      </button>
+      {open && (
+        <div className="glass-chrome absolute right-0 top-9 z-50 w-56 overflow-hidden rounded-[12px] border border-white/[0.08] shadow-2xl">
+          <div className="border-b border-white/[0.06] px-4 py-3">
+            <div className="truncate text-[13px] font-semibold text-text-primary">{name}</div>
+            <div className="text-[11px] text-text-muted">{profile?.plan ?? "Free"} plan</div>
+          </div>
+          <nav className="p-1.5">
+            {items.map((it) => (
+              <Link
+                key={it.label}
+                to={it.to}
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2.5 rounded-[8px] px-3 py-2 text-[13px] text-text-secondary transition hover:bg-white/[0.04] hover:text-text-primary"
+              >
+                <it.icon className="h-4 w-4" strokeWidth={1.75} />
+                {it.label}
+              </Link>
+            ))}
+            <button
+              onClick={handleSignOut}
+              className="flex w-full items-center gap-2.5 rounded-[8px] px-3 py-2 text-[13px] text-bear transition hover:bg-bear/10"
+            >
+              <LogOut className="h-4 w-4" strokeWidth={1.75} /> Logout
+            </button>
+          </nav>
+        </div>
+      )}
     </div>
   );
 }
 
 function Header({ onMenu }: { onMenu: () => void }) {
-  const { profile, user } = useAuth();
   return (
-    <header className="glass-chrome sticky top-0 z-20 flex h-[48px] items-center gap-3 border-b border-white/[0.06] px-3 lg:pl-6">
+    <header className="glass-chrome sticky top-0 z-20 flex h-[52px] items-center gap-2 border-b border-white/[0.06] px-3 sm:gap-3 lg:pl-6">
       <button onClick={onMenu} className="text-text-secondary lg:hidden" aria-label="Menu">
         <Menu className="h-5 w-5" strokeWidth={1.75} />
       </button>
-      <span className="hidden shrink-0 items-center gap-1.5 rounded-[4px] bg-bull/10 px-2 py-0.5 text-[10px] font-semibold text-bull sm:inline-flex">
-        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-bull" />
-        PSX OPEN
-      </span>
-      <Ticker />
-      <button className="relative shrink-0 text-text-secondary transition-colors hover:text-text-primary" aria-label="Notifications">
-        <Bell className="h-[18px] w-[18px]" strokeWidth={1.75} />
-        <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-bear text-[9px] font-bold text-white">
-          3
-        </span>
-      </button>
-      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
-        {initial(profile?.display_name, user?.email)}
+      <div className="lg:hidden">
+        <Logo />
       </div>
+      <StockSearch />
+      <div className="flex-1 lg:hidden" />
+      <Link
+        to="/plans"
+        className="hidden shrink-0 items-center gap-1.5 rounded-[8px] bg-gold px-3 py-1.5 text-[12px] font-semibold text-background transition hover:brightness-110 sm:inline-flex"
+      >
+        <Sparkles className="h-3.5 w-3.5" /> Upgrade to Pro
+      </Link>
+      <Link
+        to="/plans"
+        aria-label="Upgrade to Pro"
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-gold text-background sm:hidden"
+      >
+        <Sparkles className="h-4 w-4" />
+      </Link>
+      <NotificationBell />
+      <UserMenu />
     </header>
+  );
+}
 
+function Breadcrumbs() {
+  const path = useRouterState({ select: (s) => s.location.pathname });
+  const segments = path.split("/").filter(Boolean);
+  if (segments.length < 2) return null;
+  const crumbs = segments.map((seg, i) => {
+    const href = "/" + segments.slice(0, i + 1).join("/");
+    const isParam = !LABELS[seg];
+    const label = isParam ? decodeURIComponent(seg).toUpperCase() : LABELS[seg];
+    return { href, label, last: i === segments.length - 1 };
+  });
+  return (
+    <nav aria-label="Breadcrumb" className="border-b border-white/[0.04] px-3 py-2 sm:px-5 lg:px-6">
+      <ol className="mx-auto flex max-w-7xl items-center gap-1.5 text-[12px]">
+        {crumbs.map((c, i) => (
+          <li key={c.href} className="flex items-center gap-1.5">
+            {i > 0 && <ChevronRight className="h-3 w-3 text-text-muted" />}
+            {c.last ? (
+              <span className="font-medium text-text-primary">{c.label}</span>
+            ) : (
+              <span className="text-text-secondary">{c.label}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
   );
 }
 
@@ -181,6 +361,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [drawer, setDrawer] = useState(false);
   const { profile, user, signOut } = useAuth();
   const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   async function handleSignOut() {
     setDrawer(false);
     await signOut();
@@ -194,7 +375,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <Sidebar />
       <div className="relative lg:pl-[212px]">
         <Header onMenu={() => setDrawer(true)} />
-        <main key={useRouterState({ select: (s) => s.location.pathname })} className="animate-[page-in_0.25s_ease-out] px-3 pt-4 pb-24 sm:px-5 lg:px-6 lg:pb-8">
+        <Breadcrumbs />
+        <main key={pathname} className="animate-[page-in_0.25s_ease-out] px-3 pt-4 pb-24 sm:px-5 lg:px-6 lg:pb-8">
           {children}
         </main>
       </div>
@@ -224,6 +406,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 {n.label}
               </Link>
             ))}
+            <Link
+              to="/plans"
+              onClick={() => setDrawer(false)}
+              className="flex items-center gap-3 rounded-[6px] px-3 py-3 text-sm font-semibold text-gold hover:bg-hover"
+            >
+              <Sparkles className="h-5 w-5" /> Upgrade to Pro
+            </Link>
             <div className="mt-2 flex items-center gap-3 border-t border-border px-3 pt-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-bull/20 text-sm font-semibold text-bull">
                 {initial(profile?.display_name, user?.email)}
