@@ -39,6 +39,8 @@ import {
   UserCheck,
   AlertTriangle,
   ChevronDown,
+  Mail,
+
 
   type LucideIcon,
 } from "lucide-react";
@@ -491,8 +493,9 @@ function TrustStrip() {
 
 const NAV_LINKS = [
   { label: "Features", href: "#features", to: undefined },
-  { label: "Halal Investing", href: "#features", to: undefined },
-  { label: "Plans", href: undefined, to: "/plans" },
+  { label: "About", href: "#about", to: undefined },
+  { label: "Pricing", href: undefined, to: "/plans" },
+  { label: "Contact", href: "#contact", to: undefined },
 ] as const;
 
 function usePsxOpen() {
@@ -709,7 +712,7 @@ function Nav() {
                 to="/app"
                 className="inline-flex items-center gap-1 rounded-full bg-bull px-4 py-2 text-sm font-semibold text-bull-foreground shadow-[0_0_20px_rgba(0,212,170,0.25)] transition hover:bg-[#00efc0] hover:shadow-[0_0_28px_rgba(0,212,170,0.5)]"
               >
-                Enter App <ArrowRight className="h-4 w-4" />
+                Get Started <ArrowRight className="h-4 w-4" />
               </Link>
             </motion.div>
           </Magnetic>
@@ -770,7 +773,7 @@ function Nav() {
             onClick={() => setOpen(false)}
             className="mt-auto flex items-center justify-center gap-1 rounded-full bg-bull px-4 py-4 text-base font-semibold text-bull-foreground transition hover:bg-[#00efc0]"
           >
-            Enter App <ArrowRight className="h-5 w-5" />
+            Get Started <ArrowRight className="h-5 w-5" />
           </Link>
         </div>
       )}
@@ -1477,6 +1480,46 @@ function Landing() {
         </div>
       </section>
 
+      {/* ABOUT + CONTACT */}
+      <section id="about" className="mx-auto max-w-[1200px] scroll-mt-24 px-6 py-[60px] lg:py-[100px]">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <Reveal>
+            <SectionLabel>About NafaIQ</SectionLabel>
+            <h2 className="mt-3 text-[28px] font-bold leading-[1.2] sm:text-[40px]">
+              Built for Pakistan's financial reality.
+            </h2>
+            <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-text-secondary">
+              NafaIQ brings live Pakistan Stock Exchange data, personal finance, and AI
+              insight into a single terminal — designed around the realities of investing,
+              saving, and growing wealth in Pakistan. We help everyday investors see their
+              true, devaluation-adjusted picture and make confident, values-aligned decisions.
+            </p>
+          </Reveal>
+
+          <div id="contact" className="scroll-mt-24">
+            <Reveal delay={0.1}>
+              <SectionLabel>Get in touch</SectionLabel>
+              <h2 className="mt-3 text-[28px] font-bold leading-[1.2] sm:text-[40px]">
+                We'd love to hear from you.
+              </h2>
+              <p className="mt-5 text-[15px] leading-relaxed text-text-secondary">
+                Questions, feedback, or partnership ideas? Reach out and our team will get back
+                to you.
+              </p>
+              <div className="mt-6 space-y-3 text-sm">
+                <a
+                  href="mailto:hello@nafaiq.com"
+                  className="inline-flex items-center gap-2 font-medium text-bull transition hover:text-[#00efc0]"
+                >
+                  <Mail className="h-4 w-4" /> hello@nafaiq.com
+                </a>
+                <p className="text-text-secondary">Karachi, Pakistan</p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <footer className="relative bg-[#070B14]">
         <span className="shimmer-line absolute inset-x-0 top-0 h-px" />
@@ -1517,10 +1560,10 @@ function Landing() {
           <div>
             <div className="text-sm font-semibold text-text-primary">Company</div>
             <ul className="mt-3 space-y-2 text-sm text-text-secondary">
-              <li><a href="#" className="transition hover:text-bull">About</a></li>
+              <li><a href="#about" className="transition hover:text-bull">About</a></li>
               <li><a href="#" className="transition hover:text-bull">Privacy Policy</a></li>
               <li><a href="#" className="transition hover:text-bull">Terms</a></li>
-              <li><a href="#" className="transition hover:text-bull">Contact</a></li>
+              <li><a href="#contact" className="transition hover:text-bull">Contact</a></li>
             </ul>
           </div>
         </div>
