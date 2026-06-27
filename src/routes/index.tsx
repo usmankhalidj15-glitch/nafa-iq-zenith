@@ -651,7 +651,7 @@ function Nav() {
         className={cn(
           "flex h-14 items-center gap-3 rounded-full border px-3 transition-all duration-300 sm:gap-4 sm:px-4",
           scrolled
-            ? "w-full max-w-[760px] border-white/[0.08] bg-[#060d1f]/80 shadow-[0_8px_40px_rgba(0,0,0,0.45)] backdrop-blur-xl backdrop-saturate-150"
+            ? "w-full max-w-[760px] border-white/[0.08] bg-[#060d1f] shadow-[0_8px_40px_rgba(0,0,0,0.45)] backdrop-blur-xl backdrop-saturate-150"
             : "w-full max-w-[1120px] border-white/[0.05] bg-[#060d1f]/40 backdrop-blur-md",
         )}
       >
