@@ -653,7 +653,7 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
 
   patterns: {
     id: "patterns",
-    emoji: "🔍",
+    emoji: "🕯️",
     title: "5 Candle Patterns",
     subtitle: "High-probability setups every trader should know",
     category: "Technical Analysis",
