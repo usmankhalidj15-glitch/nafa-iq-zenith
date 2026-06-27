@@ -634,7 +634,7 @@ function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 25);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -651,7 +651,7 @@ function Nav() {
         className={cn(
           "flex h-14 items-center gap-3 rounded-full border px-3 transition-all duration-300 sm:gap-4 sm:px-4",
           scrolled
-            ? "w-full max-w-[760px] border-white/[0.08] bg-[#060d1f]/80 shadow-[0_8px_40px_rgba(0,0,0,0.45)] backdrop-blur-xl backdrop-saturate-150"
+            ? "w-full max-w-[760px] border-white/[0.08] bg-[#060d1f] shadow-[0_8px_40px_rgba(0,0,0,0.45)] backdrop-blur-xl backdrop-saturate-150"
             : "w-full max-w-[1120px] border-white/[0.05] bg-[#060d1f]/40 backdrop-blur-md",
         )}
       >
@@ -664,13 +664,13 @@ function Nav() {
         </Link>
 
         {/* primary links — pill-segmented center group */}
-        <nav className="mx-auto hidden items-center gap-1 rounded-full border border-white/[0.06] bg-white/[0.03] p-1 md:flex">
+        <nav className="mx-auto hidden items-center gap-0.5 rounded-full border border-white/[0.06] bg-white/[0.03] p-1 md:flex">
           {NAV_LINKS.map((l) =>
             l.to ? (
               <Link
                 key={l.label}
                 to={l.to}
-                className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
+                className="rounded-full px-2.5 py-1.5 text-sm font-medium whitespace-nowrap text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
               >
                 {l.label}
               </Link>
@@ -678,7 +678,7 @@ function Nav() {
               <a
                 key={l.label}
                 href={l.href}
-                className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
+                className="rounded-full px-2.5 py-1.5 text-sm font-medium whitespace-nowrap text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
               >
                 {l.label}
               </a>
@@ -695,7 +695,7 @@ function Nav() {
           </div>
           <Link
             to="/auth"
-            className="hidden text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary md:inline"
+            className="hidden whitespace-nowrap text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary md:inline"
           >
             Log In
           </Link>
@@ -736,16 +736,16 @@ function Nav() {
                   key={l.label}
                   to={l.to}
                   onClick={() => setOpen(false)}
-                  className="rounded-[12px] px-4 py-4 text-lg font-medium text-text-primary transition hover:bg-white/[0.05]"
-                >
-                  {l.label}
-                </Link>
-              ) : (
-                <a
-                  key={l.label}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-[12px] px-4 py-4 text-lg font-medium text-text-primary transition hover:bg-white/[0.05]"
+                className="rounded-[12px] px-4 py-4 text-lg font-medium whitespace-nowrap text-text-primary transition hover:bg-white/[0.05]"
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.label}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="rounded-[12px] px-4 py-4 text-lg font-medium whitespace-nowrap text-text-primary transition hover:bg-white/[0.05]"
                 >
                   {l.label}
                 </a>
@@ -754,7 +754,7 @@ function Nav() {
             <Link
               to="/auth"
               onClick={() => setOpen(false)}
-              className="rounded-[12px] px-4 py-4 text-lg font-medium text-text-secondary transition hover:bg-white/[0.05]"
+              className="rounded-[12px] px-4 py-4 text-lg font-medium whitespace-nowrap text-text-secondary transition hover:bg-white/[0.05]"
             >
               Log In
             </Link>
