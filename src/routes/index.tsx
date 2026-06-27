@@ -355,45 +355,59 @@ function PhoneMockup() {
   );
 }
 
-const FEATURES = [
+const FEATURES: {
+  Icon: LucideIcon | typeof CrescentIcon;
+  iconColor: string;
+  chipBg: string;
+  title: string;
+  desc: string;
+  badge?: string;
+}[] = [
   {
-    emoji: "📊",
+    Icon: CandlestickChart,
+    iconColor: "text-bull",
     chipBg: "rgba(0,212,170,0.15)",
     title: "PSX Trading Terminal",
     desc: "Candlestick charts, heatmaps, top movers, AI signals — the first Bloomberg-grade PSX terminal on your phone.",
   },
   {
-    emoji: "🛡️",
+    Icon: ShieldCheck,
+    iconColor: "text-warning",
     chipBg: "rgba(245,158,11,0.15)",
     title: "Haqeeqi Daulat™ Engine",
     desc: "See your REAL wealth after PKR devaluation. Pakistan's first devaluation-adjusted portfolio intelligence.",
     badge: "World First",
   },
   {
-    emoji: "🤖",
-    chipBg: "rgba(139,92,246,0.15)",
+    Icon: Bot,
+    iconColor: "text-ai",
+    chipBg: "rgba(59,130,246,0.15)",
     title: "AI Financial Advisor",
     desc: "Personalized insights, AI-generated portfolio reports, and a 24/7 finance tutor — powered by Claude AI.",
   },
   {
-    emoji: "🕋",
+    Icon: CrescentIcon,
+    iconColor: "text-bull",
     chipBg: "rgba(16,185,129,0.15)",
     title: "Built for Muslim Investors",
     desc: "Halal stock screening, Zakat calculator, Islamic savings goals — finance aligned with your values.",
   },
   {
-    emoji: "💼",
+    Icon: Wallet,
+    iconColor: "text-ai",
     chipBg: "rgba(59,130,246,0.15)",
     title: "Complete Finance Manager",
     desc: "Track income, expenses, budgets, bills, and goals — all in one place, in Pakistani Rupees.",
   },
   {
-    emoji: "📚",
+    Icon: GraduationCap,
+    iconColor: "text-warning",
     chipBg: "rgba(249,115,22,0.15)",
     title: "Financial Education",
     desc: "Beginner to advanced courses in Urdu and English. Earn XP. Build real investing knowledge.",
   },
-] as const;
+];
+
 
 const TESTIMONIALS = [
   {
