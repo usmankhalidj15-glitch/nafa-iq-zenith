@@ -257,7 +257,7 @@ function FlashcardModal({ onClose }: { onClose: () => void }) {
           </>
         ) : (
           <div className="text-center">
-            <div className="text-4xl">🎉</div>
+            <PartyPopper className="mx-auto h-10 w-10 text-bull" strokeWidth={1.5} />
             <div className="mt-3 text-lg font-semibold text-text-primary">Deck Complete!</div>
             <div className="mt-1 text-sm text-text-secondary">You reviewed all {total} terms.</div>
             <div className="mt-6 flex items-center justify-center gap-3">
