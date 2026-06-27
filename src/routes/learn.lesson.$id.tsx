@@ -359,7 +359,7 @@ function Blocks({ blocks, accent }: { blocks: ContentBlock[]; accent: string }) 
           return (
             <div
               key={i}
-              className="my-6 max-w-[680px] rounded-r-[8px] p-4"
+              className="my-6 rounded-r-[8px] p-4"
               style={{ background: `${m.color}10`, borderLeft: `3px solid ${m.color}` }}
             >
               <div
