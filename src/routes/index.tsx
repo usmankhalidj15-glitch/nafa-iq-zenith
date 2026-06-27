@@ -6,10 +6,8 @@ import {
   useTransform,
   useSpring,
   useMotionValue,
-  
   useAnimationFrame,
   useReducedMotion,
-  wrap,
 } from "framer-motion";
 import {
   Download,
