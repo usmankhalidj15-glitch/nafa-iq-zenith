@@ -151,8 +151,8 @@ function Learn() {
                     <CompletionRing status={status} />
                   </div>
                   <div className="mt-3 flex items-center justify-between">
-                    <span className="rounded-[4px] bg-elevated px-2 py-0.5 text-[10px] text-text-secondary">
-                      {isVideo ? "🎬 Video + Article" : "📖 Article"}
+                    <span className="inline-flex items-center gap-1 rounded-[4px] bg-elevated px-2 py-0.5 text-[10px] text-text-secondary">
+                      {isVideo ? <><Video className="h-3 w-3" strokeWidth={1.5} /> Video + Article</> : <><BookOpen className="h-3 w-3" strokeWidth={1.5} /> Article</>}
                     </span>
                     {status === "in-progress" && <span className="text-[10px] font-medium text-warning">In Progress</span>}
                   </div>
