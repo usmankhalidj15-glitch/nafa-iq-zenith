@@ -448,7 +448,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <Link
               to="/plans"
               onClick={() => setDrawer(false)}
-              className="flex items-center gap-3 rounded-[6px] px-3 py-3 text-sm font-semibold text-gold hover:bg-hover"
+              className="flex items-center gap-3 rounded-[6px] border border-bull/40 bg-bull/10 px-3 py-3 text-sm font-semibold text-bull hover:bg-bull/15"
             >
               <Sparkles className="h-5 w-5" /> Upgrade to Pro
             </Link>
