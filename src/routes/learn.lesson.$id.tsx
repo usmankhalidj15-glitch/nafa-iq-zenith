@@ -395,7 +395,7 @@ function Blocks({ blocks, accent }: { blocks: ContentBlock[]; accent: string }) 
         return (
           <div
             key={i}
-            className="my-6 max-w-[680px] overflow-x-auto rounded-[8px] border border-border"
+            className="my-6 overflow-x-auto rounded-[8px] border border-border"
           >
             <table className="w-full border-collapse text-sm">
               <thead>
