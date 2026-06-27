@@ -87,7 +87,7 @@ function Alerts() {
         <Card className="divide-y divide-border/50 p-0" hover={false}>
           {NOTIFS.map((n, i) => (
             <div key={i} className="flex items-center gap-3 px-3 py-3">
-              <span className="text-lg">{n.emoji}</span>
+              <span className="flex h-8 w-8 items-center justify-center rounded-[8px] border border-white/[0.06] bg-elevated text-text-secondary"><EmojiIcon emoji={n.emoji} size={15} /></span>
               <div className="flex-1">
                 <div className="text-sm text-text-primary">{n.msg}</div>
                 <div className="text-[11px] text-text-muted">{n.time}</div>
