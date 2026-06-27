@@ -59,16 +59,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   async function loadProfile(userId: string) {
-    const { data } = await supabase
-      .from("profiles")
-      .select("id, display_name, plan, avatar_url")
-      .eq("id", userId)
-      .maybeSingle();
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id, display_name, plan, avatar_url")
+    .eq("id", userId)
+    .maybeSingle();
 
-    if (data) {
-      setProfile(data as Profile);
-    }
+  console.log("========== PROFILE DEBUG ==========");
+  console.log("User ID:", userId);
+  console.log("Profile Data:", data);
+  console.log("Profile Error:", error);
+
+  if (data) {
+    setProfile(data as Profile);
   }
+}
 
   const signInWithPassword: AuthContextValue["signInWithPassword"] = async (
     email,
