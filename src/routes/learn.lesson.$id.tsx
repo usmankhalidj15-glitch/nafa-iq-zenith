@@ -716,8 +716,8 @@ function ResultsView({
             </summary>
             <div className="mt-3 space-y-1.5">
               {sq.options.map((o, j) => (
-                <div key={j} className={cn("rounded-[6px] px-3 py-1.5 text-xs", o.isCorrect ? "bg-bull/10 text-bull" : "text-text-secondary")}>
-                  {o.isCorrect ? "✓ " : "• "}{o.text}
+                <div key={j} className={cn("flex items-center gap-1.5 rounded-[6px] px-3 py-1.5 text-xs", o.isCorrect ? "bg-bull/10 text-bull" : "text-text-secondary")}>
+                  {o.isCorrect ? <Check className="h-3 w-3 shrink-0" strokeWidth={1.5} /> : <span className="shrink-0">•</span>}{o.text}
                 </div>
               ))}
               <p className="mt-2 text-xs leading-relaxed text-text-muted">{sq.q.explanation}</p>
