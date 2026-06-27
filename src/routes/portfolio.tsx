@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Sparkles, Loader2, X, Pencil, Trash2, Plus } from "lucide-react";
+import { Sparkles, Loader2, X, Pencil, Trash2, Plus, ShieldAlert, ArrowRight, AlertTriangle } from "lucide-react";
 import { Card, StatCard } from "@/components/Card";
 import { Change } from "@/components/Change";
 import { SignalBadge } from "@/components/SignalBadge";
@@ -42,6 +42,71 @@ const STOCK_ALLOC = [
   { name: "FFC", value: 15, color: "#6b7280" },
 ];
 
+function HaqeeqiDaulat() {
+  return (
+    <Card hover={false} className="relative overflow-hidden border-gold/20">
+      <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
+      <div className="relative z-10">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <ShieldAlert className="h-5 w-5 text-gold" strokeWidth={1.75} />
+            <h3 className="font-display text-sm font-bold text-text-primary">
+              Haqeeqi Daulat™ — Your REAL Returns
+            </h3>
+          </div>
+          <span className="rounded-full border border-gold/30 bg-gold/10 px-2.5 py-0.5 text-[10px] font-semibold text-gold">
+            After 16.2% PKR devaluation
+          </span>
+        </div>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          <div className="rounded-[10px] border border-white/[0.06] bg-surface-alt p-4">
+            <div className="font-mono text-xl font-bold tabular-nums text-bull">+12.73%</div>
+            <div className="mt-1 text-[11px] text-text-muted">Nominal PKR Gain</div>
+            <div className="mt-2 font-mono text-xs tabular-nums text-text-secondary">+PKR 96,864</div>
+          </div>
+          <div className="rounded-[10px] border border-white/[0.06] bg-surface-alt p-4">
+            <div className="font-mono text-xl font-bold tabular-nums text-bear">-16.2%</div>
+            <div className="mt-1 text-[11px] text-text-muted">PKR Devaluation</div>
+            <div className="mt-2 font-mono text-xs tabular-nums text-text-secondary">-PKR 102,722 eroded</div>
+          </div>
+          <div className="rounded-[10px] border border-white/[0.06] bg-surface-alt p-4">
+            <div className="font-mono text-xl font-bold tabular-nums text-bear">-3.2%</div>
+            <div className="mt-1 text-[11px] text-text-muted">Real USD Return</div>
+            <div className="mt-2 font-mono text-xs tabular-nums text-text-secondary">$-180 in real terms</div>
+          </div>
+        </div>
+
+        <div className="mt-3 rounded-[10px] border border-white/[0.06] bg-surface-alt p-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <div className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">
+                Devaluation Shield Score
+              </div>
+              <div className="mt-1 flex items-baseline gap-2">
+                <span className="font-mono text-2xl font-bold tabular-nums text-warning">38</span>
+                <span className="font-mono text-sm text-text-muted">/ 100</span>
+                <span className="rounded-full border border-warning/30 bg-warning/10 px-2 py-0.5 text-[10px] font-semibold text-warning">
+                  Moderate risk
+                </span>
+              </div>
+              <p className="mt-1.5 max-w-md text-[11px] text-text-secondary">
+                34% of portfolio in Oil &amp; Gas provides partial hedge against rupee weakness.
+              </p>
+            </div>
+            <button className="flex items-center gap-1.5 rounded-[8px] bg-gold px-3.5 py-2 text-sm font-semibold text-background transition hover:brightness-110">
+              Improve Score <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+          <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/5">
+            <div className="h-full rounded-full bg-warning" style={{ width: "38%" }} />
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
 function Portfolio() {
   const [range, setRange] = useState<(typeof RANGES)[number]>("6M");
   const [reportState, setReportState] = useState<"idle" | "loading" | "open">("idle");
@@ -78,6 +143,10 @@ function Portfolio() {
         <PortfolioAreaChart data={series(n)} height={280} />
       </Card>
 
+      <HaqeeqiDaulat />
+
+
+
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <h3 className="mb-2 text-sm font-semibold text-text-primary">Allocation by Sector</h3>
@@ -97,6 +166,14 @@ function Portfolio() {
 
       <Card>
         <h3 className="mb-3 text-sm font-semibold text-text-primary">Holdings</h3>
+        {HOLDINGS.some((h) => h.signal === "SELL" || h.signal === "STRONG SELL") && (
+          <div className="mb-3 flex items-center gap-2 rounded-[8px] border border-bear/30 bg-bear/10 px-3 py-2 text-xs text-bear">
+            <AlertTriangle className="h-4 w-4 shrink-0" strokeWidth={1.75} />
+            <span>
+              {HOLDINGS.filter((h) => h.signal === "SELL" || h.signal === "STRONG SELL").map((h) => h.ticker).join(", ")} — AI signals suggest reviewing these positions.
+            </span>
+          </div>
+        )}
         <div className="scrollbar-none overflow-x-auto">
           <table className="w-full min-w-[760px] text-xs">
             <thead>
@@ -109,8 +186,10 @@ function Portfolio() {
                 const mv = h.shares * h.current;
                 const gain = h.shares * (h.current - h.avgCost);
                 const gainPct = ((h.current - h.avgCost) / h.avgCost) * 100;
+                const isSell = h.signal === "SELL" || h.signal === "STRONG SELL";
                 return (
-                  <tr key={h.ticker} className="border-b border-border/50">
+                  <tr key={h.ticker} className={cn("border-b border-border/50", isSell && "border-l-2 border-l-bear bg-bear/[0.04]")}>
+
                     <td className="py-2 font-semibold text-bull">{h.ticker}</td>
                     <td className="text-text-secondary">{h.sector}</td>
                     <td className="text-right font-mono tabular-nums text-text-primary">{h.shares.toLocaleString()}</td>

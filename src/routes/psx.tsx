@@ -240,7 +240,12 @@ export default function PSX() {
                   <td className="text-right font-mono tabular-nums text-text-primary">{fmtNum(s.price)}</td>
                   <td className="text-right"><Change pct={s.changePct} /></td>
                   <td className="text-center"><SignalBadge signal={s.signal} /></td>
-                  <td className="text-right font-mono tabular-nums text-text-secondary">{s.rsi}</td>
+                  <td className="text-right font-mono tabular-nums">
+                    <span className={cn(s.rsi > 70 ? "text-bear" : s.rsi < 30 ? "text-bull" : "text-text-secondary")} title={s.rsi > 70 ? "Overbought" : s.rsi < 30 ? "Oversold" : "Neutral"}>
+                      {s.rsi}
+                      {s.rsi > 70 ? " ⚠" : s.rsi < 30 ? " ⚡" : ""}
+                    </span>
+                  </td>
                   <td className="text-right font-mono tabular-nums text-text-secondary">{s.volume}</td>
                   <td className="pr-2 text-right font-mono tabular-nums text-text-secondary">{s.marketCap}</td>
                 </tr>
