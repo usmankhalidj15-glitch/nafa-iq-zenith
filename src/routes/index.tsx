@@ -270,10 +270,10 @@ function PhoneMockup({ startDelay = 0 }: { startDelay?: number }) {
         <motion.div
           animate={reduce ? undefined : { y: [0, 9, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-          className="rounded-[12px] border border-warning/30 bg-surface/85 px-3.5 py-2.5 backdrop-blur-md"
+          className="rounded-[12px] border border-bull/30 bg-surface/85 px-3.5 py-2.5 backdrop-blur-md"
           style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)" }}
         >
-          <div className="flex items-center gap-1.5 text-[10px] font-semibold text-warning">
+          <div className="flex items-center gap-1.5 text-[10px] font-semibold text-bull">
             <ShieldCheck className="h-3 w-3" /> Real Wealth
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
