@@ -405,30 +405,14 @@ function StatsStrip() {
 /* ---------- nav ---------- */
 const NAV_LINKS = [
   { label: "Features", href: "#features", to: undefined },
-  { label: "Haqeeqi Daulat", href: "#features", to: undefined },
-  { label: "Learn", href: undefined, to: "/learn" },
-  { label: "Plans", href: undefined, to: "/plans" },
+  { label: "Pricing", href: undefined, to: "/plans" },
 ] as const;
-
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <motion.a
-      href={href}
-      whileHover={{ y: -2 }}
-      transition={SPRING}
-      className="group relative text-sm text-text-secondary transition hover:text-text-primary"
-    >
-      {children}
-      <span className="absolute -bottom-1 left-0 h-px w-0 bg-bull transition-all duration-300 group-hover:w-full" />
-    </motion.a>
-  );
-}
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -440,46 +424,54 @@ function Nav() {
     };
   }, [open]);
   return (
-    <header
-      className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-300",
-        scrolled || open
-          ? "border-b border-white/[0.06] bg-background/80 backdrop-blur-xl backdrop-saturate-150"
-          : "border-b border-transparent bg-transparent",
-      )}
-    >
-      <div className="mx-auto flex h-14 max-w-[1200px] items-center justify-between px-6">
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="NafaIQ" width={26} height={26} className="rounded-[6px]" />
-          <span className="font-display text-lg font-bold tracking-tight text-text-primary">Nafa<span className="text-gold">IQ</span></span>
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:pt-4">
+      <motion.div
+        initial={false}
+        animate={{ maxWidth: scrolled ? 720 : 1120 }}
+        transition={SPRING}
+        className={cn(
+          "mx-auto flex items-center justify-between gap-4 rounded-full border px-3 py-2 pl-4 transition-colors duration-300",
+          scrolled || open
+            ? "border-white/[0.08] bg-background/70 shadow-[0_8px_40px_rgba(0,0,0,0.4)] backdrop-blur-xl backdrop-saturate-150"
+            : "border-white/[0.06] bg-white/[0.02] backdrop-blur-md",
+        )}
+      >
+        <Link to="/" className="flex shrink-0 items-center gap-2">
+          <img src={logo} alt="NafaIQ" width={26} height={26} className="rounded-[7px] ring-1 ring-bull/30" />
+          <span className="font-display text-lg font-bold tracking-tight text-text-primary">
+            Nafa<span className="text-gold">IQ</span>
+          </span>
         </Link>
 
-        {/* center links — desktop */}
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 md:flex">
+        {/* center capsule — desktop */}
+        <nav className="hidden items-center gap-1 rounded-full border border-white/[0.06] bg-white/[0.03] p-1 md:flex">
           {NAV_LINKS.map((l) =>
             l.to ? (
               <Link
                 key={l.label}
                 to={l.to}
-                className="group relative text-sm text-text-secondary transition hover:text-text-primary"
+                className="rounded-full px-4 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
               >
                 {l.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-bull transition-all duration-300 group-hover:w-full" />
               </Link>
             ) : (
-              <NavLink key={l.label} href={l.href!}>
+              <a
+                key={l.label}
+                href={l.href}
+                className="rounded-full px-4 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
+              >
                 {l.label}
-              </NavLink>
+              </a>
             ),
           )}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <Magnetic strength={0.4}>
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} transition={SPRING} className="hidden md:block">
               <Link
                 to="/app"
-                className="inline-flex items-center gap-1 rounded-[6px] bg-bull px-4 py-2 text-sm font-semibold text-bull-foreground transition hover:bg-[#00efc0] hover:shadow-[0_0_20px_rgba(0,212,170,0.3)]"
+                className="inline-flex items-center gap-1 rounded-full bg-bull px-4 py-2 text-sm font-semibold text-bull-foreground transition hover:bg-[#00efc0] hover:shadow-[0_0_22px_rgba(0,212,170,0.4)]"
               >
                 Enter App <ArrowRight className="h-4 w-4" />
               </Link>
@@ -488,16 +480,16 @@ function Nav() {
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
-            className="flex h-9 w-9 items-center justify-center rounded-[8px] border border-white/[0.08] text-text-primary md:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] text-text-primary md:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* mobile drawer */}
       {open && (
-        <div className="border-t border-white/[0.06] bg-background/95 px-6 py-6 backdrop-blur-xl md:hidden">
+        <div className="mx-auto mt-2 max-w-[1120px] rounded-2xl border border-white/[0.08] bg-background/95 p-3 backdrop-blur-xl md:hidden">
           <nav className="flex flex-col gap-1">
             {NAV_LINKS.map((l) =>
               l.to ? (
@@ -505,7 +497,7 @@ function Nav() {
                   key={l.label}
                   to={l.to}
                   onClick={() => setOpen(false)}
-                  className="rounded-[8px] px-3 py-3 text-base font-medium text-text-secondary transition hover:bg-white/[0.04] hover:text-text-primary"
+                  className="rounded-[10px] px-3 py-3 text-base font-medium text-text-secondary transition hover:bg-white/[0.04] hover:text-text-primary"
                 >
                   {l.label}
                 </Link>
@@ -514,7 +506,7 @@ function Nav() {
                   key={l.label}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-[8px] px-3 py-3 text-base font-medium text-text-secondary transition hover:bg-white/[0.04] hover:text-text-primary"
+                  className="rounded-[10px] px-3 py-3 text-base font-medium text-text-secondary transition hover:bg-white/[0.04] hover:text-text-primary"
                 >
                   {l.label}
                 </a>
@@ -524,7 +516,7 @@ function Nav() {
           <Link
             to="/app"
             onClick={() => setOpen(false)}
-            className="mt-4 flex items-center justify-center gap-1 rounded-[8px] bg-bull px-4 py-3 text-sm font-semibold text-bull-foreground transition hover:bg-[#00efc0]"
+            className="mt-2 flex items-center justify-center gap-1 rounded-full bg-bull px-4 py-3 text-sm font-semibold text-bull-foreground transition hover:bg-[#00efc0]"
           >
             Enter App <ArrowRight className="h-4 w-4" />
           </Link>
