@@ -6,7 +6,7 @@ import {
   useTransform,
   useSpring,
   useMotionValue,
-  useVelocity,
+  
   useAnimationFrame,
   useReducedMotion,
   wrap,
@@ -28,15 +28,39 @@ import {
   Menu,
   X,
   Search,
+  CandlestickChart,
+  Bot,
+  Wallet,
+  GraduationCap,
+  LineChart,
+  Brain,
+  Lightbulb,
+  Lock,
+  BadgeDollarSign,
+  UserCheck,
+  AlertTriangle,
+  type LucideIcon,
 } from "lucide-react";
 
 import { toast } from "sonner";
-import { EmojiIcon, PkBadge } from "@/components/icons";
-import { AlertTriangle } from "lucide-react";
+import { CrescentIcon, PkBadge } from "@/components/icons";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import logo from "@/assets/logo.png";
 import { TICKER_ITEMS, STOCKS } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import { Reveal, staggerParent, perspectiveCard, Magnetic, SPRING } from "@/components/animations";
+import {
+  Reveal,
+  staggerParent,
+  perspectiveCard,
+  Magnetic,
+  SPRING,
+  CountUp,
+} from "@/components/animations";
 import { Tilt3D } from "@/components/Tilt3D";
 import { Particles } from "@/components/Particles";
 
@@ -90,59 +114,63 @@ function StoreButtons({ center = false }: { center?: boolean }) {
     setEmail("");
   }
   return (
-    <div className={cn("flex flex-col gap-4", center && "items-center")}>
-      <div className={cn("flex flex-col gap-3 sm:flex-row sm:flex-wrap", center && "sm:justify-center")}>
-        <Magnetic strength={0.45}>
-          <motion.div whileTap={{ scale: 0.96 }} whileHover={{ scale: 1.03 }} transition={SPRING}>
-            <Link
-              to="/app"
-              className="flex items-center gap-3 rounded-[12px] bg-gradient-to-br from-[#00d4aa] to-[#00a88a] px-6 py-3 text-left text-bull-foreground shadow-[0_8px_30px_rgba(0,212,170,0.3)] transition hover:shadow-[0_12px_50px_rgba(0,212,170,0.55)]"
-            >
-              <Download className="h-7 w-7 shrink-0" />
-              <span className="flex flex-col leading-tight">
-                <span className="text-[10px] text-white/80">Install as</span>
-                <span className="text-lg font-semibold">Web App — Free</span>
-              </span>
-            </Link>
-          </motion.div>
-        </Magnetic>
-        <div className="flex items-center gap-3 rounded-[12px] border border-white/15 bg-black/40 px-5 py-2.5 text-left opacity-80">
-          <AppleGlyph />
-          <span className="flex flex-col leading-tight">
-            <span className="text-[10px] tracking-wide text-white/60">Coming soon to the</span>
-            <span className="text-lg font-semibold text-white">App Store</span>
-          </span>
-        </div>
-        <div className="flex items-center gap-3 rounded-[12px] border border-white/15 bg-black/40 px-5 py-2.5 text-left opacity-80">
-          <GooglePlayGlyph />
-          <span className="flex flex-col leading-tight">
-            <span className="text-[10px] tracking-wide text-white/60">Coming soon to</span>
-            <span className="text-lg font-semibold text-white">Google Play</span>
-          </span>
-        </div>
-      </div>
-      <form onSubmit={notify} className={cn("w-full max-w-md", center && "mx-auto")}>
-        <div className="flex gap-2">
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@email.com"
-            aria-label="Email for native app launch notification"
-            className="h-10 flex-1 rounded-[10px] border border-white/10 bg-surface px-3 font-mono text-sm text-text-primary outline-none transition-colors placeholder:text-text-muted focus:border-gold"
-          />
-          <button
-            type="submit"
-            className="h-10 shrink-0 rounded-[10px] bg-gold px-4 text-sm font-semibold text-background transition hover:brightness-110"
+    <div className={cn("flex flex-col gap-5", center && "items-center")}>
+      {/* PRIMARY — single dominant action */}
+      <Magnetic strength={0.45}>
+        <motion.div whileTap={{ scale: 0.96 }} whileHover={{ scale: 1.03 }} transition={SPRING}>
+          <Link
+            to="/app"
+            className="flex items-center gap-3 rounded-[14px] bg-gradient-to-br from-[#00d4aa] to-[#00a88a] px-7 py-4 text-left text-bull-foreground shadow-[0_8px_30px_rgba(0,212,170,0.3)] transition hover:shadow-[0_12px_50px_rgba(0,212,170,0.55)]"
           >
-            Notify Me
-          </button>
+            <Download className="h-7 w-7 shrink-0" />
+            <span className="flex flex-col leading-tight">
+              <span className="text-[10px] uppercase tracking-wide text-white/80">Install as</span>
+              <span className="text-lg font-semibold">Web App — Free</span>
+            </span>
+          </Link>
+        </motion.div>
+      </Magnetic>
+
+      {/* SECONDARY — coming-soon stores, visually de-emphasized */}
+      <div className={cn("flex flex-col items-start gap-2.5", center && "items-center")}>
+        <div className={cn("flex flex-wrap gap-2", center && "justify-center")}>
+          <div className="flex items-center gap-2 rounded-[10px] border border-white/[0.07] bg-white/[0.02] px-3 py-1.5 text-left opacity-55 grayscale">
+            <AppleGlyph />
+            <span className="flex flex-col leading-tight">
+              <span className="text-[9px] uppercase tracking-wide text-white/50">Coming soon</span>
+              <span className="text-xs font-medium text-white/80">App Store</span>
+            </span>
+          </div>
+          <div className="flex items-center gap-2 rounded-[10px] border border-white/[0.07] bg-white/[0.02] px-3 py-1.5 text-left opacity-55 grayscale">
+            <GooglePlayGlyph />
+            <span className="flex flex-col leading-tight">
+              <span className="text-[9px] uppercase tracking-wide text-white/50">Coming soon</span>
+              <span className="text-xs font-medium text-white/80">Google Play</span>
+            </span>
+          </div>
         </div>
-        <p className="mt-1.5 text-[11px] text-text-muted">
-          We'll email you when the native app launches. No spam, ever.
-        </p>
-      </form>
+
+        {/* TERTIARY — quiet email capture for native launch */}
+        <form onSubmit={notify} className={cn("w-full max-w-xs", center && "mx-auto")}>
+          <div className="flex gap-1.5">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email me at launch"
+              aria-label="Email for native app launch notification"
+              className="h-8 flex-1 rounded-[8px] border border-white/[0.08] bg-transparent px-2.5 font-mono text-xs text-text-secondary outline-none transition-colors placeholder:text-text-muted focus:border-white/20"
+            />
+            <button
+              type="submit"
+              className="h-8 shrink-0 rounded-[8px] border border-white/[0.08] px-3 text-xs font-medium text-text-secondary transition hover:border-white/20 hover:text-text-primary"
+            >
+              Notify
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
@@ -150,32 +178,26 @@ function StoreButtons({ center = false }: { center?: boolean }) {
 /* ---------- scroll-velocity driven ticker ---------- */
 function TickerStrip() {
   const reduce = useReducedMotion();
+  // duplicate once so wrapping -50%..0 is perfectly seamless (no visible seam)
   const items = [...TICKER_ITEMS, ...TICKER_ITEMS];
   const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 4], { clamp: false });
-  const directionRef = useRef(1);
-
   const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
 
   useAnimationFrame((_, delta) => {
     if (reduce) return;
-    let moveBy = directionRef.current * -2.4 * (delta / 1000);
-    const vf = velocityFactor.get();
-    if (vf < 0) directionRef.current = -1;
-    else if (vf > 0) directionRef.current = 1;
-    moveBy += directionRef.current * moveBy * vf;
-    baseX.set(baseX.get() + moveBy);
+    // constant smooth velocity — no scroll coupling, so no stutter
+    baseX.set(baseX.get() - 2.2 * (delta / 1000));
   });
 
   return (
     <div className="relative z-10 overflow-hidden border-y border-border bg-surface py-3">
+      {/* edge fade masks hide the wrap point */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-surface to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-surface to-transparent" />
       <motion.div
         style={reduce ? undefined : { x }}
         className={cn(
-          "flex w-max gap-8 whitespace-nowrap px-4",
+          "flex w-max gap-8 whitespace-nowrap px-4 will-change-transform",
           reduce && "animate-[ticker_40s_linear_infinite]",
         )}
       >
@@ -193,6 +215,7 @@ function TickerStrip() {
     </div>
   );
 }
+
 
 /* ---------- 3D phone with mouse tilt + float ---------- */
 function PhoneMockup() {
@@ -221,42 +244,60 @@ function PhoneMockup() {
       onMouseLeave={reset}
       className="group/phone relative mx-auto w-[260px] [perspective:1200px] sm:w-[280px]"
     >
-      {/* KSE-100 floating card */}
+      {/* KSE-100 floating card — staggered entrance + float loop */}
       <motion.div
-        animate={reduce ? undefined : { y: [0, -10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-8 -left-10 z-20 rounded-[12px] border border-bull/25 bg-surface/85 px-3.5 py-2.5 backdrop-blur-md"
-        style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)" }}
+        initial={reduce ? false : { opacity: 0, y: -24, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute -top-8 -left-10 z-20"
       >
-        <div className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-bull" />
-          <span className="text-[9px] font-bold tracking-widest text-bull">LIVE</span>
-        </div>
-        <div className="mt-1 flex items-center gap-2 text-[11px]">
-          <span className="font-bold text-text-primary">KSE-100</span>
-          <span className="font-mono text-text-primary">78,542</span>
-          <span className="font-mono text-bull">+1.24% ▲</span>
-        </div>
+        <motion.div
+          animate={reduce ? undefined : { y: [0, -10, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="rounded-[12px] border border-bull/25 bg-surface/85 px-3.5 py-2.5 backdrop-blur-md"
+          style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)" }}
+        >
+          <div className="flex items-center gap-1.5">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-bull" />
+            <span className="text-[9px] font-bold tracking-widest text-bull">LIVE</span>
+          </div>
+          <div className="mt-1 flex items-center gap-2 text-[11px]">
+            <span className="font-bold text-text-primary">KSE-100</span>
+            <span className="font-mono text-text-primary">78,542</span>
+            <span className="font-mono text-bull">+1.24% ▲</span>
+          </div>
+        </motion.div>
       </motion.div>
 
-      {/* Real Wealth floating card */}
+      {/* Real Wealth floating card — staggered entrance + float loop */}
       <motion.div
-        animate={reduce ? undefined : { y: [0, 9, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-        className="absolute -bottom-8 -right-8 z-20 rounded-[12px] border border-warning/30 bg-surface/85 px-3.5 py-2.5 backdrop-blur-md"
-        style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)" }}
+        initial={reduce ? false : { opacity: 0, y: 24, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.72, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute -bottom-8 -right-8 z-20"
       >
-        <div className="flex items-center gap-1.5 text-[10px] font-semibold text-warning">
-          <ShieldCheck className="h-3 w-3" /> Real Wealth
-        </div>
-        <div className="mt-1 flex items-baseline gap-1.5">
-          <span className="font-mono text-sm font-bold text-text-primary">$15,395</span>
-          <span className="text-[9px] text-text-muted">USD value</span>
-        </div>
+        <motion.div
+          animate={reduce ? undefined : { y: [0, 9, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+          className="rounded-[12px] border border-warning/30 bg-surface/85 px-3.5 py-2.5 backdrop-blur-md"
+          style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)" }}
+        >
+          <div className="flex items-center gap-1.5 text-[10px] font-semibold text-warning">
+            <ShieldCheck className="h-3 w-3" /> Real Wealth
+          </div>
+          <div className="mt-1 flex items-baseline gap-1.5">
+            <span className="font-mono text-sm font-bold text-text-primary">$15,395</span>
+            <span className="text-[9px] text-text-muted">USD value</span>
+          </div>
+        </motion.div>
       </motion.div>
 
-      {/* phone frame */}
+
+      {/* phone frame — entrance fade-and-rise */}
       <motion.div
+        initial={reduce ? false : { opacity: 0, y: 28, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
         style={{ rotateY: ry, rotateX: rx, transformStyle: "preserve-3d" }}
         className="relative will-change-transform"
       >
@@ -314,45 +355,59 @@ function PhoneMockup() {
   );
 }
 
-const FEATURES = [
+const FEATURES: {
+  Icon: LucideIcon | typeof CrescentIcon;
+  iconColor: string;
+  chipBg: string;
+  title: string;
+  desc: string;
+  badge?: string;
+}[] = [
   {
-    emoji: "📊",
+    Icon: CandlestickChart,
+    iconColor: "text-bull",
     chipBg: "rgba(0,212,170,0.15)",
     title: "PSX Trading Terminal",
     desc: "Candlestick charts, heatmaps, top movers, AI signals — the first Bloomberg-grade PSX terminal on your phone.",
   },
   {
-    emoji: "🛡️",
+    Icon: ShieldCheck,
+    iconColor: "text-warning",
     chipBg: "rgba(245,158,11,0.15)",
     title: "Haqeeqi Daulat™ Engine",
     desc: "See your REAL wealth after PKR devaluation. Pakistan's first devaluation-adjusted portfolio intelligence.",
     badge: "World First",
   },
   {
-    emoji: "🤖",
-    chipBg: "rgba(139,92,246,0.15)",
+    Icon: Bot,
+    iconColor: "text-ai",
+    chipBg: "rgba(59,130,246,0.15)",
     title: "AI Financial Advisor",
     desc: "Personalized insights, AI-generated portfolio reports, and a 24/7 finance tutor — powered by Claude AI.",
   },
   {
-    emoji: "🕋",
+    Icon: CrescentIcon,
+    iconColor: "text-bull",
     chipBg: "rgba(16,185,129,0.15)",
     title: "Built for Muslim Investors",
     desc: "Halal stock screening, Zakat calculator, Islamic savings goals — finance aligned with your values.",
   },
   {
-    emoji: "💼",
+    Icon: Wallet,
+    iconColor: "text-ai",
     chipBg: "rgba(59,130,246,0.15)",
     title: "Complete Finance Manager",
     desc: "Track income, expenses, budgets, bills, and goals — all in one place, in Pakistani Rupees.",
   },
   {
-    emoji: "📚",
+    Icon: GraduationCap,
+    iconColor: "text-warning",
     chipBg: "rgba(249,115,22,0.15)",
     title: "Financial Education",
     desc: "Beginner to advanced courses in Urdu and English. Earn XP. Build real investing knowledge.",
   },
-] as const;
+];
+
 
 const TESTIMONIALS = [
   {
@@ -946,7 +1001,7 @@ function FlipCard() {
       />
       <motion.div
         animate={{ rotateY: flipped && !reduce ? 180 : 0 }}
-        transition={{ type: "spring", stiffness: 120, damping: 18 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="relative h-full w-full"
         style={{ transformStyle: "preserve-3d" }}
       >
@@ -1008,6 +1063,123 @@ function FlipCard() {
   );
 }
 
+/* ---------- How NafaIQ Works — 3 steps ---------- */
+const STEPS: { Icon: LucideIcon; step: string; title: string; desc: string }[] = [
+  {
+    Icon: LineChart,
+    step: "01",
+    title: "Track",
+    desc: "Connect your holdings and watchlist. NafaIQ pulls live PSX data, prices, and your full net worth into one terminal.",
+  },
+  {
+    Icon: Brain,
+    step: "02",
+    title: "Analyze",
+    desc: "AI signals, sector heatmaps, and the Haqeeqi Daulat engine reveal your real, devaluation-adjusted returns.",
+  },
+  {
+    Icon: Lightbulb,
+    step: "03",
+    title: "Decide",
+    desc: "Act with clarity — Shariah-screened ideas, budget insight, and a 24/7 AI advisor guiding every move.",
+  },
+];
+
+function HowItWorks() {
+  return (
+    <section className="mx-auto max-w-[1200px] px-6 py-[60px] lg:py-[100px]">
+      <Reveal className="text-center">
+        <SectionLabel>How it works</SectionLabel>
+        <h2 className="mt-3 text-[28px] font-bold leading-[1.2] sm:text-[40px]">
+          From data to decision in three steps
+        </h2>
+      </Reveal>
+      <motion.div
+        variants={staggerParent}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+        className="relative mt-12 grid gap-5 md:grid-cols-3"
+      >
+        {STEPS.map((s) => (
+          <motion.div key={s.step} variants={perspectiveCard}>
+            <div className="relative h-full rounded-[16px] border border-white/[0.07] bg-[rgba(17,24,39,0.6)] p-7 backdrop-blur-md">
+              <span className="absolute right-5 top-4 font-mono text-3xl font-bold tabular-nums text-white/[0.06]">
+                {s.step}
+              </span>
+              <div className="flex h-12 w-12 items-center justify-center rounded-[12px] bg-bull/10 text-bull">
+                <s.Icon size={22} strokeWidth={1.75} />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-text-primary">{s.title}</h3>
+              <p className="mt-2 text-sm leading-[1.6] text-text-secondary">{s.desc}</p>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
+  );
+}
+
+/* ---------- FAQ accordion ---------- */
+const FAQS: { Icon: LucideIcon; q: string; a: string }[] = [
+  {
+    Icon: Lock,
+    q: "Is my financial data secure?",
+    a: "Your data is encrypted in transit and at rest. NafaIQ never sells your information, and your portfolio details stay private to your account.",
+  },
+  {
+    Icon: CrescentIcon as unknown as LucideIcon,
+    q: "Is NafaIQ Shariah compliant?",
+    a: "Yes. NafaIQ includes built-in halal stock screening, a Zakat calculator, and Islamic savings goals so you can invest in line with your values.",
+  },
+  {
+    Icon: BadgeDollarSign,
+    q: "How much does it cost?",
+    a: "The core terminal is free forever — no credit card required. Premium plans add advanced AI reports and deeper analytics. See the Plans page for details.",
+  },
+  {
+    Icon: UserCheck,
+    q: "Do I need an account to start?",
+    a: "No. You can explore markets, charts, and the Haqeeqi Daulat demo without signing up. Create a free account only when you want to save your portfolio.",
+  },
+];
+
+function FAQ() {
+  return (
+    <section className="mx-auto max-w-3xl px-6 py-[60px] lg:py-[100px]">
+      <Reveal className="text-center">
+        <SectionLabel>Questions</SectionLabel>
+        <h2 className="mt-3 text-[28px] font-bold leading-[1.2] sm:text-[40px]">
+          Everything you might be wondering
+        </h2>
+      </Reveal>
+      <Reveal className="mt-10">
+        <Accordion type="single" collapsible className="w-full">
+          {FAQS.map((f, i) => (
+            <AccordionItem
+              key={i}
+              value={`faq-${i}`}
+              className="mb-3 overflow-hidden rounded-[14px] border border-white/[0.07] bg-[rgba(17,24,39,0.5)] px-5 backdrop-blur-md"
+            >
+              <AccordionTrigger className="hover:no-underline">
+                <span className="flex items-center gap-3 text-left text-base font-semibold text-text-primary">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-bull/10 text-bull">
+                    <f.Icon size={16} strokeWidth={1.75} />
+                  </span>
+                  {f.q}
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="pl-11 text-sm leading-relaxed text-text-secondary">
+                {f.a}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </Reveal>
+    </section>
+  );
+}
+
 function Landing() {
   return (
     <div className="dot-grid min-h-screen bg-background text-text-primary">
@@ -1033,42 +1205,54 @@ function Landing() {
           viewport={{ once: true, amount: 0.2 }}
           className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {FEATURES.map((f) => (
-            <motion.div key={f.title} variants={perspectiveCard} className="[perspective:1000px]">
-              <Tilt3D max={10} className="h-full">
-                <div
-                  className={cn(
-                    "group relative h-full rounded-[16px] border border-white/[0.07] p-7 backdrop-blur-md transition-colors duration-300 hover:border-bull/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.1),0_0_0_1px_rgba(0,212,170,0.12)]",
-                    "badge" in f && f.badge && "spin-border",
-                  )}
-                  style={{ background: "rgba(17,24,39,0.6)" }}
-                >
-                  {"badge" in f && f.badge && (
-                    <span
-                      className="absolute right-4 top-4 rounded-full text-[10px] font-semibold text-warning"
-                      style={{
-                        background: "rgba(245,158,11,0.15)",
-                        border: "1px solid rgba(245,158,11,0.3)",
-                        padding: "2px 8px",
-                      }}
-                    >
-                      {f.badge}
-                    </span>
-                  )}
-                  <div
-                    className="flex h-12 w-12 items-center justify-center rounded-[12px] text-text-primary"
-                    style={{ background: f.chipBg, transform: "translateZ(40px)" }}
+          {FEATURES.map((f) => {
+            const Icon = f.Icon;
+            return (
+              <motion.div key={f.title} variants={perspectiveCard} className="[perspective:1000px]">
+                <Tilt3D max={10} className="h-full">
+                  <motion.div
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className={cn(
+                      "group relative h-full rounded-[16px] border border-white/[0.07] p-7 backdrop-blur-md transition-shadow duration-300 hover:border-bull/30 hover:shadow-[0_18px_50px_rgba(0,212,170,0.14),0_0_0_1px_rgba(0,212,170,0.14)]",
+                      f.badge && "spin-border",
+                    )}
+                    style={{ background: "rgba(17,24,39,0.6)" }}
                   >
-                    <EmojiIcon emoji={f.emoji} size={22} />
-                  </div>
-                  <h3 className="mt-4 text-base font-semibold text-text-primary">{f.title}</h3>
-                  <p className="mt-2 text-sm leading-[1.6] text-text-secondary">{f.desc}</p>
-                </div>
-              </Tilt3D>
-            </motion.div>
-          ))}
+                    {f.badge && (
+                      <span
+                        className="badge-shimmer absolute right-4 top-4 overflow-hidden rounded-full text-[10px] font-semibold text-warning"
+                        style={{
+                          background: "rgba(245,158,11,0.15)",
+                          border: "1px solid rgba(245,158,11,0.3)",
+                          padding: "2px 8px",
+                        }}
+                      >
+                        {f.badge}
+                      </span>
+                    )}
+                    <div
+                      className={cn(
+                        "flex h-12 w-12 items-center justify-center rounded-[12px]",
+                        f.iconColor,
+                      )}
+                      style={{ background: f.chipBg, transform: "translateZ(40px)" }}
+                    >
+                      <Icon size={22} strokeWidth={1.75} />
+                    </div>
+                    <h3 className="mt-4 text-base font-semibold text-text-primary">{f.title}</h3>
+                    <p className="mt-2 text-sm leading-[1.6] text-text-secondary">{f.desc}</p>
+                  </motion.div>
+                </Tilt3D>
+              </motion.div>
+            );
+          })}
+
         </motion.div>
       </section>
+
+      {/* HOW IT WORKS */}
+      <HowItWorks />
 
       {/* HAQEEQI DAULAT SPOTLIGHT */}
       <section className="relative overflow-hidden border-y border-border bg-surface-alt">
@@ -1081,7 +1265,7 @@ function Landing() {
         />
         <div className="relative mx-auto grid max-w-[1200px] items-center gap-12 px-6 py-[60px] lg:grid-cols-2 lg:py-[100px]">
           <Reveal>
-            <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-warning">
+            <span className="badge-shimmer inline-block overflow-hidden rounded-full text-[11px] font-semibold uppercase tracking-[0.15em] text-warning">
               World-first feature
             </span>
             <h2 className="mt-3 text-[28px] font-bold leading-[1.2] sm:text-[40px]">
@@ -1179,6 +1363,9 @@ function Landing() {
           </div>
         </Reveal>
       </section>
+
+      {/* FAQ */}
+      <FAQ />
 
       {/* DOWNLOAD CTA */}
       <section id="download" className="gradient-mesh border-y border-border bg-[#0D1421]">

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -6,10 +6,64 @@ import {
   useTransform,
   useMotionValue,
   useReducedMotion,
+  useInView,
+  animate,
   type MotionValue,
   type Variants,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
+
+/* ---------- animated count-up (fires when scrolled into view) ---------- */
+export function CountUp({
+  to,
+  from = 0,
+  duration = 1.8,
+  decimals = 0,
+  prefix = "",
+  suffix = "",
+  className,
+}: {
+  to: number;
+  from?: number;
+  duration?: number;
+  decimals?: number;
+  prefix?: string;
+  suffix?: string;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const fmt = (n: number) =>
+    prefix +
+    n.toLocaleString("en-US", {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    }) +
+    suffix;
+  const [display, setDisplay] = useState(fmt(reduce ? to : from));
+
+  useEffect(() => {
+    if (!inView) return;
+    if (reduce) {
+      setDisplay(fmt(to));
+      return;
+    }
+    const controls = animate(from, to, {
+      duration,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (v) => setDisplay(fmt(v)),
+    });
+    return () => controls.stop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView, to]);
+
+  return (
+    <span ref={ref} className={className}>
+      {display}
+    </span>
+  );
+}
 
 /* ---------- spring presets ---------- */
 export const SPRING = { stiffness: 200, damping: 25, mass: 0.6 } as const;

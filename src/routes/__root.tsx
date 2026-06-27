@@ -10,6 +10,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 
 import appCss from "../styles.css?url";
@@ -154,6 +155,21 @@ function Spinner() {
   );
 }
 
+function PageTransition({ routeKey, children }: { routeKey: string; children: ReactNode }) {
+  const reduce = useReducedMotion();
+  if (reduce) return <>{children}</>;
+  return (
+    <motion.div
+      key={routeKey}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 function AuthGate() {
   const { user, loading } = useAuth();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -171,8 +187,13 @@ function AuthGate() {
   // Outlet must ALWAYS render so the router keeps its matched route (avoids
   // "Expected to find a match below the root match" during hydration).
   if (isPublic) {
-    return <Outlet />;
+    return (
+      <PageTransition routeKey={pathname}>
+        <Outlet />
+      </PageTransition>
+    );
   }
+
 
   const blocking = loading || !user;
   return (
