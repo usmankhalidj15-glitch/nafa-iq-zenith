@@ -101,95 +101,7 @@ export const LESSON_ID_BY_TITLE: Record<string, string> = {
   "Understanding P/E Ratio": "pe-ratio",
 };
 
-function genericQuiz(topic: string): QuizQuestion[] {
-  return [
-    {
-      q: `Which statement best describes ${topic}?`,
-      options: [
-        "It is a guaranteed way to make a profit",
-        "It is a concept that helps you make more informed decisions",
-        "It only applies to international markets, not PSX",
-        "It is irrelevant for long-term investors",
-      ],
-      correct: 1,
-      explanation: `${topic} is a tool/concept that helps you make more informed investing decisions — it is not a profit guarantee.`,
-    },
-    {
-      q: `Why should a PSX investor understand ${topic}?`,
-      options: [
-        "To impress friends",
-        "Because the broker requires it",
-        "To better manage risk and spot opportunities",
-        "There is no real reason",
-      ],
-      correct: 2,
-      explanation:
-        "Understanding the fundamentals helps you manage risk and recognise opportunities in the market.",
-    },
-    {
-      q: `What is the smartest approach when applying ${topic}?`,
-      options: [
-        "Combine it with other signals and your own research",
-        "Use it alone and ignore everything else",
-        "Only trust tips from social media",
-        "Avoid using it at all",
-      ],
-      correct: 0,
-      explanation:
-        "No single tool works in isolation — combine it with other signals and your own research for the best results.",
-    },
-  ];
-}
-
-const placeholderSections = (topic: string, _accent: string): LessonSection[] => [
-  {
-    id: "introduction",
-    heading: "Introduction",
-    blocks: [
-      {
-        type: "p",
-        text: `This lesson introduces ${topic} and why it matters for investors on the Pakistan Stock Exchange. Understanding this concept helps you make more informed decisions, manage risk effectively, and spot opportunities that less-prepared investors overlook. Review the key ideas below and test yourself with the quiz to reinforce what you learn.`,
-      },
-      {
-        type: "callout",
-        kind: "tip",
-        text: `Take your time with ${topic}. Re-reading once usually doubles how much you remember.`,
-      },
-    ],
-  },
-  {
-    id: "the-core-idea",
-    heading: "The Core Idea",
-    blocks: [
-      {
-        type: "p",
-        text: `At its heart, ${topic} is about understanding a single concept clearly and applying it consistently. PSX rewards patient, informed investors far more than impulsive ones.`,
-      },
-      {
-        type: "formula",
-        lines: [
-          `Key Idea = Knowledge × Discipline`,
-          `More knowledge + steady discipline = better outcomes`,
-        ],
-      },
-    ],
-  },
-  {
-    id: "why-it-matters",
-    heading: "Why It Matters on PSX",
-    blocks: [
-      {
-        type: "p",
-        text: `Retail sentiment moves Pakistani markets quickly. Investors who understand ${topic} react calmly while others panic — and that edge compounds over time.`,
-      },
-      {
-        type: "callout",
-        kind: "warning",
-        text: "Never act on a single data point. Confirm with additional signals before committing real money.",
-      },
-    ],
-  },
-];
+// Bespoke per-lesson content lives inline in LESSON_CONTENT below.
 
 export const LESSON_CONTENT: Record<string, LessonContent> = {
   candlestick: {
@@ -647,13 +559,95 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
       "Why are banks green today?",
       "How often does the heatmap update?",
     ],
-    sections: placeholderSections("the sector heatmap", "#3b82f6"),
-    quiz: genericQuiz("the sector heatmap"),
+    sections: [
+      {
+        id: "introduction",
+        heading: "Reading the Colours",
+        blocks: [
+          {
+            type: "p",
+            text: "A sector heatmap shows the whole market on one screen. Each tile is a sector or stock; its colour shows performance — green for gains, red for losses — and its size usually reflects market weight. One glance tells you where money is flowing today.",
+          },
+          {
+            type: "callout",
+            kind: "note",
+            text: "Deeper green or red means a bigger move. A pale tile is roughly flat, not necessarily 'safe' — it just hasn't moved much.",
+          },
+        ],
+      },
+      {
+        id: "the-core-idea",
+        heading: "Spotting Sector Rotation",
+        blocks: [
+          {
+            type: "p",
+            text: "Markets move in rotations — money leaves one sector and crowds into another. When banks are deep green while cement and autos bleed red, capital is rotating toward financials. The heatmap makes that shift obvious before headlines explain it.",
+          },
+          {
+            type: "callout",
+            kind: "example",
+            text: "If oil & gas tiles turn green across the board after a crude price jump, that's sector-wide momentum — not a one-stock story.",
+          },
+        ],
+      },
+      {
+        id: "why-it-matters",
+        heading: "Using It Without Being Fooled",
+        blocks: [
+          {
+            type: "p",
+            text: "The heatmap is a starting point, not a buy list. A green sector tells you where attention is, but you still confirm the individual stock's chart and fundamentals before acting.",
+          },
+          {
+            type: "callout",
+            kind: "warning",
+            text: "A single green day doesn't make a trend. Don't chase a hot sector at the top — confirm with a few sessions of follow-through.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        q: "On a sector heatmap, what does a deep red tile indicate?",
+        options: [
+          "A large gain",
+          "A large loss",
+          "No change",
+          "A halted stock",
+        ],
+        correct: 1,
+        explanation: "Red means a decline, and a deeper shade indicates a bigger loss.",
+      },
+      {
+        q: "Banks are green while autos and cement are red. What is this likely showing?",
+        options: [
+          "A data error",
+          "Sector rotation toward financials",
+          "The market is closed",
+          "Nothing meaningful",
+        ],
+        correct: 1,
+        explanation:
+          "Money moving into one sector while leaving others is classic sector rotation.",
+      },
+      {
+        q: "How should you treat a hot green sector on the heatmap?",
+        options: [
+          "Buy any stock in it immediately",
+          "As a starting point — confirm the individual stock before acting",
+          "Ignore it completely",
+          "Assume it will fall tomorrow",
+        ],
+        correct: 1,
+        explanation:
+          "The heatmap shows where attention is; you still confirm the specific stock's chart and fundamentals.",
+      },
+    ],
   },
 
   patterns: {
     id: "patterns",
-    emoji: "🔍",
+    emoji: "🕯️",
     title: "5 Candle Patterns",
     subtitle: "High-probability setups every trader should know",
     category: "Technical Analysis",
@@ -666,8 +660,97 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
       "How reliable are patterns?",
       "Bullish vs bearish engulfing?",
     ],
-    sections: placeholderSections("the five key candle patterns", "#8b5cf6"),
-    quiz: genericQuiz("candle patterns"),
+    sections: [
+      {
+        id: "introduction",
+        heading: "Why Patterns Work",
+        blocks: [
+          {
+            type: "p",
+            text: "Candle patterns are short, repeatable shapes that hint at a shift in who's winning — buyers or sellers. They don't predict the future; they summarise a tug-of-war in price so you can act with more context than a single candle gives.",
+          },
+          {
+            type: "callout",
+            kind: "note",
+            text: "A pattern at a key level (support, resistance, a moving average) is far more meaningful than the same pattern in the middle of nowhere.",
+          },
+        ],
+      },
+      {
+        id: "the-core-idea",
+        heading: "The Five to Know",
+        blocks: [
+          {
+            type: "p",
+            text: "Master these five and you'll recognise the majority of high-probability setups on PSX charts.",
+          },
+          {
+            type: "table",
+            head: ["Pattern", "Signals", "What it means"],
+            rows: [
+              ["Bullish Engulfing", "Reversal up", "A big green candle swallows the prior red one"],
+              ["Bearish Engulfing", "Reversal down", "A big red candle swallows the prior green one"],
+              ["Hammer", "Reversal up", "Long lower wick — sellers pushed down, buyers won back"],
+              ["Shooting Star", "Reversal down", "Long upper wick — buyers pushed up, sellers reclaimed"],
+              ["Morning Star", "Reversal up", "Three candles: drop, pause, strong recovery"],
+            ],
+          },
+          {
+            type: "callout",
+            kind: "example",
+            text: "A hammer forming right at a stock's prior support level, on rising volume, is a classic 'buyers are stepping in' signal.",
+          },
+        ],
+      },
+      {
+        id: "why-it-matters",
+        heading: "Confirm Before You Act",
+        blocks: [
+          {
+            type: "p",
+            text: "A pattern is a hint, not a trigger. The strongest signals are confirmed by volume and by the next candle continuing in the expected direction. On a thin PSX small-cap, a single candle can be noise.",
+          },
+          {
+            type: "callout",
+            kind: "warning",
+            text: "Never trade a pattern in isolation. Wait for confirmation and always pair it with a stop-loss to cap the cost of being wrong.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        q: "What does a bullish engulfing pattern look like?",
+        options: [
+          "A small green candle inside a large red one",
+          "A large green candle that fully covers the prior red candle's body",
+          "Two red candles in a row",
+          "A single candle with no wicks",
+        ],
+        correct: 1,
+        explanation:
+          "Bullish engulfing is a large green candle whose body swallows the previous red candle — a reversal-up signal.",
+      },
+      {
+        q: "A candle with a long lower wick and small body near support is a…",
+        options: ["Shooting Star", "Hammer", "Bearish Engulfing", "Doji of no meaning"],
+        correct: 1,
+        explanation:
+          "A long lower wick means sellers pushed price down but buyers reclaimed it — a hammer, especially strong at support.",
+      },
+      {
+        q: "What makes a candle pattern more trustworthy?",
+        options: [
+          "Appearing in the middle of a range with low volume",
+          "Confirmation from volume and the following candle, at a key level",
+          "Being on a very thin small-cap",
+          "Ignoring all other signals",
+        ],
+        correct: 1,
+        explanation:
+          "Patterns are strongest when they form at key levels and are confirmed by volume and follow-through.",
+      },
+    ],
   },
 
   budget: {
@@ -685,8 +768,94 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
       "What counts as a 'want'?",
       "Adapting 50/30/20 for Pakistan?",
     ],
-    sections: placeholderSections("the 50/30/20 budget rule", "#f59e0b"),
-    quiz: genericQuiz("the 50/30/20 budget rule"),
+    sections: [
+      {
+        id: "introduction",
+        heading: "The Rule in One Line",
+        blocks: [
+          {
+            type: "p",
+            text: "The 50/30/20 rule splits your take-home salary into three buckets: 50% for needs, 30% for wants, and 20% for savings and debt repayment. It's popular because it's simple enough to actually stick to.",
+          },
+          {
+            type: "formula",
+            lines: [
+              "Salary 100,000 → Needs 50,000 | Wants 30,000 | Save 20,000",
+            ],
+          },
+        ],
+      },
+      {
+        id: "the-core-idea",
+        heading: "Needs vs Wants",
+        blocks: [
+          {
+            type: "p",
+            text: "The hard part is honest categorisation. A need is something you can't reasonably skip — rent, utilities, groceries, transport to work. A want is everything that makes life nicer but isn't essential.",
+          },
+          {
+            type: "table",
+            head: ["Bucket", "Share", "Examples"],
+            rows: [
+              ["Needs", "50%", "Rent, electricity, groceries, fuel, school fees"],
+              ["Wants", "30%", "Dining out, subscriptions, new phone, travel"],
+              ["Save / repay", "20%", "Emergency fund, investments, extra loan payments"],
+            ],
+          },
+          {
+            type: "callout",
+            kind: "example",
+            text: "A monthly Netflix plan is a want. The internet connection you need for work sits in needs — same bill category, different purpose.",
+          },
+        ],
+      },
+      {
+        id: "why-it-matters",
+        heading: "Adapting It for Pakistan",
+        blocks: [
+          {
+            type: "p",
+            text: "With high inflation, many Pakistani households find needs eat well above 50%. Treat the ratios as a target to move toward, not a pass/fail test — even shifting 5% from wants to savings compounds meaningfully over years.",
+          },
+          {
+            type: "callout",
+            kind: "tip",
+            text: "Automate the 20%: move it to savings or investments the day your salary lands, before you start spending.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        q: "Under 50/30/20, how much of a PKR 80,000 salary goes to savings and debt repayment?",
+        options: ["8,000", "16,000", "24,000", "40,000"],
+        correct: 1,
+        explanation: "20% of 80,000 = 16,000 for savings and debt repayment.",
+      },
+      {
+        q: "Which of these belongs in the 'needs' bucket?",
+        options: [
+          "Weekend dining out",
+          "A streaming subscription",
+          "Rent and utilities",
+          "An upgraded smartphone",
+        ],
+        correct: 2,
+        explanation: "Rent and utilities are essential and can't reasonably be skipped — they're needs.",
+      },
+      {
+        q: "What's the smartest way to apply the rule with high inflation?",
+        options: [
+          "Abandon budgeting entirely",
+          "Treat the ratios as a target and improve gradually",
+          "Spend the savings bucket first",
+          "Put 100% into wants",
+        ],
+        correct: 1,
+        explanation:
+          "When needs exceed 50%, use the ratios as a direction to move toward rather than a strict pass/fail.",
+      },
+    ],
   },
 
   psx: {
@@ -700,8 +869,100 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
     level: "Beginner",
     type: "video",
     presets: ["What is the KSE-100?", "How do I open a CDC account?", "What are trading hours?"],
-    sections: placeholderSections("how the Pakistan Stock Exchange works", "#00d4aa"),
-    quiz: genericQuiz("how PSX works"),
+    sections: [
+      {
+        id: "introduction",
+        heading: "What the PSX Actually Is",
+        blocks: [
+          {
+            type: "p",
+            text: "The Pakistan Stock Exchange is the marketplace where shares of listed Pakistani companies are bought and sold. When you buy a share of a company like a PSX-listed bank or fertiliser maker, you own a small slice of that business and its future profits.",
+          },
+          {
+            type: "callout",
+            kind: "note",
+            text: "The KSE-100 is the benchmark index — it tracks 100 of the largest companies by market capitalisation and is the number you'll see quoted as 'the market'.",
+          },
+        ],
+      },
+      {
+        id: "the-core-idea",
+        heading: "How a Trade Happens",
+        blocks: [
+          {
+            type: "p",
+            text: "You can't trade directly on the exchange. You open an account with a licensed broker, who routes your order to the PSX. Your shares are held in a central electronic depository (the CDC) under your name — not physically with the broker.",
+          },
+          {
+            type: "table",
+            head: ["Step", "Who", "What happens"],
+            rows: [
+              ["1. Open account", "You + broker", "CDC sub-account is created in your name"],
+              ["2. Place order", "You", "Buy/sell at market or a limit price"],
+              ["3. Match & settle", "PSX + NCCPL", "Trade clears, settles on a T+2 basis"],
+            ],
+          },
+          {
+            type: "callout",
+            kind: "example",
+            text: "Place a limit buy for a bank stock at PKR 120. If a seller is willing at 120 or lower, the order fills; otherwise it waits in the order book.",
+          },
+        ],
+      },
+      {
+        id: "why-it-matters",
+        heading: "Hours, Circuit Breakers & Risk",
+        blocks: [
+          {
+            type: "p",
+            text: "PSX trades on weekdays during set hours, and individual stocks have daily price limits (circuit breakers) that cap how far they can move in one session — a mechanism designed to slow panic in a retail-heavy market.",
+          },
+          {
+            type: "callout",
+            kind: "warning",
+            text: "Retail sentiment moves PSX fast. A stock hitting its upper or lower circuit can trap you in or out of a position — size your trades accordingly.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        q: "What does the KSE-100 measure?",
+        options: [
+          "The 100 cheapest stocks on PSX",
+          "100 of the largest PSX companies by market capitalisation",
+          "All companies listed in Pakistan",
+          "Only banking sector stocks",
+        ],
+        correct: 1,
+        explanation:
+          "The KSE-100 is the benchmark index of 100 large companies, widely quoted as 'the market'.",
+      },
+      {
+        q: "Where are your PSX shares held after you buy them?",
+        options: [
+          "Physically with your broker",
+          "In an electronic CDC sub-account in your name",
+          "At the company's head office",
+          "In your bank account",
+        ],
+        correct: 1,
+        explanation:
+          "Shares sit in the Central Depository Company electronically, registered to you — not held by the broker.",
+      },
+      {
+        q: "What is the purpose of a circuit breaker on a PSX stock?",
+        options: [
+          "To guarantee profits",
+          "To cap how far a stock's price can move in a single session",
+          "To set the dividend",
+          "To open new trading accounts",
+        ],
+        correct: 1,
+        explanation:
+          "Circuit breakers limit a stock's daily price move to slow panic-driven swings.",
+      },
+    ],
   },
 
   halal: {
@@ -719,8 +980,94 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
       "What is the KMI-30 index?",
       "Is interest income allowed?",
     ],
-    sections: placeholderSections("halal investing and Islamic finance", "#22c55e"),
-    quiz: genericQuiz("halal investing"),
+    sections: [
+      {
+        id: "introduction",
+        heading: "What Makes Investing Halal",
+        blocks: [
+          {
+            type: "p",
+            text: "Halal investing applies Islamic principles to the stock market. The core rules: avoid riba (interest), avoid excessive gharar (uncertainty/speculation), and avoid owning businesses whose core activity is haram — such as conventional banking, alcohol, gambling, or pork.",
+          },
+          {
+            type: "callout",
+            kind: "note",
+            text: "On PSX, the KMI-30 and KMI All-Share indices track companies screened as Sharia-compliant, so you don't have to vet every stock from scratch.",
+          },
+        ],
+      },
+      {
+        id: "the-core-idea",
+        heading: "The Screening Tests",
+        blocks: [
+          {
+            type: "p",
+            text: "A stock is screened on two levels. First, its business must be permissible. Second, its finances must pass quantitative thresholds — a company can run a halal business but still fail if it carries too much interest-based debt.",
+          },
+          {
+            type: "table",
+            head: ["Screen", "Common threshold", "Why it exists"],
+            rows: [
+              ["Interest-bearing debt ÷ assets", "< 37%", "Limits reliance on riba-based borrowing"],
+              ["Interest income ÷ revenue", "< 5%", "Keeps haram income immaterial"],
+              ["Non-compliant investments", "Below set limit", "Avoids indirect haram exposure"],
+            ],
+          },
+          {
+            type: "callout",
+            kind: "example",
+            text: "A profitable cement maker may still fail the screen if most of its balance sheet is funded by conventional interest-bearing loans.",
+          },
+        ],
+      },
+      {
+        id: "purification",
+        heading: "Income Purification",
+        blocks: [
+          {
+            type: "p",
+            text: "Even compliant companies may earn a tiny share of income from interest. Scholars require investors to 'purify' this by donating the equivalent proportion of their dividends to charity, keeping the remaining return halal.",
+          },
+          {
+            type: "callout",
+            kind: "warning",
+            text: "Screening status can change as a company's debt levels shift. Re-check compliance periodically rather than assuming it's permanent.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        q: "Which index on PSX tracks Sharia-compliant companies?",
+        options: ["KSE-100", "KMI-30", "KSE-30", "BR Index"],
+        correct: 1,
+        explanation: "The KMI-30 (and KMI All-Share) track Sharia-screened PSX companies.",
+      },
+      {
+        q: "A company runs a permissible business but funds itself mostly with interest-bearing loans. Is it halal to invest in?",
+        options: [
+          "Yes — the business activity is all that matters",
+          "Not necessarily — it can fail the financial debt screen",
+          "Yes — debt is never part of screening",
+          "Only if it pays a dividend",
+        ],
+        correct: 1,
+        explanation:
+          "Both the business and its finances are screened. Excessive interest-based debt can disqualify a permissible business.",
+      },
+      {
+        q: "What is 'purification' in halal investing?",
+        options: [
+          "Selling all stocks once a year",
+          "Donating the share of returns linked to impermissible income",
+          "Only buying KMI-30 stocks",
+          "Avoiding dividends entirely",
+        ],
+        correct: 1,
+        explanation:
+          "Purification means giving away the proportion of income tied to non-compliant sources, such as small interest earnings.",
+      },
+    ],
   },
 
   "pe-ratio": {
@@ -734,8 +1081,98 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
     level: "Intermediate",
     type: "article",
     presets: ["What is a 'good' P/E?", "Forward vs trailing P/E?", "P/E for PSX banks?"],
-    sections: placeholderSections("the price-to-earnings ratio", "#3b82f6"),
-    quiz: genericQuiz("the P/E ratio"),
+    sections: [
+      {
+        id: "introduction",
+        heading: "What the P/E Ratio Tells You",
+        blocks: [
+          {
+            type: "p",
+            text: "The price-to-earnings (P/E) ratio answers one question: how many rupees are you paying for every one rupee of a company's annual profit? A P/E of 8 means the market values the stock at 8 times its yearly earnings per share.",
+          },
+          {
+            type: "formula",
+            lines: ["P/E = Share Price ÷ Earnings Per Share (EPS)", "Example: 240 ÷ 30 = 8.0x"],
+          },
+          {
+            type: "callout",
+            kind: "note",
+            text: "EPS on PSX is usually reported annually in company financials. Most terminals show trailing EPS (last 12 months) by default.",
+          },
+        ],
+      },
+      {
+        id: "cheap-vs-expensive",
+        heading: "Cheap Isn't Always Good",
+        blocks: [
+          {
+            type: "p",
+            text: "A low P/E can mean a bargain — or a company the market expects to shrink. A high P/E can mean an overpriced stock — or one investors expect to grow fast. The number only has meaning when you compare a company to its own sector.",
+          },
+          {
+            type: "table",
+            head: ["Stock type", "Typical PSX P/E", "What it usually signals"],
+            rows: [
+              ["Mature bank", "4–7x", "Steady earnings, low growth expectations"],
+              ["Cement / cyclical", "6–10x", "Earnings swing with the economic cycle"],
+              ["Fast-growing tech/FMCG", "15x+", "Market is pricing in future growth"],
+            ],
+          },
+          {
+            type: "callout",
+            kind: "example",
+            text: "If a PSX bank trades at 4x while its peers average 7x, ask why. Sometimes it's an opportunity; sometimes the market sees a risk you haven't yet.",
+          },
+        ],
+      },
+      {
+        id: "limits",
+        heading: "Where P/E Breaks Down",
+        blocks: [
+          {
+            type: "p",
+            text: "P/E is useless when a company has no profit (negative EPS), and it can be distorted by one-off gains like asset sales. Always check whether the earnings are recurring before trusting the ratio.",
+          },
+          {
+            type: "callout",
+            kind: "warning",
+            text: "A single-year P/E can be misleading for cyclical PSX sectors. Look at earnings across a full cycle, not just the latest result.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        q: "A stock trades at PKR 150 with an EPS of PKR 25. What is its P/E?",
+        options: ["3.75x", "6.0x", "25x", "150x"],
+        correct: 1,
+        explanation: "P/E = price ÷ EPS = 150 ÷ 25 = 6.0x.",
+      },
+      {
+        q: "A PSX bank has a P/E of 4 while the sector averages 7. What is the smartest read?",
+        options: [
+          "It is automatically a bargain — buy immediately",
+          "Investigate why it's cheaper before concluding anything",
+          "It is overpriced and should be avoided",
+          "P/E never applies to banks",
+        ],
+        correct: 1,
+        explanation:
+          "A below-peer P/E is a prompt to investigate, not an automatic buy. The discount may reflect real risk.",
+      },
+      {
+        q: "When is the P/E ratio least reliable?",
+        options: [
+          "When the company has steady recurring profits",
+          "When earnings are negative or boosted by one-off gains",
+          "When comparing a company to its own sector",
+          "When the stock pays a dividend",
+        ],
+        correct: 1,
+        explanation:
+          "With no profit or distorted one-off earnings, P/E gives a misleading picture of value.",
+      },
+    ],
   },
 };
 

@@ -44,10 +44,13 @@ export const Route = createFileRoute("/learn/lesson/$id")({
   component: LessonPage,
 });
 
+// Single brand accent for the lesson surface — teal primary, no per-lesson hue drift.
+const ACCENT = "#00d4aa";
+
 const CALLOUT_META: Record<string, { label: string; color: string; emoji: string }> = {
   tip: { label: "Pro Tip", color: "#00d4aa", emoji: "💡" },
   warning: { label: "Important", color: "#f59e0b", emoji: "⚠️" },
-  example: { label: "Real Example", color: "#6366f1", emoji: "📊" },
+  example: { label: "Real Example", color: "#22c55e", emoji: "📊" },
   note: { label: "Note", color: "#94a3b8", emoji: "📌" },
 };
 
@@ -240,7 +243,7 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
         )}
 
         {/* Main content */}
-        <main className="min-w-0 flex-1">
+        <main className="min-w-0 flex-1 xl:max-w-[760px]">
           {mode === "reading" && (
             <ReadingView
               lesson={lesson}
@@ -346,7 +349,7 @@ function Blocks({ blocks, accent }: { blocks: ContentBlock[]; accent: string }) 
       {blocks.map((b, i) => {
         if (b.type === "p") {
           return (
-            <p key={i} className="my-4 max-w-[680px] text-[16px] leading-[1.8] text-[#cbd5e1]">
+            <p key={i} className="my-4 text-[16px] leading-[1.8] text-[#cbd5e1]">
               {b.text}
             </p>
           );
@@ -356,7 +359,7 @@ function Blocks({ blocks, accent }: { blocks: ContentBlock[]; accent: string }) 
           return (
             <div
               key={i}
-              className="my-6 max-w-[680px] rounded-r-[8px] p-4"
+              className="my-6 rounded-r-[8px] p-4"
               style={{ background: `${m.color}10`, borderLeft: `3px solid ${m.color}` }}
             >
               <div
@@ -373,14 +376,14 @@ function Blocks({ blocks, accent }: { blocks: ContentBlock[]; accent: string }) 
           return (
             <div
               key={i}
-              className="my-6 max-w-[680px] rounded-[8px] border border-border bg-[#0d1421] p-5 font-mono text-sm"
+              className="my-6 rounded-[8px] border border-border bg-[#0d1421] p-5 font-mono text-sm"
             >
               {b.lines.map((line, j) => (
                 <div key={j} className="text-bull">
                   {line.split("=").map((part, k, all) => (
                     <span key={k}>
                       <span className="text-text-primary">{part}</span>
-                      {k < all.length - 1 && <span className="text-warning"> = </span>}
+                      {k < all.length - 1 && <span className="text-text-muted"> = </span>}
                     </span>
                   ))}
                 </div>
@@ -392,7 +395,7 @@ function Blocks({ blocks, accent }: { blocks: ContentBlock[]; accent: string }) 
         return (
           <div
             key={i}
-            className="my-6 max-w-[680px] overflow-x-auto rounded-[8px] border border-border"
+            className="my-6 overflow-x-auto rounded-[8px] border border-border"
           >
             <table className="w-full border-collapse text-sm">
               <thead>
@@ -459,11 +462,11 @@ function ReadingView({
       {/* Hero banner */}
       <div
         className="rounded-[12px] bg-gradient-to-br from-surface to-[#0d1421] p-8"
-        style={{ borderLeft: `4px solid ${lesson.accent}` }}
+        style={{ borderLeft: `4px solid ${ACCENT}` }}
       >
         <div
           className="flex h-12 w-12 items-center justify-center rounded-[10px] border border-white/[0.06] bg-elevated"
-          style={{ color: lesson.accent }}
+          style={{ color: ACCENT }}
         >
           <EmojiIcon emoji={lesson.emoji} size={24} />
         </div>
@@ -472,7 +475,7 @@ function ReadingView({
         <div className="mt-3 flex items-center gap-2 text-xs">
           <span
             className="rounded-[4px] px-2 py-0.5 font-semibold"
-            style={{ background: `${lesson.accent}1a`, color: lesson.accent }}
+            style={{ background: `${ACCENT}1a`, color: ACCENT }}
           >
             {lesson.level}
           </span>
@@ -522,7 +525,7 @@ function ReadingView({
               <h2 className="mt-10 border-b border-border pb-2 text-[22px] font-bold text-text-primary">
                 {s.heading}
               </h2>
-              <Blocks blocks={s.blocks} accent={lesson.accent} />
+              <Blocks blocks={s.blocks} accent={ACCENT} />
             </section>
           ))}
         </article>
