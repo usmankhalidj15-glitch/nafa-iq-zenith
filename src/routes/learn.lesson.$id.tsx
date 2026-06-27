@@ -9,11 +9,21 @@ import {
   Bot,
   Brain,
   Check,
+  CheckCircle2,
   ChevronDown,
+  FileText,
+  Inbox,
+  MessageCircle,
   Send,
   Sparkles,
+  Star,
+  Target,
+  Video,
+  BookOpen,
+  Cpu,
   X,
 } from "lucide-react";
+import { EmojiIcon } from "@/components/icons";
 import {
   LESSON_CONTENT,
   lessonOrder,
