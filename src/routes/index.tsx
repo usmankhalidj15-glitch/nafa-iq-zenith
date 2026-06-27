@@ -1088,40 +1088,49 @@ function Landing() {
           viewport={{ once: true, amount: 0.2 }}
           className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {FEATURES.map((f) => (
-            <motion.div key={f.title} variants={perspectiveCard} className="[perspective:1000px]">
-              <Tilt3D max={10} className="h-full">
-                <div
-                  className={cn(
-                    "group relative h-full rounded-[16px] border border-white/[0.07] p-7 backdrop-blur-md transition-colors duration-300 hover:border-bull/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.1),0_0_0_1px_rgba(0,212,170,0.12)]",
-                    "badge" in f && f.badge && "spin-border",
-                  )}
-                  style={{ background: "rgba(17,24,39,0.6)" }}
-                >
-                  {"badge" in f && f.badge && (
-                    <span
-                      className="absolute right-4 top-4 rounded-full text-[10px] font-semibold text-warning"
-                      style={{
-                        background: "rgba(245,158,11,0.15)",
-                        border: "1px solid rgba(245,158,11,0.3)",
-                        padding: "2px 8px",
-                      }}
-                    >
-                      {f.badge}
-                    </span>
-                  )}
-                  <div
-                    className="flex h-12 w-12 items-center justify-center rounded-[12px] text-text-primary"
-                    style={{ background: f.chipBg, transform: "translateZ(40px)" }}
+          {FEATURES.map((f) => {
+            const Icon = f.Icon;
+            return (
+              <motion.div key={f.title} variants={perspectiveCard} className="[perspective:1000px]">
+                <Tilt3D max={10} className="h-full">
+                  <motion.div
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className={cn(
+                      "group relative h-full rounded-[16px] border border-white/[0.07] p-7 backdrop-blur-md transition-shadow duration-300 hover:border-bull/30 hover:shadow-[0_18px_50px_rgba(0,212,170,0.14),0_0_0_1px_rgba(0,212,170,0.14)]",
+                      f.badge && "spin-border",
+                    )}
+                    style={{ background: "rgba(17,24,39,0.6)" }}
                   >
-                    <EmojiIcon emoji={f.emoji} size={22} />
-                  </div>
-                  <h3 className="mt-4 text-base font-semibold text-text-primary">{f.title}</h3>
-                  <p className="mt-2 text-sm leading-[1.6] text-text-secondary">{f.desc}</p>
-                </div>
-              </Tilt3D>
-            </motion.div>
-          ))}
+                    {f.badge && (
+                      <span
+                        className="badge-shimmer absolute right-4 top-4 overflow-hidden rounded-full text-[10px] font-semibold text-warning"
+                        style={{
+                          background: "rgba(245,158,11,0.15)",
+                          border: "1px solid rgba(245,158,11,0.3)",
+                          padding: "2px 8px",
+                        }}
+                      >
+                        {f.badge}
+                      </span>
+                    )}
+                    <div
+                      className={cn(
+                        "flex h-12 w-12 items-center justify-center rounded-[12px]",
+                        f.iconColor,
+                      )}
+                      style={{ background: f.chipBg, transform: "translateZ(40px)" }}
+                    >
+                      <Icon size={22} strokeWidth={1.75} />
+                    </div>
+                    <h3 className="mt-4 text-base font-semibold text-text-primary">{f.title}</h3>
+                    <p className="mt-2 text-sm leading-[1.6] text-text-secondary">{f.desc}</p>
+                  </motion.div>
+                </Tilt3D>
+              </motion.div>
+            );
+          })}
+
         </motion.div>
       </section>
 
