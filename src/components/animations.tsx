@@ -123,15 +123,18 @@ export function useReveal(amount = 0.2) {
     const raf = requestAnimationFrame(() => {
       io = new IntersectionObserver(
         ([entry]) => {
+          // Reveal as soon as any part scrolls in; threshold 0 keeps tall
+          // sections (whose 20% may exceed the viewport) from never firing.
           if (entry.isIntersecting) {
             setInView(true);
             io?.disconnect();
           }
         },
-        { threshold: amount, rootMargin: "0px 0px -8% 0px" },
+        { threshold: 0, rootMargin: "0px 0px -12% 0px" },
       );
       io.observe(el);
     });
+
     return () => {
       cancelAnimationFrame(raf);
       io?.disconnect();
