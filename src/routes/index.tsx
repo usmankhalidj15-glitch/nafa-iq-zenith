@@ -1060,11 +1060,15 @@ function FlipCard() {
           filter: "blur(40px)",
         }}
       />
-      <motion.div
-        animate={{ rotateY: flipped && !reduce ? 180 : 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="relative h-full w-full"
-        style={{ transformStyle: "preserve-3d" }}
+      <div
+        className={cn(
+          "relative h-full w-full",
+          !reduce && "transition-transform duration-[600ms] ease-in-out"
+        )}
+        style={{
+          transformStyle: "preserve-3d",
+          transform: flipped && !reduce ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}
       >
         {/* FRONT — PSX return */}
         <div
@@ -1119,7 +1123,7 @@ function FlipCard() {
           </div>
           <div className="mt-4 text-[11px] text-text-muted">Tap to flip back</div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
