@@ -462,11 +462,11 @@ function ReadingView({
       {/* Hero banner */}
       <div
         className="rounded-[12px] bg-gradient-to-br from-surface to-[#0d1421] p-8"
-        style={{ borderLeft: `4px solid ${lesson.accent}` }}
+        style={{ borderLeft: `4px solid ${ACCENT}` }}
       >
         <div
           className="flex h-12 w-12 items-center justify-center rounded-[10px] border border-white/[0.06] bg-elevated"
-          style={{ color: lesson.accent }}
+          style={{ color: ACCENT }}
         >
           <EmojiIcon emoji={lesson.emoji} size={24} />
         </div>
@@ -475,7 +475,7 @@ function ReadingView({
         <div className="mt-3 flex items-center gap-2 text-xs">
           <span
             className="rounded-[4px] px-2 py-0.5 font-semibold"
-            style={{ background: `${lesson.accent}1a`, color: lesson.accent }}
+            style={{ background: `${ACCENT}1a`, color: ACCENT }}
           >
             {lesson.level}
           </span>
