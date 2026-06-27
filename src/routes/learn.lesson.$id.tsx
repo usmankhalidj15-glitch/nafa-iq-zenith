@@ -181,11 +181,11 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
         </button>
       </div>
 
-      <div className="flex gap-6 px-3 py-5 lg:px-6">
+      <div className="mx-auto flex max-w-[1600px] gap-6 px-3 py-5 lg:px-6">
         {/* Left TOC */}
         {mode === "reading" && (
-          <aside className="hidden w-[220px] shrink-0 lg:block">
-            <div className="sticky top-[110px]">
+          <aside className="hidden w-[240px] shrink-0 lg:block">
+            <div className="sticky top-[110px] rounded-[12px] border border-border bg-surface p-4">
               <div className="text-xs font-semibold uppercase tracking-wide text-text-muted">
                 In This Lesson
               </div>
@@ -285,12 +285,21 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
             />
           )}
         </main>
+
+        {/* Right docked AI Tutor panel — desktop xl+ */}
+        {mode === "reading" && (
+          <aside className="hidden w-[360px] shrink-0 xl:block">
+            <div className="sticky top-[110px] h-[calc(100vh-130px)]">
+              <ChatPanel lesson={lesson} activeSection={activeSection} />
+            </div>
+          </aside>
+        )}
       </div>
 
       {/* Floating AI button */}
       <button
         onClick={() => setChatOpen(true)}
-        className="fixed right-4 bottom-20 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-bull text-bull-foreground shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:brightness-110 lg:bottom-8"
+        className="fixed right-4 bottom-20 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-bull text-bull-foreground shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:brightness-110 lg:bottom-8 xl:hidden"
         aria-label="Ask AI Tutor"
       >
         <Bot className="h-6 w-6" />
