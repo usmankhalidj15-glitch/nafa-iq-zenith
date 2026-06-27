@@ -117,15 +117,15 @@ function StoreButtons({ center = false }: { center?: boolean }) {
     <div className={cn("flex flex-col gap-5", center && "items-center")}>
       {/* PRIMARY — single dominant action */}
       <Magnetic strength={0.45}>
-        <motion.div whileTap={{ scale: 0.96 }} whileHover={{ scale: 1.03 }} transition={SPRING}>
+        <motion.div whileTap={{ scale: 0.96 }} whileHover={{ scale: 1.03 }} transition={SPRING} className={cn("inline-flex", center && "justify-center")}>
           <Link
             to="/app"
-            className="flex items-center gap-3 rounded-[14px] bg-gradient-to-br from-[#00d4aa] to-[#00a88a] px-7 py-4 text-left text-bull-foreground shadow-[0_8px_30px_rgba(0,212,170,0.3)] transition hover:shadow-[0_12px_50px_rgba(0,212,170,0.55)]"
+            className="inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-br from-[#00d4aa] to-[#00a88a] px-5 py-3 text-left text-bull-foreground shadow-[0_8px_30px_rgba(0,212,170,0.3)] transition hover:shadow-[0_12px_50px_rgba(0,212,170,0.55)]"
           >
-            <Download className="h-7 w-7 shrink-0" />
+            <Download className="h-5 w-5 shrink-0" />
             <span className="flex flex-col leading-tight">
-              <span className="text-[10px] uppercase tracking-wide text-white/80">Install as</span>
-              <span className="text-lg font-semibold">Web App — Free</span>
+              <span className="text-[9px] uppercase tracking-wide text-white/80">Install as</span>
+              <span className="text-sm font-semibold">Web App — Free</span>
             </span>
           </Link>
         </motion.div>
