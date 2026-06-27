@@ -299,23 +299,31 @@ function Header({ onMenu }: { onMenu: () => void }) {
       <div className="lg:hidden">
         <Logo />
       </div>
+
+      {/* search anchored left at a fixed max-width */}
       <StockSearch />
-      <div className="flex-1 lg:hidden" />
-      <Link
-        to="/plans"
-        className="hidden shrink-0 items-center gap-1.5 rounded-[8px] bg-gold px-3 py-1.5 text-[12px] font-semibold text-background transition hover:brightness-110 sm:inline-flex"
-      >
-        <Sparkles className="h-3.5 w-3.5" /> Upgrade to Pro
-      </Link>
-      <Link
-        to="/plans"
-        aria-label="Upgrade to Pro"
-        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-gold text-background sm:hidden"
-      >
-        <Sparkles className="h-4 w-4" />
-      </Link>
-      <NotificationBell />
-      <UserMenu />
+
+      {/* spacer pushes the utility cluster flush to the right edge */}
+      <div className="flex-1" />
+
+      {/* utility cluster — evenly spaced, right-aligned */}
+      <div className="flex shrink-0 items-center gap-3 sm:gap-4">
+        <Link
+          to="/plans"
+          className="hidden shrink-0 items-center gap-1.5 rounded-[8px] border border-bull/40 bg-bull/10 px-3 py-1.5 text-[12px] font-semibold text-bull transition hover:border-bull/60 hover:bg-bull/15 sm:inline-flex"
+        >
+          <Sparkles className="h-3.5 w-3.5" /> Upgrade to Pro
+        </Link>
+        <Link
+          to="/plans"
+          aria-label="Upgrade to Pro"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] border border-bull/40 bg-bull/10 text-bull sm:hidden"
+        >
+          <Sparkles className="h-4 w-4" />
+        </Link>
+        <NotificationBell />
+        <UserMenu />
+      </div>
     </header>
   );
 }
