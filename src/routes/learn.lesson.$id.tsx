@@ -9,11 +9,21 @@ import {
   Bot,
   Brain,
   Check,
+  CheckCircle2,
   ChevronDown,
+  FileText,
+  Inbox,
+  MessageCircle,
   Send,
   Sparkles,
+  Star,
+  Target,
+  Video,
+  BookOpen,
+  Cpu,
   X,
 } from "lucide-react";
+import { EmojiIcon } from "@/components/icons";
 import {
   LESSON_CONTENT,
   lessonOrder,
@@ -56,7 +66,7 @@ function LessonPage() {
   if (!lesson) {
     return (
       <div className="mx-auto max-w-md py-20 text-center">
-        <div className="text-3xl">📭</div>
+        <Inbox className="mx-auto h-8 w-8 text-text-muted" strokeWidth={1.5} />
         <h1 className="mt-3 text-lg font-semibold text-text-primary">Lesson not found</h1>
         <Link to="/learn" className="mt-4 inline-block rounded-[8px] bg-bull px-4 py-2 text-sm font-semibold text-bull-foreground">Back to Learn Hub</Link>
       </div>
@@ -140,7 +150,7 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
           onClick={() => setChatOpen(true)}
           className="hidden shrink-0 items-center gap-1.5 rounded-[6px] bg-bull/10 px-2.5 py-1 text-xs font-semibold text-bull hover:bg-bull/20 lg:inline-flex xl:hidden"
         >
-          💬 Ask AI
+          <MessageCircle className="h-3.5 w-3.5" strokeWidth={1.5} /> Ask AI
         </button>
         <button onClick={() => toggleBookmark(lesson.id)} aria-label="Bookmark" className="shrink-0 text-text-secondary hover:text-bull">
           {bookmarked ? <BookmarkCheck className="h-5 w-5 text-bull" /> : <Bookmark className="h-5 w-5" />}
@@ -167,10 +177,10 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
                   </button>
                 ))}
               </nav>
-              <div className="mt-5 space-y-1 border-t border-border pt-4 text-xs text-text-secondary">
-                <div>⏱ {lesson.duration} read</div>
-                <div>🎯 {lesson.level}</div>
-                <div>{lesson.type === "video" ? "🎬 Video + Article" : "📖 Article"}</div>
+              <div className="mt-5 space-y-1.5 border-t border-border pt-4 text-xs text-text-secondary">
+                <div className="flex items-center gap-1.5"><Sparkles className="h-3.5 w-3.5" strokeWidth={1.5} /> {lesson.duration} read</div>
+                <div className="flex items-center gap-1.5"><Target className="h-3.5 w-3.5" strokeWidth={1.5} /> {lesson.level}</div>
+                <div className="flex items-center gap-1.5">{lesson.type === "video" ? <><Video className="h-3.5 w-3.5" strokeWidth={1.5} /> Video + Article</> : <><BookOpen className="h-3.5 w-3.5" strokeWidth={1.5} /> Article</>}</div>
               </div>
               <button
                 onClick={() => toggleBookmark(lesson.id)}
@@ -254,7 +264,7 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
           <div className="relative h-[80vh] rounded-t-[16px] border-t border-border bg-sidebar" onClick={(e) => e.stopPropagation()}>
             <div className="mx-auto mt-2 h-1 w-10 rounded-full bg-border" />
             <div className="flex items-center justify-between border-b border-border px-4 py-3">
-              <span className="text-sm font-semibold text-text-primary">🤖 Ask AI Tutor</span>
+              <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary"><Cpu className="h-4 w-4 text-ai" strokeWidth={1.5} /> Ask AI Tutor</span>
               <button onClick={() => setChatOpen(false)}><X className="h-5 w-5 text-text-secondary" /></button>
             </div>
             <div className="h-[calc(80vh-56px)]">
@@ -287,7 +297,7 @@ function Blocks({ blocks, accent }: { blocks: ContentBlock[]; accent: string }) 
               className="my-6 max-w-[680px] rounded-r-[8px] p-4"
               style={{ background: `${m.color}10`, borderLeft: `3px solid ${m.color}` }}
             >
-              <div className="text-xs font-bold" style={{ color: m.color }}>{m.emoji} {m.label}</div>
+              <div className="flex items-center gap-1.5 text-xs font-bold" style={{ color: m.color }}><EmojiIcon emoji={m.emoji} size={13} /> {m.label}</div>
               <p className="mt-1.5 text-sm leading-relaxed text-[#cbd5e1]">{b.text}</p>
             </div>
           );
@@ -362,7 +372,7 @@ function ReadingView({
     <div className="learn-fade-in">
       {/* Hero banner */}
       <div className="rounded-[12px] bg-gradient-to-br from-surface to-[#0d1421] p-8" style={{ borderLeft: `4px solid ${lesson.accent}` }}>
-        <div className="text-5xl">{lesson.emoji}</div>
+        <div className="flex h-12 w-12 items-center justify-center rounded-[10px] border border-white/[0.06] bg-elevated" style={{ color: lesson.accent }}><EmojiIcon emoji={lesson.emoji} size={24} /></div>
         <h1 className="mt-3 text-3xl font-bold text-text-primary">{lesson.title}</h1>
         <p className="mt-1 text-sm text-text-secondary">{lesson.subtitle}</p>
         <div className="mt-3 flex items-center gap-2 text-xs">
@@ -377,14 +387,14 @@ function ReadingView({
         <div className="mt-6">
           <VideoPlayer url={lesson.videoUrl} />
           <div className="mt-3 flex flex-wrap items-center gap-3">
-            <button onClick={() => setShowArticle(!showArticle)} className="rounded-[8px] border border-border px-3 py-1.5 text-xs font-medium text-text-secondary hover:bg-hover">
-              📄 {showArticle ? "Hide" : "Read"} Article Version
+            <button onClick={() => setShowArticle(!showArticle)} className="inline-flex items-center gap-1.5 rounded-[8px] border border-border px-3 py-1.5 text-xs font-medium text-text-secondary hover:bg-hover">
+              <FileText className="h-3.5 w-3.5" strokeWidth={1.5} /> {showArticle ? "Hide" : "Read"} Article Version
             </button>
-            <button onClick={onMarkWatched} className="rounded-[8px] bg-bull/10 px-3 py-1.5 text-xs font-semibold text-bull hover:bg-bull/20">
-              Mark Video as Watched ✓
+            <button onClick={onMarkWatched} className="inline-flex items-center gap-1.5 rounded-[8px] bg-bull/10 px-3 py-1.5 text-xs font-semibold text-bull hover:bg-bull/20">
+              Mark Video as Watched <Check className="h-3.5 w-3.5" strokeWidth={1.5} />
             </button>
           </div>
-          <p className="mt-2 text-xs text-text-muted">✅ Watch at least 80% of the video to mark as complete</p>
+          <p className="mt-2 flex items-center gap-1.5 text-xs text-text-muted"><CheckCircle2 className="h-3.5 w-3.5 text-bull" strokeWidth={1.5} /> Watch at least 80% of the video to mark as complete</p>
         </div>
       )}
 
@@ -409,20 +419,20 @@ function ReadingView({
           <Brain className="h-5 w-5" /> Test Your Understanding — Take the Quiz
         </button>
         <p className="mt-2 text-xs text-text-muted">{lesson.quiz.length} questions · Earn up to 50 XP</p>
-        {completed && <p className="mt-2 text-xs font-semibold text-bull">✓ You've completed this lesson</p>}
+        {completed && <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-bull"><Check className="h-3.5 w-3.5" strokeWidth={1.5} /> You've completed this lesson</p>}
       </div>
 
       {/* Prev / Next */}
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         {prev ? (
           <Link to="/learn/lesson/$id" params={{ id: prev.id }} className="rounded-[8px] border border-border p-3 text-left hover:border-border-hover">
-            <div className="text-[10px] text-text-muted">← Previous</div>
+            <div className="flex items-center gap-1 text-[10px] text-text-muted"><ArrowLeft className="h-3 w-3" strokeWidth={1.5} /> Previous</div>
             <div className="text-sm font-medium text-text-primary">{prev.title}</div>
           </Link>
         ) : <div />}
         {next ? (
           <Link to="/learn/lesson/$id" params={{ id: next.id }} className="rounded-[8px] border border-border p-3 text-right hover:border-border-hover">
-            <div className="text-[10px] text-text-muted">Next →</div>
+            <div className="flex items-center justify-end gap-1 text-[10px] text-text-muted">Next <ArrowRight className="h-3 w-3" strokeWidth={1.5} /></div>
             <div className="text-sm font-medium text-text-primary">{next.title}</div>
           </Link>
         ) : <div />}
@@ -437,7 +447,7 @@ function VideoPlayer({ url }: { url: string }) {
     <div className="relative aspect-video w-full overflow-hidden rounded-[12px] border border-border bg-[#0d1421]">
       {failed ? (
         <div className="flex h-full flex-col items-center justify-center gap-2 text-text-muted">
-          <div className="text-3xl">🎬</div>
+          <Video className="h-8 w-8" strokeWidth={1.5} />
           <div className="text-sm">Video loading…</div>
         </div>
       ) : (
@@ -523,11 +533,11 @@ function QuizView({ lesson, onExit, onFinish }: { lesson: LessonContent; onExit:
         <button onClick={onExit} className="flex items-center gap-1.5 text-xs text-text-secondary hover:text-text-primary">
           <ArrowLeft className="h-4 w-4" /> Back to Lesson
         </button>
-        <span className="rounded-full bg-bull/10 px-3 py-1 text-xs font-semibold text-bull">⭐ Up to 50 XP</span>
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-bull/10 px-3 py-1 text-xs font-semibold text-bull"><Star className="h-3.5 w-3.5" strokeWidth={1.5} /> Up to 50 XP</span>
       </div>
 
       <div className="mt-4 text-xs text-text-muted">{lesson.title}</div>
-      <h2 className="text-xl font-bold text-text-primary">🧠 Knowledge Check</h2>
+      <h2 className="flex items-center gap-2 text-xl font-bold text-text-primary"><Brain className="h-5 w-5" strokeWidth={1.5} /> Knowledge Check</h2>
       <div className="mt-3 flex items-center gap-3">
         <div className="flex gap-1.5">
           {questions.map((_, i) => (
@@ -660,9 +670,9 @@ function ResultsView({
 
   const message =
     correct >= total
-      ? "🏆 Perfect Score! Ustād level understanding!"
+      ? "Perfect Score! Ustād level understanding!"
       : correct === 2
-        ? "⭐ Great work! One more review and you'll nail it."
+        ? "Great work! One more review and you'll nail it."
         : correct === 1
           ? "📖 Keep learning — review the lesson and retry."
           : "💪 Don't give up — re-read and try again!";
@@ -706,8 +716,8 @@ function ResultsView({
             </summary>
             <div className="mt-3 space-y-1.5">
               {sq.options.map((o, j) => (
-                <div key={j} className={cn("rounded-[6px] px-3 py-1.5 text-xs", o.isCorrect ? "bg-bull/10 text-bull" : "text-text-secondary")}>
-                  {o.isCorrect ? "✓ " : "• "}{o.text}
+                <div key={j} className={cn("flex items-center gap-1.5 rounded-[6px] px-3 py-1.5 text-xs", o.isCorrect ? "bg-bull/10 text-bull" : "text-text-secondary")}>
+                  {o.isCorrect ? <Check className="h-3 w-3 shrink-0" strokeWidth={1.5} /> : <span className="shrink-0">•</span>}{o.text}
                 </div>
               ))}
               <p className="mt-2 text-xs leading-relaxed text-text-muted">{sq.q.explanation}</p>

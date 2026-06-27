@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Sparkles, Circle } from "lucide-react";
 import { Card } from "@/components/Card";
 import { Change } from "@/components/Change";
 import { SignalBadge } from "@/components/SignalBadge";
@@ -101,7 +101,7 @@ function StockDetail() {
                   <td className="font-mono tabular-nums text-text-secondary">{r.value}</td>
                   <td className="text-text-secondary">{r.reading}</td>
                   <td className="text-right">
-                    <span className={cn("font-semibold", r.sig === "BUY" ? "text-bull" : "text-text-secondary")}>{r.sig === "BUY" ? "🟢" : "⚪"} {r.sig}</span>
+                    <span className={cn("inline-flex items-center gap-1.5 font-semibold", r.sig === "BUY" ? "text-bull" : "text-text-secondary")}><Circle className={cn("h-2 w-2", r.sig === "BUY" ? "fill-bull text-bull" : "fill-text-muted text-text-muted")} /> {r.sig}</span>
                   </td>
                 </tr>
               ))}

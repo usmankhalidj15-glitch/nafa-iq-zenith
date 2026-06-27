@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, Check, Lock, Layers, X, RotateCcw, ArrowRight } from "lucide-react";
 import { Card } from "@/components/Card";
+import { EmojiIcon } from "@/components/icons";
+import { Video, BookOpen, PartyPopper } from "lucide-react";
 import { LESSONS, GLOSSARY } from "@/lib/finance-data";
 import { LEARNING_PATHS, LESSON_ID_BY_TITLE, LESSON_CONTENT, FLASHCARDS } from "@/lib/learn-data";
 import { useLearn } from "@/hooks/use-learn";
@@ -25,7 +27,7 @@ function StatChip({ emoji, label, color }: { emoji: string; label: string; color
       className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
       style={{ color, borderColor: `${color}40`, background: `${color}14` }}
     >
-      <span>{emoji}</span>
+      <EmojiIcon emoji={emoji} size={14} />
       {label}
     </span>
   );
@@ -102,7 +104,7 @@ function Learn() {
                 className="group min-w-[220px] flex-1 rounded-[12px] border border-border bg-surface p-5 transition-all hover:-translate-y-0.5 hover:border-border-hover hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
                 style={{ borderLeft: `3px solid ${p.accent}` }}
               >
-                <div className="text-2xl">{p.emoji}</div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-[8px] border border-white/[0.06] bg-elevated" style={{ color: p.accent }}><EmojiIcon emoji={p.emoji} size={18} /></div>
                 <div className="mt-2 text-sm font-semibold text-text-primary">{p.title}</div>
                 <div className="mt-0.5 text-xs text-text-secondary">{p.description}</div>
                 <div className="mt-2 font-mono text-[11px] text-text-muted">{p.lessonIds.length} lessons · Est: {p.estMin} min</div>
@@ -138,7 +140,7 @@ function Learn() {
               <Link key={l.title} to="/learn/lesson/$id" params={{ id }}>
                 <Card className="group h-full transition-all hover:-translate-y-[3px] hover:border-bull">
                   <div className="flex items-start gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-elevated text-xl">{l.emoji}</span>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-[8px] border border-white/[0.06] bg-elevated text-text-secondary"><EmojiIcon emoji={l.emoji} size={18} /></span>
                     <div className="flex-1">
                       <div className="text-sm font-medium text-text-primary">{l.title}</div>
                       <div className="mt-1 flex items-center gap-1.5 text-[10px]">
@@ -149,8 +151,8 @@ function Learn() {
                     <CompletionRing status={status} />
                   </div>
                   <div className="mt-3 flex items-center justify-between">
-                    <span className="rounded-[4px] bg-elevated px-2 py-0.5 text-[10px] text-text-secondary">
-                      {isVideo ? "🎬 Video + Article" : "📖 Article"}
+                    <span className="inline-flex items-center gap-1 rounded-[4px] bg-elevated px-2 py-0.5 text-[10px] text-text-secondary">
+                      {isVideo ? <><Video className="h-3 w-3" strokeWidth={1.5} /> Video + Article</> : <><BookOpen className="h-3 w-3" strokeWidth={1.5} /> Article</>}
                     </span>
                     {status === "in-progress" && <span className="text-[10px] font-medium text-warning">In Progress</span>}
                   </div>
@@ -169,7 +171,7 @@ function Learn() {
             onClick={() => setFlashcards(true)}
             className="inline-flex items-center gap-1.5 rounded-[6px] border border-bull/40 bg-bull/10 px-3 py-1.5 text-xs font-semibold text-bull hover:bg-bull/20"
           >
-            <Layers className="h-3.5 w-3.5" /> 🃏 Flashcard Mode
+            <Layers className="h-3.5 w-3.5" /> Flashcard Mode
           </button>
         </div>
         <div className="mb-3 flex items-center gap-2 rounded-[6px] border border-border bg-surface px-3 py-2">
@@ -221,7 +223,7 @@ function FlashcardModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-background p-4">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-semibold text-text-primary">🃏 Flashcards</span>
+        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary"><Layers className="h-4 w-4" strokeWidth={1.5} /> Flashcards</span>
         <button onClick={onClose} aria-label="Close"><X className="h-5 w-5 text-text-secondary" /></button>
       </div>
 
@@ -246,7 +248,7 @@ function FlashcardModal({ onClose }: { onClose: () => void }) {
             </button>
 
             <div className="flex items-center gap-3">
-              <button onClick={next} className="rounded-[8px] bg-bull px-5 py-2.5 text-sm font-semibold text-bull-foreground hover:brightness-110">✓ Got it</button>
+              <button onClick={next} className="inline-flex items-center gap-1.5 rounded-[8px] bg-bull px-5 py-2.5 text-sm font-semibold text-bull-foreground hover:brightness-110"><Check className="h-4 w-4" strokeWidth={1.5} /> Got it</button>
               <button onClick={reviewAgain} className="inline-flex items-center gap-1.5 rounded-[8px] border border-border px-5 py-2.5 text-sm font-medium text-text-secondary hover:bg-hover">
                 <RotateCcw className="h-4 w-4" /> Review Again
               </button>
@@ -255,7 +257,7 @@ function FlashcardModal({ onClose }: { onClose: () => void }) {
           </>
         ) : (
           <div className="text-center">
-            <div className="text-4xl">🎉</div>
+            <PartyPopper className="mx-auto h-10 w-10 text-bull" strokeWidth={1.5} />
             <div className="mt-3 text-lg font-semibold text-text-primary">Deck Complete!</div>
             <div className="mt-1 text-sm text-text-secondary">You reviewed all {total} terms.</div>
             <div className="mt-6 flex items-center justify-center gap-3">

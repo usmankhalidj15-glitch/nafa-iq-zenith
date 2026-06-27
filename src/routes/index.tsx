@@ -28,6 +28,8 @@ import {
 } from "lucide-react";
 
 import { toast } from "sonner";
+import { EmojiIcon, PkBadge } from "@/components/icons";
+import { AlertTriangle } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { TICKER_ITEMS } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -643,7 +645,7 @@ function Hero() {
                 letterSpacing: "0.08em",
               }}
             >
-              🇵🇰 Built for the Pakistani Investor
+              <PkBadge /> Built for the Pakistani Investor
             </span>
           </Reveal>
           <Reveal delay={0.05}>
@@ -667,8 +669,9 @@ function Hero() {
             </div>
           </Reveal>
           <Reveal delay={0.24}>
-            <p className="mt-4 text-xs text-text-muted">
-              ✓ No account required to explore&nbsp;&nbsp; ✓ Works on iOS, Android &amp; Desktop
+            <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-text-muted">
+              <span className="inline-flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-bull" strokeWidth={1.5} /> No account required to explore</span>
+              <span className="inline-flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-bull" strokeWidth={1.5} /> Works on iOS, Android &amp; Desktop</span>
             </p>
           </Reveal>
         </motion.div>
@@ -759,7 +762,7 @@ function FlipCard() {
             className="mt-8 rounded-[8px] p-3 text-[12px] text-warning"
             style={{ background: "rgba(245,158,11,0.1)" }}
           >
-            ⚠️ PKR 1,02,722 eroded by devaluation this year
+            <span className="inline-flex items-center gap-1.5"><AlertTriangle className="h-3.5 w-3.5" strokeWidth={1.5} /> PKR 1,02,722 eroded by devaluation this year</span>
           </div>
           <div className="mt-4 text-[11px] text-text-muted">Tap to flip back</div>
         </div>
@@ -816,10 +819,10 @@ function Landing() {
                     </span>
                   )}
                   <div
-                    className="flex h-12 w-12 items-center justify-center rounded-[12px] text-xl"
+                    className="flex h-12 w-12 items-center justify-center rounded-[12px] text-text-primary"
                     style={{ background: f.chipBg, transform: "translateZ(40px)" }}
                   >
-                    {f.emoji}
+                    <EmojiIcon emoji={f.emoji} size={22} />
                   </div>
                   <h3 className="mt-4 text-base font-semibold text-text-primary">{f.title}</h3>
                   <p className="mt-2 text-sm leading-[1.6] text-text-secondary">{f.desc}</p>
@@ -1024,12 +1027,12 @@ function Landing() {
         <div className="border-t border-border">
           <div className="mx-auto flex max-w-[1200px] flex-col gap-2 px-6 py-5 text-xs text-text-muted sm:flex-row sm:items-center sm:justify-between">
             <span className="flex items-center gap-2">
-              © 2026 NafaIQ. Made in Pakistan 🇵🇰
+              © 2026 NafaIQ · Built in Pakistan <PkBadge />
               <span className="rounded-full bg-white/[0.05] px-2 py-0.5 text-[11px] text-text-secondary">
                 v1.0 · Beta
               </span>
             </span>
-            <span>Made with ❤️ for Pakistani investors</span>
+            <span>Pakistan's Financial Intelligence Terminal</span>
           </div>
         </div>
       </footer>

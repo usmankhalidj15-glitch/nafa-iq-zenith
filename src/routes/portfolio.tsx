@@ -7,6 +7,7 @@ import { SignalBadge } from "@/components/SignalBadge";
 import { DonutChart, PortfolioAreaChart } from "@/components/charts";
 import { HOLDINGS, fmtPKR, fmtNum } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { EmojiIcon } from "@/components/icons";
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
@@ -254,7 +255,7 @@ function ReportModal({ onClose }: { onClose: () => void }) {
         <div className="space-y-3">
           {sections.map((s) => (
             <div key={s.title} className="rounded-[8px] border border-border bg-surface-alt p-3">
-              <div className="text-sm font-semibold text-text-primary">{s.icon} {s.title}</div>
+              <div className="flex items-center gap-1.5 text-sm font-semibold text-text-primary"><EmojiIcon emoji={s.icon} size={15} className="text-text-secondary" /> {s.title}</div>
               <p className="mt-1 whitespace-pre-line text-xs leading-relaxed text-text-secondary">{s.body}</p>
             </div>
           ))}

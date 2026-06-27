@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { Plus, Search, Check, Sparkles, ArrowUpRight, ArrowDownRight, PiggyBank, Percent } from "lucide-react";
+import { Plus, Search, Check, Sparkles, ArrowUpRight, ArrowDownRight, PiggyBank, Percent, Lightbulb } from "lucide-react";
+import { EmojiIcon } from "@/components/icons";
 import { Card } from "@/components/Card";
 import { IncomeExpenseChart, Sparkline } from "@/components/charts";
 import { fmtPKR } from "@/lib/data";
@@ -312,7 +313,7 @@ function Budgets() {
                 <div className={cn("h-full rounded-full", color)} style={{ width: `${Math.min(pct, 100)}%` }} />
               </div>
               {b.tip && (
-                <div className="mt-2 rounded-[6px] border-l-2 border-ai bg-ai-tint px-2.5 py-1.5 text-[11px] text-text-secondary">💡 {b.tip}</div>
+                <div className="mt-2 flex items-start gap-1.5 rounded-[6px] border-l-2 border-ai bg-ai-tint px-2.5 py-1.5 text-[11px] text-text-secondary"><Lightbulb className="mt-0.5 h-3 w-3 shrink-0 text-ai" strokeWidth={1.5} />{b.tip}</div>
               )}
             </Card>
           );
@@ -350,7 +351,7 @@ function Goals() {
         return (
           <Card key={g.name}>
             <div className="flex items-center gap-2">
-              <span className="text-2xl">{g.emoji}</span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-[8px] border border-bull/20 bg-bull/[0.08] text-bull"><EmojiIcon emoji={g.emoji} size={16} /></span>
               <span className="font-semibold text-text-primary">{g.name}</span>
               <span className="ml-auto font-mono text-sm font-bold tabular-nums text-bull">{pct}%</span>
             </div>
