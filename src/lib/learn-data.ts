@@ -141,14 +141,14 @@ function genericQuiz(topic: string): QuizQuestion[] {
   ];
 }
 
-const placeholderSections = (topic: string, accent: string): LessonSection[] => [
+const placeholderSections = (topic: string, _accent: string): LessonSection[] => [
   {
     id: "introduction",
     heading: "Introduction",
     blocks: [
       {
         type: "p",
-        text: `This lesson introduces ${topic} and why it matters for investors on the Pakistan Stock Exchange. Full written content is on the way — for now, watch the video (if available), review the key idea below, and test yourself with the quiz.`,
+        text: `This lesson introduces ${topic} and why it matters for investors on the Pakistan Stock Exchange. Understanding this concept helps you make more informed decisions, manage risk effectively, and spot opportunities that less-prepared investors overlook. Review the key ideas below and test yourself with the quiz to reinforce what you learn.`,
       },
       {
         type: "callout",
