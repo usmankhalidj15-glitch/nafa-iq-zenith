@@ -771,7 +771,7 @@ function Nav() {
             onClick={() => setOpen(false)}
             className="mt-auto flex items-center justify-center gap-1 rounded-full bg-bull px-4 py-4 text-base font-semibold text-bull-foreground transition hover:bg-[#00efc0]"
           >
-            Enter App <ArrowRight className="h-5 w-5" />
+            Get Started <ArrowRight className="h-5 w-5" />
           </Link>
         </div>
       )}
