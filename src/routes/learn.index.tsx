@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, Check, Lock, Layers, X, RotateCcw, ArrowRight } from "lucide-react";
 import { Card } from "@/components/Card";
+import { EmojiIcon } from "@/components/icons";
+import { Video, BookOpen, PartyPopper } from "lucide-react";
 import { LESSONS, GLOSSARY } from "@/lib/finance-data";
 import { LEARNING_PATHS, LESSON_ID_BY_TITLE, LESSON_CONTENT, FLASHCARDS } from "@/lib/learn-data";
 import { useLearn } from "@/hooks/use-learn";
