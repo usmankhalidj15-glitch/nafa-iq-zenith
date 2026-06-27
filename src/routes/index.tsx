@@ -1428,7 +1428,8 @@ function Landing() {
                   </p>
                 </div>
               </Tilt3D>
-            </motion.div>
+            </RevealItem>
+
           ))}
         </div>
         <Reveal className="mt-16">
