@@ -11,7 +11,7 @@ export interface Goal {
 }
 
 export const GOALS: Goal[] = [
-  { emoji: "🕋", name: "Hajj Fund", target: 1200000, saved: 425000, color: "bull", date: "April 2028", ai: "At PKR 25,000/month you'll reach this goal in 31 months. ⚠️ June dining overspend delayed this by ~6 days." },
+  { emoji: "🕋", name: "Hajj Fund", target: 1200000, saved: 425000, color: "bull", date: "April 2028", ai: "At PKR 25,000/month you'll reach this goal in 31 months. June dining overspend delayed this by ~6 days." },
   { emoji: "🚨", name: "Emergency Fund", target: 300000, saved: 180000, color: "bull", ai: "Almost there! PKR 120,000 remaining. At current rate: 5 months." },
   { emoji: "🚗", name: "Honda City", target: 800000, saved: 95000, color: "warning", ai: "This goal needs attention. Consider increasing monthly contribution by PKR 5,000." },
   { emoji: "🕌", name: "Umrah 2026", target: 250000, saved: 60000, color: "bull", ai: "You need to save PKR 15,833/month to reach this goal by your target." },
