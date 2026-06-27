@@ -1390,14 +1390,12 @@ function Landing() {
         </Reveal>
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
-            <motion.div
+            <RevealItem
               key={t.initials}
+              delay={i * 0.1}
               className="[perspective:1000px]"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ ...SPRING_UI, delay: i * 0.1 }}
             >
+
               <Tilt3D max={8} scale={1.03} className="h-full">
                 <div
                   className="relative h-full overflow-hidden rounded-[16px] border border-white/[0.07] p-6 backdrop-blur-md"
