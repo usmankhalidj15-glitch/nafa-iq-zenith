@@ -285,6 +285,15 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
             />
           )}
         </main>
+
+        {/* Right docked AI Tutor panel — desktop xl+ */}
+        {mode === "reading" && (
+          <aside className="hidden w-[360px] shrink-0 xl:block">
+            <div className="sticky top-[110px] h-[calc(100vh-130px)]">
+              <ChatPanel lesson={lesson} activeSection={activeSection} />
+            </div>
+          </aside>
+        )}
       </div>
 
       {/* Floating AI button */}
