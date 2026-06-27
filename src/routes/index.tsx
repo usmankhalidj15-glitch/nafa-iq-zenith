@@ -626,16 +626,17 @@ function LangToggle({ className }: { className?: string }) {
       onClick={() => setLang((l) => (l === "EN" ? "UR" : "EN"))}
       aria-label="Toggle language"
       className={cn(
-        "shrink-0 rounded-full px-2 py-1 text-[12px] font-medium text-text-secondary transition-colors hover:text-text-primary",
+        "inline-flex shrink-0 items-center rounded-full px-2.5 py-1 text-[12px] font-medium leading-none text-text-secondary transition-colors hover:text-text-primary",
         className,
       )}
     >
       <span className={cn(lang === "EN" && "text-text-primary")}>EN</span>
       <span className="mx-1 text-text-muted">/</span>
-      <span className={cn("font-urdu", lang === "UR" && "text-text-primary")}>اردو</span>
+      <span className={cn("inline-block pe-1 font-urdu leading-none", lang === "UR" && "text-text-primary")}>اردو</span>
     </button>
   );
 }
+
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -694,18 +695,19 @@ function Nav() {
         </nav>
 
         {/* utility cluster — right */}
-        <div className="ml-auto flex items-center gap-2 sm:gap-2.5 md:ml-0">
-          <div className="hidden items-center gap-2.5 lg:flex">
+        <div className="ml-auto flex items-center gap-2.5 sm:gap-3 md:ml-0">
+          <div className="hidden items-center gap-3 lg:flex">
             <StatusPill />
             <NavSearch />
             <LangToggle />
           </div>
           <Link
             to="/auth"
-            className="hidden whitespace-nowrap text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary md:inline"
+            className="hidden whitespace-nowrap pl-1 text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary md:inline lg:border-l lg:border-white/[0.08] lg:pl-3"
           >
             Log In
           </Link>
+
 
           {/* Enter App — dominant CTA, always visible */}
           <Magnetic strength={0.4}>
