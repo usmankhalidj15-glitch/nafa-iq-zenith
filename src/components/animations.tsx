@@ -69,6 +69,12 @@ export function CountUp({
 export const SPRING = { stiffness: 200, damping: 25, mass: 0.6 } as const;
 export const SOFT_SPRING = { stiffness: 120, damping: 22, mass: 0.8 } as const;
 
+/* ---------- shared spring transitions (drive all entrance/hover/reveal easing) ---------- */
+/** Standard UI spring — cards, buttons, reveals, hovers. */
+export const SPRING_UI = { type: "spring", stiffness: 300, damping: 30 } as const;
+/** Softer spring — larger elements like the hero phone mockup & section entrances. */
+export const SPRING_SOFT = { type: "spring", stiffness: 200, damping: 25 } as const;
+
 /* ---------- centralized motion language ---------- */
 /** Single shared easing curve for the whole site (calm, settling ease-out). */
 export const EASE = [0.22, 1, 0.36, 1] as const;
