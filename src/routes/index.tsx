@@ -814,6 +814,30 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* ---------- scroll to discover cue ---------- */
+function ScrollCue({ progress, reduce }: { progress: any; reduce: boolean }) {
+  const opacity = useTransform(progress, [0, 0.08], [1, 0]);
+  if (reduce) return null;
+  return (
+    <motion.div
+      style={{ opacity }}
+      className="pointer-events-none absolute bottom-6 left-1/2 z-[2] flex -translate-x-1/2 flex-col items-center gap-2"
+      aria-hidden
+    >
+      <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-text-muted">
+        Scroll to discover
+      </span>
+      <span className="relative flex h-9 w-5 justify-center rounded-full border border-white/15 pt-1.5">
+        <motion.span
+          className="h-1.5 w-1 rounded-full bg-bull"
+          animate={{ y: [0, 10, 0], opacity: [1, 0.3, 1] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </span>
+    </motion.div>
+  );
+}
+
 /* ---------- hero with mouse-following glows + scroll parallax ---------- */
 function Hero() {
   const reduce = useReducedMotion();
