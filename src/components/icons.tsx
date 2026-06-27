@@ -92,6 +92,7 @@ const EMOJI_MAP: Record<string, LucideIcon> = {
   "🛡️": ShieldCheck,
   "💰": Percent,
   "🔍": Eye,
+  "🕯️": CandlestickChart,
   "📒": Calculator,
   "🏛️": Building2,
   "🧮": Calculator,
