@@ -85,9 +85,9 @@ function HaqeeqiDaulat() {
                 Devaluation Shield Score
               </div>
               <div className="mt-1 flex items-baseline gap-2">
-                <span className="font-mono text-2xl font-bold tabular-nums text-warning">38</span>
+                <span className="font-mono text-2xl font-bold tabular-nums text-gold">38</span>
                 <span className="font-mono text-sm text-text-muted">/ 100</span>
-                <span className="rounded-full border border-warning/30 bg-warning/10 px-2 py-0.5 text-[10px] font-semibold text-warning">
+                <span className="rounded-full border border-gold/35 bg-gold/[0.12] px-2 py-0.5 text-[10px] font-semibold text-gold">
                   Moderate risk
                 </span>
               </div>
