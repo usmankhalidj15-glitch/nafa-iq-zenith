@@ -376,7 +376,7 @@ function Blocks({ blocks, accent }: { blocks: ContentBlock[]; accent: string }) 
           return (
             <div
               key={i}
-              className="my-6 max-w-[680px] rounded-[8px] border border-border bg-[#0d1421] p-5 font-mono text-sm"
+              className="my-6 rounded-[8px] border border-border bg-[#0d1421] p-5 font-mono text-sm"
             >
               {b.lines.map((line, j) => (
                 <div key={j} className="text-bull">
