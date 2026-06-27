@@ -25,6 +25,8 @@ import {
   Smartphone,
   Globe,
   MonitorSmartphone,
+  Menu,
+  X,
 } from "lucide-react";
 
 import { toast } from "sonner";
