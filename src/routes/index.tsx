@@ -827,6 +827,7 @@ function Hero() {
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
 
   // mouse following glows with spring physics
   const mx = useMotionValue(0.5);
