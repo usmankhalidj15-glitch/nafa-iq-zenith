@@ -1180,6 +1180,7 @@ function FAQ() {
   );
 }
 
+function Landing() {
   return (
     <div className="dot-grid min-h-screen bg-background text-text-primary">
       <Nav />
