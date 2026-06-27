@@ -31,6 +31,8 @@ const NAV = [
   { to: "/alerts", label: "Alerts", icon: Bell },
 ] as const;
 
+const PRIMARY_NAV = NAV.slice(0, 5);
+
 const NOTIFICATIONS = [
   { id: 1, title: "HBL flashed a Strong Buy", time: "2m ago", tone: "bull" },
   { id: 2, title: "Dining budget exceeded by 15%", time: "1h ago", tone: "warning" },
@@ -63,6 +65,43 @@ function initial(name?: string | null, email?: string | null) {
   return (name?.trim()?.[0] || email?.trim()?.[0] || "U").toUpperCase();
 }
 
+function SidebarLink({
+  to,
+  label,
+  icon: Icon,
+  active,
+}: {
+  to: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+  active: boolean;
+}) {
+  return (
+    <Link
+      to={to}
+      className={cn(
+        "group relative flex items-center gap-3 rounded-[10px] px-3 py-2.5 text-[13px] font-medium transition-colors duration-200",
+        active
+          ? "bg-bull/[0.10] text-bull"
+          : "text-text-secondary hover:bg-white/[0.04] hover:text-text-primary",
+      )}
+    >
+      {/* left-edge accent bar */}
+      <span
+        className={cn(
+          "absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r-full bg-bull transition-opacity duration-200",
+          active ? "opacity-100" : "opacity-0",
+        )}
+      />
+      <Icon
+        className={cn("h-5 w-5 shrink-0", active ? "text-bull" : "text-text-muted group-hover:text-text-primary")}
+        strokeWidth={1.75}
+      />
+      {label}
+    </Link>
+  );
+}
+
 function Sidebar() {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const { profile, user, signOut } = useAuth();
@@ -72,34 +111,26 @@ function Sidebar() {
     await signOut();
     navigate({ to: "/auth" });
   }
+  const isActive = (to: string) => path === to || path.startsWith(to + "/");
   return (
-    <aside className="glass-chrome fixed top-0 left-0 z-30 hidden h-screen w-[212px] flex-col border-r border-white/[0.06] lg:flex">
+    <aside className="glass-chrome fixed top-0 left-0 z-30 hidden h-screen w-[212px] flex-col border-r border-white/[0.06] shadow-[1px_0_0_rgba(255,255,255,0.02),4px_0_24px_rgba(0,0,0,0.25)] lg:flex">
       <div className="flex h-[56px] items-center border-b border-white/[0.06] px-5">
         <Logo />
       </div>
-      <nav className="flex-1 space-y-0.5 p-3">
-        {NAV.map((n) => {
-          const active = path === n.to || path.startsWith(n.to + "/");
-          return (
-            <Link
-              key={n.to}
-              to={n.to}
-              className={cn(
-                "relative flex items-center gap-3 rounded-md border-l-2 px-3 py-2 text-[13px] font-medium transition-colors duration-200",
-                active
-                  ? "border-l-bull bg-bull/[0.08] text-text-primary"
-                  : "border-l-transparent text-text-secondary hover:bg-white/[0.04] hover:text-text-primary",
-              )}
-            >
-              <n.icon
-                className={cn("h-5 w-5 shrink-0", active && "text-bull")}
-                strokeWidth={1.75}
-              />
-              {n.label}
-            </Link>
-          );
-        })}
+
+      {/* primary navigation — spacing below logo */}
+      <nav className="flex-1 space-y-1 px-3 pt-5">
+        {PRIMARY_NAV.map((n) => (
+          <SidebarLink key={n.to} to={n.to} label={n.label} icon={n.icon} active={isActive(n.to)} />
+        ))}
       </nav>
+
+      {/* utility section — separated from primary nav */}
+      <div className="space-y-1 border-t border-white/[0.06] px-3 py-3">
+        <SidebarLink to="/alerts" label="Alerts" icon={Bell} active={isActive("/alerts")} />
+        <SidebarLink to="/app" label="Settings" icon={Settings} active={false} />
+      </div>
+
       <div className="flex items-center gap-3 border-t border-white/[0.06] p-3">
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
           {initial(profile?.display_name, user?.email)}
@@ -131,7 +162,7 @@ function StockSearch() {
     setQ("");
   }
   return (
-    <form onSubmit={submit} className="relative hidden flex-1 sm:block sm:max-w-xs">
+    <form onSubmit={submit} className="relative hidden w-full max-w-xs shrink-0 sm:block">
       <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
       <input
         value={q}
@@ -268,23 +299,31 @@ function Header({ onMenu }: { onMenu: () => void }) {
       <div className="lg:hidden">
         <Logo />
       </div>
+
+      {/* search anchored left at a fixed max-width */}
       <StockSearch />
-      <div className="flex-1 lg:hidden" />
-      <Link
-        to="/plans"
-        className="hidden shrink-0 items-center gap-1.5 rounded-[8px] bg-gold px-3 py-1.5 text-[12px] font-semibold text-background transition hover:brightness-110 sm:inline-flex"
-      >
-        <Sparkles className="h-3.5 w-3.5" /> Upgrade to Pro
-      </Link>
-      <Link
-        to="/plans"
-        aria-label="Upgrade to Pro"
-        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-gold text-background sm:hidden"
-      >
-        <Sparkles className="h-4 w-4" />
-      </Link>
-      <NotificationBell />
-      <UserMenu />
+
+      {/* spacer pushes the utility cluster flush to the right edge */}
+      <div className="flex-1" />
+
+      {/* utility cluster — evenly spaced, right-aligned */}
+      <div className="flex shrink-0 items-center gap-3 sm:gap-4">
+        <Link
+          to="/plans"
+          className="hidden shrink-0 items-center gap-1.5 rounded-[8px] border border-bull/40 bg-bull/10 px-3 py-1.5 text-[12px] font-semibold text-bull transition hover:border-bull/60 hover:bg-bull/15 sm:inline-flex"
+        >
+          <Sparkles className="h-3.5 w-3.5" /> Upgrade to Pro
+        </Link>
+        <Link
+          to="/plans"
+          aria-label="Upgrade to Pro"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] border border-bull/40 bg-bull/10 text-bull sm:hidden"
+        >
+          <Sparkles className="h-4 w-4" />
+        </Link>
+        <NotificationBell />
+        <UserMenu />
+      </div>
     </header>
   );
 }
@@ -409,7 +448,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <Link
               to="/plans"
               onClick={() => setDrawer(false)}
-              className="flex items-center gap-3 rounded-[6px] px-3 py-3 text-sm font-semibold text-gold hover:bg-hover"
+              className="flex items-center gap-3 rounded-[6px] border border-bull/40 bg-bull/10 px-3 py-3 text-sm font-semibold text-bull hover:bg-bull/15"
             >
               <Sparkles className="h-5 w-5" /> Upgrade to Pro
             </Link>
