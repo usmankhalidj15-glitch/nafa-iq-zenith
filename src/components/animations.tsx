@@ -162,7 +162,7 @@ export function Reveal({
 }) {
   const reduce = useReducedMotion();
   const { ref, inView } = useReveal(amount);
-  const Comp = (motion[as] as typeof motion.div) ?? motion.div;
+  const Comp = (motion[as] ?? motion.div) as React.ElementType;
   if (reduce) return <Comp className={className}>{children}</Comp>;
   return (
     <Comp
