@@ -1047,7 +1047,7 @@ function Hero() {
       </motion.div>
 
       {/* scroll to discover cue — fades out once user scrolls */}
-      <ScrollCue progress={scrollYProgress} reduce={!!reduce} />
+      <ScrollCue reduce={!!reduce} />
 
       {/* bottom fade mask */}
       <div
