@@ -114,59 +114,63 @@ function StoreButtons({ center = false }: { center?: boolean }) {
     setEmail("");
   }
   return (
-    <div className={cn("flex flex-col gap-4", center && "items-center")}>
-      <div className={cn("flex flex-col gap-3 sm:flex-row sm:flex-wrap", center && "sm:justify-center")}>
-        <Magnetic strength={0.45}>
-          <motion.div whileTap={{ scale: 0.96 }} whileHover={{ scale: 1.03 }} transition={SPRING}>
-            <Link
-              to="/app"
-              className="flex items-center gap-3 rounded-[12px] bg-gradient-to-br from-[#00d4aa] to-[#00a88a] px-6 py-3 text-left text-bull-foreground shadow-[0_8px_30px_rgba(0,212,170,0.3)] transition hover:shadow-[0_12px_50px_rgba(0,212,170,0.55)]"
-            >
-              <Download className="h-7 w-7 shrink-0" />
-              <span className="flex flex-col leading-tight">
-                <span className="text-[10px] text-white/80">Install as</span>
-                <span className="text-lg font-semibold">Web App — Free</span>
-              </span>
-            </Link>
-          </motion.div>
-        </Magnetic>
-        <div className="flex items-center gap-3 rounded-[12px] border border-white/15 bg-black/40 px-5 py-2.5 text-left opacity-80">
-          <AppleGlyph />
-          <span className="flex flex-col leading-tight">
-            <span className="text-[10px] tracking-wide text-white/60">Coming soon to the</span>
-            <span className="text-lg font-semibold text-white">App Store</span>
-          </span>
-        </div>
-        <div className="flex items-center gap-3 rounded-[12px] border border-white/15 bg-black/40 px-5 py-2.5 text-left opacity-80">
-          <GooglePlayGlyph />
-          <span className="flex flex-col leading-tight">
-            <span className="text-[10px] tracking-wide text-white/60">Coming soon to</span>
-            <span className="text-lg font-semibold text-white">Google Play</span>
-          </span>
-        </div>
-      </div>
-      <form onSubmit={notify} className={cn("w-full max-w-md", center && "mx-auto")}>
-        <div className="flex gap-2">
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@email.com"
-            aria-label="Email for native app launch notification"
-            className="h-10 flex-1 rounded-[10px] border border-white/10 bg-surface px-3 font-mono text-sm text-text-primary outline-none transition-colors placeholder:text-text-muted focus:border-gold"
-          />
-          <button
-            type="submit"
-            className="h-10 shrink-0 rounded-[10px] bg-gold px-4 text-sm font-semibold text-background transition hover:brightness-110"
+    <div className={cn("flex flex-col gap-5", center && "items-center")}>
+      {/* PRIMARY — single dominant action */}
+      <Magnetic strength={0.45}>
+        <motion.div whileTap={{ scale: 0.96 }} whileHover={{ scale: 1.03 }} transition={SPRING}>
+          <Link
+            to="/app"
+            className="flex items-center gap-3 rounded-[14px] bg-gradient-to-br from-[#00d4aa] to-[#00a88a] px-7 py-4 text-left text-bull-foreground shadow-[0_8px_30px_rgba(0,212,170,0.3)] transition hover:shadow-[0_12px_50px_rgba(0,212,170,0.55)]"
           >
-            Notify Me
-          </button>
+            <Download className="h-7 w-7 shrink-0" />
+            <span className="flex flex-col leading-tight">
+              <span className="text-[10px] uppercase tracking-wide text-white/80">Install as</span>
+              <span className="text-lg font-semibold">Web App — Free</span>
+            </span>
+          </Link>
+        </motion.div>
+      </Magnetic>
+
+      {/* SECONDARY — coming-soon stores, visually de-emphasized */}
+      <div className={cn("flex flex-col items-start gap-2.5", center && "items-center")}>
+        <div className={cn("flex flex-wrap gap-2", center && "justify-center")}>
+          <div className="flex items-center gap-2 rounded-[10px] border border-white/[0.07] bg-white/[0.02] px-3 py-1.5 text-left opacity-55 grayscale">
+            <AppleGlyph />
+            <span className="flex flex-col leading-tight">
+              <span className="text-[9px] uppercase tracking-wide text-white/50">Coming soon</span>
+              <span className="text-xs font-medium text-white/80">App Store</span>
+            </span>
+          </div>
+          <div className="flex items-center gap-2 rounded-[10px] border border-white/[0.07] bg-white/[0.02] px-3 py-1.5 text-left opacity-55 grayscale">
+            <GooglePlayGlyph />
+            <span className="flex flex-col leading-tight">
+              <span className="text-[9px] uppercase tracking-wide text-white/50">Coming soon</span>
+              <span className="text-xs font-medium text-white/80">Google Play</span>
+            </span>
+          </div>
         </div>
-        <p className="mt-1.5 text-[11px] text-text-muted">
-          We'll email you when the native app launches. No spam, ever.
-        </p>
-      </form>
+
+        {/* TERTIARY — quiet email capture for native launch */}
+        <form onSubmit={notify} className={cn("w-full max-w-xs", center && "mx-auto")}>
+          <div className="flex gap-1.5">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email me at launch"
+              aria-label="Email for native app launch notification"
+              className="h-8 flex-1 rounded-[8px] border border-white/[0.08] bg-transparent px-2.5 font-mono text-xs text-text-secondary outline-none transition-colors placeholder:text-text-muted focus:border-white/20"
+            />
+            <button
+              type="submit"
+              className="h-8 shrink-0 rounded-[8px] border border-white/[0.08] px-3 text-xs font-medium text-text-secondary transition hover:border-white/20 hover:text-text-primary"
+            >
+              Notify
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
