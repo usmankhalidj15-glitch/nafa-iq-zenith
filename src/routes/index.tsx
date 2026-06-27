@@ -1129,24 +1129,21 @@ function FlipCard() {
 }
 
 /* ---------- How NafaIQ Works — 3 steps ---------- */
-const STEPS: { Icon: LucideIcon; step: string; title: string; desc: string }[] = [
+const STEPS: { step: string; title: string; desc: string }[] = [
   {
-    Icon: LineChart,
     step: "01",
     title: "Track",
-    desc: "Connect your holdings and watchlist. NafaIQ pulls live PSX data, prices, and your full net worth into one terminal.",
+    desc: "Connect your portfolio or explore live PSX data instantly, no account required.",
   },
   {
-    Icon: Brain,
     step: "02",
-    title: "Analyze",
-    desc: "AI signals, sector heatmaps, and the Haqeeqi Daulat engine reveal your real, devaluation-adjusted returns.",
+    title: "Understand",
+    desc: "See your real wealth, AI insights, and devaluation-adjusted returns in plain language.",
   },
   {
-    Icon: Lightbulb,
     step: "03",
     title: "Decide",
-    desc: "Act with clarity — Shariah-screened ideas, budget insight, and a 24/7 AI advisor guiding every move.",
+    desc: "Act on personalized recommendations for investing, saving, and Zakat — all in one place.",
   },
 ];
 
