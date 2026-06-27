@@ -248,7 +248,7 @@ function FlashcardModal({ onClose }: { onClose: () => void }) {
             </button>
 
             <div className="flex items-center gap-3">
-              <button onClick={next} className="rounded-[8px] bg-bull px-5 py-2.5 text-sm font-semibold text-bull-foreground hover:brightness-110">✓ Got it</button>
+              <button onClick={next} className="inline-flex items-center gap-1.5 rounded-[8px] bg-bull px-5 py-2.5 text-sm font-semibold text-bull-foreground hover:brightness-110"><Check className="h-4 w-4" strokeWidth={1.5} /> Got it</button>
               <button onClick={reviewAgain} className="inline-flex items-center gap-1.5 rounded-[8px] border border-border px-5 py-2.5 text-sm font-medium text-text-secondary hover:bg-hover">
                 <RotateCcw className="h-4 w-4" /> Review Again
               </button>
