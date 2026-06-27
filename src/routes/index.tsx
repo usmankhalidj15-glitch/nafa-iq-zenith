@@ -1062,15 +1062,11 @@ function FlipCard() {
           filter: "blur(40px)",
         }}
       />
-      <div
-        className={cn(
-          "relative h-full w-full",
-          !reduce && "transition-transform duration-[600ms] ease-in-out"
-        )}
-        style={{
-          transformStyle: "preserve-3d",
-          transform: flipped && !reduce ? "rotateY(180deg)" : "rotateY(0deg)",
-        }}
+      <motion.div
+        className="relative h-full w-full"
+        style={{ transformStyle: "preserve-3d" }}
+        animate={{ rotateY: flipped && !reduce ? 180 : 0 }}
+        transition={reduce ? { duration: 0 } : SPRING_UI}
       >
         {/* FRONT — PSX return */}
         <div
