@@ -1166,7 +1166,7 @@ function HowItWorks() {
             initial={reduce ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.1 }}
+            transition={{ ...SPRING_UI, delay: i * 0.1 }}
           >
             <div className="relative h-full rounded-[16px] border border-white/[0.07] bg-[rgba(17,24,39,0.6)] p-7 backdrop-blur-md">
               <span className="absolute right-5 top-4 font-mono text-3xl font-bold tabular-nums text-white/[0.06]">
