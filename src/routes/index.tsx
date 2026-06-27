@@ -1271,14 +1271,12 @@ function Landing() {
           {FEATURES.map((f, i) => {
             const Icon = f.Icon;
             return (
-              <motion.div
+              <RevealItem
                 key={f.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ ...SPRING_UI, delay: i * 0.08 }}
+                delay={i * 0.08}
                 className="[perspective:1000px]"
               >
+
                 <Tilt3D max={10} className="h-full">
                   <motion.div
                     whileHover={{ y: -4, scale: 1.02 }}
