@@ -1346,7 +1346,7 @@ function Landing() {
             <h2 className="mt-3 text-[28px] font-bold leading-[1.2] sm:text-[40px]">
               The Truth About
               <br />
-              <span className="text-warning">Your PKR Gains</span>
+              <span className="text-bull" style={{ textShadow: "0 0 60px rgba(0,212,170,0.3)" }}>Your PKR Gains</span>
             </h2>
             <p className="mt-5 max-w-[520px] text-text-secondary">
               Most Pakistani investors don't realize their PSX gains are partly an illusion. When PKR
