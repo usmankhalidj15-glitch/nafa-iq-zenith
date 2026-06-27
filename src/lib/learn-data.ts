@@ -700,8 +700,100 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
     level: "Beginner",
     type: "video",
     presets: ["What is the KSE-100?", "How do I open a CDC account?", "What are trading hours?"],
-    sections: placeholderSections("how the Pakistan Stock Exchange works", "#00d4aa"),
-    quiz: genericQuiz("how PSX works"),
+    sections: [
+      {
+        id: "introduction",
+        heading: "What the PSX Actually Is",
+        blocks: [
+          {
+            type: "p",
+            text: "The Pakistan Stock Exchange is the marketplace where shares of listed Pakistani companies are bought and sold. When you buy a share of a company like a PSX-listed bank or fertiliser maker, you own a small slice of that business and its future profits.",
+          },
+          {
+            type: "callout",
+            kind: "note",
+            text: "The KSE-100 is the benchmark index — it tracks 100 of the largest companies by market capitalisation and is the number you'll see quoted as 'the market'.",
+          },
+        ],
+      },
+      {
+        id: "the-core-idea",
+        heading: "How a Trade Happens",
+        blocks: [
+          {
+            type: "p",
+            text: "You can't trade directly on the exchange. You open an account with a licensed broker, who routes your order to the PSX. Your shares are held in a central electronic depository (the CDC) under your name — not physically with the broker.",
+          },
+          {
+            type: "table",
+            head: ["Step", "Who", "What happens"],
+            rows: [
+              ["1. Open account", "You + broker", "CDC sub-account is created in your name"],
+              ["2. Place order", "You", "Buy/sell at market or a limit price"],
+              ["3. Match & settle", "PSX + NCCPL", "Trade clears, settles on a T+2 basis"],
+            ],
+          },
+          {
+            type: "callout",
+            kind: "example",
+            text: "Place a limit buy for a bank stock at PKR 120. If a seller is willing at 120 or lower, the order fills; otherwise it waits in the order book.",
+          },
+        ],
+      },
+      {
+        id: "why-it-matters",
+        heading: "Hours, Circuit Breakers & Risk",
+        blocks: [
+          {
+            type: "p",
+            text: "PSX trades on weekdays during set hours, and individual stocks have daily price limits (circuit breakers) that cap how far they can move in one session — a mechanism designed to slow panic in a retail-heavy market.",
+          },
+          {
+            type: "callout",
+            kind: "warning",
+            text: "Retail sentiment moves PSX fast. A stock hitting its upper or lower circuit can trap you in or out of a position — size your trades accordingly.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        q: "What does the KSE-100 measure?",
+        options: [
+          "The 100 cheapest stocks on PSX",
+          "100 of the largest PSX companies by market capitalisation",
+          "All companies listed in Pakistan",
+          "Only banking sector stocks",
+        ],
+        correct: 1,
+        explanation:
+          "The KSE-100 is the benchmark index of 100 large companies, widely quoted as 'the market'.",
+      },
+      {
+        q: "Where are your PSX shares held after you buy them?",
+        options: [
+          "Physically with your broker",
+          "In an electronic CDC sub-account in your name",
+          "At the company's head office",
+          "In your bank account",
+        ],
+        correct: 1,
+        explanation:
+          "Shares sit in the Central Depository Company electronically, registered to you — not held by the broker.",
+      },
+      {
+        q: "What is the purpose of a circuit breaker on a PSX stock?",
+        options: [
+          "To guarantee profits",
+          "To cap how far a stock's price can move in a single session",
+          "To set the dividend",
+          "To open new trading accounts",
+        ],
+        correct: 1,
+        explanation:
+          "Circuit breakers limit a stock's daily price move to slow panic-driven swings.",
+      },
+    ],
   },
 
   halal: {
