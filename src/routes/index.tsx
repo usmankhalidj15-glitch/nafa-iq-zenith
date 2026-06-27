@@ -1312,7 +1312,8 @@ function Landing() {
                     <p className="mt-2 text-sm leading-[1.6] text-text-secondary">{f.desc}</p>
                   </motion.div>
                 </Tilt3D>
-              </motion.div>
+              </RevealItem>
+
             );
           })}
         </div>
