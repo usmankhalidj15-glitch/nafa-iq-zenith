@@ -372,7 +372,7 @@ function ReadingView({
     <div className="learn-fade-in">
       {/* Hero banner */}
       <div className="rounded-[12px] bg-gradient-to-br from-surface to-[#0d1421] p-8" style={{ borderLeft: `4px solid ${lesson.accent}` }}>
-        <div className="text-5xl">{lesson.emoji}</div>
+        <div className="flex h-12 w-12 items-center justify-center rounded-[10px] border border-white/[0.06] bg-elevated" style={{ color: lesson.accent }}><EmojiIcon emoji={lesson.emoji} size={24} /></div>
         <h1 className="mt-3 text-3xl font-bold text-text-primary">{lesson.title}</h1>
         <p className="mt-1 text-sm text-text-secondary">{lesson.subtitle}</p>
         <div className="mt-3 flex items-center gap-2 text-xs">
