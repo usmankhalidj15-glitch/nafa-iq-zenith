@@ -1121,7 +1121,7 @@ function FlipCard() {
           </div>
           <div className="mt-4 text-[11px] text-text-muted">Tap to flip back</div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
