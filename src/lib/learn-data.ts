@@ -685,8 +685,94 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
       "What counts as a 'want'?",
       "Adapting 50/30/20 for Pakistan?",
     ],
-    sections: placeholderSections("the 50/30/20 budget rule", "#f59e0b"),
-    quiz: genericQuiz("the 50/30/20 budget rule"),
+    sections: [
+      {
+        id: "introduction",
+        heading: "The Rule in One Line",
+        blocks: [
+          {
+            type: "p",
+            text: "The 50/30/20 rule splits your take-home salary into three buckets: 50% for needs, 30% for wants, and 20% for savings and debt repayment. It's popular because it's simple enough to actually stick to.",
+          },
+          {
+            type: "formula",
+            lines: [
+              "Salary 100,000 → Needs 50,000 | Wants 30,000 | Save 20,000",
+            ],
+          },
+        ],
+      },
+      {
+        id: "the-core-idea",
+        heading: "Needs vs Wants",
+        blocks: [
+          {
+            type: "p",
+            text: "The hard part is honest categorisation. A need is something you can't reasonably skip — rent, utilities, groceries, transport to work. A want is everything that makes life nicer but isn't essential.",
+          },
+          {
+            type: "table",
+            head: ["Bucket", "Share", "Examples"],
+            rows: [
+              ["Needs", "50%", "Rent, electricity, groceries, fuel, school fees"],
+              ["Wants", "30%", "Dining out, subscriptions, new phone, travel"],
+              ["Save / repay", "20%", "Emergency fund, investments, extra loan payments"],
+            ],
+          },
+          {
+            type: "callout",
+            kind: "example",
+            text: "A monthly Netflix plan is a want. The internet connection you need for work sits in needs — same bill category, different purpose.",
+          },
+        ],
+      },
+      {
+        id: "why-it-matters",
+        heading: "Adapting It for Pakistan",
+        blocks: [
+          {
+            type: "p",
+            text: "With high inflation, many Pakistani households find needs eat well above 50%. Treat the ratios as a target to move toward, not a pass/fail test — even shifting 5% from wants to savings compounds meaningfully over years.",
+          },
+          {
+            type: "callout",
+            kind: "tip",
+            text: "Automate the 20%: move it to savings or investments the day your salary lands, before you start spending.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        q: "Under 50/30/20, how much of a PKR 80,000 salary goes to savings and debt repayment?",
+        options: ["8,000", "16,000", "24,000", "40,000"],
+        correct: 1,
+        explanation: "20% of 80,000 = 16,000 for savings and debt repayment.",
+      },
+      {
+        q: "Which of these belongs in the 'needs' bucket?",
+        options: [
+          "Weekend dining out",
+          "A streaming subscription",
+          "Rent and utilities",
+          "An upgraded smartphone",
+        ],
+        correct: 2,
+        explanation: "Rent and utilities are essential and can't reasonably be skipped — they're needs.",
+      },
+      {
+        q: "What's the smartest way to apply the rule with high inflation?",
+        options: [
+          "Abandon budgeting entirely",
+          "Treat the ratios as a target and improve gradually",
+          "Spend the savings bucket first",
+          "Put 100% into wants",
+        ],
+        correct: 1,
+        explanation:
+          "When needs exceed 50%, use the ratios as a direction to move toward rather than a strict pass/fail.",
+      },
+    ],
   },
 
   psx: {
