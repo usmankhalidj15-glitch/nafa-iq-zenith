@@ -223,7 +223,7 @@ function FlashcardModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-background p-4">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-semibold text-text-primary">🃏 Flashcards</span>
+        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary"><Layers className="h-4 w-4" strokeWidth={1.5} /> Flashcards</span>
         <button onClick={onClose} aria-label="Close"><X className="h-5 w-5 text-text-secondary" /></button>
       </div>
 
