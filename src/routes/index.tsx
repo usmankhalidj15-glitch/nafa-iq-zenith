@@ -486,7 +486,8 @@ function TrustStrip() {
               </span>
             </motion.div>
           ))}
-        </motion.div>
+        </RevealGroup>
+
       </div>
     </section>
   );
