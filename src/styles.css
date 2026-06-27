@@ -34,6 +34,7 @@
   /* Gold — premium accent (logo IQ, premium badges, savings) */
   --color-gold: #d4a017;
   --color-gold-foreground: #020617;
+  --color-gold-hover: #e3b324;
   --color-gold-muted: #b8881a;
 
   --color-primary: #00d4aa;

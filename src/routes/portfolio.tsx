@@ -55,7 +55,7 @@ function HaqeeqiDaulat() {
               Haqeeqi Daulat™ — Your REAL Returns
             </h3>
           </div>
-          <span className="rounded-full border border-gold/30 bg-gold/10 px-2.5 py-0.5 text-[10px] font-semibold text-gold">
+          <span className="rounded-full border border-gold/35 bg-gold/[0.12] px-2.5 py-0.5 text-[10px] font-semibold text-gold">
             After 16.2% PKR devaluation
           </span>
         </div>
@@ -85,9 +85,9 @@ function HaqeeqiDaulat() {
                 Devaluation Shield Score
               </div>
               <div className="mt-1 flex items-baseline gap-2">
-                <span className="font-mono text-2xl font-bold tabular-nums text-warning">38</span>
+                <span className="font-mono text-2xl font-bold tabular-nums text-gold">38</span>
                 <span className="font-mono text-sm text-text-muted">/ 100</span>
-                <span className="rounded-full border border-warning/30 bg-warning/10 px-2 py-0.5 text-[10px] font-semibold text-warning">
+                <span className="rounded-full border border-gold/35 bg-gold/[0.12] px-2 py-0.5 text-[10px] font-semibold text-gold">
                   Moderate risk
                 </span>
               </div>
@@ -95,12 +95,12 @@ function HaqeeqiDaulat() {
                 34% of portfolio in Oil &amp; Gas provides partial hedge against rupee weakness.
               </p>
             </div>
-            <button className="flex items-center gap-1.5 rounded-[8px] bg-gold px-3.5 py-2 text-sm font-semibold text-background transition hover:brightness-110">
+            <button className="flex items-center gap-1.5 rounded-[8px] bg-gold px-3.5 py-2 text-sm font-semibold text-gold-foreground transition hover:bg-gold-hover">
               Improve Score <ArrowRight className="h-4 w-4" />
             </button>
           </div>
           <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/5">
-            <div className="h-full rounded-full bg-warning" style={{ width: "38%" }} />
+            <div className="h-full rounded-full bg-gold" style={{ width: "38%" }} />
           </div>
         </div>
       </div>
