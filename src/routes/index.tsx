@@ -563,15 +563,15 @@ function Nav() {
     };
   }, [open]);
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled
-          ? "border-b border-white/[0.06] bg-[#060d1f]/85 backdrop-blur-xl backdrop-saturate-150"
-          : "border-b border-transparent bg-transparent",
-      )}
-    >
-      <div className="mx-auto flex h-14 max-w-[1200px] items-center gap-4 px-4 sm:px-6">
+    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-3 sm:pt-4">
+      <div
+        className={cn(
+          "flex h-14 items-center gap-3 rounded-full border px-3 transition-all duration-300 sm:gap-4 sm:px-4",
+          scrolled
+            ? "w-full max-w-[760px] border-white/[0.08] bg-[#060d1f]/80 shadow-[0_8px_40px_rgba(0,0,0,0.45)] backdrop-blur-xl backdrop-saturate-150"
+            : "w-full max-w-[1120px] border-white/[0.05] bg-[#060d1f]/40 backdrop-blur-md",
+        )}
+      >
         {/* logo */}
         <Link to="/" className="flex shrink-0 items-center gap-2">
           <img src={logo} alt="NafaIQ" width={26} height={26} className="rounded-[7px] ring-1 ring-bull/30" />
@@ -580,44 +580,42 @@ function Nav() {
           </span>
         </Link>
 
-        {/* primary links — center-left */}
-        <nav className="hidden items-center gap-6 md:flex">
+        {/* primary links — pill-segmented center group */}
+        <nav className="mx-auto hidden items-center gap-1 rounded-full border border-white/[0.06] bg-white/[0.03] p-1 md:flex">
           {NAV_LINKS.map((l) =>
             l.to ? (
               <Link
                 key={l.label}
                 to={l.to}
-                className="group relative text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
+                className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
               >
                 {l.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-bull transition-all duration-300 group-hover:w-full" />
               </Link>
             ) : (
               <a
                 key={l.label}
                 href={l.href}
-                className="group relative text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
+                className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-secondary transition-colors hover:bg-white/[0.06] hover:text-text-primary"
               >
                 {l.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-bull transition-all duration-300 group-hover:w-full" />
               </a>
             ),
           )}
         </nav>
 
         {/* utility cluster — right */}
-        <div className="ml-auto flex items-center gap-2 sm:gap-3">
-          <StatusPill />
-          <div className="hidden items-center gap-3 md:flex">
+        <div className="ml-auto flex items-center gap-2 sm:gap-2.5 md:ml-0">
+          <div className="hidden items-center gap-2.5 lg:flex">
+            <StatusPill />
             <NavSearch />
             <LangToggle />
-            <Link
-              to="/auth"
-              className="text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary"
-            >
-              Log In
-            </Link>
           </div>
+          <Link
+            to="/auth"
+            className="hidden text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary md:inline"
+          >
+            Log In
+          </Link>
 
           {/* Enter App — dominant CTA, always visible */}
           <Magnetic strength={0.4}>
@@ -644,7 +642,7 @@ function Nav() {
 
       {/* mobile full-screen drawer */}
       {open && (
-        <div className="fixed inset-0 top-14 z-40 flex flex-col bg-[#060d1f]/98 px-6 py-8 backdrop-blur-xl md:hidden">
+        <div className="fixed inset-0 top-0 z-40 flex flex-col bg-[#060d1f]/98 px-6 pb-8 pt-24 backdrop-blur-xl md:hidden">
           <div className="mb-6">
             <NavSearch />
           </div>
@@ -677,7 +675,8 @@ function Nav() {
             >
               Log In
             </Link>
-            <div className="px-4 py-3">
+            <div className="flex items-center justify-between px-4 py-3">
+              <StatusPill />
               <LangToggle className="px-0 text-base" />
             </div>
           </nav>
