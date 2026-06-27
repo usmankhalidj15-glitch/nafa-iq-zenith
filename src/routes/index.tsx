@@ -736,16 +736,16 @@ function Nav() {
                   key={l.label}
                   to={l.to}
                   onClick={() => setOpen(false)}
-                  className="rounded-[12px] px-4 py-4 text-lg font-medium text-text-primary transition hover:bg-white/[0.05]"
-                >
-                  {l.label}
-                </Link>
-              ) : (
-                <a
-                  key={l.label}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-[12px] px-4 py-4 text-lg font-medium text-text-primary transition hover:bg-white/[0.05]"
+                className="rounded-[12px] px-4 py-4 text-lg font-medium whitespace-nowrap text-text-primary transition hover:bg-white/[0.05]"
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.label}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="rounded-[12px] px-4 py-4 text-lg font-medium whitespace-nowrap text-text-primary transition hover:bg-white/[0.05]"
                 >
                   {l.label}
                 </a>
