@@ -39,6 +39,8 @@ import {
   UserCheck,
   AlertTriangle,
   ChevronDown,
+  Mail,
+
 
   type LucideIcon,
 } from "lucide-react";
