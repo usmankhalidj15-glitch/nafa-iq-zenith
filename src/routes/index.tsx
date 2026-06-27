@@ -1283,7 +1283,7 @@ function Landing() {
                 <Tilt3D max={10} className="h-full">
                   <motion.div
                     whileHover={{ y: -4, scale: 1.02 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    transition={SPRING_UI}
                     className={cn(
                       "group relative h-full rounded-[16px] border border-white/[0.07] p-7 backdrop-blur-md transition-shadow duration-[250ms] hover:border-bull/30 hover:shadow-[0_24px_60px_rgba(0,212,170,0.18),0_0_0_1px_rgba(0,212,170,0.18)]",
                       f.badge && "spin-border",
