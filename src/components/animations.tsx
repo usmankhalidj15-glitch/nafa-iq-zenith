@@ -134,7 +134,7 @@ export function Reveal({
       variants={variants}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount }}
+      viewport={{ once: false, amount }}
       transition={{ delay }}
     >
       {children}
