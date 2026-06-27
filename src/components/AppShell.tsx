@@ -20,6 +20,7 @@ import {
 import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { TICKER_ITEMS, STOCKS } from "@/lib/data";
+import { LEARNING_PATHS, LESSON_CONTENT } from "@/lib/learn-data";
 import { useAuth } from "@/hooks/use-auth";
 
 const NAV = [
