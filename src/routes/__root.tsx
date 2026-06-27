@@ -160,7 +160,8 @@ function AuthGate() {
   const navigate = useNavigate();
   const isAuthRoute = pathname === "/auth";
   const isLanding = pathname === "/";
-  const isPublic = isAuthRoute || isLanding;
+  const isPlans = pathname === "/plans";
+  const isPublic = isAuthRoute || isLanding || isPlans;
 
   useEffect(() => {
     if (loading) return;
