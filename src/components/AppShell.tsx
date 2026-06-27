@@ -31,6 +31,8 @@ const NAV = [
   { to: "/alerts", label: "Alerts", icon: Bell },
 ] as const;
 
+const PRIMARY_NAV = NAV.slice(0, 5);
+
 const NOTIFICATIONS = [
   { id: 1, title: "HBL flashed a Strong Buy", time: "2m ago", tone: "bull" },
   { id: 2, title: "Dining budget exceeded by 15%", time: "1h ago", tone: "warning" },
