@@ -141,7 +141,7 @@ export default function PSX() {
               <select
                 value={sym}
                 onChange={(e) => setSym(e.target.value)}
-                className="rounded-[6px] border border-border bg-elevated px-2.5 py-1.5 text-sm font-medium text-text-primary"
+                className="min-w-0 max-w-[180px] flex-1 truncate rounded-[6px] border border-border bg-elevated px-2.5 py-1.5 text-sm font-medium text-text-primary sm:flex-none"
               >
                 {SYMBOLS.map((s) => (
                   <option key={s} value={s}>
@@ -149,7 +149,7 @@ export default function PSX() {
                   </option>
                 ))}
               </select>
-              <div className="flex gap-1">
+              <div className="flex flex-wrap gap-1">
                 {TIMEFRAMES.map((t) => (
                   <button
                     key={t}
@@ -165,7 +165,8 @@ export default function PSX() {
                   </button>
                 ))}
               </div>
-              <div className="ml-auto flex gap-1">
+              <div className="flex flex-wrap gap-1 sm:ml-auto">
+
                 <button
                   onClick={() => setType("candle")}
                   className={cn(
