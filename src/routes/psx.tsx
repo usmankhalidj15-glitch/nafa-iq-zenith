@@ -129,6 +129,8 @@ export default function PSX() {
           );
         })}
       </div>
+      </TooltipProvider>
+
 
       <div className="grid gap-6 lg:grid-cols-[65fr_35fr]">
         {/* Chart column */}
