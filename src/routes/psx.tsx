@@ -337,7 +337,7 @@ export default function PSX() {
         </div>
 
         {/* Right panel */}
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <Card>
             <div className="mb-2 flex items-center justify-between">
               <h3 className="text-sm font-semibold text-text-primary">Watchlist</h3>
