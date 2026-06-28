@@ -132,9 +132,10 @@ export default function PSX() {
       </TooltipProvider>
 
 
-      <div className="grid gap-6 lg:grid-cols-[65fr_35fr]">
+      <div className="grid min-w-0 gap-6 lg:grid-cols-[65fr_35fr]">
         {/* Chart column */}
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
+
           <Card hover={false} className="bg-surface-alt p-3">
             {/* Toolbar */}
             <div className="mb-3 flex flex-wrap items-center gap-2">
@@ -336,7 +337,7 @@ export default function PSX() {
         </div>
 
         {/* Right panel */}
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <Card>
             <div className="mb-2 flex items-center justify-between">
               <h3 className="text-sm font-semibold text-text-primary">Watchlist</h3>
