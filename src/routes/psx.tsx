@@ -5,9 +5,16 @@ import {
   Plus,
   Star,
   Filter,
+  Info,
   CandlestickChart as CandleIcon,
   LineChart as LineIcon,
 } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Card } from "@/components/Card";
 import { Change } from "@/components/Change";
 import { SignalBadge } from "@/components/SignalBadge";
@@ -86,12 +93,29 @@ export default function PSX() {
   return (
     <div className="mx-auto max-w-7xl space-y-6">
       {/* Index overview */}
+      <TooltipProvider delayDuration={150}>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {INDICES.map((idx) => {
           const spark = generateOHLCV(idx.seed, idx.start, idx.end, 7).map((c) => c.close);
           return (
             <Card key={idx.name}>
-              <div className="text-xs font-medium text-text-secondary">{idx.name}</div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-medium text-text-secondary">{idx.name}</span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      type="button"
+                      aria-label={`What is ${idx.name}?`}
+                      className="text-text-muted transition-colors hover:text-text-secondary"
+                    >
+                      <Info className="h-3.5 w-3.5" />
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-[220px] text-xs leading-relaxed">
+                    {idx.info}
+                  </TooltipContent>
+                </Tooltip>
+              </div>
               <div className="mt-1 font-mono text-lg font-bold tabular-nums text-text-primary">
                 {fmtNum(idx.value)}
               </div>
@@ -105,6 +129,8 @@ export default function PSX() {
           );
         })}
       </div>
+      </TooltipProvider>
+
 
       <div className="grid gap-6 lg:grid-cols-[65fr_35fr]">
         {/* Chart column */}
