@@ -93,8 +93,8 @@ export default function PSX() {
   return (
     <div className="mx-auto max-w-7xl space-y-6">
       {/* Index overview */}
-      <TooltipProvider delayDuration={150}>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+
         {INDICES.map((idx) => {
           const spark = generateOHLCV(idx.seed, idx.start, idx.end, 7).map((c) => c.close);
           return (
