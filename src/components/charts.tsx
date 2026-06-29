@@ -44,6 +44,9 @@ function useChartTheme() {
   };
 }
 
+/** Harmonious, desaturated donut palette for white cards in light mode. */
+export const DONUT_LIGHT_PALETTE = ["#0d8a7e", "#5b7aa6", "#c08a4a", "#9b7aa6", "#94a3b8"];
+
 /** Remap neon dark-theme hexes to deeper, desaturated light-theme equivalents. */
 const LIGHT_SPARK: Record<string, string> = {
   "#00d4aa": "#0d9488",
