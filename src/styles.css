@@ -485,3 +485,60 @@
     }
   }
 }
+
+/* ============================================================
+   Light theme — scoped to .theme-light (applied in-app only).
+   Overrides semantic tokens so the landing page stays dark.
+   ============================================================ */
+.theme-light {
+  --color-background: #f4f6fb;
+  --color-foreground: #0d1424;
+
+  --color-surface: #ffffff;
+  --color-surface-alt: #eef2f8;
+  --color-elevated: #ffffff;
+  --color-border: rgba(15, 23, 42, 0.10);
+  --color-border-hover: rgba(15, 23, 42, 0.18);
+  --color-hover: rgba(15, 23, 42, 0.04);
+  --color-sidebar: #ffffff;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #0d1424;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0d1424;
+
+  --color-ai-tint: #eef2f8;
+
+  --color-secondary: #eef2f8;
+  --color-secondary-foreground: #0d1424;
+  --color-muted: #eef2f8;
+  --color-muted-foreground: #475569;
+  --color-accent: #eef2f8;
+  --color-accent-foreground: #0d1424;
+
+  --color-text-primary: #0d1424;
+  --color-text-secondary: #475569;
+  --color-text-muted: #7c8aa0;
+
+  --color-input: rgba(15, 23, 42, 0.12);
+
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* Glass surfaces use hardcoded white alphas — retune for light */
+.theme-light .glass-card {
+  background: var(--color-surface);
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+.theme-light .glass-card-hover:hover {
+  border-color: rgba(15, 23, 42, 0.16);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+}
+.theme-light .glass-chrome {
+  background: color-mix(in oklab, #ffffff 90%, transparent);
+}
+.theme-light .nav-active {
+  background: rgba(0, 212, 170, 0.10);
+}
