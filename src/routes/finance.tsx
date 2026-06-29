@@ -489,7 +489,7 @@ function Goals() {
               </span>
             </div>
             <div className="mt-2 font-mono text-xs tabular-nums text-text-secondary">
-              Target {fmtPKR(g.target)} · Saved {fmtPKR(g.saved)}
+              {t("Target")} {fmtPKR(g.target)} · {t("Saved")} {fmtPKR(g.saved)}
             </div>
             <div className="mt-2 h-2 overflow-hidden rounded-full bg-elevated">
               <div
@@ -498,11 +498,11 @@ function Goals() {
               />
             </div>
             {g.date && (
-              <div className="mt-2 text-[11px] text-text-muted">Target date: {g.date}</div>
+              <div className="mt-2 text-[11px] text-text-muted">{t("Target date:")} {g.date}</div>
             )}
             <div className="mt-2 rounded-[6px] border-l-2 border-ai bg-ai-tint px-2.5 py-1.5 text-[11px] text-text-secondary">
               <Sparkles className="mr-1 inline h-3 w-3 text-ai" />
-              {g.ai}
+              {t(g.ai)}
             </div>
           </Card>
         );
