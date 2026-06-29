@@ -774,13 +774,15 @@ function Nav() {
                 </a>
               ),
             )}
-            <Link
-              to="/auth"
-              onClick={() => setOpen(false)}
-              className="rounded-[12px] px-4 py-4 text-lg font-medium whitespace-nowrap text-text-secondary transition hover:bg-white/[0.05]"
-            >
-              Log In
-            </Link>
+            {!user && (
+              <Link
+                to="/auth"
+                onClick={() => setOpen(false)}
+                className="rounded-[12px] px-4 py-4 text-lg font-medium whitespace-nowrap text-text-secondary transition hover:bg-white/[0.05]"
+              >
+                Log In
+              </Link>
+            )}
             <div className="flex items-center px-4 py-3">
               <StatusPill />
             </div>
