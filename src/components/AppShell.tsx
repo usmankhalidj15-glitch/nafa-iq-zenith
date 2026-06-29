@@ -23,6 +23,7 @@ import { TICKER_ITEMS, STOCKS } from "@/lib/data";
 import { LEARNING_PATHS, LESSON_CONTENT } from "@/lib/learn-data";
 import { useAuth } from "@/hooks/use-auth";
 import { useTheme } from "@/hooks/use-theme";
+import { useLang } from "@/hooks/use-lang";
 
 const NAV = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard, mobile: "Home" },
