@@ -250,7 +250,11 @@ export default function PSX() {
             </div>
 
             <div className="h-[300px] lg:h-[480px]">
-              <CandlestickChart data={data} height={9999} mas={mas} />
+              {type === "line" ? (
+                <PriceLineChart data={data} height={9999} mas={mas} />
+              ) : (
+                <CandlestickChart data={data} height={9999} mas={mas} />
+              )}
             </div>
           </Card>
 
