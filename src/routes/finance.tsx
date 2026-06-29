@@ -368,6 +368,7 @@ function Transactions() {
 }
 
 function Budgets() {
+  const { t } = useLang();
   const [offset, setOffset] = useState(0);
   const base = new Date();
   const current = new Date(base.getFullYear(), base.getMonth() + offset, 1);
