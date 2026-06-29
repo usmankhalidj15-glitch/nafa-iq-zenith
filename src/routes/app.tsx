@@ -211,9 +211,17 @@ function Dashboard() {
           <h3 className="mb-3 text-sm font-semibold text-text-primary">{t("Spending Breakdown")}</h3>
           <DonutChart data={SPENDING} centerValue="112,050" centerLabel="PKR total" />
           <div className="mt-2 grid grid-cols-2 gap-1.5 text-xs">
-            {SPENDING.map((s) => (
+            {SPENDING.map((s, i) => (
               <span key={s.name} className="flex items-center gap-1.5 text-text-secondary">
-                <span className="h-2 w-2 rounded-full" style={{ background: s.color }} />
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{
+                    background:
+                      theme === "light"
+                        ? DONUT_LIGHT_PALETTE[i % DONUT_LIGHT_PALETTE.length]
+                        : s.color,
+                  }}
+                />
                 {s.name} {s.value}%
               </span>
             ))}
