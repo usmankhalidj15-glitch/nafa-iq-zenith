@@ -258,7 +258,13 @@ function Learn() {
               <p className="mt-2 text-xs leading-relaxed text-text-secondary">{t.def}</p>
             </details>
           ))}
+          {terms.length === 0 && (
+            <div className="rounded-[8px] border border-dashed border-border bg-surface p-6 text-center text-sm text-text-muted">
+              No terms found for “{search}”
+            </div>
+          )}
         </div>
+
       </section>
 
       {flashcards && <FlashcardModal onClose={() => setFlashcards(false)} />}
