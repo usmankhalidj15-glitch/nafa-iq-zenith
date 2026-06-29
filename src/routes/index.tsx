@@ -301,10 +301,10 @@ function PhoneMockup({ startDelay = 0 }: { startDelay?: number }) {
         className="relative will-change-transform"
       >
         <span
-          className="absolute -bottom-8 left-[10%] -z-10 h-1/2 w-4/5 rounded-full"
+          className="absolute -bottom-10 left-1/2 -z-10 h-[70%] w-[120%] -translate-x-1/2 rounded-full"
           style={{
-            background: "radial-gradient(ellipse, rgba(0,212,170,0.25), transparent 70%)",
-            filter: "blur(30px)",
+            background: "radial-gradient(ellipse, rgba(0,212,170,0.45), transparent 70%)",
+            filter: "blur(50px)",
           }}
         />
         <div
