@@ -132,10 +132,10 @@ function PlansPage() {
       <main className="mx-auto max-w-[1100px] px-6 py-14">
         <div className="text-center">
           <h1 className="font-display text-3xl font-extrabold tracking-tight text-text-primary sm:text-5xl">
-            Simple, honest pricing
+            {t("Simple, honest pricing")}
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-            Start free. Upgrade when you're ready for real-time data and unlimited AI insights.
+            {t("Start free. Upgrade when you're ready for real-time data and unlimited AI insights.")}
           </p>
 
           {/* billing toggle */}
@@ -149,7 +149,7 @@ function PlansPage() {
                   : "text-text-secondary hover:text-text-primary",
               )}
             >
-              Monthly
+              {t("Monthly")}
             </button>
             <button
               onClick={() => setBilling("yearly")}
@@ -160,9 +160,9 @@ function PlansPage() {
                   : "text-text-secondary hover:text-text-primary",
               )}
             >
-              Yearly
+              {t("Yearly")}
               <span className="rounded-full bg-gold/15 px-2 py-0.5 text-[10px] font-bold text-gold">
-                SAVE 20%
+                {t("SAVE 20%")}
               </span>
             </button>
           </div>
