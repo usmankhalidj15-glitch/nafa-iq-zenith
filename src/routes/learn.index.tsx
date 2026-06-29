@@ -506,20 +506,22 @@ function FlashcardModal({ onClose }: { onClose: () => void }) {
         ) : (
           <div className="text-center">
             <PartyPopper className="mx-auto h-10 w-10 text-bull" strokeWidth={1.5} />
-            <div className="mt-3 text-lg font-semibold text-text-primary">Deck Complete!</div>
-            <div className="mt-1 text-sm text-text-secondary">You reviewed all {total} terms.</div>
+            <div className="mt-3 text-lg font-semibold text-text-primary">{t("Deck Complete!")}</div>
+            <div className="mt-1 text-sm text-text-secondary">
+              {t("You reviewed all")} {total} {t("terms.")}
+            </div>
             <div className="mt-6 flex items-center justify-center gap-3">
               <button
                 onClick={restart}
                 className="rounded-[8px] bg-bull px-5 py-2.5 text-sm font-semibold text-bull-foreground hover:brightness-110"
               >
-                Restart Deck
+                {t("Restart Deck")}
               </button>
               <button
                 onClick={onClose}
                 className="rounded-[8px] border border-border px-5 py-2.5 text-sm font-medium text-text-secondary hover:bg-hover"
               >
-                Exit
+                {t("Exit")}
               </button>
             </div>
           </div>
