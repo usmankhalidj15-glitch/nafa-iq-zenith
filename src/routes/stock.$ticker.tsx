@@ -173,7 +173,7 @@ function StockDetail() {
       </Card>
 
       <Card>
-        <h3 className="mb-3 text-sm font-semibold text-text-primary">Recent News</h3>
+        <h3 className="mb-3 text-sm font-semibold text-text-primary">{t("Recent News")}</h3>
         <div className="space-y-2">
           {NEWS.map((n) => (
             <div
@@ -184,9 +184,9 @@ function StockDetail() {
                 {n.source[0]}
               </div>
               <div className="flex-1">
-                <div className="text-sm text-text-primary">{n.headline}</div>
+                <div className="text-sm text-text-primary">{t(n.headline)}</div>
                 <div className="text-[11px] text-text-muted">
-                  {n.source} · {n.time}
+                  {n.source} · {t(n.time)}
                 </div>
               </div>
               <span
@@ -197,7 +197,7 @@ function StockDetail() {
                     : "bg-neutral/20 text-text-secondary",
                 )}
               >
-                {n.sentiment}
+                {t(n.sentiment)}
               </span>
             </div>
           ))}
@@ -206,13 +206,13 @@ function StockDetail() {
 
       <div className="flex flex-wrap gap-2">
         <button className="rounded-[10px] border border-white/[0.08] bg-surface px-4 py-2 text-sm font-semibold text-text-primary transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.16]">
-          Add to Watchlist
+          {t("Add to Watchlist")}
         </button>
         <button className="rounded-[10px] bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110">
-          Add to Portfolio
+          {t("Add to Portfolio")}
         </button>
         <button className="rounded-[10px] border border-white/[0.08] bg-surface px-4 py-2 text-sm font-semibold text-text-primary transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.16]">
-          Set Price Alert
+          {t("Set Price Alert")}
         </button>
       </div>
     </div>
