@@ -345,7 +345,7 @@ function Transactions() {
                 <div className="flex-1">
                   <div className="text-sm text-text-primary">{t.merchant}</div>
                   <div className="flex items-center gap-1.5 text-[11px] text-text-muted">
-                    <span className="rounded-[4px] bg-elevated px-1.5 py-0.5">{t.category}</span>
+                    <span className="rounded-[4px] bg-elevated px-1.5 py-0.5">{tr(t.category)}</span>
                     {t.account}
                   </div>
                 </div>
