@@ -368,7 +368,7 @@ export function IncomeExpenseChart({
         <Bar
           dataKey="expense"
           name="Expense"
-          fill="#e5484d"
+          fill={ct.expense}
           radius={[3, 3, 0, 0]}
           isAnimationActive={false}
         />
