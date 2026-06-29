@@ -428,6 +428,7 @@ function BottomNav() {
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [drawer, setDrawer] = useState(false);
   const { profile, user, signOut } = useAuth();
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   async function handleSignOut() {
@@ -436,7 +437,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     navigate({ to: "/auth" });
   }
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background">
+    <div
+      className={cn(
+        "relative min-h-screen overflow-x-hidden bg-background",
+        theme === "light" && "theme-light",
+      )}
+    >
       {/* ambient depth — very subtle brand wash */}
       <div className="ambient-glow -top-40 right-[-12%] h-[420px] w-[420px] bg-primary/[0.03]" />
 
