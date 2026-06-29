@@ -217,7 +217,7 @@ function NotificationBell() {
               onClick={() => setOpen(false)}
               className="text-[11px] text-bull hover:underline"
             >
-              View all
+              {t("View all")}
             </Link>
           </div>
           <ul className="max-h-72 overflow-y-auto">
