@@ -642,6 +642,7 @@ function NavSearch() {
 
 
 function Nav() {
+  const { user } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   useEffect(() => {
