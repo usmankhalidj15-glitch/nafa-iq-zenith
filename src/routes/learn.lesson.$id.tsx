@@ -781,7 +781,7 @@ function QuizView({
             }}
           >
             <span className="font-semibold text-text-primary">
-              {q.options[selected]?.isCorrect ? "Correct! " : "Not quite. "}
+              {q.options[selected]?.isCorrect ? t("Correct! ") : t("Not quite. ")}
             </span>
             {q.q.explanation}
           </div>
@@ -792,7 +792,7 @@ function QuizView({
             onClick={nextQuestion}
             className="mt-5 inline-flex items-center gap-1.5 rounded-[8px] bg-bull px-5 py-2.5 text-sm font-semibold text-bull-foreground hover:brightness-110"
           >
-            {current + 1 >= total ? "See Results" : "Next Question"}{" "}
+            {current + 1 >= total ? t("See Results") : t("Next Question")}{" "}
             <ArrowRight className="h-4 w-4" />
           </button>
         )}
