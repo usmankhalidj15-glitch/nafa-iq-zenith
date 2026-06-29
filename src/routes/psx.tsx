@@ -25,6 +25,7 @@ import {
   type Signal,
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/hooks/use-lang";
 
 export const Route = createFileRoute("/psx")({
   head: () => ({
@@ -55,6 +56,7 @@ function symbolMeta(sym: string) {
 }
 
 export default function PSX() {
+  const { t } = useLang();
   const [sym, setSym] = useState("KSE-100");
   const [tf, setTf] = useState<string>("6M");
   const [type, setType] = useState<"candle" | "line">("candle");
