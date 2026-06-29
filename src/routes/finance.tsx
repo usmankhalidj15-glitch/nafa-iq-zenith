@@ -737,7 +737,7 @@ function Goals() {
               {t(g.ai)}
             </div>
             <button
-              onClick={() => contribute(g.name)}
+              onClick={() => openContribute(g.name)}
               className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-[6px] border border-bull/40 py-1.5 text-xs font-semibold text-bull hover:bg-bull/10"
             >
               <Plus className="h-3.5 w-3.5" />
