@@ -471,20 +471,20 @@ function ReadingView({
         >
           <EmojiIcon emoji={lesson.emoji} size={24} />
         </div>
-        <h1 className="mt-3 text-3xl font-bold text-text-primary">{lesson.title}</h1>
-        <p className="mt-1 text-sm text-text-secondary">{lesson.subtitle}</p>
+        <h1 className="mt-3 text-3xl font-bold text-text-primary">{t(lesson.title)}</h1>
+        <p className="mt-1 text-sm text-text-secondary">{t(lesson.subtitle)}</p>
         <div className="mt-3 flex items-center gap-2 text-xs">
           <span
             className="rounded-[4px] px-2 py-0.5 font-semibold"
             style={{ background: `${ACCENT}1a`, color: ACCENT }}
           >
-            {lesson.level}
+            {t(lesson.level)}
           </span>
           <span className="rounded-[4px] bg-elevated px-2 py-0.5 text-text-secondary">
-            ⏱ {lesson.duration} read
+            ⏱ {lesson.duration} {t("read")}
           </span>
           <span className="rounded-[4px] bg-elevated px-2 py-0.5 text-text-secondary">
-            {lesson.category}
+            {t(lesson.category)}
           </span>
         </div>
       </div>
