@@ -433,6 +433,7 @@ function Budgets() {
 }
 
 function Bills() {
+  const { t } = useLang();
   return (
     <div className="space-y-3">
       {BILLS.map((b) => (
