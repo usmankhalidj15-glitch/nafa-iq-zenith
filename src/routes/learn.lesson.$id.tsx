@@ -688,16 +688,16 @@ function QuizView({
           onClick={onExit}
           className="flex items-center gap-1.5 text-xs text-text-secondary hover:text-text-primary"
         >
-          <ArrowLeft className="h-4 w-4" /> Back to Lesson
+          <ArrowLeft className="h-4 w-4" /> {t("Back to Lesson")}
         </button>
         <span className="inline-flex items-center gap-1.5 rounded-full bg-bull/10 px-3 py-1 text-xs font-semibold text-bull">
-          <Star className="h-3.5 w-3.5" strokeWidth={1.5} /> Up to 50 XP
+          <Star className="h-3.5 w-3.5" strokeWidth={1.5} /> {t("Up to 50 XP")}
         </span>
       </div>
 
-      <div className="mt-4 text-xs text-text-muted">{lesson.title}</div>
+      <div className="mt-4 text-xs text-text-muted">{t(lesson.title)}</div>
       <h2 className="flex items-center gap-2 text-xl font-bold text-text-primary">
-        <Brain className="h-5 w-5" strokeWidth={1.5} /> Knowledge Check
+        <Brain className="h-5 w-5" strokeWidth={1.5} /> {t("Knowledge Check")}
       </h2>
       <div className="mt-3 flex items-center gap-3">
         <div className="flex gap-1.5">
@@ -712,7 +712,7 @@ function QuizView({
           ))}
         </div>
         <span className="text-xs text-text-secondary">
-          Question {current + 1} of {total}
+          {t("Question")} {current + 1} {t("of")} {total}
         </span>
       </div>
 
