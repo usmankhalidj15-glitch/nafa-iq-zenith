@@ -1065,7 +1065,7 @@ function ChatPanel({
             >
               {m.content}
             </div>
-            {i === 0 && <div className="mt-1 text-[10px] text-text-muted">just now</div>}
+            {i === 0 && <div className="mt-1 text-[10px] text-text-muted">{t("just now")}</div>}
           </div>
         ))}
 
