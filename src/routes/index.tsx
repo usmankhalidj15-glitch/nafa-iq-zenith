@@ -71,6 +71,7 @@ import {
 
 import { Tilt3D } from "@/components/Tilt3D";
 import { Particles } from "@/components/Particles";
+import { useAuth } from "@/hooks/use-auth";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -641,6 +642,7 @@ function NavSearch() {
 
 
 function Nav() {
+  const { user } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -708,12 +710,14 @@ function Nav() {
             <StatusPill />
             <NavSearch />
           </div>
-          <Link
-            to="/auth"
-            className="hidden whitespace-nowrap pl-1 text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary md:inline lg:border-l lg:border-white/[0.08] lg:pl-3"
-          >
-            Log In
-          </Link>
+          {!user && (
+            <Link
+              to="/auth"
+              className="hidden whitespace-nowrap pl-1 text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary md:inline lg:border-l lg:border-white/[0.08] lg:pl-3"
+            >
+              Log In
+            </Link>
+          )}
 
           {/* Enter App — dominant CTA, always visible */}
           <Magnetic strength={0.4}>
@@ -726,7 +730,7 @@ function Nav() {
                 to="/app"
                 className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-bull px-4 py-2 text-sm font-semibold text-bull-foreground shadow-[0_0_20px_rgba(0,212,170,0.25)] transition hover:bg-[#00efc0] hover:shadow-[0_0_28px_rgba(0,212,170,0.5)]"
               >
-                Get Started <ArrowRight className="h-4 w-4 shrink-0" />
+                {user ? "Open App" : "Get Started"} <ArrowRight className="h-4 w-4 shrink-0" />
               </Link>
             </motion.div>
           </Magnetic>
@@ -770,13 +774,15 @@ function Nav() {
                 </a>
               ),
             )}
-            <Link
-              to="/auth"
-              onClick={() => setOpen(false)}
-              className="rounded-[12px] px-4 py-4 text-lg font-medium whitespace-nowrap text-text-secondary transition hover:bg-white/[0.05]"
-            >
-              Log In
-            </Link>
+            {!user && (
+              <Link
+                to="/auth"
+                onClick={() => setOpen(false)}
+                className="rounded-[12px] px-4 py-4 text-lg font-medium whitespace-nowrap text-text-secondary transition hover:bg-white/[0.05]"
+              >
+                Log In
+              </Link>
+            )}
             <div className="flex items-center px-4 py-3">
               <StatusPill />
             </div>
@@ -786,7 +792,7 @@ function Nav() {
             onClick={() => setOpen(false)}
             className="mt-auto flex items-center justify-center gap-1 rounded-full bg-bull px-4 py-4 text-base font-semibold text-bull-foreground transition hover:bg-[#00efc0]"
           >
-            Get Started <ArrowRight className="h-5 w-5" />
+            {user ? "Open App" : "Get Started"} <ArrowRight className="h-5 w-5" />
           </Link>
         </div>
       )}
