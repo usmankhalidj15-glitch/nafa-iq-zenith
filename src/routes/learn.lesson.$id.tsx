@@ -163,16 +163,16 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
           to="/learn"
           className="flex shrink-0 items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-text-primary"
         >
-          <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">Learn Hub</span>
+          <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">{t("Learn Hub")}</span>
         </Link>
         <div className="flex-1 truncate text-center text-sm font-semibold text-text-primary">
-          {lesson.title}
+          {t(lesson.title)}
         </div>
         <button
           onClick={() => setChatOpen(true)}
           className="hidden shrink-0 items-center gap-1.5 rounded-[6px] bg-bull/10 px-2.5 py-1 text-xs font-semibold text-bull hover:bg-bull/20 lg:inline-flex xl:hidden"
         >
-          <MessageCircle className="h-3.5 w-3.5" strokeWidth={1.5} /> Ask AI
+          <MessageCircle className="h-3.5 w-3.5" strokeWidth={1.5} /> {t("Ask AI")}
         </button>
         <button
           onClick={() => toggleBookmark(lesson.id)}
