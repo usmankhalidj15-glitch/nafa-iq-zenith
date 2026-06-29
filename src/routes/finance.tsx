@@ -306,18 +306,72 @@ function Overview() {
   );
 }
 
+const CATEGORIES = [
+  "Food & Dining",
+  "Groceries",
+  "Transport",
+  "Utilities",
+  "Shopping",
+  "Subscriptions",
+  "Savings",
+  "Income",
+];
+const ACCOUNTS = ["HBL Current", "Meezan Debit", "Easypaisa", "Meezan Savings"];
+
 function Transactions() {
   const { t: tr } = useLang();
-  const grouped = TRANSACTIONS.reduce<Record<string, typeof TRANSACTIONS>>((acc, t) => {
+  const { transactions } = useFinanceStore();
+  const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
+
+  // add form
+  const [merchant, setMerchant] = useState("");
+  const [amount, setAmount] = useState("");
+  const [kind, setKind] = useState<"expense" | "income">("expense");
+  const [category, setCategory] = useState(CATEGORIES[0]);
+  const [account, setAccount] = useState(ACCOUNTS[0]);
+  const [err, setErr] = useState("");
+
+  const filtered = transactions.filter((t) => {
+    const q = query.toLowerCase();
+    return (
+      !q ||
+      t.merchant.toLowerCase().includes(q) ||
+      t.category.toLowerCase().includes(q) ||
+      t.account.toLowerCase().includes(q)
+    );
+  });
+
+  const grouped = filtered.reduce<Record<string, typeof transactions>>((acc, t) => {
     (acc[t.date] ??= []).push(t);
     return acc;
   }, {});
+
+  const submit = () => {
+    setErr("");
+    const num = Number(amount);
+    if (!merchant.trim()) return setErr(tr("Please enter a merchant name."));
+    if (!amount || Number.isNaN(num) || num <= 0) return setErr(tr("Please enter a valid amount."));
+    financeActions.addTransaction({
+      merchant: merchant.trim(),
+      category: kind === "income" ? "Income" : category,
+      account,
+      amount: kind === "income" ? num : -num,
+    });
+    setMerchant("");
+    setAmount("");
+    setKind("expense");
+    setOpen(false);
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-2">
         <div className="flex flex-1 items-center gap-2 rounded-[6px] border border-border bg-surface px-3 py-2">
           <Search className="h-4 w-4 text-text-muted" />
           <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
             placeholder={tr("Search transactions")}
             className="w-full bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted"
           />
@@ -359,9 +413,80 @@ function Transactions() {
           </Card>
         </div>
       ))}
+
+      <button
+        onClick={() => setOpen(true)}
+        className="safe-bottom fixed right-4 bottom-20 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-bull text-bull-foreground shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:brightness-110 lg:bottom-8"
+      >
+        <Plus className="h-6 w-6" />
+      </button>
+
+      <Modal open={open} onClose={() => setOpen(false)} title={tr("Add Transaction")}>
+        <div className="space-y-3">
+          <div className="flex gap-2">
+            {(["expense", "income"] as const).map((k) => (
+              <button
+                key={k}
+                onClick={() => setKind(k)}
+                className={cn(
+                  "flex-1 rounded-[6px] border py-2 text-sm font-medium capitalize transition",
+                  kind === k
+                    ? "border-primary/40 bg-primary/10 text-primary"
+                    : "border-border text-text-secondary",
+                )}
+              >
+                {tr(k === "expense" ? "Expense" : "Income")}
+              </button>
+            ))}
+          </div>
+          <input
+            value={merchant}
+            onChange={(e) => setMerchant(e.target.value)}
+            placeholder={tr("Merchant / description")}
+            className={fieldClass}
+          />
+          <input
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            inputMode="decimal"
+            placeholder={tr("Amount (PKR)")}
+            className={fieldClass}
+          />
+          {kind === "expense" && (
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className={fieldClass}
+            >
+              {CATEGORIES.filter((c) => c !== "Income").map((c) => (
+                <option key={c} value={c}>
+                  {tr(c)}
+                </option>
+              ))}
+            </select>
+          )}
+          <select
+            value={account}
+            onChange={(e) => setAccount(e.target.value)}
+            className={fieldClass}
+          >
+            {ACCOUNTS.map((a) => (
+              <option key={a}>{a}</option>
+            ))}
+          </select>
+          {err && <div className="text-xs text-bear">{err}</div>}
+          <button
+            onClick={submit}
+            className="w-full rounded-[6px] bg-bull py-2 text-sm font-semibold text-bull-foreground hover:brightness-110"
+          >
+            {tr("Add Transaction")}
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
+
 
 function Budgets() {
   const { t } = useLang();
