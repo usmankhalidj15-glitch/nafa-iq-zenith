@@ -6,6 +6,7 @@ import { SignalBadge } from "@/components/SignalBadge";
 import { CandlestickChart } from "@/components/charts";
 import { STOCKS, generateOHLCV, fmtNum } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/hooks/use-lang";
 
 export const Route = createFileRoute("/stock/$ticker")({
   head: ({ params }) => ({
