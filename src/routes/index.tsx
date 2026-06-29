@@ -71,6 +71,7 @@ import {
 
 import { Tilt3D } from "@/components/Tilt3D";
 import { Particles } from "@/components/Particles";
+import { useAuth } from "@/hooks/use-auth";
 
 export const Route = createFileRoute("/")({
   head: () => ({
