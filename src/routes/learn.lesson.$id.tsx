@@ -1085,7 +1085,7 @@ function ChatPanel({
 
         {loading && (
           <div className="flex items-center gap-2 text-xs text-text-muted">
-            <Sparkles className="h-3.5 w-3.5 animate-pulse text-bull" /> Thinking…
+            <Sparkles className="h-3.5 w-3.5 animate-pulse text-bull" /> {t("Thinking…")}
           </div>
         )}
       </div>
