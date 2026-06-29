@@ -104,11 +104,11 @@ function Alerts() {
               </select>
               <div className="flex gap-2">
                 <select className="rounded-[6px] border border-border bg-elevated px-3 py-2 text-sm text-text-primary">
-                  <option>Above</option>
-                  <option>Below</option>
+                  <option>{t("Above")}</option>
+                  <option>{t("Below")}</option>
                 </select>
                 <input
-                  placeholder="Price"
+                  placeholder={t("Price")}
                   className="w-full rounded-[6px] border border-border bg-elevated px-3 py-2 text-sm text-text-primary outline-none placeholder:text-text-muted"
                 />
               </div>
@@ -130,21 +130,21 @@ function Alerts() {
           <div className="mt-3 flex flex-wrap gap-3 text-xs text-text-secondary">
             <label className="flex items-center gap-1.5">
               <input type="checkbox" defaultChecked className="accent-[#00d4aa]" />
-              Push
+              {t("Push")}
             </label>
             <label className="flex items-center gap-1.5">
               <input type="checkbox" className="accent-[#00d4aa]" />
-              Email
+              {t("Email")}
             </label>
           </div>
           <button className="mt-4 w-full rounded-[6px] bg-bull py-2 text-sm font-semibold text-bull-foreground hover:brightness-110">
-            Create Alert
+            {t("Create Alert")}
           </button>
         </Card>
       </section>
 
       <section>
-        <h3 className="mb-3 text-sm font-semibold text-text-primary">Notification History</h3>
+        <h3 className="mb-3 text-sm font-semibold text-text-primary">{t("Notification History")}</h3>
         <Card className="divide-y divide-border/50 p-0" hover={false}>
           {NOTIFS.map((n, i) => (
             <div key={i} className="flex items-center gap-3 px-3 py-3">
