@@ -291,7 +291,7 @@ export function DonutChart({
 }) {
   const ct = useChartTheme();
   // Harmonious, desaturated palette for white cards in light mode.
-  const lightPalette = ["#0d8a7e", "#5b7aa6", "#c08a4a", "#9b7aa6", "#94a3b8"];
+  const lightPalette = DONUT_LIGHT_PALETTE;
   return (
     <div className="relative">
       <ResponsiveContainer width="100%" height={220}>
