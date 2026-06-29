@@ -14,7 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Card } from "@/components/Card";
 import { Change } from "@/components/Change";
 import { SignalBadge } from "@/components/SignalBadge";
-import { CandlestickChart, Sparkline } from "@/components/charts";
+import { CandlestickChart, PriceLineChart, Sparkline } from "@/components/charts";
 import {
   INDICES,
   STOCKS,
