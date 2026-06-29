@@ -538,14 +538,14 @@ function ReadingView({
           onClick={onTakeQuiz}
           className="inline-flex w-full items-center justify-center gap-2 rounded-[10px] bg-gradient-to-r from-bull to-[#06b6d4] px-8 py-3.5 text-base font-bold text-bull-foreground transition hover:brightness-110"
         >
-          <Brain className="h-5 w-5" /> Test Your Understanding — Take the Quiz
+          <Brain className="h-5 w-5" /> {t("Test Your Understanding — Take the Quiz")}
         </button>
         <p className="mt-2 text-xs text-text-muted">
-          {lesson.quiz.length} questions · Earn up to 50 XP
+          {lesson.quiz.length} {t("questions")} · {t("Earn up to 50 XP")}
         </p>
         {completed && (
           <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-bull">
-            <Check className="h-3.5 w-3.5" strokeWidth={1.5} /> You've completed this lesson
+            <Check className="h-3.5 w-3.5" strokeWidth={1.5} /> {t("You've completed this lesson")}
           </p>
         )}
       </div>
