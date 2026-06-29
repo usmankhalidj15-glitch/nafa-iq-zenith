@@ -132,7 +132,7 @@ function Sidebar() {
 
       {/* utility section — separated from primary nav */}
       <div className="space-y-1 border-t border-white/[0.06] px-3 py-3">
-        <SidebarLink to="/app" label="Settings" icon={Settings} active={false} />
+        <SidebarLink to="/settings" label="Settings" icon={Settings} active={isActive("/settings")} />
       </div>
 
       <div className="flex items-center gap-3 border-t border-white/[0.06] p-3">
@@ -262,7 +262,7 @@ function UserMenu() {
   }
   const items = [
     { label: "Profile", icon: User, to: "/app" as const },
-    { label: "Settings", icon: Settings, to: "/app" as const },
+    { label: "Settings", icon: Settings, to: "/settings" as const },
     { label: "Plans / Upgrade", icon: CreditCard, to: "/plans" as const },
   ];
   return (
