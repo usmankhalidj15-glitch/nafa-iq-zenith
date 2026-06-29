@@ -488,57 +488,208 @@
 
 /* ============================================================
    Light theme — scoped to .theme-light (applied in-app only).
-   Overrides semantic tokens so the landing page stays dark.
+   Premium, Stripe/Linear-grade. Overrides semantic tokens so the
+   landing page and the dark theme stay completely untouched.
    ============================================================ */
 .theme-light {
+  /* Soft, slightly cool-tinted canvas — never pure white */
   --color-background: #f4f6fb;
-  --color-foreground: #0d1424;
+  --color-foreground: #0f172a;
 
+  /* Surfaces */
   --color-surface: #ffffff;
   --color-surface-alt: #eef2f8;
   --color-elevated: #ffffff;
-  --color-border: rgba(15, 23, 42, 0.10);
-  --color-border-hover: rgba(15, 23, 42, 0.18);
-  --color-hover: rgba(15, 23, 42, 0.04);
+  --color-border: rgba(15, 23, 42, 0.08);
+  --color-border-hover: rgba(15, 23, 42, 0.14);
+  --color-hover: rgba(15, 23, 42, 0.045);
   --color-sidebar: #ffffff;
 
   --color-card: #ffffff;
-  --color-card-foreground: #0d1424;
+  --color-card-foreground: #0f172a;
   --color-popover: #ffffff;
-  --color-popover-foreground: #0d1424;
+  --color-popover-foreground: #0f172a;
 
-  --color-ai-tint: #eef2f8;
+  /* Deepened teal — readable & professional on light, not neon */
+  --color-primary: #0d9488;
+  --color-primary-foreground: #ffffff;
+  --color-info: #0d9488;
+
+  /* AI + Learn keep a distinct violet accent in light mode */
+  --color-ai: #7c3aed;
+  --color-ai-tint: #f5f3ff;
+
+  /* Market signals — deepened for contrast on white */
+  --color-bull: #059669;
+  --color-bull-foreground: #ffffff;
+  --color-bear: #dc2626;
+  --color-warning: #b45309;
+  --color-neutral: #64748b;
+
+  /* Gold premium accent — darkened so it reads on white */
+  --color-gold: #a97c12;
+  --color-gold-foreground: #ffffff;
+  --color-gold-hover: #946b0f;
+  --color-gold-muted: #8a6510;
 
   --color-secondary: #eef2f8;
-  --color-secondary-foreground: #0d1424;
+  --color-secondary-foreground: #0f172a;
   --color-muted: #eef2f8;
   --color-muted-foreground: #475569;
   --color-accent: #eef2f8;
-  --color-accent-foreground: #0d1424;
+  --color-accent-foreground: #0f172a;
+  --color-destructive: #dc2626;
 
-  --color-text-primary: #0d1424;
+  /* Strict text hierarchy — never pure black */
+  --color-text-primary: #0f172a;
   --color-text-secondary: #475569;
-  --color-text-muted: #7c8aa0;
+  --color-text-muted: #94a3b8;
 
   --color-input: rgba(15, 23, 42, 0.12);
+  --color-ring: #0d9488;
 
   background-color: var(--color-background);
   color: var(--color-foreground);
 }
 
-/* Glass surfaces use hardcoded white alphas — retune for light */
+/* ---- Cards: depth through layered shadows, not borders ---- */
 .theme-light .glass-card {
   background: var(--color-surface);
-  border-color: rgba(15, 23, 42, 0.08);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+  border-color: transparent;
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.04),
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 4px 12px -2px rgba(15, 23, 42, 0.06),
+    0 14px 32px -10px rgba(15, 23, 42, 0.06);
 }
 .theme-light .glass-card-hover:hover {
-  border-color: rgba(15, 23, 42, 0.16);
-  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+  border-color: transparent;
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.05),
+    0 2px 4px rgba(15, 23, 42, 0.05),
+    0 10px 24px -4px rgba(15, 23, 42, 0.1),
+    0 24px 48px -14px rgba(15, 23, 42, 0.1);
 }
+
+/* Gold premium card — warmer shadow on light */
+.theme-light .glass-gold {
+  border-color: rgba(169, 124, 18, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(169, 124, 18, 0.18),
+    0 10px 28px -8px rgba(169, 124, 18, 0.18),
+    0 18px 40px -16px rgba(15, 23, 42, 0.1);
+}
+.theme-light .gold-glow {
+  box-shadow: 0 0 24px rgba(169, 124, 18, 0.22);
+}
+
+/* ---- Chrome: sidebar reads as a distinct elevated layer ---- */
 .theme-light .glass-chrome {
-  background: color-mix(in oklab, #ffffff 90%, transparent);
+  background: color-mix(in oklab, #ffffff 86%, transparent);
+  backdrop-filter: blur(16px) saturate(120%);
 }
+.theme-light aside.glass-chrome {
+  background: #ffffff;
+  border-right: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow:
+    1px 0 0 rgba(15, 23, 42, 0.02),
+    6px 0 24px -8px rgba(15, 23, 42, 0.1);
+}
+.theme-light header.glass-chrome {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+.theme-light nav.glass-chrome {
+  border-top: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow: 0 -2px 16px -6px rgba(15, 23, 42, 0.12);
+}
+
+/* Active nav item — deepened teal wash + accent bar */
 .theme-light .nav-active {
-  background: rgba(0, 212, 170, 0.10);
+  background: rgba(13, 148, 136, 0.1);
+}
+.theme-light .nav-active::before {
+  background: var(--color-primary);
+}
+
+/* ---- Remap dark-mode white alphas to light slate alphas ---- */
+/* Subtle borders */
+.theme-light .border-white\/\[0\.02\],
+.theme-light .border-white\/\[0\.04\],
+.theme-light .border-white\/\[0\.05\],
+.theme-light .border-white\/5,
+.theme-light .border-white\/\[0\.06\],
+.theme-light .border-white\/\[0\.07\],
+.theme-light .border-white\/\[0\.08\],
+.theme-light .border-white\/\[0\.1\],
+.theme-light .border-white\/10 {
+  border-color: rgba(15, 23, 42, 0.08);
+}
+/* Stronger emphasis borders */
+.theme-light .border-white\/12,
+.theme-light .border-white\/\[0\.12\],
+.theme-light .border-white\/15,
+.theme-light .border-white\/\[0\.16\],
+.theme-light .border-white\/\[0\.2\],
+.theme-light .border-white\/20 {
+  border-color: rgba(15, 23, 42, 0.14);
+}
+/* White elevation fills → subtle slate tints */
+.theme-light .bg-white\/\[0\.02\],
+.theme-light .bg-white\/\[0\.03\],
+.theme-light .bg-white\/\[0\.04\],
+.theme-light .bg-white\/\[0\.05\],
+.theme-light .bg-white\/5,
+.theme-light .bg-white\/\[0\.06\],
+.theme-light .bg-white\/10 {
+  background-color: rgba(15, 23, 42, 0.04);
+}
+.theme-light .divide-white\/\[0\.08\] > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+/* ---- Intentional interactive states on form controls ---- */
+.theme-light input:focus,
+.theme-light select:focus,
+.theme-light textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.16);
+}
+.theme-light :disabled,
+.theme-light [aria-disabled="true"],
+.theme-light [data-disabled] {
+  opacity: 0.5;
+}
+
+/* ---- Ambient background: lighten the glow blobs for light bg ---- */
+.theme-light .ambient-bg {
+  background:
+    radial-gradient(42% 42% at 22% 28%, rgba(13, 148, 136, 0.07), transparent 72%),
+    radial-gradient(38% 38% at 80% 72%, rgba(59, 130, 246, 0.06), transparent 72%),
+    radial-gradient(34% 34% at 60% 18%, rgba(169, 124, 18, 0.05), transparent 70%);
+}
+
+/* ============================================================
+   Always-dark market data strip (PSX live ticker). Dense
+   financial data reads better on a dark surface in any theme.
+   ============================================================ */
+.market-strip {
+  background: #0b1120;
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+}
+.market-strip .market-strip-muted {
+  color: #94a3b8;
+}
+
+/* ============================================================
+   Warm-tinted surface for the Islamic screens (Halal Screener,
+   Zakat Calculator) — intentional personality in light mode.
+   ============================================================ */
+.theme-light .warm-tint {
+  background:
+    radial-gradient(60% 80% at 50% 0%, rgba(169, 124, 18, 0.06), transparent 70%),
+    #faf7f0;
 }

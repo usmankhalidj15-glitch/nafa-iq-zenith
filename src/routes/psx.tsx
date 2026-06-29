@@ -55,6 +55,42 @@ function symbolMeta(sym: string) {
   return { seed: s.seed, start: s.start, end: s.price, vMin: 100, vMax: 600 };
 }
 
+function MarketTicker() {
+  // Always-dark dense data strip — same in dark & light themes.
+  const row = [...STOCK_LIST, ...STOCK_LIST];
+  return (
+    <div className="market-strip overflow-hidden rounded-[10px]">
+      <div className="flex items-stretch">
+        <div className="market-strip flex shrink-0 items-center gap-1.5 rounded-none border-y-0 border-l-0 px-3 text-[11px] font-semibold uppercase tracking-wide">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-bull" />
+          <span className="text-bull">Live</span>
+        </div>
+        <div className="flex-1 overflow-hidden py-2">
+          <div className="flex w-max animate-ticker gap-6 pl-6">
+            {row.map((s, i) => (
+              <span key={i} className="flex items-center gap-2 whitespace-nowrap text-[12px]">
+                <span className="font-semibold text-[#e2e8f0]">{s.ticker}</span>
+                <span className="font-mono tabular-nums market-strip-muted">
+                  {fmtNum(s.price)}
+                </span>
+                <span
+                  className={cn(
+                    "font-mono tabular-nums",
+                    s.changePct >= 0 ? "text-bull" : "text-bear",
+                  )}
+                >
+                  {s.changePct >= 0 ? "+" : ""}
+                  {s.changePct.toFixed(2)}%
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PSX() {
   const { t } = useLang();
   const [sym, setSym] = useState("KSE-100");
@@ -90,6 +126,9 @@ export default function PSX() {
 
   return (
     <div className="mx-auto max-w-7xl space-y-6">
+      {/* Live market ticker — always-dark dense data strip */}
+      <MarketTicker />
+
       {/* Index overview */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {INDICES.map((idx) => {
