@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { TICKER_ITEMS, STOCKS } from "@/lib/data";
 import { LEARNING_PATHS, LESSON_CONTENT } from "@/lib/learn-data";
 import { useAuth } from "@/hooks/use-auth";
+import { useTheme } from "@/hooks/use-theme";
 
 const NAV = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard, mobile: "Home" },
@@ -131,7 +132,7 @@ function Sidebar() {
 
       {/* utility section — separated from primary nav */}
       <div className="space-y-1 border-t border-white/[0.06] px-3 py-3">
-        <SidebarLink to="/app" label="Settings" icon={Settings} active={false} />
+        <SidebarLink to="/settings" label="Settings" icon={Settings} active={isActive("/settings")} />
       </div>
 
       <div className="flex items-center gap-3 border-t border-white/[0.06] p-3">
@@ -261,7 +262,7 @@ function UserMenu() {
   }
   const items = [
     { label: "Profile", icon: User, to: "/app" as const },
-    { label: "Settings", icon: Settings, to: "/app" as const },
+    { label: "Settings", icon: Settings, to: "/settings" as const },
     { label: "Plans / Upgrade", icon: CreditCard, to: "/plans" as const },
   ];
   return (
@@ -428,6 +429,7 @@ function BottomNav() {
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [drawer, setDrawer] = useState(false);
   const { profile, user, signOut } = useAuth();
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   async function handleSignOut() {
@@ -436,7 +438,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     navigate({ to: "/auth" });
   }
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background">
+    <div
+      className={cn(
+        "relative min-h-screen overflow-x-hidden bg-background",
+        theme === "light" && "theme-light",
+      )}
+    >
       {/* ambient depth — very subtle brand wash */}
       <div className="ambient-glow -top-40 right-[-12%] h-[420px] w-[420px] bg-primary/[0.03]" />
 
