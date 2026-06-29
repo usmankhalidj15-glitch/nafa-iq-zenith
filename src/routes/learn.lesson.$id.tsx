@@ -35,6 +35,7 @@ import {
 } from "@/lib/learn-data";
 import { askTutor } from "@/lib/learn-ai.functions";
 import { useLearn } from "@/hooks/use-learn";
+import { useLang } from "@/hooks/use-lang";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/learn/lesson/$id")({
@@ -66,17 +67,18 @@ function shuffle<T>(arr: T[]): T[] {
 function LessonPage() {
   const { id } = useParams({ from: "/learn/lesson/$id" });
   const lesson = LESSON_CONTENT[id];
+  const { t } = useLang();
 
   if (!lesson) {
     return (
       <div className="mx-auto max-w-md py-20 text-center">
         <Inbox className="mx-auto h-8 w-8 text-text-muted" strokeWidth={1.5} />
-        <h1 className="mt-3 text-lg font-semibold text-text-primary">Lesson not found</h1>
+        <h1 className="mt-3 text-lg font-semibold text-text-primary">{t("Lesson not found")}</h1>
         <Link
           to="/learn"
           className="mt-4 inline-block rounded-[8px] bg-bull px-4 py-2 text-sm font-semibold text-bull-foreground"
         >
-          Back to Learn Hub
+          {t("Back to Learn Hub")}
         </Link>
       </div>
     );
@@ -90,6 +92,7 @@ type Mode = "reading" | "quiz" | "results";
 function LessonInner({ lesson }: { lesson: LessonContent }) {
   const navigate = useNavigate();
   const { statusOf, completeLesson, bookmarks, toggleBookmark, xp } = useLearn();
+  const { t } = useLang();
   const [mode, setMode] = useState<Mode>("reading");
   const [progress, setProgress] = useState(0);
   const [activeSection, setActiveSection] = useState(lesson.sections[0]?.id);
@@ -160,16 +163,16 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
           to="/learn"
           className="flex shrink-0 items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-text-primary"
         >
-          <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">Learn Hub</span>
+          <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">{t("Learn Hub")}</span>
         </Link>
         <div className="flex-1 truncate text-center text-sm font-semibold text-text-primary">
-          {lesson.title}
+          {t(lesson.title)}
         </div>
         <button
           onClick={() => setChatOpen(true)}
           className="hidden shrink-0 items-center gap-1.5 rounded-[6px] bg-bull/10 px-2.5 py-1 text-xs font-semibold text-bull hover:bg-bull/20 lg:inline-flex xl:hidden"
         >
-          <MessageCircle className="h-3.5 w-3.5" strokeWidth={1.5} /> Ask AI
+          <MessageCircle className="h-3.5 w-3.5" strokeWidth={1.5} /> {t("Ask AI")}
         </button>
         <button
           onClick={() => toggleBookmark(lesson.id)}
@@ -190,7 +193,7 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
           <aside className="hidden w-[240px] shrink-0 lg:block">
             <div className="sticky top-[110px] rounded-[12px] border border-border bg-surface p-4">
               <div className="text-xs font-semibold uppercase tracking-wide text-text-muted">
-                In This Lesson
+                {t("In This Lesson")}
               </div>
               <nav className="mt-3 space-y-1 border-l border-border">
                 {lesson.sections.map((s) => (
@@ -204,25 +207,25 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
                         : "border-transparent text-text-secondary hover:text-text-primary",
                     )}
                   >
-                    {s.heading}
+                    {t(s.heading)}
                   </button>
                 ))}
               </nav>
               <div className="mt-5 space-y-1.5 border-t border-border pt-4 text-xs text-text-secondary">
                 <div className="flex items-center gap-1.5">
-                  <Sparkles className="h-3.5 w-3.5" strokeWidth={1.5} /> {lesson.duration} read
+                  <Sparkles className="h-3.5 w-3.5" strokeWidth={1.5} /> {lesson.duration} {t("read")}
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Target className="h-3.5 w-3.5" strokeWidth={1.5} /> {lesson.level}
+                  <Target className="h-3.5 w-3.5" strokeWidth={1.5} /> {t(lesson.level)}
                 </div>
                 <div className="flex items-center gap-1.5">
                   {lesson.type === "video" && lesson.videoUrl ? (
                     <>
-                      <Video className="h-3.5 w-3.5" strokeWidth={1.5} /> Video + Article
+                      <Video className="h-3.5 w-3.5" strokeWidth={1.5} /> {t("Video + Article")}
                     </>
                   ) : (
                     <>
-                      <BookOpen className="h-3.5 w-3.5" strokeWidth={1.5} /> Article
+                      <BookOpen className="h-3.5 w-3.5" strokeWidth={1.5} /> {t("Article")}
                     </>
                   )}
                 </div>
@@ -236,7 +239,7 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
                 ) : (
                   <Bookmark className="h-4 w-4" />
                 )}
-                {bookmarked ? "Bookmarked" : "Bookmark Lesson"}
+                {bookmarked ? t("Bookmarked") : t("Bookmark Lesson")}
               </button>
             </div>
           </aside>
@@ -303,7 +306,7 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
       <button
         onClick={() => setChatOpen(true)}
         className="fixed right-4 bottom-20 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-bull text-bull-foreground shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:brightness-110 lg:bottom-8 xl:hidden"
-        aria-label="Ask AI Tutor"
+        aria-label={t("Ask AI Tutor")}
       >
         <Bot className="h-6 w-6" />
       </button>
@@ -322,7 +325,7 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
             <div className="mx-auto mt-2 h-1 w-10 rounded-full bg-border sm:hidden" />
             <div className="flex items-center justify-between border-b border-border px-4 py-3">
               <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary">
-                <Cpu className="h-4 w-4 text-ai" strokeWidth={1.5} /> Ask AI Tutor
+                <Cpu className="h-4 w-4 text-ai" strokeWidth={1.5} /> {t("Ask AI Tutor")}
               </span>
               <button onClick={() => setChatOpen(false)} aria-label="Close">
                 <X className="h-5 w-5 text-text-secondary" />
@@ -453,6 +456,7 @@ function ReadingView({
 }) {
   const prev = prevId ? LESSON_CONTENT[prevId] : null;
   const next = nextId ? LESSON_CONTENT[nextId] : null;
+  const { t } = useLang();
 
   return (
     <div className="learn-fade-in">
@@ -467,20 +471,20 @@ function ReadingView({
         >
           <EmojiIcon emoji={lesson.emoji} size={24} />
         </div>
-        <h1 className="mt-3 text-3xl font-bold text-text-primary">{lesson.title}</h1>
-        <p className="mt-1 text-sm text-text-secondary">{lesson.subtitle}</p>
+        <h1 className="mt-3 text-3xl font-bold text-text-primary">{t(lesson.title)}</h1>
+        <p className="mt-1 text-sm text-text-secondary">{t(lesson.subtitle)}</p>
         <div className="mt-3 flex items-center gap-2 text-xs">
           <span
             className="rounded-[4px] px-2 py-0.5 font-semibold"
             style={{ background: `${ACCENT}1a`, color: ACCENT }}
           >
-            {lesson.level}
+            {t(lesson.level)}
           </span>
           <span className="rounded-[4px] bg-elevated px-2 py-0.5 text-text-secondary">
-            ⏱ {lesson.duration} read
+            ⏱ {lesson.duration} {t("read")}
           </span>
           <span className="rounded-[4px] bg-elevated px-2 py-0.5 text-text-secondary">
-            {lesson.category}
+            {t(lesson.category)}
           </span>
         </div>
       </div>
@@ -494,19 +498,19 @@ function ReadingView({
               onClick={() => setShowArticle(!showArticle)}
               className="inline-flex items-center gap-1.5 rounded-[8px] border border-border px-3 py-1.5 text-xs font-medium text-text-secondary hover:bg-hover"
             >
-              <FileText className="h-3.5 w-3.5" strokeWidth={1.5} /> {showArticle ? "Hide" : "Read"}{" "}
-              Article Version
+              <FileText className="h-3.5 w-3.5" strokeWidth={1.5} /> {showArticle ? t("Hide") : t("Read")}{" "}
+              {t("Article Version")}
             </button>
             <button
               onClick={onMarkWatched}
               className="inline-flex items-center gap-1.5 rounded-[8px] bg-bull/10 px-3 py-1.5 text-xs font-semibold text-bull hover:bg-bull/20"
             >
-              Mark Video as Watched <Check className="h-3.5 w-3.5" strokeWidth={1.5} />
+              {t("Mark Video as Watched")} <Check className="h-3.5 w-3.5" strokeWidth={1.5} />
             </button>
           </div>
           <p className="mt-2 flex items-center gap-1.5 text-xs text-text-muted">
-            <CheckCircle2 className="h-3.5 w-3.5 text-bull" strokeWidth={1.5} /> Watch at least 80%
-            of the video to mark as complete
+            <CheckCircle2 className="h-3.5 w-3.5 text-bull" strokeWidth={1.5} />{" "}
+            {t("Watch at least 80% of the video to mark as complete")}
           </p>
         </div>
       )}
@@ -520,7 +524,7 @@ function ReadingView({
           {lesson.sections.map((s) => (
             <section key={s.id} id={s.id} className="scroll-mt-[120px]">
               <h2 className="mt-10 border-b border-border pb-2 text-[22px] font-bold text-text-primary">
-                {s.heading}
+                {t(s.heading)}
               </h2>
               <Blocks blocks={s.blocks} accent={ACCENT} />
             </section>
@@ -534,14 +538,14 @@ function ReadingView({
           onClick={onTakeQuiz}
           className="inline-flex w-full items-center justify-center gap-2 rounded-[10px] bg-gradient-to-r from-bull to-[#06b6d4] px-8 py-3.5 text-base font-bold text-bull-foreground transition hover:brightness-110"
         >
-          <Brain className="h-5 w-5" /> Test Your Understanding — Take the Quiz
+          <Brain className="h-5 w-5" /> {t("Test Your Understanding — Take the Quiz")}
         </button>
         <p className="mt-2 text-xs text-text-muted">
-          {lesson.quiz.length} questions · Earn up to 50 XP
+          {lesson.quiz.length} {t("questions")} · {t("Earn up to 50 XP")}
         </p>
         {completed && (
           <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-bull">
-            <Check className="h-3.5 w-3.5" strokeWidth={1.5} /> You've completed this lesson
+            <Check className="h-3.5 w-3.5" strokeWidth={1.5} /> {t("You've completed this lesson")}
           </p>
         )}
       </div>
@@ -555,9 +559,9 @@ function ReadingView({
             className="rounded-[8px] border border-border p-3 text-left hover:border-border-hover"
           >
             <div className="flex items-center gap-1 text-[10px] text-text-muted">
-              <ArrowLeft className="h-3 w-3" strokeWidth={1.5} /> Previous
+              <ArrowLeft className="h-3 w-3" strokeWidth={1.5} /> {t("Previous")}
             </div>
-            <div className="text-sm font-medium text-text-primary">{prev.title}</div>
+            <div className="text-sm font-medium text-text-primary">{t(prev.title)}</div>
           </Link>
         ) : (
           <div />
@@ -569,9 +573,9 @@ function ReadingView({
             className="rounded-[8px] border border-border p-3 text-right hover:border-border-hover"
           >
             <div className="flex items-center justify-end gap-1 text-[10px] text-text-muted">
-              Next <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+              {t("Next")} <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
             </div>
-            <div className="text-sm font-medium text-text-primary">{next.title}</div>
+            <div className="text-sm font-medium text-text-primary">{t(next.title)}</div>
           </Link>
         ) : (
           <div />
@@ -583,12 +587,13 @@ function ReadingView({
 
 function VideoPlayer({ url }: { url: string }) {
   const [failed, setFailed] = useState(false);
+  const { t } = useLang();
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-[12px] border border-border bg-elevated">
       {failed ? (
         <div className="flex h-full flex-col items-center justify-center gap-2 text-text-muted">
           <Video className="h-8 w-8" strokeWidth={1.5} />
-          <div className="text-sm">Video loading…</div>
+          <div className="text-sm">{t("Video loading…")}</div>
         </div>
       ) : (
         <iframe
@@ -627,6 +632,7 @@ function QuizView({
   onExit: () => void;
   onFinish: (correct: number) => void;
 }) {
+  const { t } = useLang();
   const [questions] = useState(() => buildShuffled(lesson.quiz));
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
@@ -682,16 +688,16 @@ function QuizView({
           onClick={onExit}
           className="flex items-center gap-1.5 text-xs text-text-secondary hover:text-text-primary"
         >
-          <ArrowLeft className="h-4 w-4" /> Back to Lesson
+          <ArrowLeft className="h-4 w-4" /> {t("Back to Lesson")}
         </button>
         <span className="inline-flex items-center gap-1.5 rounded-full bg-bull/10 px-3 py-1 text-xs font-semibold text-bull">
-          <Star className="h-3.5 w-3.5" strokeWidth={1.5} /> Up to 50 XP
+          <Star className="h-3.5 w-3.5" strokeWidth={1.5} /> {t("Up to 50 XP")}
         </span>
       </div>
 
-      <div className="mt-4 text-xs text-text-muted">{lesson.title}</div>
+      <div className="mt-4 text-xs text-text-muted">{t(lesson.title)}</div>
       <h2 className="flex items-center gap-2 text-xl font-bold text-text-primary">
-        <Brain className="h-5 w-5" strokeWidth={1.5} /> Knowledge Check
+        <Brain className="h-5 w-5" strokeWidth={1.5} /> {t("Knowledge Check")}
       </h2>
       <div className="mt-3 flex items-center gap-3">
         <div className="flex gap-1.5">
@@ -706,7 +712,7 @@ function QuizView({
           ))}
         </div>
         <span className="text-xs text-text-secondary">
-          Question {current + 1} of {total}
+          {t("Question")} {current + 1} {t("of")} {total}
         </span>
       </div>
 
@@ -775,7 +781,7 @@ function QuizView({
             }}
           >
             <span className="font-semibold text-text-primary">
-              {q.options[selected]?.isCorrect ? "Correct! " : "Not quite. "}
+              {q.options[selected]?.isCorrect ? t("Correct! ") : t("Not quite. ")}
             </span>
             {q.q.explanation}
           </div>
@@ -786,7 +792,7 @@ function QuizView({
             onClick={nextQuestion}
             className="mt-5 inline-flex items-center gap-1.5 rounded-[8px] bg-bull px-5 py-2.5 text-sm font-semibold text-bull-foreground hover:brightness-110"
           >
-            {current + 1 >= total ? "See Results" : "Next Question"}{" "}
+            {current + 1 >= total ? t("See Results") : t("Next Question")}{" "}
             <ArrowRight className="h-4 w-4" />
           </button>
         )}
@@ -836,6 +842,7 @@ function ResultsView({
   onBackToLesson: () => void;
   onContinue: () => void;
 }) {
+  const { t } = useLang();
   const total = lesson.quiz.length;
   const pct = (correct / total) * 100;
   const ringColor = correct >= total ? "#00d4aa" : correct >= 2 ? "#f59e0b" : "#ff4d4d";
@@ -857,20 +864,20 @@ function ResultsView({
 
   const message =
     correct >= total
-      ? "Perfect Score! Ustād level understanding!"
+      ? t("Perfect Score! Ustād level understanding!")
       : correct === 2
-        ? "Great work! One more review and you'll nail it."
+        ? t("Great work! One more review and you'll nail it.")
         : correct === 1
-          ? "📖 Keep learning — review the lesson and retry."
-          : "💪 Don't give up — re-read and try again!";
+          ? t("📖 Keep learning — review the lesson and retry.")
+          : t("💪 Don't give up — re-read and try again!");
 
   const r = 52;
   const circ = 2 * Math.PI * r;
 
   return (
     <div className="learn-fade-in mx-auto max-w-2xl text-center">
-      <div className="text-xs text-text-muted">{lesson.title}</div>
-      <h2 className="text-xl font-bold text-text-primary">Quiz Results</h2>
+      <div className="text-xs text-text-muted">{t(lesson.title)}</div>
+      <h2 className="text-xl font-bold text-text-primary">{t("Quiz Results")}</h2>
 
       <div className="relative mx-auto mt-6 h-32 w-32">
         <svg className="h-full w-full -rotate-90" viewBox="0 0 120 120">
@@ -898,8 +905,8 @@ function ResultsView({
 
       <div className="mx-auto mt-5 max-w-sm rounded-[12px] border border-bull/40 bg-bull/10 p-5">
         <div className="font-mono text-3xl font-bold text-bull">+{gain} XP</div>
-        <div className="mt-1 text-xs text-text-secondary">Added to your profile</div>
-        <div className="mt-2 font-mono text-sm tabular-nums text-text-muted">{xpVal} XP total</div>
+        <div className="mt-1 text-xs text-text-secondary">{t("Added to your profile")}</div>
+        <div className="mt-2 font-mono text-sm tabular-nums text-text-muted">{xpVal} {t("XP total")}</div>
       </div>
 
       {/* Review accordion */}
@@ -940,19 +947,19 @@ function ResultsView({
           onClick={onContinue}
           className="inline-flex items-center justify-center gap-1.5 rounded-[8px] bg-bull px-5 py-2.5 text-sm font-semibold text-bull-foreground hover:brightness-110"
         >
-          Continue Learning <ArrowRight className="h-4 w-4" />
+          {t("Continue Learning")} <ArrowRight className="h-4 w-4" />
         </button>
         <button
           onClick={onRetake}
           className="rounded-[8px] border border-border px-5 py-2.5 text-sm font-medium text-text-secondary hover:bg-hover"
         >
-          Retake Quiz
+          {t("Retake Quiz")}
         </button>
         <button
           onClick={onBackToLesson}
           className="rounded-[8px] border border-border px-5 py-2.5 text-sm font-medium text-text-secondary hover:bg-hover"
         >
-          Back to Lesson
+          {t("Back to Lesson")}
         </button>
       </div>
     </div>
@@ -976,10 +983,11 @@ function ChatPanel({
   embedded?: boolean;
 }) {
   const ask = useServerFn(askTutor);
+  const { t } = useLang();
   const [messages, setMessages] = useState<ChatMsg[]>([
     {
       role: "assistant",
-      content: `Hi! I'm here to help you understand ${lesson.title}. What would you like to know?`,
+      content: `${t("Hi! I'm here to help you understand")} ${t(lesson.title)}. ${t("What would you like to know?")}`,
     },
   ]);
   const [input, setInput] = useState("");
@@ -1011,7 +1019,7 @@ function ChatPanel({
       } catch {
         setMessages((m) => [
           ...m,
-          { role: "assistant", content: "Sorry, something went wrong. Please try again." },
+          { role: "assistant", content: t("Sorry, something went wrong. Please try again.") },
         ]);
       } finally {
         setLoading(false);
@@ -1034,12 +1042,12 @@ function ChatPanel({
           <span className="flex h-6 w-6 items-center justify-center rounded-full bg-bull/15 text-bull">
             <Bot className="h-3.5 w-3.5" />
           </span>
-          AI Tutor
+          {t("AI Tutor")}
         </div>
         <div className="mt-0.5 flex items-center gap-2">
-          <span className="text-[11px] text-text-secondary">Ask anything about this lesson</span>
+          <span className="text-[11px] text-text-secondary">{t("Ask anything about this lesson")}</span>
           <span className="rounded-full bg-ai/15 px-1.5 py-0.5 text-[9px] font-semibold text-ai">
-            Powered by AI
+            {t("Powered by AI")}
           </span>
         </div>
       </div>
@@ -1057,7 +1065,7 @@ function ChatPanel({
             >
               {m.content}
             </div>
-            {i === 0 && <div className="mt-1 text-[10px] text-text-muted">just now</div>}
+            {i === 0 && <div className="mt-1 text-[10px] text-text-muted">{t("just now")}</div>}
           </div>
         ))}
 
@@ -1069,7 +1077,7 @@ function ChatPanel({
                 onClick={() => send(p)}
                 className="block w-full rounded-full border border-border px-3 py-1.5 text-left text-[11px] text-text-secondary hover:border-bull hover:text-bull"
               >
-                {p}
+                {t(p)}
               </button>
             ))}
           </div>
@@ -1077,7 +1085,7 @@ function ChatPanel({
 
         {loading && (
           <div className="flex items-center gap-2 text-xs text-text-muted">
-            <Sparkles className="h-3.5 w-3.5 animate-pulse text-bull" /> Thinking…
+            <Sparkles className="h-3.5 w-3.5 animate-pulse text-bull" /> {t("Thinking…")}
           </div>
         )}
       </div>
@@ -1087,7 +1095,7 @@ function ChatPanel({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && send(input)}
-          placeholder="Ask about this lesson…"
+          placeholder={t("Ask about this lesson…")}
           className="flex-1 rounded-[8px] border border-border bg-elevated px-3 py-2 text-sm text-text-primary outline-none placeholder:text-text-muted"
         />
         <button
