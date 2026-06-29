@@ -25,6 +25,7 @@ import {
   type Signal,
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/hooks/use-lang";
 
 export const Route = createFileRoute("/psx")({
   head: () => ({
@@ -55,6 +56,7 @@ function symbolMeta(sym: string) {
 }
 
 export default function PSX() {
+  const { t } = useLang();
   const [sym, setSym] = useState("KSE-100");
   const [tf, setTf] = useState<string>("6M");
   const [type, setType] = useState<"candle" | "line">("candle");
@@ -239,7 +241,7 @@ export default function PSX() {
           <Card>
             <div className="mb-3 flex items-center gap-2">
               <Filter className="h-4 w-4 text-text-secondary" />
-              <h3 className="text-sm font-semibold text-text-primary">Stock Screener</h3>
+              <h3 className="text-sm font-semibold text-text-primary">{t("Stock Screener")}</h3>
             </div>
             <div className="mb-3 flex flex-wrap gap-1.5">
               {(
@@ -263,14 +265,14 @@ export default function PSX() {
               <table className="w-full min-w-[640px] text-xs">
                 <thead>
                   <tr className="border-b border-border text-left text-text-muted">
-                    <th className="py-2">Stock</th>
-                    <th>Sector</th>
-                    <th className="text-right">Price</th>
-                    <th className="text-right">Change</th>
-                    <th className="text-center">Signal</th>
+                    <th className="py-2">{t("Stock")}</th>
+                    <th>{t("Sector")}</th>
+                    <th className="text-right">{t("Price")}</th>
+                    <th className="text-right">{t("Change")}</th>
+                    <th className="text-center">{t("Signal")}</th>
                     <th className="text-right">RSI</th>
-                    <th className="text-right">Volume</th>
-                    <th className="pr-2 text-right">Mkt Cap</th>
+                    <th className="text-right">{t("Volume")}</th>
+                    <th className="pr-2 text-right">{t("Mkt Cap")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -331,10 +333,10 @@ export default function PSX() {
         <div className="min-w-0 space-y-4">
           <Card>
             <div className="mb-2 flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-text-primary">Watchlist</h3>
+              <h3 className="text-sm font-semibold text-text-primary">{t("Watchlist")}</h3>
               <button className="flex items-center gap-1 text-xs font-medium text-bull">
                 <Plus className="h-3.5 w-3.5" />
-                Add Stock
+                {t("Add Stock")}
               </button>
             </div>
             <div className="space-y-1">
@@ -402,7 +404,7 @@ export default function PSX() {
           </Card>
 
           <Card>
-            <h3 className="mb-2 text-sm font-semibold text-text-primary">Sector Heatmap</h3>
+            <h3 className="mb-2 text-sm font-semibold text-text-primary">{t("Sector Heatmap")}</h3>
             <div className="grid grid-cols-3 gap-1.5">
               {SECTORS.map((s) => {
                 const up = s.pct >= 0;

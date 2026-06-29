@@ -18,6 +18,7 @@ import { IncomeExpenseChart, Sparkline } from "@/components/charts";
 import { fmtPKR } from "@/lib/data";
 import { TRANSACTIONS, BUDGETS, BILLS, GOALS, INCOME_EXPENSE } from "@/lib/finance-data";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/hooks/use-lang";
 
 export const Route = createFileRoute("/finance")({
   head: () => ({
@@ -47,30 +48,31 @@ const CAT_COLOR: Record<string, string> = {
 };
 
 function Finance() {
+  const { t: tr } = useLang();
   const [tab, setTab] = useState<Tab>("Overview");
   return (
     <div className="mx-auto max-w-6xl space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">
-          Personal Finance
+          {tr("Personal Finance")}
         </h1>
         <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-surface/60 backdrop-blur-md">
           <span className="h-2 w-2 animate-pulse rounded-full bg-bull" />
         </div>
       </div>
       <div className="scrollbar-none flex gap-1 overflow-x-auto rounded-[10px] border border-white/[0.06] bg-surface p-1">
-        {TABS.map((t) => (
+        {TABS.map((tb) => (
           <button
-            key={t}
-            onClick={() => setTab(t)}
+            key={tb}
+            onClick={() => setTab(tb)}
             className={cn(
               "shrink-0 rounded-lg px-4 py-1.5 text-sm font-medium transition-colors",
-              tab === t
+              tab === tb
                 ? "bg-primary/10 text-primary"
                 : "text-text-secondary hover:text-text-primary",
             )}
           >
-            {t}
+            {tr(tb)}
           </button>
         ))}
       </div>
@@ -156,14 +158,16 @@ function KpiCard({
 }
 
 function KpiLabel({ children }: { children: React.ReactNode }) {
+  const { t } = useLang();
   return (
     <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-text-muted">
-      {children}
+      {typeof children === "string" ? t(children) : children}
     </div>
   );
 }
 
 function Overview() {
+  const { t } = useLang();
   const income = useCountUp(47500);
   const expenses = useCountUp(18675);
   const savings = useCountUp(28825);
@@ -231,7 +235,7 @@ function Overview() {
             PKR <span ref={savings.ref}>{savings.formatted}</span>
           </div>
           <div className="mt-3 flex items-center justify-between gap-2">
-            <span className="text-[10px] text-text-muted sm:text-[11px]">Saved this month</span>
+            <span className="text-[10px] text-text-muted sm:text-[11px]">{t("Saved this month")}</span>
             <span className="text-[10px] text-bull/80 sm:text-[11px]">+PKR 4,825</span>
           </div>
         </KpiCard>

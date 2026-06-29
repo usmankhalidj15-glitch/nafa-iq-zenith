@@ -10,6 +10,7 @@ import { STOCKS, WATCHLIST, generateOHLCV, fmtPKR } from "@/lib/data";
 import { SPENDING, GOALS } from "@/lib/finance-data";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
+import { useLang } from "@/hooks/use-lang";
 
 export const Route = createFileRoute("/app")({
   head: () => ({
@@ -64,6 +65,7 @@ function formatToday() {
 
 function Dashboard() {
   const { profile, user } = useAuth();
+  const { t } = useLang();
   const firstName = (profile?.display_name || user?.email?.split("@")[0] || "Investor").split(
     " ",
   )[0];
@@ -90,13 +92,13 @@ function Dashboard() {
             to="/psx"
             className="rounded-lg bg-primary px-3.5 py-2 text-[13px] font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110"
           >
-            Explore PSX
+            {t("Explore PSX")}
           </Link>
           <Link
             to="/finance"
             className="rounded-lg border border-white/[0.08] bg-surface px-3.5 py-2 text-[13px] font-semibold text-text-primary transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.16]"
           >
-            Add Transaction
+            {t("Add Transaction")}
           </Link>
         </div>
       </div>
@@ -110,7 +112,7 @@ function Dashboard() {
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2.5">
-                <h2 className="text-sm font-semibold text-text-primary">AI Recommendation</h2>
+                <h2 className="text-sm font-semibold text-text-primary">{t("AI Recommendation")}</h2>
                 <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
                   92% confidence
                 </span>
@@ -128,13 +130,13 @@ function Dashboard() {
                 to="/psx"
                 className="rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition hover:brightness-110"
               >
-                View
+                {t("View")}
               </Link>
               <button
                 onClick={() => setShowAI(false)}
                 className="rounded-lg px-3 py-1.5 text-xs text-text-muted transition hover:bg-white/[0.04] hover:text-text-primary"
               >
-                Dismiss
+                {t("Dismiss")}
               </button>
             </div>
           </div>
@@ -144,7 +146,7 @@ function Dashboard() {
       {/* Metric cards — Net Worth primary, rest secondary */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         <Card className="lg:col-span-6">
-          <div className="text-[13px] font-medium text-text-secondary">Total Net Worth</div>
+          <div className="text-[13px] font-medium text-text-secondary">{t("Total Net Worth")}</div>
           <div className="mt-3 font-mono text-4xl font-bold tabular-nums text-text-primary">
             {fmtPKR(4280500)}
           </div>
@@ -173,7 +175,7 @@ function Dashboard() {
       <div className="grid gap-4 lg:grid-cols-5">
         <Card className="lg:col-span-3">
           <div className="mb-3 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-text-primary">Portfolio Value</h3>
+            <h3 className="text-sm font-semibold text-text-primary">{t("Portfolio Value")}</h3>
             <div className="flex gap-1">
               {RANGES.map((r) => (
                 <button
@@ -204,7 +206,7 @@ function Dashboard() {
           </div>
         </Card>
         <Card className="lg:col-span-2">
-          <h3 className="mb-3 text-sm font-semibold text-text-primary">Spending Breakdown</h3>
+          <h3 className="mb-3 text-sm font-semibold text-text-primary">{t("Spending Breakdown")}</h3>
           <DonutChart data={SPENDING} centerValue="112,050" centerLabel="PKR total" />
           <div className="mt-2 grid grid-cols-2 gap-1.5 text-xs">
             {SPENDING.map((s) => (
@@ -219,7 +221,7 @@ function Dashboard() {
 
       {/* Watchlist strip */}
       <section>
-        <h3 className="mb-3 text-sm font-semibold text-text-primary">Watchlist</h3>
+        <h3 className="mb-3 text-sm font-semibold text-text-primary">{t("Watchlist")}</h3>
         <div className="scrollbar-none flex gap-3 overflow-x-auto pb-1">
           {WATCHLIST.map((tk) => {
             const s = STOCKS[tk];
@@ -250,7 +252,7 @@ function Dashboard() {
 
       {/* Savings goals */}
       <section>
-        <h3 className="mb-3 text-sm font-semibold text-text-primary">Savings Goals</h3>
+        <h3 className="mb-3 text-sm font-semibold text-text-primary">{t("Savings Goals")}</h3>
         <div className="scrollbar-none flex gap-4 overflow-x-auto py-3 lg:grid lg:grid-cols-3">
           {GOALS.slice(0, 3).map((g) => {
             const pct = Math.round((g.saved / g.target) * 100);

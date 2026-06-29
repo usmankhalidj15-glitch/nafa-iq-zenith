@@ -5,6 +5,7 @@ import { Card } from "@/components/Card";
 import { EmojiIcon } from "@/components/icons";
 import { ALERTS, NOTIFS } from "@/lib/finance-data";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/hooks/use-lang";
 
 export const Route = createFileRoute("/alerts")({
   head: () => ({
@@ -27,15 +28,16 @@ const TYPES = [
 ];
 
 function Alerts() {
+  const { t } = useLang();
   const [alerts, setAlerts] = useState(ALERTS);
   const [type, setType] = useState("Stock Price");
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
-      <h1 className="text-2xl font-bold text-text-primary sm:text-3xl">Alerts</h1>
+      <h1 className="text-2xl font-bold text-text-primary sm:text-3xl">{t("Alerts")}</h1>
 
       <section>
-        <h3 className="mb-3 text-sm font-semibold text-text-primary">Active Alerts</h3>
+        <h3 className="mb-3 text-sm font-semibold text-text-primary">{t("Active Alerts")}</h3>
         <div className="space-y-2">
           {alerts.map((a, i) => (
             <Card key={i} className="flex items-center gap-3">
@@ -73,22 +75,22 @@ function Alerts() {
       </section>
 
       <section>
-        <h3 className="mb-3 text-sm font-semibold text-text-primary">Add New Alert</h3>
+        <h3 className="mb-3 text-sm font-semibold text-text-primary">{t("Add New Alert")}</h3>
         <Card>
           <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-            {TYPES.map((t) => (
+            {TYPES.map((ty) => (
               <button
-                key={t.label}
-                onClick={() => setType(t.label)}
+                key={ty.label}
+                onClick={() => setType(ty.label)}
                 className={cn(
                   "flex flex-col items-center gap-1.5 rounded-[10px] border p-3 text-xs font-medium transition",
-                  type === t.label
+                  type === ty.label
                     ? "border-primary/40 bg-primary/10 text-primary"
                     : "border-white/[0.06] text-text-secondary hover:bg-white/[0.04]",
                 )}
               >
-                <t.icon className="h-5 w-5" strokeWidth={1.75} />
-                {t.label}
+                <ty.icon className="h-5 w-5" strokeWidth={1.75} />
+                {t(ty.label)}
               </button>
             ))}
           </div>
@@ -102,11 +104,11 @@ function Alerts() {
               </select>
               <div className="flex gap-2">
                 <select className="rounded-[6px] border border-border bg-elevated px-3 py-2 text-sm text-text-primary">
-                  <option>Above</option>
-                  <option>Below</option>
+                  <option>{t("Above")}</option>
+                  <option>{t("Below")}</option>
                 </select>
                 <input
-                  placeholder="Price"
+                  placeholder={t("Price")}
                   className="w-full rounded-[6px] border border-border bg-elevated px-3 py-2 text-sm text-text-primary outline-none placeholder:text-text-muted"
                 />
               </div>
@@ -128,21 +130,21 @@ function Alerts() {
           <div className="mt-3 flex flex-wrap gap-3 text-xs text-text-secondary">
             <label className="flex items-center gap-1.5">
               <input type="checkbox" defaultChecked className="accent-[#00d4aa]" />
-              Push
+              {t("Push")}
             </label>
             <label className="flex items-center gap-1.5">
               <input type="checkbox" className="accent-[#00d4aa]" />
-              Email
+              {t("Email")}
             </label>
           </div>
           <button className="mt-4 w-full rounded-[6px] bg-bull py-2 text-sm font-semibold text-bull-foreground hover:brightness-110">
-            Create Alert
+            {t("Create Alert")}
           </button>
         </Card>
       </section>
 
       <section>
-        <h3 className="mb-3 text-sm font-semibold text-text-primary">Notification History</h3>
+        <h3 className="mb-3 text-sm font-semibold text-text-primary">{t("Notification History")}</h3>
         <Card className="divide-y divide-border/50 p-0" hover={false}>
           {NOTIFS.map((n, i) => (
             <div key={i} className="flex items-center gap-3 px-3 py-3">
