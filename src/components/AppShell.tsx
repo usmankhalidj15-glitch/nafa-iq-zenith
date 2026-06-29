@@ -186,6 +186,7 @@ function StockSearch() {
 }
 
 function NotificationBell() {
+  const { t } = useLang();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
