@@ -905,8 +905,8 @@ function ResultsView({
 
       <div className="mx-auto mt-5 max-w-sm rounded-[12px] border border-bull/40 bg-bull/10 p-5">
         <div className="font-mono text-3xl font-bold text-bull">+{gain} XP</div>
-        <div className="mt-1 text-xs text-text-secondary">Added to your profile</div>
-        <div className="mt-2 font-mono text-sm tabular-nums text-text-muted">{xpVal} XP total</div>
+        <div className="mt-1 text-xs text-text-secondary">{t("Added to your profile")}</div>
+        <div className="mt-2 font-mono text-sm tabular-nums text-text-muted">{xpVal} {t("XP total")}</div>
       </div>
 
       {/* Review accordion */}
