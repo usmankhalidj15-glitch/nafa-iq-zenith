@@ -9,11 +9,7 @@ import {
   CandlestickChart as CandleIcon,
   LineChart as LineIcon,
 } from "lucide-react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 import { Card } from "@/components/Card";
 import { Change } from "@/components/Change";
@@ -94,7 +90,6 @@ export default function PSX() {
     <div className="mx-auto max-w-7xl space-y-6">
       {/* Index overview */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-
         {INDICES.map((idx) => {
           const spark = generateOHLCV(idx.seed, idx.start, idx.end, 7).map((c) => c.close);
           return (
@@ -115,7 +110,6 @@ export default function PSX() {
                     {idx.info}
                   </PopoverContent>
                 </Popover>
-
               </div>
               <div className="mt-1 font-mono text-lg font-bold tabular-nums text-text-primary">
                 {fmtNum(idx.value)}
@@ -131,12 +125,9 @@ export default function PSX() {
         })}
       </div>
 
-
-
       <div className="grid min-w-0 gap-6 lg:grid-cols-[65fr_35fr]">
         {/* Chart column */}
         <div className="min-w-0 space-y-4">
-
           <Card hover={false} className="bg-surface-alt p-3">
             {/* Toolbar */}
             <div className="mb-3 flex flex-wrap items-center gap-2">
@@ -168,7 +159,6 @@ export default function PSX() {
                 ))}
               </div>
               <div className="flex flex-wrap gap-1 sm:ml-auto">
-
                 <button
                   onClick={() => setType("candle")}
                   className={cn(
@@ -291,7 +281,7 @@ export default function PSX() {
                     >
                       <td className="py-2">
                         <Link
-                          to="/psx/$ticker"
+                          to="/stock/$ticker"
                           params={{ ticker: s.ticker }}
                           className="font-semibold text-bull"
                         >
@@ -352,7 +342,7 @@ export default function PSX() {
                 const s = STOCKS[tk];
                 return (
                   <Link
-                    to="/psx/$ticker"
+                    to="/stock/$ticker"
                     params={{ ticker: tk }}
                     key={tk}
                     className="flex items-center gap-2 rounded-[6px] px-2 py-1.5 hover:bg-hover"

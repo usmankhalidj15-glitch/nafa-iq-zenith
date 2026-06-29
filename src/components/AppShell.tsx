@@ -352,8 +352,7 @@ function Breadcrumbs() {
   if (segments[0] === "learn" && segments[1] === "lesson" && segments[2]) {
     const id = decodeURIComponent(segments[2]);
     const lesson = LESSON_CONTENT[id];
-    const pathName =
-      LEARNING_PATHS.find((p) => p.lessonIds.includes(id))?.title ?? "Lessons";
+    const pathName = LEARNING_PATHS.find((p) => p.lessonIds.includes(id))?.title ?? "Lessons";
     crumbs = [
       { href: "/learn", label: "Learn Hub", last: false },
       { href: "/learn", label: pathName, last: false },

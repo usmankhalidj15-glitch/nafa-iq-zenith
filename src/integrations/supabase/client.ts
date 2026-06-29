@@ -5,11 +5,9 @@ import type { Database } from "./types";
 function createSupabaseClient() {
   // Use Vite environment variables on the client
   // Fall back to process.env for SSR if needed
-  const SUPABASE_URL =
-    import.meta.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
+  const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
 
-  const SUPABASE_ANON_KEY =
-    import.meta.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
+  const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
 
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     const missing = [
@@ -17,9 +15,7 @@ function createSupabaseClient() {
       ...(!SUPABASE_ANON_KEY ? ["VITE_SUPABASE_ANON_KEY"] : []),
     ];
 
-    const message = `Missing Supabase environment variable(s): ${missing.join(
-      ", "
-    )}`;
+    const message = `Missing Supabase environment variable(s): ${missing.join(", ")}`;
 
     console.error(`[Supabase] ${message}`);
     throw new Error(message);
@@ -38,15 +34,12 @@ let _supabase: ReturnType<typeof createSupabaseClient> | undefined;
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
-export const supabase = new Proxy(
-  {} as ReturnType<typeof createSupabaseClient>,
-  {
-    get(_, prop, receiver) {
-      if (!_supabase) {
-        _supabase = createSupabaseClient();
-      }
+export const supabase = new Proxy({} as ReturnType<typeof createSupabaseClient>, {
+  get(_, prop, receiver) {
+    if (!_supabase) {
+      _supabase = createSupabaseClient();
+    }
 
-      return Reflect.get(_supabase, prop, receiver);
-    },
-  }
-);
+    return Reflect.get(_supabase, prop, receiver);
+  },
+});

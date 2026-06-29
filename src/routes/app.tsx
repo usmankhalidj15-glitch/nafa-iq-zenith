@@ -41,15 +41,7 @@ function portfolioSeries(months: number) {
   return out;
 }
 
-const WEEKDAYS = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const MONTHS = [
   "January",
   "February",
@@ -69,7 +61,6 @@ function formatToday() {
   const d = new Date();
   return `${WEEKDAYS[d.getDay()]}, ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
 }
-
 
 function Dashboard() {
   const { profile, user } = useAuth();
@@ -91,8 +82,7 @@ function Dashboard() {
             Asalam-o-Alaikum, {firstName}
           </h1>
           <p className="mt-0.5 text-[13px] text-text-secondary">
-            {formatToday()}{" "}
-            · KSE-100 <span className="font-mono text-bull">+1.24%</span> today
+            {formatToday()} · KSE-100 <span className="font-mono text-bull">+1.24%</span> today
           </p>
         </div>
         <div className="flex shrink-0 gap-2">

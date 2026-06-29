@@ -59,26 +59,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   async function loadProfile(userId: string) {
-  const { data, error } = await supabase
-    .from("profiles")
-    .select("id, display_name, plan, avatar_url")
-    .eq("id", userId)
-    .maybeSingle();
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("id, display_name, plan, avatar_url")
+      .eq("id", userId)
+      .maybeSingle();
 
-  console.log("========== PROFILE DEBUG ==========");
-  console.log("User ID:", userId);
-  console.log("Profile Data:", data);
-  console.log("Profile Error:", error);
+    console.log("========== PROFILE DEBUG ==========");
+    console.log("User ID:", userId);
+    console.log("Profile Data:", data);
+    console.log("Profile Error:", error);
 
-  if (data) {
-    setProfile(data as Profile);
+    if (data) {
+      setProfile(data as Profile);
+    }
   }
-}
 
-  const signInWithPassword: AuthContextValue["signInWithPassword"] = async (
-    email,
-    password,
-  ) => {
+  const signInWithPassword: AuthContextValue["signInWithPassword"] = async (email, password) => {
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,

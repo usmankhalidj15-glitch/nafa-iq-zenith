@@ -609,12 +609,7 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
     quiz: [
       {
         q: "On a sector heatmap, what does a deep red tile indicate?",
-        options: [
-          "A large gain",
-          "A large loss",
-          "No change",
-          "A halted stock",
-        ],
+        options: ["A large gain", "A large loss", "No change", "A halted stock"],
         correct: 1,
         explanation: "Red means a decline, and a deeper shade indicates a bigger loss.",
       },
@@ -689,9 +684,17 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
             head: ["Pattern", "Signals", "What it means"],
             rows: [
               ["Bullish Engulfing", "Reversal up", "A big green candle swallows the prior red one"],
-              ["Bearish Engulfing", "Reversal down", "A big red candle swallows the prior green one"],
+              [
+                "Bearish Engulfing",
+                "Reversal down",
+                "A big red candle swallows the prior green one",
+              ],
               ["Hammer", "Reversal up", "Long lower wick — sellers pushed down, buyers won back"],
-              ["Shooting Star", "Reversal down", "Long upper wick — buyers pushed up, sellers reclaimed"],
+              [
+                "Shooting Star",
+                "Reversal down",
+                "Long upper wick — buyers pushed up, sellers reclaimed",
+              ],
               ["Morning Star", "Reversal up", "Three candles: drop, pause, strong recovery"],
             ],
           },
@@ -779,9 +782,7 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
           },
           {
             type: "formula",
-            lines: [
-              "Salary 100,000 → Needs 50,000 | Wants 30,000 | Save 20,000",
-            ],
+            lines: ["Salary 100,000 → Needs 50,000 | Wants 30,000 | Save 20,000"],
           },
         ],
       },
@@ -841,7 +842,8 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
           "An upgraded smartphone",
         ],
         correct: 2,
-        explanation: "Rent and utilities are essential and can't reasonably be skipped — they're needs.",
+        explanation:
+          "Rent and utilities are essential and can't reasonably be skipped — they're needs.",
       },
       {
         q: "What's the smartest way to apply the rule with high inflation?",
@@ -1008,7 +1010,11 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
             type: "table",
             head: ["Screen", "Common threshold", "Why it exists"],
             rows: [
-              ["Interest-bearing debt ÷ assets", "< 37%", "Limits reliance on riba-based borrowing"],
+              [
+                "Interest-bearing debt ÷ assets",
+                "< 37%",
+                "Limits reliance on riba-based borrowing",
+              ],
               ["Interest income ÷ revenue", "< 5%", "Keeps haram income immaterial"],
               ["Non-compliant investments", "Below set limit", "Avoids indirect haram exposure"],
             ],
