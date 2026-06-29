@@ -632,6 +632,7 @@ function QuizView({
   onExit: () => void;
   onFinish: (correct: number) => void;
 }) {
+  const { t } = useLang();
   const [questions] = useState(() => buildShuffled(lesson.quiz));
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
