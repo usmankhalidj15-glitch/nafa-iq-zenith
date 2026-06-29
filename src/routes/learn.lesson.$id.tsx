@@ -983,10 +983,11 @@ function ChatPanel({
   embedded?: boolean;
 }) {
   const ask = useServerFn(askTutor);
+  const { t } = useLang();
   const [messages, setMessages] = useState<ChatMsg[]>([
     {
       role: "assistant",
-      content: `Hi! I'm here to help you understand ${lesson.title}. What would you like to know?`,
+      content: `${t("Hi! I'm here to help you understand")} ${t(lesson.title)}. ${t("What would you like to know?")}`,
     },
   ]);
   const [input, setInput] = useState("");
