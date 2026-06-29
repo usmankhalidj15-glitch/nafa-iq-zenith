@@ -524,7 +524,7 @@ function ReadingView({
           {lesson.sections.map((s) => (
             <section key={s.id} id={s.id} className="scroll-mt-[120px]">
               <h2 className="mt-10 border-b border-border pb-2 text-[22px] font-bold text-text-primary">
-                {s.heading}
+                {t(s.heading)}
               </h2>
               <Blocks blocks={s.blocks} accent={ACCENT} />
             </section>
