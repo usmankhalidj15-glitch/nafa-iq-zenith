@@ -154,8 +154,6 @@ const UR: Record<string, string> = {
   "Goal Milestone": "ہدف سنگ میل",
   "Create Alert": "الرٹ بنائیں",
   Push: "پش",
-  Email: "ای میل",
-  Price: "قیمت",
 };
 
 export function translate(lang: Lang, key: string): string {
