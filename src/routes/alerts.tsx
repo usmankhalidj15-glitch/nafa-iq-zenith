@@ -45,9 +45,9 @@ function Alerts() {
                 <EmojiIcon emoji={a.emoji} size={16} />
               </span>
               <div className="flex-1">
-                <div className="text-sm font-medium text-text-primary">{a.title}</div>
+                <div className="text-sm font-medium text-text-primary">{t(a.title)}</div>
                 <div className="text-[11px] text-text-muted">
-                  {a.type} · {a.meta}
+                  {t(a.type)} · {t(a.meta)}
                 </div>
               </div>
               <button
