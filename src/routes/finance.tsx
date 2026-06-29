@@ -483,7 +483,7 @@ function Goals() {
               <span className="flex h-9 w-9 items-center justify-center rounded-[8px] border border-bull/20 bg-bull/[0.08] text-bull">
                 <EmojiIcon emoji={g.emoji} size={16} />
               </span>
-              <span className="font-semibold text-text-primary">{g.name}</span>
+              <span className="font-semibold text-text-primary">{t(g.name)}</span>
               <span className="ml-auto font-mono text-sm font-bold tabular-nums text-bull">
                 {pct}%
               </span>
