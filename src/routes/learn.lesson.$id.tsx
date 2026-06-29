@@ -947,19 +947,19 @@ function ResultsView({
           onClick={onContinue}
           className="inline-flex items-center justify-center gap-1.5 rounded-[8px] bg-bull px-5 py-2.5 text-sm font-semibold text-bull-foreground hover:brightness-110"
         >
-          Continue Learning <ArrowRight className="h-4 w-4" />
+          {t("Continue Learning")} <ArrowRight className="h-4 w-4" />
         </button>
         <button
           onClick={onRetake}
           className="rounded-[8px] border border-border px-5 py-2.5 text-sm font-medium text-text-secondary hover:bg-hover"
         >
-          Retake Quiz
+          {t("Retake Quiz")}
         </button>
         <button
           onClick={onBackToLesson}
           className="rounded-[8px] border border-border px-5 py-2.5 text-sm font-medium text-text-secondary hover:bg-hover"
         >
-          Back to Lesson
+          {t("Back to Lesson")}
         </button>
       </div>
     </div>
