@@ -284,7 +284,12 @@ function UserMenu() {
         {initial(profile?.display_name, user?.email)}
       </button>
       {open && (
-        <div className="glass-chrome absolute right-0 top-9 z-50 w-56 overflow-hidden rounded-[12px] border border-white/[0.08] shadow-2xl">
+        <div
+          className={cn(
+            "glass-chrome absolute top-9 z-50 w-56 max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-[12px] border border-white/[0.08] shadow-2xl",
+            lang === "ur" ? "left-0" : "right-0",
+          )}
+        >
           <div className="border-b border-white/[0.06] px-4 py-3">
             <div className="truncate text-[13px] font-semibold text-text-primary">{name}</div>
             <div className="text-[11px] text-text-muted">{profile?.plan ?? "Free"} plan</div>
