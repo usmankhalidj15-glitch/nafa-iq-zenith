@@ -656,9 +656,46 @@ function Bills() {
 
 function Goals() {
   const { t } = useLang();
+  const { goals } = useFinanceStore();
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [target, setTarget] = useState("");
+  const [date, setDate] = useState("");
+  const [err, setErr] = useState("");
+
+  const submit = () => {
+    setErr("");
+    const num = Number(target);
+    if (!name.trim()) return setErr(t("Please enter a goal name."));
+    if (!target || Number.isNaN(num) || num <= 0)
+      return setErr(t("Please enter a valid target amount."));
+    const goal: Goal = {
+      emoji: "🎯",
+      name: name.trim(),
+      target: num,
+      saved: 0,
+      color: "bull",
+      date: date.trim() || undefined,
+      ai: t("New goal created. Start contributing to track your progress."),
+    };
+    financeActions.addGoal(goal);
+    setName("");
+    setTarget("");
+    setDate("");
+    setOpen(false);
+  };
+
+  const contribute = (goalName: string) => {
+    const input = window.prompt(t("How much would you like to add? (PKR)"));
+    if (input == null) return;
+    const num = Number(input);
+    if (Number.isNaN(num) || num <= 0) return;
+    financeActions.contributeToGoal(goalName, num);
+  };
+
   return (
     <div className="grid gap-4 md:grid-cols-2">
-      {GOALS.map((g) => {
+      {goals.map((g) => {
         const pct = Math.round((g.saved / g.target) * 100);
         return (
           <Card key={g.name}>
@@ -687,13 +724,54 @@ function Goals() {
               <Sparkles className="mr-1 inline h-3 w-3 text-ai" />
               {t(g.ai)}
             </div>
+            <button
+              onClick={() => contribute(g.name)}
+              className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-[6px] border border-bull/40 py-1.5 text-xs font-semibold text-bull hover:bg-bull/10"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              {t("Add Contribution")}
+            </button>
           </Card>
         );
       })}
-      <button className="flex min-h-[120px] items-center justify-center gap-1.5 rounded-[8px] border border-dashed border-border text-sm font-medium text-text-secondary hover:border-bull hover:text-bull">
+      <button
+        onClick={() => setOpen(true)}
+        className="flex min-h-[120px] items-center justify-center gap-1.5 rounded-[8px] border border-dashed border-border text-sm font-medium text-text-secondary hover:border-bull hover:text-bull"
+      >
         <Plus className="h-4 w-4" />
         {t("Add Goal")}
       </button>
+
+      <Modal open={open} onClose={() => setOpen(false)} title={t("Add Goal")}>
+        <div className="space-y-3">
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder={t("Goal name")}
+            className={fieldClass}
+          />
+          <input
+            value={target}
+            onChange={(e) => setTarget(e.target.value)}
+            inputMode="decimal"
+            placeholder={t("Target amount (PKR)")}
+            className={fieldClass}
+          />
+          <input
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            placeholder={t("Target date (optional)")}
+            className={fieldClass}
+          />
+          {err && <div className="text-xs text-bear">{err}</div>}
+          <button
+            onClick={submit}
+            className="w-full rounded-[6px] bg-bull py-2 text-sm font-semibold text-bull-foreground hover:brightness-110"
+          >
+            {t("Add Goal")}
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
