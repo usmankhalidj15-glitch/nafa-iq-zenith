@@ -312,7 +312,7 @@ function PhoneMockup({ startDelay = 0 }: { startDelay?: number }) {
           style={{
             background: "linear-gradient(145deg, #1a1f35 0%, #0d1121 100%)",
             boxShadow:
-              "0 0 0 1px rgba(255,255,255,0.05), 0 30px 60px rgba(0,0,0,0.6), 0 0 80px rgba(0,212,170,0.15), inset 0 1px 0 rgba(255,255,255,0.08)",
+              "0 0 0 1px rgba(255,255,255,0.05), 0 30px 60px rgba(0,0,0,0.6), 0 0 100px rgba(0,212,170,0.28), inset 0 1px 0 rgba(255,255,255,0.08)",
           }}
         >
           <div className="m-2 overflow-hidden rounded-[36px] bg-[#070B14]">
