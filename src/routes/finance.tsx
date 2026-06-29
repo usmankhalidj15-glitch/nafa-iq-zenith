@@ -158,9 +158,10 @@ function KpiCard({
 }
 
 function KpiLabel({ children }: { children: React.ReactNode }) {
+  const { t } = useLang();
   return (
     <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-text-muted">
-      {children}
+      {typeof children === "string" ? t(children) : children}
     </div>
   );
 }
