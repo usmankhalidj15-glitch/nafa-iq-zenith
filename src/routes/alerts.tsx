@@ -152,7 +152,7 @@ function Alerts() {
                 <EmojiIcon emoji={n.emoji} size={15} />
               </span>
               <div className="flex-1">
-                <div className="text-sm text-text-primary">{n.msg}</div>
+                <div className="text-sm text-text-primary">{t(n.msg)}</div>
                 <div className="text-[11px] text-text-muted">{n.time}</div>
               </div>
               {!n.read && <span className="h-2 w-2 shrink-0 rounded-full bg-bull" />}
