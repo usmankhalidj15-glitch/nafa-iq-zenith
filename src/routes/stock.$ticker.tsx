@@ -106,7 +106,7 @@ function StockDetail() {
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         {stats.map(([l, v]) => (
           <Card key={l}>
-            <div className="text-xs text-text-muted">{l}</div>
+            <div className="text-xs text-text-muted">{t(l)}</div>
             <div className="mt-1 font-mono text-sm font-bold tabular-nums text-text-primary">
               {v}
             </div>
