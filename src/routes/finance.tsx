@@ -284,18 +284,18 @@ function Overview() {
         <div className="relative z-10 flex items-end justify-between">
           <div>
             <div className="text-[11px] font-bold uppercase tracking-[0.14em] text-text-secondary">
-              6-Month Overview
+              {t("6-Month Overview")}
             </div>
             <div className="mt-0.5 text-[11px] text-text-muted">Jan 2026 — Jun 2026</div>
           </div>
           <div className="flex items-center gap-3 text-[11px] font-medium text-text-secondary">
             <span className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-bull" />
-              In
+              {t("In")}
             </span>
             <span className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-bear" />
-              Out
+              {t("Out")}
             </span>
           </div>
         </div>
@@ -311,6 +311,7 @@ function Overview() {
 }
 
 function Transactions() {
+  const { t: tr } = useLang();
   const grouped = TRANSACTIONS.reduce<Record<string, typeof TRANSACTIONS>>((acc, t) => {
     (acc[t.date] ??= []).push(t);
     return acc;
