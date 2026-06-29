@@ -241,7 +241,7 @@ export default function PSX() {
           <Card>
             <div className="mb-3 flex items-center gap-2">
               <Filter className="h-4 w-4 text-text-secondary" />
-              <h3 className="text-sm font-semibold text-text-primary">Stock Screener</h3>
+              <h3 className="text-sm font-semibold text-text-primary">{t("Stock Screener")}</h3>
             </div>
             <div className="mb-3 flex flex-wrap gap-1.5">
               {(
@@ -265,14 +265,14 @@ export default function PSX() {
               <table className="w-full min-w-[640px] text-xs">
                 <thead>
                   <tr className="border-b border-border text-left text-text-muted">
-                    <th className="py-2">Stock</th>
-                    <th>Sector</th>
-                    <th className="text-right">Price</th>
-                    <th className="text-right">Change</th>
-                    <th className="text-center">Signal</th>
+                    <th className="py-2">{t("Stock")}</th>
+                    <th>{t("Sector")}</th>
+                    <th className="text-right">{t("Price")}</th>
+                    <th className="text-right">{t("Change")}</th>
+                    <th className="text-center">{t("Signal")}</th>
                     <th className="text-right">RSI</th>
-                    <th className="text-right">Volume</th>
-                    <th className="pr-2 text-right">Mkt Cap</th>
+                    <th className="text-right">{t("Volume")}</th>
+                    <th className="pr-2 text-right">{t("Mkt Cap")}</th>
                   </tr>
                 </thead>
                 <tbody>
