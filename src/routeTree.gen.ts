@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as PsxRouteImport } from './routes/psx'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PlansRouteImport } from './routes/plans'
@@ -26,6 +27,11 @@ import { Route as LearnLessonIdRouteImport } from './routes/learn.lesson.$id'
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PsxRoute = PsxRouteImport.update({
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/plans': typeof PlansRoute
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
+  '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stock/$ticker': typeof StockTickerRoute
   '/learn/': typeof LearnIndexRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/plans': typeof PlansRoute
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
+  '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stock/$ticker': typeof StockTickerRoute
   '/learn': typeof LearnIndexRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/plans': typeof PlansRoute
   '/portfolio': typeof PortfolioRoute
   '/psx': typeof PsxRoute
+  '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stock/$ticker': typeof StockTickerRoute
   '/learn/': typeof LearnIndexRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
     | '/plans'
     | '/portfolio'
     | '/psx'
+    | '/settings'
     | '/sitemap.xml'
     | '/stock/$ticker'
     | '/learn/'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/plans'
     | '/portfolio'
     | '/psx'
+    | '/settings'
     | '/sitemap.xml'
     | '/stock/$ticker'
     | '/learn'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/plans'
     | '/portfolio'
     | '/psx'
+    | '/settings'
     | '/sitemap.xml'
     | '/stock/$ticker'
     | '/learn/'
@@ -191,6 +203,7 @@ export interface RootRouteChildren {
   PlansRoute: typeof PlansRoute
   PortfolioRoute: typeof PortfolioRoute
   PsxRoute: typeof PsxRoute
+  SettingsRoute: typeof SettingsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StockTickerRoute: typeof StockTickerRoute
 }
@@ -202,6 +215,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/psx': {
@@ -313,6 +333,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlansRoute: PlansRoute,
   PortfolioRoute: PortfolioRoute,
   PsxRoute: PsxRoute,
+  SettingsRoute: SettingsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StockTickerRoute: StockTickerRoute,
 }
