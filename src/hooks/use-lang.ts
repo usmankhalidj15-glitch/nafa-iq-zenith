@@ -134,6 +134,12 @@ const UR: Record<string, string> = {
 
   // ---- Finance ----
   "Saved this month": "اس ماہ بچایا",
+  "Personal Finance": "ذاتی مالیات",
+  Overview: "جائزہ",
+  Transactions: "ٹرانزیکشنز",
+  Budgets: "بجٹ",
+  Bills: "بل",
+  Goals: "اہداف",
   "Net Savings Rate": "خالص بچت کی شرح",
 
   // ---- Alerts ----
