@@ -15,10 +15,11 @@ import { Card, StatCard } from "@/components/Card";
 import { Change } from "@/components/Change";
 import { SignalBadge } from "@/components/SignalBadge";
 import { DonutChart, PortfolioAreaChart } from "@/components/charts";
-import { HOLDINGS, fmtPKR, fmtNum } from "@/lib/data";
+import { HOLDINGS, fmtPKR, fmtNum, type Holding, type Signal } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { EmojiIcon } from "@/components/icons";
 import { useLang } from "@/hooks/use-lang";
+import { Modal, fieldClass } from "@/components/Modal";
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
@@ -139,6 +140,74 @@ function Portfolio() {
   const [reportState, setReportState] = useState<"idle" | "loading" | "open">("idle");
   const n = range === "1M" ? 2 : range === "3M" ? 3 : 6;
 
+  const [holdings, setHoldings] = useState<Holding[]>(HOLDINGS);
+  const [formOpen, setFormOpen] = useState(false);
+  const [editIdx, setEditIdx] = useState<number | null>(null);
+  const emptyForm = {
+    ticker: "",
+    sector: "",
+    shares: "",
+    avgCost: "",
+    current: "",
+    signal: "HOLD" as Signal,
+  };
+  const [form, setForm] = useState(emptyForm);
+  const [formErr, setFormErr] = useState("");
+
+  const SIGNALS: Signal[] = ["STRONG BUY", "BUY", "HOLD", "SELL", "STRONG SELL"];
+
+  function openAdd() {
+    setEditIdx(null);
+    setForm(emptyForm);
+    setFormErr("");
+    setFormOpen(true);
+  }
+
+  function openEdit(idx: number) {
+    const h = holdings[idx];
+    setEditIdx(idx);
+    setForm({
+      ticker: h.ticker,
+      sector: h.sector,
+      shares: String(h.shares),
+      avgCost: String(h.avgCost),
+      current: String(h.current),
+      signal: h.signal,
+    });
+    setFormErr("");
+    setFormOpen(true);
+  }
+
+  function remove(idx: number) {
+    setHoldings((prev) => prev.filter((_, i) => i !== idx));
+  }
+
+  function saveHolding() {
+    setFormErr("");
+    const shares = Number(form.shares);
+    const avgCost = Number(form.avgCost);
+    const current = Number(form.current);
+    if (!form.ticker.trim()) return setFormErr(t("Please enter a stock symbol."));
+    if (!form.sector.trim()) return setFormErr(t("Please enter a sector."));
+    if (!form.shares || Number.isNaN(shares) || shares <= 0)
+      return setFormErr(t("Please enter a valid number of shares."));
+    if (!form.avgCost || Number.isNaN(avgCost) || avgCost <= 0)
+      return setFormErr(t("Please enter a valid average cost."));
+    const cur = !form.current || Number.isNaN(current) || current <= 0 ? avgCost : current;
+    const entry: Holding = {
+      ticker: form.ticker.trim().toUpperCase(),
+      sector: form.sector.trim(),
+      shares,
+      avgCost,
+      current: cur,
+      signal: form.signal,
+    };
+    setHoldings((prev) =>
+      editIdx == null ? [...prev, entry] : prev.map((h, i) => (i === editIdx ? entry : h)),
+    );
+    setFormOpen(false);
+  }
+
   function generate() {
     setReportState("loading");
     setTimeout(() => setReportState("open"), 2000);
@@ -212,11 +281,12 @@ function Portfolio() {
 
       <Card>
         <h3 className="mb-3 text-sm font-semibold text-text-primary">{t("Holdings")}</h3>
-        {HOLDINGS.some((h) => h.signal === "SELL" || h.signal === "STRONG SELL") && (
+        {holdings.some((h) => h.signal === "SELL" || h.signal === "STRONG SELL") && (
           <div className="mb-3 flex items-center gap-2 rounded-[8px] border border-bear/30 bg-bear/10 px-3 py-2 text-xs text-bear">
             <AlertTriangle className="h-4 w-4 shrink-0" strokeWidth={1.75} />
             <span>
-              {HOLDINGS.filter((h) => h.signal === "SELL" || h.signal === "STRONG SELL")
+              {holdings
+                .filter((h) => h.signal === "SELL" || h.signal === "STRONG SELL")
                 .map((h) => h.ticker)
                 .join(", ")}{" "}
               {t("— AI signals suggest reviewing these positions.")}
@@ -239,14 +309,21 @@ function Portfolio() {
               </tr>
             </thead>
             <tbody>
-              {HOLDINGS.map((h) => {
+              {holdings.length === 0 && (
+                <tr>
+                  <td colSpan={9} className="py-6 text-center text-text-muted">
+                    {t("No holdings yet. Add your first position.")}
+                  </td>
+                </tr>
+              )}
+              {holdings.map((h, idx) => {
                 const mv = h.shares * h.current;
                 const gain = h.shares * (h.current - h.avgCost);
                 const gainPct = ((h.current - h.avgCost) / h.avgCost) * 100;
                 const isSell = h.signal === "SELL" || h.signal === "STRONG SELL";
                 return (
                   <tr
-                    key={h.ticker}
+                    key={`${h.ticker}-${idx}`}
                     className={cn(
                       "border-b border-border/50",
                       isSell && "border-l-2 border-l-bear bg-bear/[0.04]",
@@ -278,8 +355,20 @@ function Portfolio() {
                     </td>
                     <td className="text-right">
                       <div className="flex justify-end gap-2 text-text-muted">
-                        <Pencil className="h-3.5 w-3.5 hover:text-text-primary" />
-                        <Trash2 className="h-3.5 w-3.5 hover:text-bear" />
+                        <button
+                          onClick={() => openEdit(idx)}
+                          aria-label={t("Edit")}
+                          className="transition hover:text-text-primary"
+                        >
+                          <Pencil className="h-3.5 w-3.5" />
+                        </button>
+                        <button
+                          onClick={() => remove(idx)}
+                          aria-label={t("Delete")}
+                          className="transition hover:text-bear"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -288,11 +377,74 @@ function Portfolio() {
             </tbody>
           </table>
         </div>
-        <button className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-[6px] bg-bull py-2 text-sm font-semibold text-bull-foreground hover:brightness-110">
+        <button
+          onClick={openAdd}
+          className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-[6px] bg-bull py-2 text-sm font-semibold text-bull-foreground hover:brightness-110"
+        >
           <Plus className="h-4 w-4" />
           {t("Add Holding")}
         </button>
       </Card>
+
+      <Modal
+        open={formOpen}
+        onClose={() => setFormOpen(false)}
+        title={editIdx == null ? t("Add Holding") : t("Edit Holding")}
+      >
+        <div className="space-y-3">
+          <input
+            value={form.ticker}
+            onChange={(e) => setForm({ ...form, ticker: e.target.value })}
+            placeholder={t("Stock symbol (e.g. HBL)")}
+            className={fieldClass}
+          />
+          <input
+            value={form.sector}
+            onChange={(e) => setForm({ ...form, sector: e.target.value })}
+            placeholder={t("Sector")}
+            className={fieldClass}
+          />
+          <input
+            value={form.shares}
+            onChange={(e) => setForm({ ...form, shares: e.target.value })}
+            inputMode="decimal"
+            placeholder={t("Shares")}
+            className={fieldClass}
+          />
+          <input
+            value={form.avgCost}
+            onChange={(e) => setForm({ ...form, avgCost: e.target.value })}
+            inputMode="decimal"
+            placeholder={t("Avg Cost (PKR)")}
+            className={fieldClass}
+          />
+          <input
+            value={form.current}
+            onChange={(e) => setForm({ ...form, current: e.target.value })}
+            inputMode="decimal"
+            placeholder={t("Current price (PKR, optional)")}
+            className={fieldClass}
+          />
+          <select
+            value={form.signal}
+            onChange={(e) => setForm({ ...form, signal: e.target.value as Signal })}
+            className={fieldClass}
+          >
+            {SIGNALS.map((s) => (
+              <option key={s} value={s}>
+                {t(s)}
+              </option>
+            ))}
+          </select>
+          {formErr && <div className="text-xs text-bear">{formErr}</div>}
+          <button
+            onClick={saveHolding}
+            className="w-full rounded-[6px] bg-bull py-2 text-sm font-semibold text-bull-foreground hover:brightness-110"
+          >
+            {editIdx == null ? t("Add Holding") : t("Save Changes")}
+          </button>
+        </div>
+      </Modal>
 
       {/* AI report */}
       <div className="rounded-[8px] border border-border border-l-4 border-l-ai bg-ai-tint p-4">
