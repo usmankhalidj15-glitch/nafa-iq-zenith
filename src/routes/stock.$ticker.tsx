@@ -75,7 +75,7 @@ function StockDetail() {
         to="/psx"
         className="inline-flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary"
       >
-        <ArrowLeft className="h-4 w-4" /> Back to Market
+        <ArrowLeft className="h-4 w-4" /> {t("Back to Market")}
       </Link>
 
       <div className="flex flex-wrap items-end justify-between gap-3">
@@ -83,7 +83,7 @@ function StockDetail() {
           <h1 className="text-2xl font-bold text-text-primary">
             {s.ticker} · {s.name}
           </h1>
-          <p className="text-sm text-text-secondary">{s.sector} Sector</p>
+          <p className="text-sm text-text-secondary">{t(s.sector)} {t("Sector")}</p>
           <div className="mt-2 flex items-baseline gap-3">
             <span className="font-mono text-3xl font-bold tabular-nums text-text-primary">
               {fmtNum(s.price)}
@@ -93,7 +93,7 @@ function StockDetail() {
         </div>
         <div className="text-right">
           <SignalBadge signal={s.signal} className="text-xs" />
-          <div className="mt-1 text-xs text-text-muted">Confidence 5/6 indicators</div>
+          <div className="mt-1 text-xs text-text-muted">{t("Confidence 5/6 indicators")}</div>
         </div>
       </div>
 
