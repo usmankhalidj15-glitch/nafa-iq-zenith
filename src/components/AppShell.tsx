@@ -309,6 +309,7 @@ function UserMenu() {
 }
 
 function Header({ onMenu }: { onMenu: () => void }) {
+  const { t } = useLang();
   return (
     <header className="glass-chrome sticky top-0 z-20 flex h-[52px] items-center gap-2 border-b border-white/[0.06] px-3 sm:gap-3 lg:pl-6">
       <button onClick={onMenu} className="text-text-secondary lg:hidden" aria-label="Menu">
@@ -330,7 +331,7 @@ function Header({ onMenu }: { onMenu: () => void }) {
           to="/plans"
           className="hidden shrink-0 items-center gap-1.5 rounded-[8px] border border-bull/40 bg-bull/10 px-3 py-1.5 text-[12px] font-semibold text-bull transition hover:border-bull/60 hover:bg-bull/15 sm:inline-flex"
         >
-          <Sparkles className="h-3.5 w-3.5" /> Upgrade to Pro
+          <Sparkles className="h-3.5 w-3.5" /> {t("Upgrade to Pro")}
         </Link>
         <Link
           to="/plans"
