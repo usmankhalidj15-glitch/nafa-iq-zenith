@@ -92,13 +92,13 @@ function Dashboard() {
             to="/psx"
             className="rounded-lg bg-primary px-3.5 py-2 text-[13px] font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110"
           >
-            Explore PSX
+            {t("Explore PSX")}
           </Link>
           <Link
             to="/finance"
             className="rounded-lg border border-white/[0.08] bg-surface px-3.5 py-2 text-[13px] font-semibold text-text-primary transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.16]"
           >
-            Add Transaction
+            {t("Add Transaction")}
           </Link>
         </div>
       </div>
@@ -112,7 +112,7 @@ function Dashboard() {
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2.5">
-                <h2 className="text-sm font-semibold text-text-primary">AI Recommendation</h2>
+                <h2 className="text-sm font-semibold text-text-primary">{t("AI Recommendation")}</h2>
                 <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
                   92% confidence
                 </span>
@@ -130,13 +130,13 @@ function Dashboard() {
                 to="/psx"
                 className="rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition hover:brightness-110"
               >
-                View
+                {t("View")}
               </Link>
               <button
                 onClick={() => setShowAI(false)}
                 className="rounded-lg px-3 py-1.5 text-xs text-text-muted transition hover:bg-white/[0.04] hover:text-text-primary"
               >
-                Dismiss
+                {t("Dismiss")}
               </button>
             </div>
           </div>
