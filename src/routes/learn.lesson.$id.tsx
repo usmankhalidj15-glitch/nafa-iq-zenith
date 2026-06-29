@@ -587,12 +587,13 @@ function ReadingView({
 
 function VideoPlayer({ url }: { url: string }) {
   const [failed, setFailed] = useState(false);
+  const { t } = useLang();
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-[12px] border border-border bg-elevated">
       {failed ? (
         <div className="flex h-full flex-col items-center justify-center gap-2 text-text-muted">
           <Video className="h-8 w-8" strokeWidth={1.5} />
-          <div className="text-sm">Video loading…</div>
+          <div className="text-sm">{t("Video loading…")}</div>
         </div>
       ) : (
         <iframe
