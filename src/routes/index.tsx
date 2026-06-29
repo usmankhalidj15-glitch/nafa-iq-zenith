@@ -710,12 +710,14 @@ function Nav() {
             <StatusPill />
             <NavSearch />
           </div>
-          <Link
-            to="/auth"
-            className="hidden whitespace-nowrap pl-1 text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary md:inline lg:border-l lg:border-white/[0.08] lg:pl-3"
-          >
-            Log In
-          </Link>
+          {!user && (
+            <Link
+              to="/auth"
+              className="hidden whitespace-nowrap pl-1 text-[13px] font-normal text-text-secondary transition-colors hover:text-text-primary md:inline lg:border-l lg:border-white/[0.08] lg:pl-3"
+            >
+              Log In
+            </Link>
+          )}
 
           {/* Enter App — dominant CTA, always visible */}
           <Magnetic strength={0.4}>
@@ -728,7 +730,7 @@ function Nav() {
                 to="/app"
                 className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-bull px-4 py-2 text-sm font-semibold text-bull-foreground shadow-[0_0_20px_rgba(0,212,170,0.25)] transition hover:bg-[#00efc0] hover:shadow-[0_0_28px_rgba(0,212,170,0.5)]"
               >
-                Get Started <ArrowRight className="h-4 w-4 shrink-0" />
+                {user ? "Open App" : "Get Started"} <ArrowRight className="h-4 w-4 shrink-0" />
               </Link>
             </motion.div>
           </Magnetic>
