@@ -79,7 +79,14 @@ function Learn() {
     [statusOf],
   );
 
-  const terms = GLOSSARY.filter((t) => t.en.toLowerCase().includes(search.toLowerCase()));
+  const q = search.trim().toLowerCase();
+  const terms = GLOSSARY.filter(
+    (t) =>
+      !q ||
+      t.en.toLowerCase().includes(q) ||
+      t.ur.toLowerCase().includes(q) ||
+      t.def.toLowerCase().includes(q),
+  );
   const xpPct = Math.min(100, Math.round((xp / XP_GOAL) * 100));
 
   return (
