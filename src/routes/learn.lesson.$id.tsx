@@ -876,8 +876,8 @@ function ResultsView({
 
   return (
     <div className="learn-fade-in mx-auto max-w-2xl text-center">
-      <div className="text-xs text-text-muted">{lesson.title}</div>
-      <h2 className="text-xl font-bold text-text-primary">Quiz Results</h2>
+      <div className="text-xs text-text-muted">{t(lesson.title)}</div>
+      <h2 className="text-xl font-bold text-text-primary">{t("Quiz Results")}</h2>
 
       <div className="relative mx-auto mt-6 h-32 w-32">
         <svg className="h-full w-full -rotate-90" viewBox="0 0 120 120">
