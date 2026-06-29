@@ -92,6 +92,7 @@ type Mode = "reading" | "quiz" | "results";
 function LessonInner({ lesson }: { lesson: LessonContent }) {
   const navigate = useNavigate();
   const { statusOf, completeLesson, bookmarks, toggleBookmark, xp } = useLearn();
+  const { t } = useLang();
   const [mode, setMode] = useState<Mode>("reading");
   const [progress, setProgress] = useState(0);
   const [activeSection, setActiveSection] = useState(lesson.sections[0]?.id);
