@@ -120,7 +120,6 @@ const UR: Record<string, string> = {
   Delete: "حذف کریں",
   "No holdings yet. Add your first position.": "ابھی کوئی ہولڈنگ نہیں۔ اپنی پہلی پوزیشن شامل کریں۔",
   "Stock symbol (e.g. HBL)": "اسٹاک علامت (مثلاً HBL)",
-  Shares: "حصص",
   "Avg Cost (PKR)": "اوسط لاگت (روپے)",
   "Current price (PKR, optional)": "موجودہ قیمت (روپے، اختیاری)",
   "Please enter a stock symbol.": "براہ کرم اسٹاک علامت درج کریں۔",
