@@ -82,12 +82,6 @@ function Finance() {
       {tab === "Budgets" && <Budgets />}
       {tab === "Bills" && <Bills />}
       {tab === "Goals" && <Goals />}
-
-      {tab === "Transactions" && (
-        <button className="safe-bottom fixed right-4 bottom-20 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-bull text-bull-foreground shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:brightness-110 lg:bottom-8">
-          <Plus className="h-6 w-6" />
-        </button>
-      )}
     </div>
   );
 }
