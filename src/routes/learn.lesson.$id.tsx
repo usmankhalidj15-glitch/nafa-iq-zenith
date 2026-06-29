@@ -193,7 +193,7 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
           <aside className="hidden w-[240px] shrink-0 lg:block">
             <div className="sticky top-[110px] rounded-[12px] border border-border bg-surface p-4">
               <div className="text-xs font-semibold uppercase tracking-wide text-text-muted">
-                In This Lesson
+                {t("In This Lesson")}
               </div>
               <nav className="mt-3 space-y-1 border-l border-border">
                 {lesson.sections.map((s) => (
@@ -207,25 +207,25 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
                         : "border-transparent text-text-secondary hover:text-text-primary",
                     )}
                   >
-                    {s.heading}
+                    {t(s.heading)}
                   </button>
                 ))}
               </nav>
               <div className="mt-5 space-y-1.5 border-t border-border pt-4 text-xs text-text-secondary">
                 <div className="flex items-center gap-1.5">
-                  <Sparkles className="h-3.5 w-3.5" strokeWidth={1.5} /> {lesson.duration} read
+                  <Sparkles className="h-3.5 w-3.5" strokeWidth={1.5} /> {lesson.duration} {t("read")}
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Target className="h-3.5 w-3.5" strokeWidth={1.5} /> {lesson.level}
+                  <Target className="h-3.5 w-3.5" strokeWidth={1.5} /> {t(lesson.level)}
                 </div>
                 <div className="flex items-center gap-1.5">
                   {lesson.type === "video" && lesson.videoUrl ? (
                     <>
-                      <Video className="h-3.5 w-3.5" strokeWidth={1.5} /> Video + Article
+                      <Video className="h-3.5 w-3.5" strokeWidth={1.5} /> {t("Video + Article")}
                     </>
                   ) : (
                     <>
-                      <BookOpen className="h-3.5 w-3.5" strokeWidth={1.5} /> Article
+                      <BookOpen className="h-3.5 w-3.5" strokeWidth={1.5} /> {t("Article")}
                     </>
                   )}
                 </div>
@@ -239,7 +239,7 @@ function LessonInner({ lesson }: { lesson: LessonContent }) {
                 ) : (
                   <Bookmark className="h-4 w-4" />
                 )}
-                {bookmarked ? "Bookmarked" : "Bookmark Lesson"}
+                {bookmarked ? t("Bookmarked") : t("Bookmark Lesson")}
               </button>
             </div>
           </aside>
