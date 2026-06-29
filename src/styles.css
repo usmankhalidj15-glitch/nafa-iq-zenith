@@ -693,3 +693,34 @@
     radial-gradient(60% 80% at 50% 0%, rgba(169, 124, 18, 0.06), transparent 70%),
     #faf7f0;
 }
+
+/* ============================================================
+   Light-mode-only accent calming. Dark theme untouched.
+   ============================================================ */
+
+/* HOLD signal badge — neutral outline, consistent with BUY style */
+.theme-light .signal-hold {
+  background: transparent;
+  border-color: var(--color-neutral);
+  color: var(--color-neutral);
+}
+
+/* Active chart timeframe button — deep navy, reads selected without glowing */
+.theme-light .tf-active {
+  background: #1e293b;
+  color: #ffffff;
+}
+
+/* Watchlist symbols read as bold primary text, not neon teal */
+.theme-light .wl-symbol {
+  color: var(--color-text-primary);
+}
+.theme-light .wl-star {
+  color: var(--color-text-muted);
+  fill: var(--color-text-muted);
+}
+
+/* Net savings & savings-rate values use primary text — icon/badge carry color */
+.theme-light .kpi-value-neutral {
+  color: var(--color-text-primary);
+}
