@@ -348,6 +348,7 @@ function Header({ onMenu }: { onMenu: () => void }) {
 }
 
 function Breadcrumbs() {
+  const { t } = useLang();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const segments = path.split("/").filter(Boolean);
   if (segments.length < 2) return null;
@@ -382,9 +383,9 @@ function Breadcrumbs() {
           <li key={c.href} className="flex items-center gap-1.5">
             {i > 0 && <ChevronRight className="h-3 w-3 text-text-muted" />}
             {c.last ? (
-              <span className="font-medium text-text-primary">{c.label}</span>
+              <span className="font-medium text-text-primary">{t(c.label)}</span>
             ) : (
-              <span className="text-text-secondary">{c.label}</span>
+              <span className="text-text-secondary">{t(c.label)}</span>
             )}
           </li>
         ))}
@@ -394,6 +395,7 @@ function Breadcrumbs() {
 }
 
 function BottomNav() {
+  const { t: tr } = useLang();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const tabs = NAV.slice(0, 5);
   return (
@@ -421,7 +423,7 @@ function BottomNav() {
             <span
               className={cn("text-[10px] font-medium", active ? "text-gold" : "text-text-muted")}
             >
-              {label}
+              {tr(label)}
             </span>
           </Link>
         );
