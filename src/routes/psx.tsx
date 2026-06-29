@@ -333,10 +333,10 @@ export default function PSX() {
         <div className="min-w-0 space-y-4">
           <Card>
             <div className="mb-2 flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-text-primary">Watchlist</h3>
+              <h3 className="text-sm font-semibold text-text-primary">{t("Watchlist")}</h3>
               <button className="flex items-center gap-1 text-xs font-medium text-bull">
                 <Plus className="h-3.5 w-3.5" />
-                Add Stock
+                {t("Add Stock")}
               </button>
             </div>
             <div className="space-y-1">
@@ -404,7 +404,7 @@ export default function PSX() {
           </Card>
 
           <Card>
-            <h3 className="mb-2 text-sm font-semibold text-text-primary">Sector Heatmap</h3>
+            <h3 className="mb-2 text-sm font-semibold text-text-primary">{t("Sector Heatmap")}</h3>
             <div className="grid grid-cols-3 gap-1.5">
               {SECTORS.map((s) => {
                 const up = s.pct >= 0;

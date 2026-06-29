@@ -130,6 +130,7 @@ const UR: Record<string, string> = {
   Volume: "حجم",
   "Mkt Cap": "مارکیٹ کیپ",
   "Sector Heatmap": "سیکٹر ہیٹ میپ",
+  "Add Stock": "اسٹاک شامل کریں",
 
   // ---- Finance ----
   "Saved this month": "اس ماہ بچایا",
