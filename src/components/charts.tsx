@@ -27,6 +27,7 @@ function useChartTheme() {
     grid: light ? "#e6eaf2" : "#1a2535",
     tick: "#64748b",
     teal: light ? "#0d9488" : "#00d4aa",
+    expense: light ? "#c4615a" : "#e5484d",
     benchmark: light ? "#64748b" : "#94a3b8",
     cursorBar: light ? "rgba(15,23,42,0.05)" : "#1f2d40",
     tooltip: {
