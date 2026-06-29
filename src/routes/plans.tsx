@@ -99,6 +99,7 @@ function price(tier: (typeof TIERS)[number], billing: Billing) {
 
 function PlansPage() {
   const [billing, setBilling] = useState<Billing>("monthly");
+  const { t } = useLang();
 
   return (
     <div className="min-h-screen bg-background">
