@@ -191,7 +191,7 @@ export default function PSX() {
                     className={cn(
                       "rounded-[6px] px-2 py-1 text-xs font-medium",
                       tf === t
-                        ? "bg-bull text-bull-foreground"
+                        ? "tf-active bg-bull text-bull-foreground"
                         : "text-text-secondary hover:bg-hover",
                     )}
                   >
@@ -388,9 +388,9 @@ export default function PSX() {
                     key={tk}
                     className="flex items-center gap-2 rounded-[6px] px-2 py-1.5 hover:bg-hover"
                   >
-                    <Star className="h-3.5 w-3.5 text-bull" fill="#00d4aa" />
+                    <Star className="wl-star h-3.5 w-3.5 text-bull" fill="#00d4aa" />
                     <div className="flex-1">
-                      <div className="text-sm font-semibold text-bull">{tk}</div>
+                      <div className="wl-symbol text-sm font-semibold text-bull">{tk}</div>
                       <div className="text-[10px] text-text-muted">{s.name}</div>
                     </div>
                     <div className="text-right">

@@ -5,7 +5,8 @@ import { Card, StatCard } from "@/components/Card";
 import { Change } from "@/components/Change";
 import { SignalBadge } from "@/components/SignalBadge";
 import { EmojiIcon } from "@/components/icons";
-import { DonutChart, PortfolioAreaChart, Sparkline } from "@/components/charts";
+import { DonutChart, PortfolioAreaChart, Sparkline, DONUT_LIGHT_PALETTE } from "@/components/charts";
+import { useTheme } from "@/hooks/use-theme";
 import { STOCKS, WATCHLIST, generateOHLCV, fmtPKR } from "@/lib/data";
 import { SPENDING, GOALS } from "@/lib/finance-data";
 import { cn } from "@/lib/utils";
@@ -66,6 +67,7 @@ function formatToday() {
 function Dashboard() {
   const { profile, user } = useAuth();
   const { t } = useLang();
+  const { theme } = useTheme();
   const firstName = (profile?.display_name || user?.email?.split("@")[0] || "Investor").split(
     " ",
   )[0];
@@ -209,9 +211,17 @@ function Dashboard() {
           <h3 className="mb-3 text-sm font-semibold text-text-primary">{t("Spending Breakdown")}</h3>
           <DonutChart data={SPENDING} centerValue="112,050" centerLabel="PKR total" />
           <div className="mt-2 grid grid-cols-2 gap-1.5 text-xs">
-            {SPENDING.map((s) => (
+            {SPENDING.map((s, i) => (
               <span key={s.name} className="flex items-center gap-1.5 text-text-secondary">
-                <span className="h-2 w-2 rounded-full" style={{ background: s.color }} />
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{
+                    background:
+                      theme === "light"
+                        ? DONUT_LIGHT_PALETTE[i % DONUT_LIGHT_PALETTE.length]
+                        : s.color,
+                  }}
+                />
                 {s.name} {s.value}%
               </span>
             ))}

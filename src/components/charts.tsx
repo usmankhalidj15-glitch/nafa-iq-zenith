@@ -27,6 +27,7 @@ function useChartTheme() {
     grid: light ? "#e6eaf2" : "#1a2535",
     tick: "#64748b",
     teal: light ? "#0d9488" : "#00d4aa",
+    expense: light ? "#c4615a" : "#e5484d",
     benchmark: light ? "#64748b" : "#94a3b8",
     cursorBar: light ? "rgba(15,23,42,0.05)" : "#1f2d40",
     tooltip: {
@@ -43,12 +44,23 @@ function useChartTheme() {
   };
 }
 
+/** Harmonious, desaturated donut palette for white cards in light mode. */
+export const DONUT_LIGHT_PALETTE = ["#0d8a7e", "#5b7aa6", "#c08a4a", "#9b7aa6", "#94a3b8"];
+
+/** Remap neon dark-theme hexes to deeper, desaturated light-theme equivalents. */
+const LIGHT_SPARK: Record<string, string> = {
+  "#00d4aa": "#0d9488",
+  "#e5484d": "#c4615a",
+};
+
 export function Sparkline({ data, color }: { data: number[]; color: string }) {
+  const { theme } = useTheme();
+  const stroke = theme === "light" ? (LIGHT_SPARK[color.toLowerCase()] ?? color) : color;
   const d = data.map((v, i) => ({ i, v }));
   return (
     <ResponsiveContainer width="100%" height={36}>
       <LineChart data={d} margin={{ top: 2, bottom: 2, left: 0, right: 0 }}>
-        <Line type="monotone" dataKey="v" stroke={color} strokeWidth={1.5} dot={false} />
+        <Line type="monotone" dataKey="v" stroke={stroke} strokeWidth={1.5} dot={false} />
       </LineChart>
     </ResponsiveContainer>
   );
@@ -281,6 +293,8 @@ export function DonutChart({
   centerValue?: string;
 }) {
   const ct = useChartTheme();
+  // Harmonious, desaturated palette for white cards in light mode.
+  const lightPalette = DONUT_LIGHT_PALETTE;
   return (
     <div className="relative">
       <ResponsiveContainer width="100%" height={220}>
@@ -297,7 +311,7 @@ export function DonutChart({
             isAnimationActive={false}
           >
             {data.map((d, i) => (
-              <Cell key={i} fill={d.color} />
+              <Cell key={i} fill={ct.light ? lightPalette[i % lightPalette.length] : d.color} />
             ))}
           </Pie>
           <Tooltip
@@ -357,7 +371,7 @@ export function IncomeExpenseChart({
         <Bar
           dataKey="expense"
           name="Expense"
-          fill="#e5484d"
+          fill={ct.expense}
           radius={[3, 3, 0, 0]}
           isAnimationActive={false}
         />
