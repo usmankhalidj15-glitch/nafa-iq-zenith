@@ -182,21 +182,21 @@ function PlansPage() {
             >
               {tier.highlight && (
                 <span className="absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1 rounded-full bg-bull px-3 py-1 text-[11px] font-bold text-bull-foreground">
-                  <Star className="h-3 w-3 fill-current" /> MOST POPULAR
+                  <Star className="h-3 w-3 fill-current" /> {t("MOST POPULAR")}
                 </span>
               )}
-              <div className="text-lg font-bold text-text-primary">{tier.name}</div>
-              <div className="mt-1 text-sm text-text-secondary">{tier.tagline}</div>
+              <div className="text-lg font-bold text-text-primary">{t(tier.name)}</div>
+              <div className="mt-1 text-sm text-text-secondary">{t(tier.tagline)}</div>
               <div className="mt-5 flex items-baseline gap-1.5">
                 <span className="font-mono text-3xl font-bold tabular-nums text-text-primary">
-                  {price(tier, billing)}
+                  {t(price(tier, billing))}
                 </span>
                 {tier.monthly !== null && tier.monthly !== 0 && (
-                  <span className="text-sm text-text-muted">/ mo</span>
+                  <span className="text-sm text-text-muted">{t("/ mo")}</span>
                 )}
               </div>
               {billing === "yearly" && tier.yearly !== null && tier.yearly !== 0 && (
-                <div className="mt-1 text-[11px] text-gold">Billed annually — 20% off</div>
+                <div className="mt-1 text-[11px] text-gold">{t("Billed annually — 20% off")}</div>
               )}
 
               {tier.ctaTo ? (
@@ -209,14 +209,14 @@ function PlansPage() {
                       : "border border-white/[0.1] bg-surface text-text-primary hover:border-white/[0.2]",
                   )}
                 >
-                  {tier.cta}
+                  {t(tier.cta)}
                 </Link>
               ) : (
                 <a
                   href="mailto:hello@nafaiq.com?subject=NafaIQ%20Premium%20Inquiry"
                   className="mt-6 flex items-center justify-center rounded-[10px] border border-white/[0.1] bg-surface px-4 py-2.5 text-sm font-semibold text-text-primary transition hover:border-white/[0.2]"
                 >
-                  {tier.cta}
+                  {t(tier.cta)}
                 </a>
               )}
 
@@ -224,7 +224,7 @@ function PlansPage() {
                 {tier.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-sm text-text-secondary">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-bull" strokeWidth={2.25} />
-                    {f}
+                    {t(f)}
                   </li>
                 ))}
               </ul>
