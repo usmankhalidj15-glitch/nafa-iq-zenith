@@ -559,9 +559,9 @@ function ReadingView({
             className="rounded-[8px] border border-border p-3 text-left hover:border-border-hover"
           >
             <div className="flex items-center gap-1 text-[10px] text-text-muted">
-              <ArrowLeft className="h-3 w-3" strokeWidth={1.5} /> Previous
+              <ArrowLeft className="h-3 w-3" strokeWidth={1.5} /> {t("Previous")}
             </div>
-            <div className="text-sm font-medium text-text-primary">{prev.title}</div>
+            <div className="text-sm font-medium text-text-primary">{t(prev.title)}</div>
           </Link>
         ) : (
           <div />
@@ -573,9 +573,9 @@ function ReadingView({
             className="rounded-[8px] border border-border p-3 text-right hover:border-border-hover"
           >
             <div className="flex items-center justify-end gap-1 text-[10px] text-text-muted">
-              Next <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
+              {t("Next")} <ArrowRight className="h-3 w-3" strokeWidth={1.5} />
             </div>
-            <div className="text-sm font-medium text-text-primary">{next.title}</div>
+            <div className="text-sm font-medium text-text-primary">{t(next.title)}</div>
           </Link>
         ) : (
           <div />
