@@ -509,7 +509,7 @@ function Goals() {
       })}
       <button className="flex min-h-[120px] items-center justify-center gap-1.5 rounded-[8px] border border-dashed border-border text-sm font-medium text-text-secondary hover:border-bull hover:text-bull">
         <Plus className="h-4 w-4" />
-        Add Goal
+        {t("Add Goal")}
       </button>
     </div>
   );
