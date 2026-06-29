@@ -231,7 +231,7 @@ function Overview() {
             <PiggyBank className="h-5 w-5 text-ai" />
           </div>
           <KpiLabel>Net Savings</KpiLabel>
-          <div className="mt-1 font-mono text-lg font-semibold tracking-tight text-ai tabular-nums sm:text-xl">
+          <div className="kpi-value-neutral mt-1 font-mono text-lg font-semibold tracking-tight text-ai tabular-nums sm:text-xl">�
             PKR <span ref={savings.ref}>{savings.formatted}</span>
           </div>
           <div className="mt-3 flex items-center justify-between gap-2">
