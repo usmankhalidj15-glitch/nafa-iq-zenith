@@ -662,6 +662,9 @@ function Goals() {
   const [target, setTarget] = useState("");
   const [date, setDate] = useState("");
   const [err, setErr] = useState("");
+  const [contribGoal, setContribGoal] = useState<string | null>(null);
+  const [contribAmount, setContribAmount] = useState("");
+  const [contribErr, setContribErr] = useState("");
 
   const submit = () => {
     setErr("");
@@ -685,13 +688,22 @@ function Goals() {
     setOpen(false);
   };
 
-  const contribute = (goalName: string) => {
-    const input = window.prompt(t("How much would you like to add? (PKR)"));
-    if (input == null) return;
-    const num = Number(input);
-    if (Number.isNaN(num) || num <= 0) return;
-    financeActions.contributeToGoal(goalName, num);
+  const openContribute = (goalName: string) => {
+    setContribGoal(goalName);
+    setContribAmount("");
+    setContribErr("");
   };
+
+  const submitContribute = () => {
+    setContribErr("");
+    const num = Number(contribAmount);
+    if (!contribAmount || Number.isNaN(num) || num <= 0)
+      return setContribErr(t("Please enter a valid amount."));
+    if (contribGoal) financeActions.contributeToGoal(contribGoal, num);
+    setContribGoal(null);
+    setContribAmount("");
+  };
+
 
   return (
     <div className="grid gap-4 md:grid-cols-2">
