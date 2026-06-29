@@ -1,8 +1,10 @@
-import { useEffect, useState, useCallback } from "react";
+import { useSyncExternalStore, useCallback } from "react";
 
 export type Theme = "dark" | "light";
 
 const STORAGE_KEY = "nafaiq-app-theme";
+const listeners = new Set<() => void>();
+let current: Theme = readStored();
 
 function readStored(): Theme {
   if (typeof window === "undefined") return "dark";
@@ -10,20 +12,33 @@ function readStored(): Theme {
   return v === "light" ? "light" : "dark";
 }
 
+function setStore(theme: Theme) {
+  current = theme;
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem(STORAGE_KEY, theme);
+  }
+  listeners.forEach((l) => l());
+}
+
+function subscribe(cb: () => void) {
+  listeners.add(cb);
+  return () => listeners.delete(cb);
+}
+
 /**
- * App theme (dark/light) persisted to localStorage.
+ * App theme (dark/light) shared across components and persisted to localStorage.
  * Scoped to the authenticated app — the landing page stays dark.
  */
 export function useTheme() {
-  const [theme, setThemeState] = useState<Theme>(readStored);
+  const theme = useSyncExternalStore(
+    subscribe,
+    () => current,
+    () => "dark" as Theme,
+  );
 
-  useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, theme);
-  }, [theme]);
-
-  const setTheme = useCallback((t: Theme) => setThemeState(t), []);
+  const setTheme = useCallback((t: Theme) => setStore(t), []);
   const toggleTheme = useCallback(
-    () => setThemeState((t) => (t === "dark" ? "light" : "dark")),
+    () => setStore(current === "dark" ? "light" : "dark"),
     [],
   );
 
