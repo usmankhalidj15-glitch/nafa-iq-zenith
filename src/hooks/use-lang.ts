@@ -148,6 +148,14 @@ const UR: Record<string, string> = {
   Above: "اوپر",
   Below: "نیچے",
   "Notification History": "اطلاعات کی تاریخ",
+  "Stock Price": "اسٹاک کی قیمت",
+  "Bill Reminder": "بل یاد دہانی",
+  Budget: "بجٹ",
+  "Goal Milestone": "ہدف سنگ میل",
+  "Create Alert": "الرٹ بنائیں",
+  Push: "پش",
+  Email: "ای میل",
+  Price: "قیمت",
 };
 
 export function translate(lang: Lang, key: string): string {
