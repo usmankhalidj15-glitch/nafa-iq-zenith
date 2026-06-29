@@ -161,6 +161,12 @@ export const financeActions = {
   },
 };
 
+const serverState = seed();
+
 export function useFinanceStore(): FinanceState {
-  return useSyncExternalStore(subscribe, () => state, seed);
+  return useSyncExternalStore(
+    subscribe,
+    () => state,
+    () => serverState,
+  );
 }
