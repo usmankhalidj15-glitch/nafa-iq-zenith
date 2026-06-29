@@ -102,7 +102,7 @@ export default function PSX() {
 
   const meta = symbolMeta(sym);
   const full = useMemo(
-    () => generateOHLCV(meta.seed, meta.start, meta.end, 180, meta.vMin, meta.vMax),
+    () => generateOHLCV(meta.seed, meta.start, meta.end, 250, meta.vMin, meta.vMax),
     [sym],
   );
   const data = full.slice(-tfDays(tf));
