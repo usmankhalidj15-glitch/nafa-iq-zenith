@@ -16,6 +16,32 @@ import {
   Legend,
 } from "recharts";
 import { type Candle, fmtNum, sma } from "@/lib/data";
+import { useTheme } from "@/hooks/use-theme";
+
+/** Theme-aware chart colors. Dark values are unchanged from the original design. */
+function useChartTheme() {
+  const { theme } = useTheme();
+  const light = theme === "light";
+  return {
+    light,
+    grid: light ? "#e6eaf2" : "#1a2535",
+    tick: "#64748b",
+    teal: light ? "#0d9488" : "#00d4aa",
+    benchmark: light ? "#64748b" : "#94a3b8",
+    cursorBar: light ? "rgba(15,23,42,0.05)" : "#1f2d40",
+    tooltip: {
+      background: light ? "#ffffff" : "#1a2332",
+      border: light ? "1px solid rgba(15,23,42,0.10)" : "1px solid #2a3a50",
+      borderRadius: 10,
+      fontSize: 12,
+      color: light ? "#0f172a" : "#e2e8f0",
+      boxShadow: light
+        ? "0 10px 28px rgba(15,23,42,0.14)"
+        : "0 8px 24px rgba(0,0,0,0.5)",
+    },
+    tooltipLabel: light ? "#475569" : "#94a3b8",
+  };
+}
 
 export function Sparkline({ data, color }: { data: number[]; color: string }) {
   const d = data.map((v, i) => ({ i, v }));
@@ -102,6 +128,7 @@ export function CandlestickChart({
   height?: number;
   mas?: string[];
 }) {
+  const ct = useChartTheme();
   const ma20 = sma(data, 20);
   const ma50 = sma(data, 50);
   const ma200 = sma(data, 200);
@@ -120,26 +147,26 @@ export function CandlestickChart({
   return (
     <ResponsiveContainer width="100%" height={height >= 9999 ? "100%" : height}>
       <ComposedChart data={enriched} margin={{ top: 10, right: 8, left: 0, bottom: 0 }}>
-        <CartesianGrid stroke="#1a2535" vertical={false} />
+        <CartesianGrid stroke={ct.grid} vertical={false} />
         <XAxis
           dataKey="date"
-          tick={{ fill: "#64748b", fontSize: 10 }}
+          tick={{ fill: ct.tick, fontSize: 10 }}
           minTickGap={48}
-          axisLine={{ stroke: "#1a2535" }}
+          axisLine={{ stroke: ct.grid }}
           tickLine={false}
         />
         <YAxis
           yAxisId="price"
           orientation="right"
           domain={[lows - pad, highs + pad]}
-          tick={{ fill: "#64748b", fontSize: 10 }}
+          tick={{ fill: ct.tick, fontSize: 10 }}
           width={56}
           axisLine={false}
           tickLine={false}
           tickFormatter={(v) => fmtNum(v, 0)}
         />
         <YAxis yAxisId="vol" domain={[0, maxVol * 5]} hide />
-        <Tooltip content={<OHLCTooltip />} cursor={{ stroke: "#94a3b8", strokeDasharray: "4 4" }} />
+        <Tooltip content={<OHLCTooltip />} cursor={{ stroke: ct.benchmark, strokeDasharray: "4 4" }} />
         <Bar yAxisId="vol" dataKey="volume" isAnimationActive={false}>
           {enriched.map((c, i) => (
             <Cell key={i} fill={c.close >= c.open ? "#00d4aa" : "#e5484d"} fillOpacity={0.35} />
@@ -190,43 +217,39 @@ export function PortfolioAreaChart({
   height?: number;
   showBenchmark?: boolean;
 }) {
+  const ct = useChartTheme();
   return (
     <ResponsiveContainer width="100%" height={height}>
       <AreaChart data={data} margin={{ top: 10, right: 8, left: 0, bottom: 0 }}>
         <defs>
           <linearGradient id="tealFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#00d4aa" stopOpacity={0.4} />
-            <stop offset="100%" stopColor="#00d4aa" stopOpacity={0} />
+            <stop offset="0%" stopColor={ct.teal} stopOpacity={ct.light ? 0.22 : 0.4} />
+            <stop offset="100%" stopColor={ct.teal} stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid stroke="#1a2535" vertical={false} />
+        <CartesianGrid stroke={ct.grid} vertical={false} />
         <XAxis
           dataKey="label"
-          tick={{ fill: "#64748b", fontSize: 11 }}
-          axisLine={{ stroke: "#1a2535" }}
+          tick={{ fill: ct.tick, fontSize: 11 }}
+          axisLine={{ stroke: ct.grid }}
           tickLine={false}
         />
         <YAxis
-          tick={{ fill: "#64748b", fontSize: 10 }}
+          tick={{ fill: ct.tick, fontSize: 10 }}
           width={56}
           axisLine={false}
           tickLine={false}
           tickFormatter={(v) => (v / 1000).toFixed(0) + "k"}
         />
         <Tooltip
-          contentStyle={{
-            background: "#1a2332",
-            border: "1px solid #2a3a50",
-            borderRadius: 8,
-            fontSize: 12,
-          }}
-          labelStyle={{ color: "#94a3b8" }}
+          contentStyle={ct.tooltip}
+          labelStyle={{ color: ct.tooltipLabel }}
         />
         <Area
           type="monotone"
           dataKey="value"
           name="Portfolio"
-          stroke="#00d4aa"
+          stroke={ct.teal}
           strokeWidth={2}
           fill="url(#tealFill)"
           isAnimationActive={false}
@@ -236,7 +259,7 @@ export function PortfolioAreaChart({
             type="monotone"
             dataKey="benchmark"
             name="KSE-100"
-            stroke="#94a3b8"
+            stroke={ct.benchmark}
             strokeWidth={1.5}
             strokeDasharray="5 4"
             dot={false}
@@ -257,6 +280,7 @@ export function DonutChart({
   centerLabel?: string;
   centerValue?: string;
 }) {
+  const ct = useChartTheme();
   return (
     <div className="relative">
       <ResponsiveContainer width="100%" height={220}>
@@ -268,7 +292,8 @@ export function DonutChart({
             innerRadius={62}
             outerRadius={92}
             paddingAngle={2}
-            stroke="none"
+            stroke={ct.light ? "#ffffff" : "none"}
+            strokeWidth={ct.light ? 2 : 0}
             isAnimationActive={false}
           >
             {data.map((d, i) => (
@@ -276,14 +301,8 @@ export function DonutChart({
             ))}
           </Pie>
           <Tooltip
-            contentStyle={{
-              background: "#1a2332",
-              border: "1px solid #2a3a50",
-              borderRadius: 8,
-              fontSize: 12,
-              color: "#e2e8f0",
-            }}
-            itemStyle={{ color: "#e2e8f0" }}
+            contentStyle={ct.tooltip}
+            itemStyle={{ color: ct.tooltip.color }}
           />
         </PieChart>
       </ResponsiveContainer>
@@ -304,38 +323,34 @@ export function IncomeExpenseChart({
 }: {
   data: { month: string; income: number; expense: number }[];
 }) {
+  const ct = useChartTheme();
   return (
     <ResponsiveContainer width="100%" height={280}>
       <ComposedChart data={data} margin={{ top: 10, right: 8, left: 0, bottom: 0 }}>
-        <CartesianGrid stroke="#1a2535" vertical={false} />
+        <CartesianGrid stroke={ct.grid} vertical={false} />
         <XAxis
           dataKey="month"
-          tick={{ fill: "#64748b", fontSize: 11 }}
-          axisLine={{ stroke: "#1a2535" }}
+          tick={{ fill: ct.tick, fontSize: 11 }}
+          axisLine={{ stroke: ct.grid }}
           tickLine={false}
         />
         <YAxis
-          tick={{ fill: "#64748b", fontSize: 10 }}
+          tick={{ fill: ct.tick, fontSize: 10 }}
           width={48}
           axisLine={false}
           tickLine={false}
           tickFormatter={(v) => (v / 1000).toFixed(0) + "k"}
         />
         <Tooltip
-          contentStyle={{
-            background: "#1a2332",
-            border: "1px solid #2a3a50",
-            borderRadius: 8,
-            fontSize: 12,
-          }}
-          labelStyle={{ color: "#94a3b8" }}
-          cursor={{ fill: "#1f2d40", fillOpacity: 0.4 }}
+          contentStyle={ct.tooltip}
+          labelStyle={{ color: ct.tooltipLabel }}
+          cursor={{ fill: ct.cursorBar, fillOpacity: ct.light ? 1 : 0.4 }}
         />
         <Legend wrapperStyle={{ fontSize: 12 }} />
         <Bar
           dataKey="income"
           name="Income"
-          fill="#00d4aa"
+          fill={ct.teal}
           radius={[3, 3, 0, 0]}
           isAnimationActive={false}
         />
