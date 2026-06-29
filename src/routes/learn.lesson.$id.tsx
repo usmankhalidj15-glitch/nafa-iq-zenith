@@ -1077,7 +1077,7 @@ function ChatPanel({
                 onClick={() => send(p)}
                 className="block w-full rounded-full border border-border px-3 py-1.5 text-left text-[11px] text-text-secondary hover:border-bull hover:text-bull"
               >
-                {p}
+                {t(p)}
               </button>
             ))}
           </div>
